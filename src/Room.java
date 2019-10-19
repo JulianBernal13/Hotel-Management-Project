@@ -5,10 +5,12 @@
 public class Room {
     private int number;
     private boolean isEmpty;
+    private boolean isClean;
 
     public Room(int number) {
         this.number = number;
         this.isEmpty = true;
+        this.isClean = true;
     }
 
     public int getNumber() {
@@ -25,5 +27,13 @@ public class Room {
 
     public void setEmpty(boolean empty) {
         isEmpty = empty;
+    }
+
+    public boolean isClean() {
+        return isClean;
+    }
+
+    public void setClean(boolean clean) {
+        isClean = clean;
     }
 }
