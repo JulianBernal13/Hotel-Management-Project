@@ -1,16 +1,18 @@
+import java.util.ArrayList;
+
 /**
  * @author Yingxie Gao
  * @date 10/18/19 22:40
  */
 public class Room {
     private int number;
-    private boolean isEmpty;
     private boolean isClean;
+    private ArrayList<Contract> contractList;
 
     public Room(int number) {
         this.number = number;
-        this.isEmpty = true;
         this.isClean = true;
+        ArrayList<Contract> contractList = new ArrayList<>();
     }
 
     public int getNumber() {
@@ -21,19 +23,19 @@ public class Room {
         this.number = number;
     }
 
-    public boolean isEmpty() {
-        return isEmpty;
-    }
-
-    public void setEmpty(boolean empty) {
-        isEmpty = empty;
-    }
-
     public boolean isClean() {
         return isClean;
     }
 
     public void setClean(boolean clean) {
         isClean = clean;
+    }
+
+    public ArrayList<Contract> getContractList() {
+        return contractList;
+    }
+
+    public void setContractList(ArrayList<Contract> contractList) {
+        this.contractList = contractList;
     }
 }
