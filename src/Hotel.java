@@ -4,10 +4,11 @@
  */
 public class Hotel {
     private String name;
-    private String location;
+//    private String location;
+    private Location location;
     private Room[] room;
 
-    public Hotel(String name, String location, Room[] room) {
+    public Hotel(String name, Location location, Room[] room) {
         this.name = name;
         this.location = location;
         this.room = room;
@@ -21,11 +22,11 @@ public class Hotel {
         this.name = name;
     }
 
-    public String getLocation() {
+    public Location getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 
