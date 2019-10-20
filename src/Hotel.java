@@ -7,16 +7,16 @@ import java.util.HashMap;
 public class Hotel {
     private String name;
     private Location location;
-    private HashMap<String,Room> rooms;
-    private HashMap<String,Room> emptyRooms;
-    private HashMap<String,Room> occupiedRooms;
+    private HashMap<Integer,Room> rooms;
+    private HashMap<Integer,Room> emptyRooms;
+    private HashMap<Integer,Room> occupiedRooms;
 
-    public Hotel(String name, Location location, HashMap<String,Room> rooms) {
+    public Hotel(String name, Location location, HashMap<Integer,Room> rooms) {
         this.name = name;
         this.location = location;
         this.rooms = rooms;
         this.emptyRooms.putAll(rooms);
-        this.occupiedRooms = new HashMap<String, Room>();
+        this.occupiedRooms = new HashMap<>();
     }
 
     public String getName() {
@@ -35,27 +35,27 @@ public class Hotel {
         this.location = location;
     }
 
-    public HashMap<String, Room> getRooms() {
+    public HashMap<Integer, Room> getRooms() {
         return rooms;
     }
 
-    public void setRooms(HashMap<String, Room> rooms) {
+    public void setRooms(HashMap<Integer, Room> rooms) {
         this.rooms = rooms;
     }
 
-    public HashMap<String, Room> getEmptyRooms() {
+    public HashMap<Integer, Room> getEmptyRooms() {
         return emptyRooms;
     }
 
-    public void setEmptyRooms(HashMap<String, Room> emptyRooms) {
+    public void setEmptyRooms(HashMap<Integer, Room> emptyRooms) {
         this.emptyRooms = emptyRooms;
     }
 
-    public HashMap<String, Room> getOccupiedRooms() {
+    public HashMap<Integer, Room> getOccupiedRooms() {
         return occupiedRooms;
     }
 
-    public void setOccupiedRooms(HashMap<String, Room> occupiedRooms) {
+    public void setOccupiedRooms(HashMap<Integer, Room> occupiedRooms) {
         this.occupiedRooms = occupiedRooms;
     }
 }
