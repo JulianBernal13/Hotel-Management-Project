@@ -15,7 +15,8 @@ public class Hotel {
         this.name = name;
         this.location = location;
         this.rooms = rooms;
-        this.emptyRooms.putAll(rooms);
+        this.emptyRooms = new HashMap<>();
+        emptyRooms.putAll(rooms);
         this.occupiedRooms = new HashMap<>();
     }
 
