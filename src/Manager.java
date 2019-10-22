@@ -1,7 +1,11 @@
 package [insert name here]
 
 public class Manager extends Employee {
+	// Specifies the exact person within a position (e.g Cleaner, id:1234 -->
+	// person named "Bob")
 	private String id;
+
+	// Specifies the salary this type of employee receives
 	private int salary;
 
 	public Manager(String titleName, String id, int salary) {
