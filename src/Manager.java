@@ -6,13 +6,11 @@ public class Manager extends Employee {
 		super("Manager", "1234", 70000);
 	}
 
-	public void deleteEmployee() {
+	public void deleteEmployee(Employee[] a, String titleName, String id) {
 
 	}
 
-	public void addEmployee()
-
-	{
+	public void addEmployee(Employee[] a, String titleName, String id) {
 
 	}
 }
