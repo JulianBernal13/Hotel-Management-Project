@@ -33,8 +33,8 @@ public class Contract {
         return this.end <= other.getStart();
     }
 
-    boolean lsGreater(Contract other) {
-        return this.start >= other.getStart();
+    boolean isGreater(Contract other) {
+        return this.start >= other.getEnd();
     }
 
 
