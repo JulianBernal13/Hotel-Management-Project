@@ -1,4 +1,4 @@
-package [insert name here]
+package [insert name here];
 /**
  * 
  * @author
@@ -9,13 +9,6 @@ public class Employee {
 	// Specifies the type of Employee (e.g Manager, Cleaner)
 	private String titleName;
 
-	// Specifies the exact person within a position (e.g Cleaner, id:1234 -->
-	// person named "Bob")
-	private String id;
-
-	// Specifies the salary this type of employee gets
-	private int salary;
-
 	// private Employee[] a;
 
 	/**
@@ -25,10 +18,18 @@ public class Employee {
 	 * @param id
 	 * @param salary
 	 */
-	public Employee(String titleName, String id, int salary) {
+	public Employee(String titleName) {
 		this.titleName = titleName;
-		this.id = id;
-		this.salary = salary;
+	}
+
+	// OVERRIDE IN SUBCLASSES
+	public void setEmployeeID(String id) {
+
+	}
+
+	// OVERRIDE IN SUBCLASSES
+	public void setSalary(int salary) {
+
 	}
 
 }
