@@ -1,5 +1,4 @@
-package [insert name here];
-
+package [insert name here]
 /**
  * 
  * @author 
@@ -16,5 +15,5 @@ public class Employee {
 		this.id = id;
 		this.salary = salary;
 	}
-
+	
 }
