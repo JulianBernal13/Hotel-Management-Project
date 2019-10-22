@@ -1,9 +1,18 @@
-package [insert name here];
+package [insert name here]
 
 public class Manager extends Employee {
 
-
 	public Manager() {
-		super("Manager", "234", 70000);
+		super("Manager", "1234", 70000);
+	}
+
+	public void deleteEmployee() {
+
+	}
+
+	public void addEmployee()
+
+	{
+
 	}
 }
