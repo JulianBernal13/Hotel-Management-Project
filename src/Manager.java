@@ -1,4 +1,4 @@
-package [insert name here]
+
 
 public class Manager extends Employee {
 	// Specifies the exact person within a position (e.g Cleaner, id:1234 -->

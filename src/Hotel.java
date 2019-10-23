@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -10,6 +11,7 @@ public class Hotel {
     private HashMap<Integer,Room> rooms;
     private HashMap<Integer,Room> emptyRooms;
     private HashMap<Integer,Room> occupiedRooms;
+    private ArrayList<Employee> employees;
 
     public Hotel(String name, Location location, HashMap<Integer,Room> rooms) {
         this.name = name;
@@ -18,6 +20,7 @@ public class Hotel {
         this.emptyRooms = new HashMap<>();
         emptyRooms.putAll(rooms);
         this.occupiedRooms = new HashMap<>();
+        this.employees = new ArrayList<>();
     }
 
     public String getName() {
@@ -58,5 +61,13 @@ public class Hotel {
 
     public void setOccupiedRooms(HashMap<Integer, Room> occupiedRooms) {
         this.occupiedRooms = occupiedRooms;
+    }
+
+    public ArrayList<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(ArrayList<Employee> employees) {
+        this.employees = employees;
     }
 }
