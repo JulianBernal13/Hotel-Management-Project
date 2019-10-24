@@ -1,5 +1,8 @@
 package HotelManagement;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 
 /**
@@ -21,5 +24,9 @@ public class Main {
         Hotel hotel = new Hotel("ISU HotelManagement.Hotel",location,rooms);
 
         System.out.println("Welcome to "+hotel.getName() +"!");
+        
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String name = reader.readLine();
+        System.out.println(name);
     }
 }
