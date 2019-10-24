@@ -13,19 +13,25 @@ import java.io.InputStreamReader;
 public class Hotel {
     private String name;
     private Location location;
-    private HashMap<Integer,Room> rooms;
-    private HashMap<Integer,Room> emptyRooms;
-    private HashMap<Integer,Room> occupiedRooms;
+    private int numOfLevel;
+    private int levelRmNum;
+//    private HashMap<Integer,Room> rooms;
+//    private HashMap<Integer,Room> emptyRooms;
+//    private HashMap<Integer,Room> occupiedRooms;
+    private Room rooms[][];
     private ArrayList<Employee> employees;
 
-    public Hotel(String name, Location location, HashMap<Integer,Room> rooms) {
+    public Hotel(String name, Location location, int numOfLevel, int levelRmNum) {
         this.name = name;
         this.location = location;
-        this.rooms = rooms;
-        this.emptyRooms = new HashMap<>();
-        emptyRooms.putAll(rooms);
-        this.occupiedRooms = new HashMap<>();
-        this.employees = new ArrayList<>();
+        this.numOfLevel = numOfLevel;
+        this.levelRmNum = levelRmNum;
+        rooms = new Room[numOfLevel][levelRmNum];
+        for(int i = 0; i < numOfLevel; i++) {
+            for(int j = 0; j < levelRmNum; j++) {
+                rooms[i][j] = new Room(i* 100 + j);
+            }
+        }
     }
 
     public String getName() {
@@ -44,29 +50,29 @@ public class Hotel {
         this.location = location;
     }
 
-    public HashMap<Integer, Room> getRooms() {
-        return rooms;
-    }
+//    public HashMap<Integer, Room> getRooms() {
+//        return rooms;
+//    }
+//
+//    public void setRooms(HashMap<Integer, Room> rooms) {
+//        this.rooms = rooms;
+//    }
 
-    public void setRooms(HashMap<Integer, Room> rooms) {
-        this.rooms = rooms;
-    }
-
-    public HashMap<Integer, Room> getEmptyRooms() {
-        return emptyRooms;
-    }
-
-    public void setEmptyRooms(HashMap<Integer, Room> emptyRooms) {
-        this.emptyRooms = emptyRooms;
-    }
-
-    public HashMap<Integer, Room> getOccupiedRooms() {
-        return occupiedRooms;
-    }
-
-    public void setOccupiedRooms(HashMap<Integer, Room> occupiedRooms) {
-        this.occupiedRooms = occupiedRooms;
-    }
+//    public HashMap<Integer, Room> getEmptyRooms() {
+//        return emptyRooms;
+//    }
+//
+//    public void setEmptyRooms(HashMap<Integer, Room> emptyRooms) {
+//        this.emptyRooms = emptyRooms;
+//    }
+//
+//    public HashMap<Integer, Room> getOccupiedRooms() {
+//        return occupiedRooms;
+//    }
+//
+//    public void setOccupiedRooms(HashMap<Integer, Room> occupiedRooms) {
+//        this.occupiedRooms = occupiedRooms;
+//    }
 
     public ArrayList<Employee> getEmployees() {
         return employees;

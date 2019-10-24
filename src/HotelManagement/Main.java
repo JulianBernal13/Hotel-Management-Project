@@ -12,7 +12,7 @@ import java.util.HashMap;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        //construct a hotel
+//        construct a hotel
         Room room101 = new Room(101);
         Room room102 = new Room(102);
         Room room103 = new Room(103);

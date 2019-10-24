@@ -8,12 +8,15 @@ import java.util.ArrayList;
  */
 public class Room {
     private int number;
+    private double price;
+
     private boolean isClean;
     private ArrayList<Contract> contractList;
 
     public Room(int number) {
         this.number = number;
         this.isClean = true;
+        this.price = 100;
         ArrayList<Contract> contractList = new ArrayList<>();
     }
 
