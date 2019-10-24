@@ -1,4 +1,4 @@
-# Hotel-Management
+# HotelManagement.Hotel-Management
 
-ManagementSystem.java:
+HotelManagement.ManagementSystem.java:
 Stores all hotels created inside a HashMap named "hotels"

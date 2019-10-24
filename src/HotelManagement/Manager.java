@@ -1,4 +1,4 @@
-
+package HotelManagement;
 
 public class Manager extends Employee {
 	// Specifies the exact person within a position (e.g Cleaner, id:1234 -->
@@ -9,7 +9,7 @@ public class Manager extends Employee {
 	private int salary;
 
 	public Manager(String titleName, String id, int salary) {
-		super("Manager");
+		super("HotelManagement.Manager");
 		setEmployeeID(id);
 		setSalary(salary);
 	}

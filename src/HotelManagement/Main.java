@@ -1,3 +1,5 @@
+package HotelManagement;
+
 import java.util.HashMap;
 
 /**
@@ -16,7 +18,7 @@ public class Main {
         rooms.put(102,room102);
         rooms.put(103,room103);
         Location location = new Location("Ames");
-        Hotel hotel = new Hotel("ISU Hotel",location,rooms);
+        Hotel hotel = new Hotel("ISU HotelManagement.Hotel",location,rooms);
 
         System.out.println("Welcome to "+hotel.getName() +"!");
     }

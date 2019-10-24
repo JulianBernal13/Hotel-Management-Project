@@ -1,3 +1,4 @@
+package HotelManagement;
 
 /**
  * 
@@ -6,10 +7,10 @@
  */
 public class Employee {
 
-	// Specifies the type of Employee (e.g Manager, Cleaner)
+	// Specifies the type of HotelManagement.Employee (e.g HotelManagement.Manager, Cleaner)
 	private String titleName;
 
-	// private Employee[] a;
+	// private HotelManagement.Employee[] a;
 
 	/**
 	 * Constructs an employee

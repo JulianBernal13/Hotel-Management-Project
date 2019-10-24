@@ -1,4 +1,4 @@
-
+package HotelManagement;
 
 import java.util.HashMap;
 

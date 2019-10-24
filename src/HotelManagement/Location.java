@@ -1,3 +1,5 @@
+package HotelManagement;
+
 /**
  * @author Anji Yu
  */
