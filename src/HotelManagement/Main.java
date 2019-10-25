@@ -48,7 +48,11 @@ public class Main {
             //Enter a number
             System.out.println("Enter 'checkin' to check-in");
             System.out.println("Enter 'checkout' to check-out");
-            //todo
+            System.out.println("Enter 'delete' to delte the hotel");
+            String word2 = sc.nextLine();
+            if(word2.equals("delete")){
+                //delete the hotel from our local file
+            }
         }
         else {
             System.out.println("We can not do that.");
