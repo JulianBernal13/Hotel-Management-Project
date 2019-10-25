@@ -12,19 +12,10 @@ import java.util.HashMap;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-//        construct a hotel
-        Room room101 = new Room(101);
-        Room room102 = new Room(102);
-        Room room103 = new Room(103);
-        HashMap<Integer,Room> rooms = new HashMap<>();
-        rooms.put(101,room101);
-        rooms.put(102,room102);
-        rooms.put(103,room103);
+//        test construct a hotel
         Location location = new Location("Ames");
-        Hotel hotel = new Hotel("ISU HotelManagement.Hotel",location,rooms);
-
+        Hotel hotel = new Hotel("ISU HotelManagement.Hotel",location,10,10);
         System.out.println("Welcome to "+hotel.getName() +"!");
-        
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String name = reader.readLine();
         System.out.println(name);

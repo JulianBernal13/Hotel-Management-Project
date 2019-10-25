@@ -15,13 +15,10 @@ public class Hotel {
     private Location location;
     private int numOfLevel;
     private int levelRmNum;
-//    private HashMap<Integer,Room> rooms;
-//    private HashMap<Integer,Room> emptyRooms;
-//    private HashMap<Integer,Room> occupiedRooms;
     private Room rooms[][];
     private ArrayList<Employee> employees;
 
-    public Hotel(String name, Location location, int numOfLevel, int levelRmNum) {
+    public Hotel(String name,Location location, int numOfLevel, int levelRmNum) {
         this.name = name;
         this.location = location;
         this.numOfLevel = numOfLevel;

@@ -9,13 +9,14 @@ import java.util.ArrayList;
 public class Room {
     private int number;
     private double price;
-
+    private boolean isEmpty;
     private boolean isClean;
     private ArrayList<Contract> contractList;
 
     public Room(int number) {
         this.number = number;
         this.isClean = true;
+        this.isEmpty = true;
         this.price = 100;
         ArrayList<Contract> contractList = new ArrayList<>();
     }
@@ -42,5 +43,21 @@ public class Room {
 
     public void setContractList(ArrayList<Contract> contractList) {
         this.contractList = contractList;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public boolean isEmpty() {
+        return isEmpty;
+    }
+
+    public void setEmpty(boolean empty) {
+        isEmpty = empty;
     }
 }
