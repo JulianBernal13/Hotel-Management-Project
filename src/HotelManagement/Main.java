@@ -24,10 +24,11 @@ public class Main {
 
         //Construct a hotel
         System.out.println("Welcome to ISU Hotel Management System!");
-        System.out.println("If you want to construct a hotel, please enter 'construct'.");
+        System.out.println("Enter 'new' to start a new hotel.");
+        System.out.println("Enter 'manage' to manage current hotels.");
         Scanner sc = new Scanner(System.in);
         String word = sc.nextLine();
-        if(word.equals("construct")){
+        if(word.equals("new")){
             System.out.println("What is your hotel's name?");
             String name = sc.nextLine();
             System.out.println("What is your hotel's location? Enter an Address.");
@@ -38,7 +39,16 @@ public class Main {
             int numRoom = Integer.parseInt(sc.nextLine());
             Hotel hotel = new Hotel(name,new Location(address),floor,numRoom);
             // save the hotel      todo
-            System.out.println("Success! "+hotel.getName()+" is constructed!");
+            System.out.println("Success! "+hotel.getName()+" has been constructed!");
+        }
+        else if(word.equals("manage")){
+            //go to local file to check which hotels are already constructed
+            System.out.println("which hotel?" + "Please Enter the corresponding number.");
+            //show hotel list
+            //Enter a number
+            System.out.println("Enter 'checkin' to check-in");
+            System.out.println("Enter 'checkout' to check-out");
+            //todo
         }
         else {
             System.out.println("We can not do that.");
