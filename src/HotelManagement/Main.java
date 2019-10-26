@@ -46,20 +46,20 @@ public class Main {
             File f = new File("./ManagementSystem/"+name+".txt");
             String path = "./ManagementSystem/"+name+".txt";
             PrintWriter out = new PrintWriter(path);
-            out.write(name+"\n");
-            out.write(address+"\n");
-            out.write(password+"\n");
-            out.write("Rooms:"+"\n");
+            out.println(name);
+            out.println(address);
+            out.println(password);
+            out.println("Rooms:");
             for (int i = 0; i <floor ; i++) {
                 for (int j = 0; j < numRoom; j++) {
-                    out.write(hotel.getRooms()[i][j].toString());
+                    out.println(hotel.getRooms()[i][j].toString());
                 }
-                out.write("\n");
+                out.println();
             }
-            out.write("Employees:"+"\n");
+            out.println("Employees:"+" \n");
             try {
                 for (int i = 0; i < hotel.getEmployees().size(); i++) {
-                    out.write(hotel.getEmployees().get(i).toString() + "\n");
+                    out.write(hotel.getEmployees().get(i).toString() + " \n");
                 }
             }
             catch (NullPointerException e){
