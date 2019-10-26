@@ -67,13 +67,16 @@ public class Main {
             System.out.println("If you are the manager please enter the password, else enter 'employee'");
             File currentHotel = new File(currentHotelPath);
             Scanner hotelSc = new Scanner(currentHotel);
-            hotelSc.nextLine();
-            hotelSc.nextLine();
+            String currentHotelName = hotelSc.nextLine();
+            String currentHotelAddress = hotelSc.nextLine();
             String currentPassword = hotelSc.nextLine();
             //manager can do
             if(currentPassword.equals(sc.nextLine())) {
+                System.out.println("Welcome Manager!");
                 System.out.println("Enter 'checkin' to check-in");
                 System.out.println("Enter 'checkout' to check-out");
+                System.out.println("Enter 'hire' to add employee");
+                System.out.println("Enter 'edit employee' to edit employee");
                 System.out.println("Enter 'delete' to delte the hotel");
                 System.out.println("Enter 'edit password' to reset the password");
                 String word2 = sc.nextLine();
@@ -87,6 +90,7 @@ public class Main {
             }
             //employee can do
             else {
+                System.out.println("Welcome Employee!");
                 System.out.println("Enter 'checkin' to check-in");
                 System.out.println("Enter 'checkout' to check-out");
             }
