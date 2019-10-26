@@ -19,10 +19,14 @@ public class Main {
         /*BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String name = reader.readLine();
         System.out.println(name);*/
+    	/*System.out.println(new File("").getAbsolutePath());
+        File a = new File("./ManagementSystem/helloo.txt");
+        System.out.println(a.getAbsolutePath());
+        a.createNewFile();*/
 
-        System.out.println("Welcome to ISU Hotel Management System!");
-        System.out.println("Enter 'new' to start a new hotel.");
-        System.out.println("Enter 'manage' to manage current hotels.");
+        System.out.println("Welcome to ISU Hotel Management System!\n" +
+        "Enter 'new' to start a new hotel.\n"+
+        "Enter 'manage' to manage current hotels.\n");
         Scanner sc = new Scanner(System.in);
         String word = sc.nextLine();
         //construct a hotel
@@ -39,9 +43,9 @@ public class Main {
             String password = sc.nextLine();
             Hotel hotel = new Hotel(name,new Location(address),floor,numRoom,password);
             // save the hotel
-            File f = new File("src/ManagementSystem/"+name+".txt");
-            String path = "src/ManagementSystem/"+name+".txt";
-            PrintWriter out=new PrintWriter(path);
+            File f = new File("./ManagementSystem/"+name+".txt");
+            String path = "./ManagementSystem/"+name+".txt";
+            PrintWriter out = new PrintWriter(path);
             out.write(name+"\n");
             out.write(address+"\n");
             out.write(password+"\n");
@@ -68,14 +72,14 @@ public class Main {
         else if(word.equals("manage")){
             //go to local file to check which hotels are already constructed
             System.out.println("which hotel? " + "Please Enter the hotel name.");
-            String path = "src/ManagementSystem/";
+            String path = "./ManagementSystem/";
             File file = new File(path);
             File[] array = file.listFiles();
             for (int i = 0; i <array.length ; i++) {
                 System.out.println(array[i].getName());
             }
             String name = sc.nextLine();
-            String currentHotelPath = "src/ManagementSystem/"+name+".txt";
+            String currentHotelPath = "./ManagementSystem/"+name+".txt";
 
             //login
             System.out.println("If you are the manager please enter the password, else enter 'employee'");
