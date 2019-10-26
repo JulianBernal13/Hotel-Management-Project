@@ -1,8 +1,6 @@
 package HotelManagement;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -40,7 +38,17 @@ public class Main {
             System.out.println("Please set a password for this hotel.");
             String password = sc.nextLine();
             Hotel hotel = new Hotel(name,new Location(address),floor,numRoom,password);
-            // save the hotel      todo
+            // save the hotel
+            File f = new File("src/ManagementSystem/"+name+".txt");
+            String path = "src/ManagementSystem/"+name+".txt";
+            PrintWriter out=new PrintWriter(path);
+            out.write(name);
+            out.write("\n");
+            out.write(address);
+            out.write("\n");
+            out.write(password);
+            out.flush();
+            out.close();
             System.out.println("Success! "+hotel.getName()+" has been constructed!");
         }
         else if(word.equals("manage")){
