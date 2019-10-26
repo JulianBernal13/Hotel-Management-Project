@@ -53,25 +53,42 @@ public class Main {
         }
         else if(word.equals("manage")){
             //go to local file to check which hotels are already constructed
-            System.out.println("which hotel?" + "Please Enter the corresponding number.");
-            //show hotel list  todo
-            //Enter a number
+            System.out.println("which hotel? " + "Please Enter the hotel name.");
+            String path = "src/ManagementSystem/";
+            File file = new File(path);
+            File[] array = file.listFiles();
+            for (int i = 0; i <array.length ; i++) {
+                System.out.println(array[i].getName());
+            }
+            String name = sc.nextLine();
+            String currentHotelPath = "src/ManagementSystem/"+name+".txt";
 
             //login
             System.out.println("If you are the manager please enter the password, else enter 'employee'");
-            //read file to find corresponding password  todo
-
-            System.out.println("Enter 'checkin' to check-in");
-            System.out.println("Enter 'checkout' to check-out");
-            System.out.println("Enter 'delete' to delte the hotel");
-            System.out.println("Enter 'edit password' to reset the password");
-            String word2 = sc.nextLine();
-            if(word2.equals("delete")){
-                //delete the hotel from our local file  todo
+            File currentHotel = new File(currentHotelPath);
+            Scanner hotelSc = new Scanner(currentHotel);
+            hotelSc.nextLine();
+            hotelSc.nextLine();
+            String currentPassword = hotelSc.nextLine();
+            //manager can do
+            if(currentPassword.equals(sc.nextLine())) {
+                System.out.println("Enter 'checkin' to check-in");
+                System.out.println("Enter 'checkout' to check-out");
+                System.out.println("Enter 'delete' to delte the hotel");
+                System.out.println("Enter 'edit password' to reset the password");
+                String word2 = sc.nextLine();
+                if (word2.equals("delete")) {
+                    currentHotel.delete();
+                }
+                else if(word2.equals("edit password")){
+                    String newPassword = sc.nextLine();
+                    //write the new password into the local file   todo
+                }
             }
-            else if(word2.equals("edit password")){
-                String newPassword = sc.nextLine();
-                //write the new password into the local file   todo
+            //employee can do
+            else {
+                System.out.println("Enter 'checkin' to check-in");
+                System.out.println("Enter 'checkout' to check-out");
             }
         }
         else {
