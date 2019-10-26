@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 /**
  * @author Yingxie Gao
@@ -27,9 +28,10 @@ public class Hotel {
         rooms = new Room[numOfLevel][levelRmNum];
         for(int i = 0; i < numOfLevel; i++) {
             for(int j = 0; j < levelRmNum; j++) {
-                rooms[i][j] = new Room(i* 100 + j);
+                rooms[i][j] = new Room((i+1)* 100 + j);
             }
         }
+        ArrayList<Employee> employees =new ArrayList<>();
         this.password = password;
     }
 

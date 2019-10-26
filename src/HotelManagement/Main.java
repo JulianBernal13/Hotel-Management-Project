@@ -42,11 +42,25 @@ public class Main {
             File f = new File("src/ManagementSystem/"+name+".txt");
             String path = "src/ManagementSystem/"+name+".txt";
             PrintWriter out=new PrintWriter(path);
-            out.write(name);
-            out.write("\n");
-            out.write(address);
-            out.write("\n");
-            out.write(password);
+            out.write(name+"\n");
+            out.write(address+"\n");
+            out.write(password+"\n");
+            out.write("Rooms:"+"\n");
+            for (int i = 0; i <floor ; i++) {
+                for (int j = 0; j < numRoom; j++) {
+                    out.write(hotel.getRooms()[i][j].toString());
+                }
+                out.write("\n");
+            }
+            out.write("Employees:"+"\n");
+            try {
+                for (int i = 0; i < hotel.getEmployees().size(); i++) {
+                    out.write(hotel.getEmployees().get(i).toString() + "\n");
+                }
+            }
+            catch (NullPointerException e){
+                out.write("There is no employee.");
+            }
             out.flush();
             out.close();
             System.out.println("Success! "+hotel.getName()+" has been constructed!");

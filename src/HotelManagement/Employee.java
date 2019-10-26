@@ -33,4 +33,18 @@ public class Employee {
 
 	}
 
+	public String getTitleName() {
+		return titleName;
+	}
+
+	public void setTitleName(String titleName) {
+		this.titleName = titleName;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee{" +
+				"titleName='" + titleName + '\'' +
+				'}';
+	}
 }

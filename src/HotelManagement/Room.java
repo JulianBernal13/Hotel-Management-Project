@@ -60,4 +60,14 @@ public class Room {
     public void setEmpty(boolean empty) {
         isEmpty = empty;
     }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "number=" + number +
+                ", price=" + price +
+                ", isEmpty=" + isEmpty +
+                ", isClean=" + isClean +
+                '}';
+    }
 }
