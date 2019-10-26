@@ -17,8 +17,9 @@ public class Hotel {
     private int levelRmNum;
     private Room rooms[][];
     private ArrayList<Employee> employees;
+    private String password;
 
-    public Hotel(String name,Location location, int numOfLevel, int levelRmNum) {
+    public Hotel(String name,Location location, int numOfLevel, int levelRmNum, String password) {
         this.name = name;
         this.location = location;
         this.numOfLevel = numOfLevel;
@@ -29,6 +30,7 @@ public class Hotel {
                 rooms[i][j] = new Room(i* 100 + j);
             }
         }
+        this.password = password;
     }
 
     public String getName() {
@@ -47,29 +49,29 @@ public class Hotel {
         this.location = location;
     }
 
-//    public HashMap<Integer, Room> getRooms() {
-//        return rooms;
-//    }
-//
-//    public void setRooms(HashMap<Integer, Room> rooms) {
-//        this.rooms = rooms;
-//    }
+    public int getNumOfLevel() {
+        return numOfLevel;
+    }
 
-//    public HashMap<Integer, Room> getEmptyRooms() {
-//        return emptyRooms;
-//    }
-//
-//    public void setEmptyRooms(HashMap<Integer, Room> emptyRooms) {
-//        this.emptyRooms = emptyRooms;
-//    }
-//
-//    public HashMap<Integer, Room> getOccupiedRooms() {
-//        return occupiedRooms;
-//    }
-//
-//    public void setOccupiedRooms(HashMap<Integer, Room> occupiedRooms) {
-//        this.occupiedRooms = occupiedRooms;
-//    }
+    public void setNumOfLevel(int numOfLevel) {
+        this.numOfLevel = numOfLevel;
+    }
+
+    public int getLevelRmNum() {
+        return levelRmNum;
+    }
+
+    public void setLevelRmNum(int levelRmNum) {
+        this.levelRmNum = levelRmNum;
+    }
+
+    public Room[][] getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(Room[][] rooms) {
+        this.rooms = rooms;
+    }
 
     public ArrayList<Employee> getEmployees() {
         return employees;
@@ -77,5 +79,13 @@ public class Hotel {
 
     public void setEmployees(ArrayList<Employee> employees) {
         this.employees = employees;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
