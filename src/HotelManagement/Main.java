@@ -43,8 +43,14 @@ public class Main {
             String password = sc.nextLine();
             Hotel hotel = new Hotel(name,new Location(address),floor,numRoom,password);
             // save the hotel
-            File f = new File("./ManagementSystem/"+name+".txt");
-            String path = "./ManagementSystem/"+name+".txt";
+            String home = System.getProperty("user.home");
+            String sep = File.separator;
+            System.out.println(home);
+            File f = new File(home + sep + "ManagementSystem" + sep + name + ".txt");
+//            f.createNewFile();
+//            File f = new File("./ManagementSystem/"+name+".txt");
+//            File(FileNameUtils.normalize(home + "/Desktop/Testing/Java.txt"))
+            String path = home + File.separator + "ManagementSystem" + File.separator + name + ".txt";
             PrintWriter out = new PrintWriter(path);
             out.println(name);
             out.println(address);
