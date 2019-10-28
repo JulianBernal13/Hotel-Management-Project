@@ -2,7 +2,7 @@ package HotelManagement;
 
 /**
  * 
- * @author
+ * @author Julian Garcia
  *
  */
 public class Employee {
