@@ -65,6 +65,26 @@ public class Manager extends Employee {
 		}
 	}
 
+	// Selection Sort (employees alphabet style)
+	public void sortEmployees() {
+
+		// One by one move boundary of unsorted subarray
+		for (int i = 0; i < employees.size() - 1; i++) {
+			// Find the minimum element in unsorted array
+			int min_idx = i;
+			for (int j = i + 1; j < employees.size(); j++)
+				if (this.compareTwoEmployees(employees.get(j), employees.get(min_idx)) == -1) {
+					min_idx = j;
+				}
+			// Swap the found minimum element with the first
+			// element
+			Employee temp = employees.get(min_idx);
+			employees.set(min_idx, employees.get(i));
+			employees.set(i, temp);
+		}
+	}
+
+	//Helper method for sort
 	public int compareTwoEmployees(Employee employee1, Employee employee2) {
 
 		String alphabet = employee1.getTrueID(employee1.getID());
@@ -82,25 +102,6 @@ public class Manager extends Employee {
 		// if this, order doesn't matter, (i.e. 0)
 		else {
 			return 0;
-		}
-	}
-
-	// Selection Sort (employees alphabet style)
-	public void sortEmployees() {
-
-		// One by one move boundary of unsorted subarray
-		for (int i = 0; i < employees.size() - 1; i++) {
-			// Find the minimum element in unsorted array
-			int min_idx = i;
-			for (int j = i + 1; j < employees.size(); j++)
-				if (this.compareTwoEmployees(employees.get(j), employees.get(min_idx)) == -1) {
-					min_idx = j;
-				}
-			// Swap the found minimum element with the first
-			// element
-			Employee temp = employees.get(min_idx);
-			employees.set(min_idx, employees.get(i));
-			employees.set(i, temp);
 		}
 	}
 
