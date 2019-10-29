@@ -122,6 +122,14 @@ public class Menu {
                     System.out.println("Success! Now the room is occupied.");
                     break;
                 }
+                case "CO":{
+                    System.out.println("which room are you going to check-out?");
+                    int num = Integer.parseInt(sc.nextLine());
+                    String roomPath = cur.getPath()+File.separator+"Rooms";
+                    Room.checkOut(roomPath,num);
+                    System.out.println("Success! Now the room is empty.");
+                    break;
+                }
                 case "DE" : {FileReader.displayEmpINfo(info); break;}
                 case "LR" :
                 	File rooms = new File(cur.getPath() + File.pathSeparator + "Rooms");
