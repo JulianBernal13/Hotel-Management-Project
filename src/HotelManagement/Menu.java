@@ -14,7 +14,9 @@ public class Menu {
         System.out.println("Enter 'new' to construct a new hotel         ");
         System.out.println("Enter 'manage' to manage hotel               ");
         System.out.println("Enter 'exit' to exit the system              ");
-//        System.out.println("");
+        System.out.println("=============================================");
+        System.out.println("");
+
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
 
@@ -94,8 +96,43 @@ public class Menu {
     }
 
     private void managedByManager(File cur) {
-        
+
     }
 
+    private File registerCustomer(File cur) {
+        boolean found = false;
+        System.out.println("Please enter customer's name:");
+        Scanner sc = new Scanner(System.in);
+        String name = sc.nextLine();
+        for(File tmp : cur.listFiles()) {
+            if (tmp.getName() == name) {
+                System.out.println("This customer has already existed");
+                return tmp;
+            }
+        }
+        return createCustomer(name, cur);
+    }
+
+    private File lookUpCustomer(File cur) {
+        System.out.println("Please enter customer's name:");
+        Scanner sc = new Scanner(System.in);
+        String name = sc.nextLine();
+        for(File tmp : cur.listFiles()) {
+            if(tmp.getName() == name) {
+                return tmp;
+            }
+        }
+        System.out.println("Customer does not exists");
+        return null;
+    }
+
+    private void editCustomer(File customer) {
+        System.out.println("What would you like to do to" + customer.getName());
+
+    }
+
+    private File createCustomer(String name, File cur) {
+        return null;
+    }
 
 }
