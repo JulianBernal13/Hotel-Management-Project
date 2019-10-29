@@ -114,6 +114,14 @@ public class Menu {
             switch(command) {
                 case "exit" : break;
                 case "DH" : {FileReader.displayHotelInfo(info); break;}
+                case "CI":{
+                    System.out.println("Which room are you going to check-in?");
+                    int num = Integer.parseInt(sc.nextLine());
+                    String roomPath = cur.getPath()+File.separator+"Rooms";
+                    Room.checkIn(roomPath,num);
+                    System.out.println("Success! Now the room is occupied.");
+                    break;
+                }
                 case "DE" : {FileReader.displayEmpINfo(info); break;}
                 case "LR" :
                 	File rooms = new File(cur.getPath() + File.pathSeparator + "Rooms");
@@ -127,8 +135,9 @@ public class Menu {
                     String type = sc.nextLine();
                     String roomPath = cur.getPath()+File.separator+"Rooms";
                     Room.changeRoomType(roomPath,num,type);
-                    System.out.println("Success!");
-                };//change room type
+                    System.out.println("Success! Now the room is "+type);
+                    break;
+                }//change room type
             }
         }
     }

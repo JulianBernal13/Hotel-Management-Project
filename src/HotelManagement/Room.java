@@ -183,4 +183,29 @@ public class Room {
             }
         }
     }
+    public static void checkIn(String path,int number) throws FileNotFoundException {
+        File file = new File(path+File.separator+number+".txt");
+        Scanner sc = new Scanner(file);
+        String originalType = sc.nextLine();
+        String originalNumber = sc.nextLine();
+        String originalPrice = sc.nextLine();
+        String originalIsEmpty = sc.nextLine();
+        String originalIsClean = sc.nextLine();
+        String originalMaintaince = sc.nextLine();
+        String originalNote = sc.nextLine();
+        PrintWriter Originalwriter = new PrintWriter(file);
+        Originalwriter.write("");
+        Originalwriter.flush();
+        Originalwriter.close();
+        PrintWriter writer = new PrintWriter(file);
+        writer.println(originalType);
+        writer.println(originalNumber);
+        writer.println(originalPrice);
+        writer.println("false");
+        writer.println(originalIsClean);
+        writer.println(originalMaintaince);
+        writer.println(originalNote);
+        writer.flush();
+        writer.close();
+    }
 }
