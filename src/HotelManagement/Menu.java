@@ -101,7 +101,6 @@ public class Menu {
         File info = new File(path);
         if(info.exists()) {
             System.out.println("Please enter hotel password");
-            System.out.println(info.getPath());
             String password = FileReader.getHotelInfo(info, Hotel.HotelProperty.password);
             System.out.println("Here is a hint " + password);
             Scanner sc = new Scanner(System.in);
@@ -121,6 +120,15 @@ public class Menu {
                 	listRooms(rooms); //call Room List
                 case "CE" : break; //call employee
                 case "EE" : break; //edit employee
+                case "CRT":{
+                    System.out.println("Which room are you going to change type?");
+                    int num = Integer.parseInt(sc.nextLine());
+                    System.out.println("What type are you going to change?(single,double,triple,queen,king)");
+                    String type = sc.nextLine();
+                    String roomPath = cur.getPath()+File.separator+"Rooms";
+                    Room.changeRoomType(roomPath,num,type);
+                    System.out.println("Success!");
+                };//change room type
             }
         }
     }
