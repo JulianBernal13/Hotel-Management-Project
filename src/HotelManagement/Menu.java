@@ -106,11 +106,11 @@ public class Menu {
             String password = FileReader.getHotelInfo(tmp, Hotel.HotelProperty.password);
             System.out.println("Here is a hint " + password);
             Scanner sc = new Scanner(System.in);
-            if(sc.nextLine() != password) {
+            if(!sc.nextLine().equals(password)) {
                 System.out.println("You are not a manager!");
                 return;
             }
-            System.out.println("Success log in");
+            System.out.println("Successfully log in");
         }
     }
 

@@ -11,7 +11,7 @@ public class Manager extends Employee {
 
 	public Manager(String titleName, String id, int salary) {
 
-		super(titleName, id);
+		super(titleName, id, "", salary);
 
 		employees = new ArrayList<Employee>();
 		addEmployee(this);
@@ -88,7 +88,7 @@ public class Manager extends Employee {
 	public int compareTwoEmployees(Employee employee1, Employee employee2) {
 
 		String alphabet = employee1.getTrueID(employee1.getID());
-		Employee temp = new Employee(employee2.getTitleName(), employee2.getID());
+		Employee temp = new Employee(employee2.getTitleName(), employee2.getID(), "", 0);
 		String alphabet2 = employee2.getTrueID(employee2.getID());
 
 		// if this, employee 1 is first (i.e. -1)
