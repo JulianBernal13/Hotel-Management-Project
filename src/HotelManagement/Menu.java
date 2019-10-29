@@ -37,11 +37,15 @@ public class Menu {
         Scanner sc = new Scanner(System.in);
         System.out.println("What is your hotel's name?");
         String name = sc.nextLine();
-        File hotelFile = new File(name);
+        String path = "." + File.separator + "managementSystem";
+        File tmp = new File(path);
+        tmp.mkdir();
+        path += File.separator + name;
+        File hotelFile = new File(path);
         while(!hotelFile.mkdir()) {
             System.out.println("This name is taken, please enter another name");
             name = sc.nextLine();
-            hotelFile = new File(name);
+            hotelFile = new File(path);
         }
         System.out.println("What is your hotel's location? Enter an Address.");
         String address = sc.nextLine();
@@ -51,7 +55,7 @@ public class Menu {
         int numRoom = Integer.parseInt(sc.nextLine());
         System.out.println("Please set a password for this hotel.");
         String password = sc.nextLine();
-        String path = "." + File.separator + name;
+
 
         Hotel hotel = new Hotel(path, name, new Location(address), floor, numRoom, password);
         // save the hotel
