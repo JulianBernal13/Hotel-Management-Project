@@ -2,10 +2,17 @@ package HotelManagement;
 
 public class Printer {
     public static void printWelcome(){
-        System.out.println("Welcome to ISU Hotel Management System!\n" +
-                "Enter 'new' to start a new hotel.\n"+
-                "Enter 'manage' to manage current hotels.\n" +
-                "Enter 'exit' to quit the system.\n"
-        );
+        System.out.println("=============================================");
+        System.out.println("*         Hotel Management System           *");
+        System.out.println("=============================================");
+        System.out.println("Enter 'new' to construct a new hotel         ");
+        System.out.println("Enter 'manage' to manage hotel               ");
+        System.out.println("Enter 'exit' to exit the system              ");
+        System.out.println("=============================================");
+        System.out.println("");
+    }
+
+    public static void printEditCustomer() {
+
     }
 }

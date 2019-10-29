@@ -1,21 +1,13 @@
 package HotelManagement;
 
 import java.io.*;
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Menu {
 
 
     public void menu() throws IOException {
-        System.out.println("=============================================");
-        System.out.println("*         Hotel Management System           *");
-        System.out.println("=============================================");
-        System.out.println("Enter 'new' to construct a new hotel         ");
-        System.out.println("Enter 'manage' to manage hotel               ");
-        System.out.println("Enter 'exit' to exit the system              ");
-        System.out.println("=============================================");
-        System.out.println("");
+        Printer.printWelcome();
 
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
@@ -29,7 +21,12 @@ public class Menu {
                 manageHotel();
                 menu();
             }
-            default: break;
+            case "exit" :
+                break;
+            default: {
+                System.out.println("Invalid command, please enter another command");
+                menu();
+            }
         }
     }
 
@@ -127,7 +124,7 @@ public class Menu {
     }
 
     private void editCustomer(File customer) {
-        System.out.println("What would you like to do to" + customer.getName());
+        System.out.println("What would you like to do to with " + customer.getName());
 
     }
 

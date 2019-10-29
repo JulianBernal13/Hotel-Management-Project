@@ -31,11 +31,11 @@ public class Contract {
         this.end = end;
     }
 
-    boolean isLess(Contract other) {
+    boolean isLessThan(Contract other) {
         return this.end <= other.getStart();
     }
 
-    boolean isGreater(Contract other) {
+    boolean isGreaterThan(Contract other) {
         return this.start >= other.getEnd();
     }
 
