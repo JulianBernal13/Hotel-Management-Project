@@ -98,12 +98,11 @@ public class Menu {
 
     private void managedByManager(File cur) throws FileNotFoundException {
         String path = cur.getPath() + File.separator + "info.txt";
-        File tmp = new File(path);
-        if(tmp.exists()) {
+        File info = new File(path);
+        if(info.exists()) {
             System.out.println("Please enter hotel password");
-            System.out.println(tmp.getPath());
-//            Hotel.HotelProperty property = Hotel.HotelProperty;
-            String password = FileReader.getHotelInfo(tmp, Hotel.HotelProperty.password);
+            System.out.println(info.getPath());
+            String password = FileReader.getHotelInfo(info, Hotel.HotelProperty.password);
             System.out.println("Here is a hint " + password);
             Scanner sc = new Scanner(System.in);
             if(!sc.nextLine().equals(password)) {
@@ -111,6 +110,7 @@ public class Menu {
                 return;
             }
             System.out.println("Successfully log in");
+            FileReader.displayHotelInfo(info);
         }
     }
 

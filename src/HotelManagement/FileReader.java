@@ -12,4 +12,11 @@ public class FileReader {
             in.nextLine();
         return in.nextLine();
     }
+
+    public static void displayHotelInfo(File file) throws FileNotFoundException {
+        Scanner in = new Scanner(file);
+        for (Hotel.HotelProperty tmp : Hotel.HotelProperty.values()) {
+            System.out.println(tmp.name() + ": " + in.nextLine());
+        }
+    }
 }
