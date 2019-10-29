@@ -14,6 +14,9 @@ public class Employee {
 	//ID (e.g. C43245)
 	private String id;
 	
+	private String paymentType;
+	private int wage;
+	
 	// private HotelManagement.Employee[] a;
 
 	/**
@@ -21,9 +24,11 @@ public class Employee {
 	 * 
 	 * @param titleName
 	 */
-	public Employee(String titleName, String id) {
+	public Employee(String titleName, String id, String paymentType, int wage) {
 		this.titleName = titleName;
 		this.id = id;
+		this.paymentType = paymentType;
+		this.wage = wage;
 	}
 
 	// OVERRIDE IN SUBCLASSES
