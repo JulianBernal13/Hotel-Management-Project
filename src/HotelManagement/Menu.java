@@ -1,9 +1,7 @@
 package HotelManagement;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Menu {
@@ -37,7 +35,7 @@ public class Menu {
         Scanner sc = new Scanner(System.in);
         System.out.println("What is your hotel's name?");
         String name = sc.nextLine();
-        String path = "." + File.separator + "managementSystem";
+        String path = "." + File.separator + "ManagementSystem";
         File tmp = new File(path);
         tmp.mkdir();
         path += File.separator + name;
@@ -56,37 +54,48 @@ public class Menu {
         System.out.println("Please set a password for this hotel.");
         String password = sc.nextLine();
 
-
         Hotel hotel = new Hotel(path, name, new Location(address), floor, numRoom, password);
-        // save the hotel
-//        File f = new File(home + sep + "ManagementSystem" + sep + name + ".txt");
-//        String path = home + File.separator + "ManagementSystem" + File.separator + name + ".txt";
-//        PrintWriter out = new PrintWriter(path);
-//        out.println(name);
-//        out.println(address);
-//        out.println(password);
-//        out.println("Rooms:");
-//        for (int i = 0; i <floor ; i++) {
-//            for (int j = 0; j < numRoom; j++) {
-//                out.println(hotel.getRooms()[i][j].toString());
-//            }
-//            out.println();
-//        }
-//        out.println("Employees:"+" \n");
-//        try {
-//            for (int i = 0; i < hotel.getEmployees().size(); i++) {
-//                out.write(hotel.getEmployees().get(i).toString() + " \n");
-//            }
-//        }
-//        catch (NullPointerException e){
-//            out.write("There is no employee.");
-//        }
-//        out.flush();
-//        out.close();
-//        System.out.println("Success! "+hotel.getName()+" has been constructed!");
     }
 
     private void manageHotel() {
+        Scanner sc = new Scanner(System.in);
+        String path = "." + File.separator + "ManagementSystem";
+        System.out.println("Which Hotel?");
+        File tmp = new File(path);
+        for (File file : tmp.listFiles()) {
+            System.out.println(file.getName());
+        }
+        System.out.println("Please enter hotel name");
+        String name = sc.nextLine();
+        File cur = new File(path + File.separator + name);
+        while(!cur.exists()) {
+            System.out.println("Hotel does not exist. Please enter another one");
+            for (File file : tmp.listFiles()) {
+                System.out.println(file.getName());
+            }
+            name = sc.nextLine();
+            cur = new File(path + File.separator + name);
+        }
+//        path += File.separator + name;
+        System.out.println("Choose your occupation number");
+        System.out.println("1. Manager");
+        System.out.println("2. Counter");
+
+        int occu = sc.nextInt();
+        switch(occu) {
+            case 1: managedByManager(cur);
+            case 2: managedByCounter(cur);
+            default: break;
+        }
     }
+
+    private void managedByCounter(File cur) {
+
+    }
+
+    private void managedByManager(File cur) {
+        
+    }
+
 
 }
