@@ -1,5 +1,9 @@
 package HotelManagement;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -11,10 +15,12 @@ public class Room {
     private double price;
     private boolean isEmpty;
     private boolean isClean;
+    private String path;
     private ArrayList<Contract> contractList;
 
-    public Room(int number) {
+    public Room(int number, String path) {
         this.number = number;
+        this.path = path;
         this.isClean = true;
         this.isEmpty = true;
         this.price = 100;
@@ -69,5 +75,17 @@ public class Room {
                 ", isEmpty=" + isEmpty +
                 ", isClean=" + isClean +
                 '}';
+    }
+
+    public void createRoomFile() throws IOException {
+        File cur = new File(this.path + File.separator + this.number + ".txt");
+//        cur.createNewFile();
+        PrintWriter writer = new PrintWriter(cur);
+        writer.println(number);
+        writer.println(String.valueOf(price));
+        writer.println(String.valueOf(isEmpty));
+        writer.println(String.valueOf(isClean));
+        writer.flush();
+        writer.close();
     }
 }

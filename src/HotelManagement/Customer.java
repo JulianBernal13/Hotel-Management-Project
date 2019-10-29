@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class Customer {
     private String firstName;
     private String lastName;
+    private boolean isVIP = false;
     private ArrayList<Contract> contracts;
 
     public Customer(String firstName, String lastName, ArrayList<Contract> contracts) {

@@ -1,11 +1,9 @@
 package HotelManagement;
 
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.List;
 
 /**
  * @author Yingxie Gao
@@ -19,75 +17,39 @@ public class Hotel {
     private Room rooms[][];
     private ArrayList<Employee> employees;
     private String password;
+    private String path;
 
-    public Hotel(String name,Location location, int numOfLevel, int levelRmNum, String password) {
+    public Hotel(String path, String name,Location location, int numOfLevel, int levelRmNum, String password) throws IOException {
+        this.path = path;
         this.name = name;
         this.location = location;
         this.numOfLevel = numOfLevel;
         this.levelRmNum = levelRmNum;
+        this.password = password;
         rooms = new Room[numOfLevel][levelRmNum];
+
+
+        File info = new File(path + File.separator + "info.txt");
+        PrintWriter writer = new PrintWriter(info);
+        writer.println(name);
+        writer.println(location);
+        writer.println(numOfLevel);
+        writer.println(levelRmNum);
+        writer.println(password);
+        writer.flush();
+        writer.close();
+
+        String roomPath = path + File.separator + "Rooms";
+        File roomFile = new File(roomPath);
+        roomFile.mkdir();
         for(int i = 0; i < numOfLevel; i++) {
             for(int j = 0; j < levelRmNum; j++) {
-                rooms[i][j] = new Room((i+1)* 100 + j);
+                rooms[i][j] = new Room((i+1)* 100 + j, roomPath);
+                rooms[i][j].createRoomFile();
             }
         }
+
+
         ArrayList<Employee> employees =new ArrayList<>();
-        this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    public int getNumOfLevel() {
-        return numOfLevel;
-    }
-
-    public void setNumOfLevel(int numOfLevel) {
-        this.numOfLevel = numOfLevel;
-    }
-
-    public int getLevelRmNum() {
-        return levelRmNum;
-    }
-
-    public void setLevelRmNum(int levelRmNum) {
-        this.levelRmNum = levelRmNum;
-    }
-
-    public Room[][] getRooms() {
-        return rooms;
-    }
-
-    public void setRooms(Room[][] rooms) {
-        this.rooms = rooms;
-    }
-
-    public ArrayList<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(ArrayList<Employee> employees) {
-        this.employees = employees;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }

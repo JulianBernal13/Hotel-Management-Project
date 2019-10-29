@@ -1,9 +1,0 @@
-numberone
-Ames
-123456
-Rooms:
-Room{number=100, price=100.0, isEmpty=true, isClean=true}Room{number=101, price=100.0, isEmpty=true, isClean=true}Room{number=102, price=100.0, isEmpty=true, isClean=true}
-Room{number=200, price=100.0, isEmpty=true, isClean=true}Room{number=201, price=100.0, isEmpty=true, isClean=true}Room{number=202, price=100.0, isEmpty=true, isClean=true}
-Room{number=300, price=100.0, isEmpty=true, isClean=true}Room{number=301, price=100.0, isEmpty=true, isClean=true}Room{number=302, price=100.0, isEmpty=true, isClean=true}
-Employees:
-There is no employee.
