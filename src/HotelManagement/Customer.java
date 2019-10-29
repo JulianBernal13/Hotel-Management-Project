@@ -30,12 +30,14 @@ public class Customer {
 
     public void createCostomerFile (String path) throws IOException {
         File cur = new File(path + File.separator + this.toString() + ".txt");
-        PrintWriter writer = new PrintWriter(cur);
-        writer.println(firstName);
-        writer.println(lastName);
-        writer.println(isVIP);
-        writer.flush();
-        writer.close();
+        if(cur.createNewFile()) {
+            PrintWriter writer = new PrintWriter(cur);
+            writer.println(firstName);
+            writer.println(lastName);
+            writer.println(isVIP);
+            writer.flush();
+            writer.close();
+        }
     }
 
 

@@ -49,7 +49,17 @@ public class Hotel {
             }
         }
 
+        createDirectory(this.path, "Customer");
+        createDirectory(this.path, "Employee");
+
+
 
         ArrayList<Employee> employees =new ArrayList<>();
+    }
+
+    public static void createDirectory(String currentPath, String name) {
+        String targetPath = currentPath + File.separator + name;
+        File targetFile = new File(targetPath);
+        targetFile.mkdir();
     }
 }

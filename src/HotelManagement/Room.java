@@ -79,13 +79,14 @@ public class Room {
 
     public void createRoomFile() throws IOException {
         File cur = new File(this.path + File.separator + this.number + ".txt");
-//        cur.createNewFile();
-        PrintWriter writer = new PrintWriter(cur);
-        writer.println(number);
-        writer.println(String.valueOf(price));
-        writer.println(String.valueOf(isEmpty));
-        writer.println(String.valueOf(isClean));
-        writer.flush();
-        writer.close();
+        if(cur.createNewFile()) {
+            PrintWriter writer = new PrintWriter(cur);
+            writer.println(number);
+            writer.println(String.valueOf(price));
+            writer.println(String.valueOf(isEmpty));
+            writer.println(String.valueOf(isClean));
+            writer.flush();
+            writer.close();
+        }
     }
 }

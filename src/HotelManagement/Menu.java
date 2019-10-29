@@ -89,7 +89,7 @@ public class Menu {
     }
 
     private void managedByCounter(File cur) {
-
+        
     }
 
     private void managedByManager(File cur) {
@@ -125,6 +125,7 @@ public class Menu {
 
     private void editCustomer(File customer) {
         System.out.println("What would you like to do to with " + customer.getName());
+        Printer.printEditCustomer();
 
     }
 
