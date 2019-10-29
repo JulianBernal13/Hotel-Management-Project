@@ -17,6 +17,10 @@ public class Customer {
     private ArrayList<Contract> contractHistory;
     private ArrayList<Contract> futureContracts;
 
+    public static enum customerProperty {
+        firstname, lastname, isVIP, contractHistory, futureContract;
+    }
+
     public Customer(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -28,7 +32,7 @@ public class Customer {
         return firstName + " " + lastName;
     }
 
-    public void createCostomerFile (String path) throws IOException {
+    public void createCustomerFile (String path) throws IOException {
         File cur = new File(path + File.separator + this.toString() + ".txt");
         if(cur.createNewFile()) {
             PrintWriter writer = new PrintWriter(cur);
@@ -39,7 +43,4 @@ public class Customer {
             writer.close();
         }
     }
-
-
-
 }

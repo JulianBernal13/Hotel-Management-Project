@@ -86,14 +86,14 @@ public class Menu {
 
         int occu = sc.nextInt();
         switch(occu) {
-            case 1: managedByManager(cur);
-            case 2: managedByCounter(cur);
+            case 1: {managedByManager(cur); break;}
+            case 2: {managedByCounter(cur); break;}
             default: break;
         }
     }
 
     private void managedByCounter(File cur) {
-
+        Printer.printCounterMenu();
     }
 
     private void managedByManager(File cur) throws FileNotFoundException {
@@ -109,8 +109,16 @@ public class Menu {
                 System.out.println("You are not a manager!");
                 return;
             }
-            System.out.println("Successfully log in");
-            FileReader.displayHotelInfo(info);
+            System.out.println("Welcome manager");
+            Printer.printManagerMenu();
+            String command = sc.nextLine();
+            switch(command) {
+                case "exit" : break;
+                case "DH" : {FileReader.displayHotelInfo(info); break;}
+                case "DE" : {FileReader.displayEmpINfo(info); break;}
+                case "CE" : break; //call employee
+                case "EE" : break; //edit employee
+            }
         }
     }
 

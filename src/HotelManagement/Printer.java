@@ -22,7 +22,21 @@ public class Printer {
         System.out.println("");
     }
 
-    public static void printManager() {
+    public static void printManagerMenu() {
+        System.out.println("=============================================");
+        System.out.println("Enter 'DH' to display hotal information      ");
+        System.out.println("Enter 'CE' to call an employee               ");
+        System.out.println("Enter 'EE' to edit employee                  ");
+        System.out.println("Enter 'exit' to exit");
+        System.out.println("");
+    }
+
+    public static void printCounterMenu() {
+        System.out.println("=============================================");
+        System.out.println("Enter 'DH' to display hotal information      ");
+        System.out.println("Enter 'CE' to call an employee               ");
+        System.out.println("Enter 'EE' to edit employee                  ");
+        System.out.println("Enter 'exit' to exit");
         System.out.println("");
     }
 }

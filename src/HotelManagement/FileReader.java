@@ -19,4 +19,7 @@ public class FileReader {
             System.out.println(tmp.name() + ": " + in.nextLine());
         }
     }
+
+    public static void displayEmpINfo(File info) throws FileNotFoundException{
+    }
 }
