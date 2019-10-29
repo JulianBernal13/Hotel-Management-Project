@@ -14,8 +14,8 @@ public class Printer {
 
     public static void printEditCustomer() {
         System.out.println("=============================================");
-        System.out.println("Enter 'ckeckin' to check customer in         ");
-        System.out.println("Enter 'ckeckout' to check customer out       ");
+        System.out.println("Enter 'checkin' to check customer in         ");
+        System.out.println("Enter 'checkout' to check customer out       ");
         System.out.println("Enter 'VIP' to make this customer VIP        ");
 //        System.out.println("");
         System.out.println("=============================================");
