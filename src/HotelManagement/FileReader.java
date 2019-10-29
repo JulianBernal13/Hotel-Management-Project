@@ -19,6 +19,13 @@ public class FileReader {
             System.out.println(tmp.name() + ": " + in.nextLine());
         }
     }
+    
+    public static void displayRoomInfo(File file) throws FileNotFoundException {
+    	Scanner in = new Scanner(file);
+    	for (Room.RoomProperty tmp : Room.RoomProperty.values()) {
+            System.out.println(tmp.name() + ": " + in.nextLine());
+        }
+    }
 
     public static void displayEmpINfo(File info) throws FileNotFoundException{
     }

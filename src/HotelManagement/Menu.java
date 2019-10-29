@@ -116,6 +116,9 @@ public class Menu {
                 case "exit" : break;
                 case "DH" : {FileReader.displayHotelInfo(info); break;}
                 case "DE" : {FileReader.displayEmpINfo(info); break;}
+                case "LR" :
+                	File rooms = new File(cur.getPath() + File.pathSeparator + "Rooms");
+                	listRooms(rooms); //call Room List
                 case "CE" : break; //call employee
                 case "EE" : break; //edit employee
             }
@@ -152,11 +155,30 @@ public class Menu {
     private void editCustomer(File customer) {
         System.out.println("What would you like to do to with " + customer.getName());
         Printer.printEditCustomer();
-
     }
 
     private File createCustomer(String name, File cur) {
         return null;
+    }
+    
+    private void listRooms(File rooms) {
+    	Printer.printRoomview();
+    	Scanner sc = new Scanner(System.in);
+        for (File file : rooms.listFiles()) {
+            System.out.println("-" + file.getName());
+        }
+        String room = sc.nextLine();
+        File check = new File(rooms + File.separator + room);
+        while(!check.exists()) {
+        	System.out.println("room does not exist, enter another room \n");
+        	for (File file : rooms.listFiles()) {
+                System.out.println("-" + file.getName());
+            }
+        	room = sc.nextLine();
+        	check = new File(rooms + File.separator + room);
+        }
+        //TODO
+        //james
     }
 
 }

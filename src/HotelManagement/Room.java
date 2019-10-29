@@ -15,8 +15,14 @@ public class Room {
     private double price;
     private boolean isEmpty;
     private boolean isClean;
-    private String path;
+    private String path; 
+    private String maintaince;
+    private String notes;
     private ArrayList<Contract> contractList;
+    
+    public static enum RoomProperty {
+        number, price, isEmpty, IsClean, maintaince, notes
+    }
 
     public Room(int number, String path) {
         this.number = number;
@@ -24,6 +30,8 @@ public class Room {
         this.isClean = true;
         this.isEmpty = true;
         this.price = 100;
+        this.maintaince = "none";
+        this.notes = "none";
         ArrayList<Contract> contractList = new ArrayList<>();
     }
 
@@ -66,6 +74,22 @@ public class Room {
     public void setEmpty(boolean empty) {
         isEmpty = empty;
     }
+    
+    public String Maintaince() {
+        return maintaince;
+    }
+
+    public void setMaintaince(String maintaince) {
+        this.maintaince = maintaince;
+    }
+    
+    public String Notes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
 
     @Override
     public String toString() {
@@ -74,6 +98,8 @@ public class Room {
                 ", price=" + price +
                 ", isEmpty=" + isEmpty +
                 ", isClean=" + isClean +
+                ", maintaince=" + maintaince +
+                ", notes" + notes + 
                 '}';
     }
 
@@ -85,6 +111,8 @@ public class Room {
             writer.println(String.valueOf(price));
             writer.println(String.valueOf(isEmpty));
             writer.println(String.valueOf(isClean));
+            writer.println(String.valueOf(maintaince));
+            writer.println(String.valueOf(notes));
             writer.flush();
             writer.close();
         }
