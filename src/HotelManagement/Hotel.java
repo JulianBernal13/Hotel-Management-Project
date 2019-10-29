@@ -5,6 +5,10 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.io.IOException;
 
+//enum HotelProperty {
+//    name, location, numOfLevel, levelRmNum, password;
+//}
+
 /**
  * @author Yingxie Gao
  * @date 10/18/19 22:30
@@ -18,6 +22,11 @@ public class Hotel {
     private ArrayList<Employee> employees;
     private String password;
     private String path;
+
+    public static enum HotelProperty {
+        name, location, numOfLevel, levelRmNum, password;
+    }
+
 
     public Hotel(String path, String name,Location location, int numOfLevel, int levelRmNum, String password) throws IOException {
         this.path = path;
@@ -62,4 +71,5 @@ public class Hotel {
         File targetFile = new File(targetPath);
         targetFile.mkdir();
     }
+
 }

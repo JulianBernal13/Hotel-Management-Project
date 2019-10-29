@@ -21,4 +21,8 @@ public class Printer {
         System.out.println("=============================================");
         System.out.println("");
     }
+
+    public static void printManager() {
+        System.out.println("");
+    }
 }

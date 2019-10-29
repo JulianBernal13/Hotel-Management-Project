@@ -5,6 +5,10 @@ import java.util.Scanner;
 
 public class Menu {
 
+    public static enum HotelProperty {
+        name, location, numOfLevel, levelRmNum, password;
+    }
+
 
     public void menu() throws IOException {
         Printer.printWelcome();
@@ -56,7 +60,7 @@ public class Menu {
         Hotel hotel = new Hotel(path, name, new Location(address), floor, numRoom, password);
     }
 
-    private void manageHotel() {
+    private void manageHotel() throws FileNotFoundException {
         Scanner sc = new Scanner(System.in);
         String path = "." + File.separator + "ManagementSystem";
         System.out.println("Which Hotel?");
@@ -89,11 +93,25 @@ public class Menu {
     }
 
     private void managedByCounter(File cur) {
-        
+
     }
 
-    private void managedByManager(File cur) {
-
+    private void managedByManager(File cur) throws FileNotFoundException {
+        String path = cur.getPath() + File.separator + "info.txt";
+        File tmp = new File(path);
+        if(tmp.exists()) {
+            System.out.println("Please enter hotel password");
+            System.out.println(tmp.getPath());
+//            Hotel.HotelProperty property = Hotel.HotelProperty;
+            String password = FileReader.getHotelInfo(tmp, Hotel.HotelProperty.password);
+            System.out.println("Here is a hint " + password);
+            Scanner sc = new Scanner(System.in);
+            if(sc.nextLine() != password) {
+                System.out.println("You are not a manager!");
+                return;
+            }
+            System.out.println("Success log in");
+        }
     }
 
     private File registerCustomer(File cur) {
