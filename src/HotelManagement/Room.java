@@ -106,12 +106,8 @@ public class Room {
 
     public static void changeRoomType(String path, int number, String type) throws FileNotFoundException {
         File file = new File(path+File.separator+number+".txt");
-        Scanner sc = new Scanner(file);
-        ArrayList<String> oldInfo = new ArrayList<>();
-        while(sc.hasNext()){
-            oldInfo.add(String.valueOf(sc.nextLine()));
-        }
-        FileReader.cleanFileContent(file);
+        ArrayList<String> oldInfo = FileController.copyOldInfo(file);
+        FileController.cleanFileContent(file);
         PrintWriter writer = new PrintWriter(file);
         switch (type){
             case "single":{
@@ -179,12 +175,9 @@ public class Room {
     }
     public static void checkIn(String path,int number) throws FileNotFoundException {
         File file = new File(path+File.separator+number+".txt");
-        Scanner sc = new Scanner(file);
-        ArrayList<String> oldInfo = new ArrayList<>();
-        while(sc.hasNext()){
-            oldInfo.add(String.valueOf(sc.nextLine()));
-        }
-        FileReader.cleanFileContent(file);
+        ArrayList<String> oldInfo = FileController.copyOldInfo(file);
+        FileController.cleanFileContent(file);
+
         PrintWriter writer = new PrintWriter(file);
         writer.println(oldInfo.get(RoomProperty.number.ordinal()));
         writer.println(oldInfo.get(RoomProperty.type.ordinal()));
@@ -199,12 +192,9 @@ public class Room {
 
     public static void checkOut(String path, int number) throws FileNotFoundException {
         File file = new File(path+File.separator+number+".txt");
-        Scanner sc = new Scanner(file);
-        ArrayList<String> oldInfo = new ArrayList<>();
-        while(sc.hasNext()){
-            oldInfo.add(String.valueOf(sc.nextLine()));
-        }
-        FileReader.cleanFileContent(file);
+        ArrayList<String> oldInfo = FileController.copyOldInfo(file);
+        FileController.cleanFileContent(file);
+
         PrintWriter writer = new PrintWriter(file);
         writer.println(oldInfo.get(RoomProperty.number.ordinal()));
         writer.println(oldInfo.get(RoomProperty.type.ordinal()));
