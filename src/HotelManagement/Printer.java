@@ -32,6 +32,7 @@ public class Printer {
         System.out.println("Enter 'LR' to list all rooms and to edit     ");
         System.out.println("Enter 'CE' to call an employee               ");
         System.out.println("Enter 'EE' to edit employee                  ");
+        System.out.println("Enter 'AE' to add employee                  ");
         System.out.println("Enter 'CRT' to change room type                  ");
         System.out.println("Enter 'exit' to exit");
         System.out.println("");
