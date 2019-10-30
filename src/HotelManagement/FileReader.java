@@ -60,7 +60,4 @@ public class FileReader {
         Collections.sort(allRoomsWithType);
         Printer.printArray(allRoomsWithType);
     }
-
-    public static void displayEmpINfo(File info) throws FileNotFoundException{
-    }
 }
