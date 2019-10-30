@@ -64,6 +64,7 @@ public class Hotel {
 		}
 
 		createDirectory(this.path, "Customer");
+        createDirectory(this.path, "Contract");
 
 		// createDirectory(this.path, "Employee");
 
@@ -84,10 +85,10 @@ public class Hotel {
 		ArrayList<Employee> employees = new ArrayList<>();
 	}
 
-	public static void createDirectory(String currentPath, String name) {
+	public static boolean createDirectory(String currentPath, String name) {
 		String targetPath = currentPath + File.separator + name;
 		File targetFile = new File(targetPath);
-		targetFile.mkdir();
+		return targetFile.mkdir();
 	}
 
 }
