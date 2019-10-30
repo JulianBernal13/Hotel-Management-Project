@@ -141,15 +141,15 @@ public class Menu {
             switch(command) {
                 case "exit" : break;
                 case "DH" : {FileReader.displayHotelInfo(info); break;}
-                case "DE" : {
-				String employeePath = cur.getPath() + File.separator + "Employee";
-				File info2 = new File(employeePath);
-				File[] temp = info2.listFiles();
-				for (File f : temp) {
-					FileReader.displayEmpInfo(f);
-				}
-				break;
-                }
+//                case "DE" : {
+//				String employeePath = cur.getPath() + File.separator + "Employee";
+//				File info2 = new File(employeePath);
+//				File[] temp = info2.listFiles();
+//				for (File f : temp) {
+//					FileReader.displayEmpInfo(f);
+//				}
+//				break;
+//                }
                 case "LR" :
                 	File rooms = new File(cur.getPath() + File.pathSeparator + "Rooms");
                 	listRooms(rooms); //call Room List
@@ -171,41 +171,7 @@ public class Menu {
         }
     }
 
-    private File registerCustomer(File cur) {
-        boolean found = false;
-        System.out.println("Please enter customer's name:");
-        Scanner sc = new Scanner(System.in);
-        String name = sc.nextLine();
-        for(File tmp : cur.listFiles()) {
-            if (tmp.getName() == name) {
-                System.out.println("This customer has already existed");
-                return tmp;
-            }
-        }
-        return createCustomer(name, cur);
-    }
 
-    private File lookUpCustomer(File cur) {
-        System.out.println("Please enter customer's name:");
-        Scanner sc = new Scanner(System.in);
-        String name = sc.nextLine();
-        for(File tmp : cur.listFiles()) {
-            if(tmp.getName() == name) {
-                return tmp;
-            }
-        }
-        System.out.println("Customer does not exists");
-        return null;
-    }
-
-    private void editCustomer(File customer) {
-        System.out.println("What would you like to do to with " + customer.getName());
-        Printer.printEditCustomer();
-    }
-
-    private File createCustomer(String name, File cur) {
-        return null;
-    }
     
     private void listRooms(File rooms) {
     	Printer.printRoomview();

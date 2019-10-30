@@ -71,16 +71,16 @@ public class Hotel {
 		String employeePath = path + File.separator + "Employee";
 		File employeeFile = new File(employeePath);
 		employeeFile.mkdir();
-		File cur = new File(employeePath + File.separator + manager.getID() + ".txt");
-		if (cur.createNewFile()) {
-			PrintWriter writer1 = new PrintWriter(cur);
-			writer1.println(manager.getTitleName());
-			writer1.println(manager.getID());
-			writer1.println(manager.getPaymentType());
-			writer1.println(String.valueOf(manager.getSalary()));
-			writer1.flush();
-			writer1.close();
-		}
+//		File cur = new File(employeePath + File.separator + manager.getID() + ".txt");
+//		if (cur.createNewFile()) {
+//			PrintWriter writer1 = new PrintWriter(cur);
+//			writer1.println(manager.getTitleName());
+//			writer1.println(manager.getID());
+//			writer1.println(manager.getPaymentType());
+//			writer1.println(String.valueOf(manager.getSalary()));
+//			writer1.flush();
+//			writer1.close();
+//		}
 
 		ArrayList<Employee> employees = new ArrayList<>();
 	}

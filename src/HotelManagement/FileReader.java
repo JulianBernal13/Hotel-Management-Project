@@ -29,12 +29,12 @@ public class FileReader {
 		}
 	}
 
-	public static void displayEmpInfo(File file) throws FileNotFoundException {
-		Scanner in = new Scanner(file);
-		for (Employee.EmployeeProperty tmp : Employee.EmployeeProperty.values()) {
-			System.out.println(tmp.name() + ": " + in.nextLine());
-		}
-	}
+//	public static void displayEmpInfo(File file) throws FileNotFoundException {
+//		Scanner in = new Scanner(file);
+//		for (Employee.EmployeeProperty tmp : Employee.EmployeeProperty.values()) {
+//			System.out.println(tmp.name() + ": " + in.nextLine());
+//		}
+//	}
 
     public static void displayAllRoom(File file) throws FileNotFoundException {
 

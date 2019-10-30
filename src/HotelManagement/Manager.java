@@ -111,20 +111,20 @@ public class Manager extends Employee {
 		}
 	}
 
-	public void addEmployeeToFile(String path, Employee emp) throws IOException {
-
-		File cur = new File(path + File.separator + emp.getID() + ".txt");
-		if (cur.createNewFile()) {
-			PrintWriter writer = new PrintWriter(cur);
-			writer.println(emp.getTitleName());
-			writer.println(emp.getID());
-			writer.println(emp.getPaymentType());
-			writer.println(String.valueOf(emp.getSalary()));
-			writer.flush();
-			writer.close();
-			// titleName, id, paymentType, wage
-		}
-	}
+//	public void addEmployeeToFile(String path, Employee emp) throws IOException {
+//
+//		File cur = new File(path + File.separator + emp.getID() + ".txt");
+//		if (cur.createNewFile()) {
+//			PrintWriter writer = new PrintWriter(cur);
+//			writer.println(emp.getTitleName());
+//			writer.println(emp.getID());
+//			writer.println(emp.getPaymentType());
+//			writer.println(String.valueOf(emp.getSalary()));
+//			writer.flush();
+//			writer.close();
+//			// titleName, id, paymentType, wage
+//		}
+//	}
 
 	public void deleteEmployeeFromFile(String path, Employee emp) throws IOException {
 		File cur = new File(path + File.separator + emp.getID() + ".txt");
