@@ -1,6 +1,10 @@
 package HotelManagement;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Manager extends Employee {
 
@@ -9,10 +13,13 @@ public class Manager extends Employee {
 	// Only Manager can access this
 	private ArrayList<Employee> employees;
 
+	public static enum ManagerProperty {
+		titleName, id, paymentType, salary
+	}
+
 	public Manager(String titleName, String id, int salary) {
 
-		super(titleName, id, "", salary);
-
+		super(titleName, id, "bi-weekly", salary);
 		employees = new ArrayList<Employee>();
 		addEmployee(this);
 		setSalary(salary);
@@ -39,7 +46,6 @@ public class Manager extends Employee {
 		return null;
 	}
 
-	// List of employees
 	public int getEmployees() {
 		return employees.size();
 	}
@@ -84,7 +90,7 @@ public class Manager extends Employee {
 		}
 	}
 
-	//Helper method for sort
+	// Helper method for sort
 	public int compareTwoEmployees(Employee employee1, Employee employee2) {
 
 		String alphabet = employee1.getTrueID(employee1.getID());
@@ -105,4 +111,33 @@ public class Manager extends Employee {
 		}
 	}
 
+	public void addEmployeeToFile(String path, Employee emp) throws IOException {
+
+		File cur = new File(path + File.separator + emp.getID() + ".txt");
+		if (cur.createNewFile()) {
+			PrintWriter writer = new PrintWriter(cur);
+			writer.println(emp.getTitleName());
+			writer.println(emp.getID());
+			writer.println(emp.getPaymentType());
+			writer.println(String.valueOf(emp.getSalary()));
+			writer.flush();
+			writer.close();
+			// titleName, id, paymentType, wage
+		}
+	}
+
+	public void deleteEmployeeFromFile(String path, Employee emp) throws IOException {
+		File cur = new File(path + File.separator + emp.getID() + ".txt");
+		cur.deleteOnExit();
+		// if (cur.createNewFile()) {
+		// PrintWriter writer = new PrintWriter(cur);
+		// writer.println(emp.getTitleName());
+		// writer.println(emp.getID());
+		// writer.println(emp.getPaymentType());
+		// writer.println(String.valueOf(emp.getSalary()));
+		// writer.flush();
+		// writer.close();
+		// titleName, id, paymentType, wage
+		// }
+	}
 }
