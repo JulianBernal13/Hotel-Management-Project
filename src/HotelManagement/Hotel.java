@@ -41,7 +41,6 @@ public class Hotel {
 		rooms = new Room[numOfLevel][levelRmNum];
 
 		Random rand = new Random();
-		manager = new Manager("Manager", "M" + rand.nextInt(10000), 80000);
 
 		File info = new File(path + File.separator + "info.txt");
 		PrintWriter writer = new PrintWriter(info);
@@ -64,31 +63,36 @@ public class Hotel {
 		}
 
 		createDirectory(this.path, "Customer");
-        createDirectory(this.path, "Contract");
 
 		// createDirectory(this.path, "Employee");
 
 		String employeePath = path + File.separator + "Employee";
+		manager = new Manager(employeePath, "Manager", "M" + rand.nextInt(10000), "bi-weekly", 80000);
+
 		File employeeFile = new File(employeePath);
 		employeeFile.mkdir();
-//		File cur = new File(employeePath + File.separator + manager.getID() + ".txt");
-//		if (cur.createNewFile()) {
-//			PrintWriter writer1 = new PrintWriter(cur);
-//			writer1.println(manager.getTitleName());
-//			writer1.println(manager.getID());
-//			writer1.println(manager.getPaymentType());
-//			writer1.println(String.valueOf(manager.getSalary()));
-//			writer1.flush();
-//			writer1.close();
-//		}
+		File cur = new File(employeePath + File.separator + manager.getID() + ".txt");
+		if (cur.createNewFile()) {
+			PrintWriter writer1 = new PrintWriter(cur);
+			writer1.println(manager.getTitleName());
+			writer1.println(manager.getID());
+			writer1.println(manager.getPaymentType());
+			writer1.println(String.valueOf(manager.getSalary()));
+			writer1.flush();
+			writer1.close();
+		}
 
 		ArrayList<Employee> employees = new ArrayList<>();
 	}
 
-	public static boolean createDirectory(String currentPath, String name) {
+	public String getManagerID() {
+		return this.manager.getID();
+	}
+
+	public static void createDirectory(String currentPath, String name) {
 		String targetPath = currentPath + File.separator + name;
 		File targetFile = new File(targetPath);
-		return targetFile.mkdir();
+		targetFile.mkdir();
 	}
 
 }
