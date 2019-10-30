@@ -141,7 +141,15 @@ public class Menu {
             switch(command) {
                 case "exit" : break;
                 case "DH" : {FileReader.displayHotelInfo(info); break;}
-                case "DE" : {FileReader.displayEmpInfo(info); break;}
+                case "DE" : {
+				String employeePath = cur.getPath() + File.separator + "Employee";
+				File info2 = new File(employeePath);
+				File[] temp = info2.listFiles();
+				for (File f : temp) {
+					FileReader.displayEmpInfo(f);
+				}
+				break;
+                }
                 case "LR" :
                 	File rooms = new File(cur.getPath() + File.pathSeparator + "Rooms");
                 	listRooms(rooms); //call Room List
