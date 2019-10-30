@@ -115,59 +115,59 @@ public class Room {
         PrintWriter writer = new PrintWriter(file);
         switch (type){
             case "single":{
-                writer.println(oldInfo.get(0));
+                writer.println(oldInfo.get(RoomProperty.number.ordinal()));
                 writer.println("single");
-                writer.println(oldInfo.get(2));
-                writer.println(oldInfo.get(3));
-                writer.println(oldInfo.get(4));
-                writer.println(oldInfo.get(5));
-                writer.println(oldInfo.get(6));
+                writer.println(oldInfo.get(RoomProperty.price.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.isEmpty.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.IsClean.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.maintaince.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.notes.ordinal()));
                 writer.flush();
                 writer.close();
                 break;
             }
             case "double":{
-                writer.println(oldInfo.get(0));
+                writer.println(oldInfo.get(RoomProperty.number.ordinal()));
                 writer.println("double");
-                writer.println(oldInfo.get(2));
-                writer.println(oldInfo.get(3));
-                writer.println(oldInfo.get(4));
-                writer.println(oldInfo.get(5));
-                writer.println(oldInfo.get(6));
+                writer.println(oldInfo.get(RoomProperty.price.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.isEmpty.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.IsClean.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.maintaince.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.notes.ordinal()));
                 writer.flush();
                 writer.close();
                 break;
             }
             case "triple":{
-                writer.println(oldInfo.get(0));
+                writer.println(oldInfo.get(RoomProperty.number.ordinal()));
                 writer.println("triple");
-                writer.println(oldInfo.get(2));
-                writer.println(oldInfo.get(3));
-                writer.println(oldInfo.get(4));
-                writer.println(oldInfo.get(5));
-                writer.println(oldInfo.get(6));
+                writer.println(oldInfo.get(RoomProperty.price.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.isEmpty.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.IsClean.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.maintaince.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.notes.ordinal()));
                 break;
             }
             case "queen":{
-                writer.println(oldInfo.get(0));
+                writer.println(oldInfo.get(RoomProperty.number.ordinal()));
                 writer.println("queen");
-                writer.println(oldInfo.get(2));
-                writer.println(oldInfo.get(3));
-                writer.println(oldInfo.get(4));
-                writer.println(oldInfo.get(5));
-                writer.println(oldInfo.get(6));
+                writer.println(oldInfo.get(RoomProperty.price.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.isEmpty.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.IsClean.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.maintaince.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.notes.ordinal()));
                 writer.flush();
                 writer.close();
                 break;
             }
             case "king":{
-                writer.println(oldInfo.get(0));
+                writer.println(oldInfo.get(RoomProperty.number.ordinal()));
                 writer.println("king");
-                writer.println(oldInfo.get(2));
-                writer.println(oldInfo.get(3));
-                writer.println(oldInfo.get(4));
-                writer.println(oldInfo.get(5));
-                writer.println(oldInfo.get(6));
+                writer.println(oldInfo.get(RoomProperty.price.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.isEmpty.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.IsClean.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.maintaince.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.notes.ordinal()));
                 writer.flush();
                 writer.close();
                 break;
@@ -186,13 +186,13 @@ public class Room {
         }
         FileReader.cleanFileContent(file);
         PrintWriter writer = new PrintWriter(file);
-        writer.println(oldInfo.get(0));
-        writer.println(oldInfo.get(1));
-        writer.println(oldInfo.get(2));
+        writer.println(oldInfo.get(RoomProperty.number.ordinal()));
+        writer.println(oldInfo.get(RoomProperty.type.ordinal()));
+        writer.println(oldInfo.get(RoomProperty.price.ordinal()));
         writer.println("false");
-        writer.println(oldInfo.get(4));
-        writer.println(oldInfo.get(5));
-        writer.println(oldInfo.get(6));
+        writer.println(oldInfo.get(RoomProperty.IsClean.ordinal()));
+        writer.println(oldInfo.get(RoomProperty.maintaince.ordinal()));
+        writer.println(oldInfo.get(RoomProperty.notes.ordinal()));
         writer.flush();
         writer.close();
     }
@@ -206,13 +206,13 @@ public class Room {
         }
         FileReader.cleanFileContent(file);
         PrintWriter writer = new PrintWriter(file);
-        writer.println(oldInfo.get(0));
-        writer.println(oldInfo.get(1));
-        writer.println(oldInfo.get(2));
+        writer.println(oldInfo.get(RoomProperty.number.ordinal()));
+        writer.println(oldInfo.get(RoomProperty.type.ordinal()));
+        writer.println(oldInfo.get(RoomProperty.price.ordinal()));
         writer.println("true");
-        writer.println(oldInfo.get(4));
-        writer.println(oldInfo.get(5));
-        writer.println(oldInfo.get(6));
+        writer.println(oldInfo.get(RoomProperty.IsClean.ordinal()));
+        writer.println(oldInfo.get(RoomProperty.maintaince.ordinal()));
+        writer.println(oldInfo.get(RoomProperty.notes.ordinal()));
         writer.flush();
         writer.close();
     }
