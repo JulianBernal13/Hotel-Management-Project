@@ -1,6 +1,7 @@
 package HotelManagement;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -12,28 +13,17 @@ public class Manager extends Employee {
 	private int salary;
 	// Only Manager can access this
 	private ArrayList<Employee> employees;
+	private String hotel;
+	private boolean clockIn;
 
 	public static enum ManagerProperty {
 		titleName, id, paymentType, salary
 	}
 
-	public Manager(String titleName, String id, int salary) {
+	public Manager(String path, String titleName, String id, String paymentType, int salary) {
 
-		super(titleName, id, "bi-weekly", salary);
-		employees = new ArrayList<Employee>();
-		addEmployee(this);
-		setSalary(salary);
-
-	}
-
-	@Override
-	public void setEmployeeID(String id) {
-		this.id = id;
-	}
-
-	@Override
-	public void setSalary(int salary) {
-		this.salary = salary;
+		super(path, titleName, id, paymentType, salary);
+		clockIn = false;
 	}
 
 	public Employee getEmployee(String id) {
@@ -60,84 +50,91 @@ public class Manager extends Employee {
 		employees.remove(employee);
 	}
 
-	public void addEmployee(Employee employee) {
-		employees.add(employee);
-	}
-
-	public void addManyEmployees(Employee[] employees) {
-
-		for (int i = 0; i < employees.length; i++) {
-			this.addEmployee(employees[i]);
-		}
-	}
+	// public void addManyEmployees(Employee[] employees) {
+	//
+	// for (int i = 0; i < employees.length; i++) {
+	// this.createEmployee(employees[i]);
+	// }
+	// }
 
 	// Selection Sort (employees alphabet style)
-	public void sortEmployees() {
 
-		// One by one move boundary of unsorted subarray
-		for (int i = 0; i < employees.size() - 1; i++) {
-			// Find the minimum element in unsorted array
-			int min_idx = i;
-			for (int j = i + 1; j < employees.size(); j++)
-				if (this.compareTwoEmployees(employees.get(j), employees.get(min_idx)) == -1) {
-					min_idx = j;
-				}
-			// Swap the found minimum element with the first
-			// element
-			Employee temp = employees.get(min_idx);
-			employees.set(min_idx, employees.get(i));
-			employees.set(i, temp);
+	// path given is ../Employee
+	public void addEmployeeToFile(String employeePath, Employee emp) throws IOException {
+
+		String path = employeePath + File.separator + emp.getID() + ".txt";
+		File cur = new File(path);
+		if (cur.createNewFile()) {
+			PrintWriter writer = new PrintWriter(cur);
+			writer.println(emp.getTitleName());
+			writer.println(emp.getID());
+			writer.println(emp.getPaymentType());
+			writer.println(String.valueOf(emp.getSalary()));
+			writer.flush();
+			writer.close();
+			// titleName, id, paymentType, wage
+		} else {
+			System.out.println("The employee with the ID " + emp.getID() + " already exists");
 		}
 	}
 
-	// Helper method for sort
-	public int compareTwoEmployees(Employee employee1, Employee employee2) {
+	// path given is ../Employee
+	public void deleteEmployeeFromFile(String employeePath, String empID) throws IOException {
 
-		String alphabet = employee1.getTrueID(employee1.getID());
-		Employee temp = new Employee(employee2.getTitleName(), employee2.getID(), "", 0);
-		String alphabet2 = employee2.getTrueID(employee2.getID());
+		File cur = new File(employeePath); // Employee path
+		File empCur = new File(employeePath + File.separator + empID + ".txt"); // current
+																				// emp
+		File[] temp = cur.listFiles();
+		for (File f : temp) {
 
-		// if this, employee 1 is first (i.e. -1)
-		if (Integer.parseInt(alphabet) < Integer.parseInt(alphabet2)) {
-			return -1;
-		}
-		// if this, employee 2 is first (i.e. 1)
-		else if (Integer.parseInt(alphabet) > Integer.parseInt(alphabet2)) {
-			return 1;
-		}
-		// if this, order doesn't matter, (i.e. 0)
-		else {
-			return 0;
+			if (f.equals(cur)) {
+				empCur.deleteOnExit();
+			} else {
+				System.out.println("The employee with the ID " + empID + " is already gone");
+			}
 		}
 	}
 
-//	public void addEmployeeToFile(String path, Employee emp) throws IOException {
-//
-//		File cur = new File(path + File.separator + emp.getID() + ".txt");
-//		if (cur.createNewFile()) {
-//			PrintWriter writer = new PrintWriter(cur);
-//			writer.println(emp.getTitleName());
-//			writer.println(emp.getID());
-//			writer.println(emp.getPaymentType());
-//			writer.println(String.valueOf(emp.getSalary()));
-//			writer.flush();
-//			writer.close();
-//			// titleName, id, paymentType, wage
-//		}
-//	}
+	public Employee findEmployeeFromFile(String employeePath, String id) throws IOException {
 
-	public void deleteEmployeeFromFile(String path, Employee emp) throws IOException {
-		File cur = new File(path + File.separator + emp.getID() + ".txt");
-		cur.deleteOnExit();
-		// if (cur.createNewFile()) {
-		// PrintWriter writer = new PrintWriter(cur);
-		// writer.println(emp.getTitleName());
-		// writer.println(emp.getID());
-		// writer.println(emp.getPaymentType());
-		// writer.println(String.valueOf(emp.getSalary()));
-		// writer.flush();
-		// writer.close();
-		// titleName, id, paymentType, wage
-		// }
+		File cur = new File(employeePath); // Employee path
+		File empCur = new File(employeePath + File.separator + id + ".txt"); // current
+																				// emp
+		File[] temp = cur.listFiles();
+		for (File f : temp) {
+			if (f.equals(empCur)) {
+
+				String tempTN = FileReader.getEmployeeInfo(f, Employee.EmployeeProperty.titleName);
+				String tempID = FileReader.getEmployeeInfo(f, Employee.EmployeeProperty.id);
+				String tempPT = FileReader.getEmployeeInfo(f, Employee.EmployeeProperty.paymentType);
+				String tempS = FileReader.getEmployeeInfo(f, Employee.EmployeeProperty.salary);
+				return new Employee(employeePath, tempTN, tempID, tempPT, Integer.parseInt(tempS));
+
+			} else {
+				System.out.println("The employee with the ID " + id + " does not work here");
+			}
+		}
+		return null;
+	}
+
+	public void editEmployeeFromFile(Employee emp, String titleName2, String id2, String paymentType2, int salary2)
+			throws IOException {
+
+		Employee temp2 = findEmployeeFromFile(emp.getPath(), emp.getID());
+
+		temp2.setTitleName(titleName2);
+		temp2.setID(id2);
+		temp2.setPaymentType(paymentType2);
+		temp2.setSalary(salary2);
+
+		File empCur = new File(emp.getPath()); // current emp and then override
+
+		PrintWriter writer1 = new PrintWriter(empCur);
+		writer1.println(temp2.getTitleName());
+		writer1.println(temp2.getID());
+		writer1.println(temp2.getPaymentType());
+		writer1.println(String.valueOf(temp2.getSalary()));
+		writer1.flush();
+		writer1.close();
 	}
 }
