@@ -11,36 +11,7 @@ import java.util.ArrayList;
 
 
 public class Customer {
-    private String firstName;
-    private String lastName;
-    private boolean isVIP = false;
-    private ArrayList<Contract> contractHistory;
-    private ArrayList<Contract> futureContracts;
-
     public static enum customerProperty {
-        firstname, lastname, isVIP, contractHistory, futureContract;
-    }
-
-    public Customer(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-//        this.contracts = contracts;
-    }
-
-    @Override
-    public String toString() {
-        return firstName + " " + lastName;
-    }
-
-    public void createCustomerFile (String path) throws IOException {
-        File cur = new File(path + File.separator + this.toString() + ".txt");
-        if(cur.createNewFile()) {
-            PrintWriter writer = new PrintWriter(cur);
-            writer.println(firstName);
-            writer.println(lastName);
-            writer.println(isVIP);
-            writer.flush();
-            writer.close();
-        }
+        firstname, lastname, isVIP, isStaying, contractHistory, futureContract;
     }
 }

@@ -1,7 +1,5 @@
 package HotelManagement;
 
-import com.sun.security.jgss.GSSUtil;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,28 +7,27 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class CustomerFileController implements FileController {
-    public static void menuLookUp(File customer) throws IOException {
+    public static void menuLookUp(File customers) throws IOException {
         System.out.println("Enter customer name");
         Scanner sc = new Scanner(System.in);
-        registerCustomer(customer, sc.nextLine());
+        String name = sc.nextLine();
+        registerCustomer(customers, name);
+        getCustomerInfo(customers, name, "isVIP");
+        getCustomerInfo(customers, name, Customer.customerProperty.firstname);
+
     }
     public static void displayAll(File customers) {
 
     }
 
     public static File lookUpCustomer(File customers, String name) {
-        String filename = FileController.convertToTxt(name);
-        for(File customer : customers.listFiles()) {
-            if(customer.getName() == filename) {
-                return customer;
-            }
-        }
-        return null;
+        return new File(customers.getPath() + File.separator + FileController.convertToTxt(name));
     }
 
     public static File registerCustomer(File customers, String name) throws IOException {
-        if(lookUpCustomer(customers, name) == null)
+        if(!lookUpCustomer(customers, name).exists())
             return createCustomer(customers, name);
+        System.out.println("Error, the customer has already existed");
         return null;
     }
 
@@ -44,6 +41,7 @@ public class CustomerFileController implements FileController {
             writer.println(firstName);
             writer.println(lastName);
             writer.println(false);
+            writer.println(false);
             writer.flush();
             writer.close();
         }
@@ -52,7 +50,7 @@ public class CustomerFileController implements FileController {
 
     public static void getCustomerInfo(File customers, String name, Customer.customerProperty property) throws FileNotFoundException {
         File customer = lookUpCustomer(customers, name);
-        if(customer == null) {
+        if(!customer.exists()) {
             System.out.println("Customer dose not exists");
             return;
         }
@@ -62,13 +60,13 @@ public class CustomerFileController implements FileController {
             sc.nextLine();
         if (!sc.hasNext())
             System.out.println("Error, no such data exists");
-        String ret = name + property.name() + sc.nextLine();
+        String ret = name + "   " + property.name() + "    " + sc.nextLine();
         System.out.println(ret);
     }
 
     public static void getCustomerInfo(File customers, String name, String property) throws FileNotFoundException {
         File customer = lookUpCustomer(customers, name);
-        if(customer == null) {
+        if(!customer.exists()) {
             System.out.println("Customer dose not exists");
             return;
         }
@@ -82,7 +80,7 @@ public class CustomerFileController implements FileController {
             System.out.println("Error, no such data exists");
             return;
         }
-        String ret = name + property + sc.nextLine();
+        String ret = name + "   " + property + "   " + sc.nextLine();
         System.out.println(ret);
     }
 
