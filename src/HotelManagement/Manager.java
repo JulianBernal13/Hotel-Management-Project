@@ -72,6 +72,7 @@ public class Manager extends Employee {
 			writer.println(String.valueOf(emp.getSalary()));
 			writer.flush();
 			writer.close();
+			System.out.println("The employee with the ID " + emp.getID() + " has been added");
 			// titleName, id, paymentType, wage
 		} else {
 			System.out.println("The employee with the ID " + emp.getID() + " already exists");
@@ -87,10 +88,10 @@ public class Manager extends Employee {
 		File[] temp = cur.listFiles();
 		for (File f : temp) {
 
-			if (f.equals(cur)) {
-				empCur.deleteOnExit();
-			} else {
-				System.out.println("The employee with the ID " + empID + " is already gone");
+			if (f.equals(empCur)) {
+				empCur.delete();
+				System.out.println("The employee with the ID " + empID + " has been terminated");
+				break;
 			}
 		}
 	}
