@@ -261,4 +261,13 @@ public class Room {
             return 0;
         }
     }
+    
+    public static void RoomWriter(File curRoom, Room room) throws FileNotFoundException {
+        PrintWriter Originalwriter = new PrintWriter(curRoom);
+        Originalwriter.write("");
+        Originalwriter.flush();
+        Originalwriter.close();
+        //PrintWriter writer = new PrintWriter(file);
+
+    }
 }

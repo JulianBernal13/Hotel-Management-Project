@@ -22,9 +22,17 @@ public class FileReader {
 		}
 	}
 
+	public static String displayRoomInfoIndivual(File file, Room.RoomProperty property) throws FileNotFoundException {
+		Scanner in = new Scanner(file);
+		int i = 0;
+		while (i++ < property.ordinal() && in.hasNext())
+			in.nextLine();
+		return in.nextLine();
+	}
+	
 	public static void displayRoomInfo(File file) throws FileNotFoundException {
 		Scanner in = new Scanner(file);
-		for (Room.RoomProperty tmp : Room.RoomProperty.values()) {
+		for (Hotel.HotelProperty tmp : Hotel.HotelProperty.values()) {
 			System.out.println(tmp.name() + ": " + in.nextLine());
 		}
 	}

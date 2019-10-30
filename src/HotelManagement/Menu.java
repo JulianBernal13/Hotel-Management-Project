@@ -178,8 +178,7 @@ public class Menu {
 				break;
 			}
 			case "LR":
-				File rooms = new File(cur.getPath() + File.pathSeparator + "Rooms");
-				listRooms(rooms); // call Room List
+				listRooms(cur); // call Room List
 			case "CE":
 				break; // call employee
 			case "EE": {
@@ -227,7 +226,8 @@ public class Menu {
 		}
 	}
 
-	private void listRooms(File rooms) {
+	private void listRooms(File cur) throws IOException {
+		File rooms = new File(cur.getPath() + File.pathSeparator + "Rooms");
 		Printer.printRoomview();
 		Scanner sc = new Scanner(System.in);
 		for (File file : rooms.listFiles()) {
@@ -243,8 +243,28 @@ public class Menu {
 			room = sc.nextLine();
 			check = new File(rooms + File.separator + room);
 		}
-		// TODO
+		FileReader.displayRoomInfo(check);
+		System.out.println("enter 'Edit' to modifty current room or 'Exit' to return to manager screen");
+		String command = sc.nextLine();
+		switch(command) {
+		case "Edit": {
+			EditRoom(check);
+		}
+		case "Exit": {
+			managedByManager(cur);
+		}
+		default: {
+			System.out.println("command does not exit \n" +
+								"enter new command");
+		}
+		}
+		
 		// james
+	}
+	
+	private void EditRoom(File room) throws FileNotFoundException {
+		FileReader.displayRoomInfo(room);
+		
 	}
 
 }
