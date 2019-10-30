@@ -29,35 +29,51 @@ public class FileReader {
 		}
 	}
 
-//	public static void displayEmpInfo(File file) throws FileNotFoundException {
-//		Scanner in = new Scanner(file);
-//		for (Employee.EmployeeProperty tmp : Employee.EmployeeProperty.values()) {
-//			System.out.println(tmp.name() + ": " + in.nextLine());
-//		}
-//	}
+	public static String getManagerInfo(File file, Manager.ManagerProperty property) throws FileNotFoundException {
+		Scanner in = new Scanner(file);
+		int i = 0;
+		while (i++ < property.ordinal() && in.hasNext())
+			in.nextLine();
+		return in.nextLine();
+	}
 
-    public static void displayAllRoom(File file) throws FileNotFoundException {
+	public static String getEmployeeInfo(File file, Employee.EmployeeProperty property) throws FileNotFoundException {
+		Scanner in = new Scanner(file);
+		int i = 0;
+		while (i++ < property.ordinal() && in.hasNext())
+			in.nextLine();
+		return in.nextLine();
+	}
 
-    }
+	public static void displayEmpInfo(File file) throws FileNotFoundException {
+		Scanner in = new Scanner(file);
+		for (Employee.EmployeeProperty tmp : Employee.EmployeeProperty.values()) {
+			System.out.println(tmp.name() + ": " + in.nextLine());
+		}
+	}
 
-    public static void diaplayAllChosenRoom(File file, Room.RoomProperty property) throws FileNotFoundException {
-        ArrayList<String> allRoomsWithType = new ArrayList<>();
-        for (File f : file.listFiles()) {
-            Scanner sc = new Scanner(f);
-            int i = 0;
-            String name  = "";
-            while(i < property.ordinal() && sc.hasNext()) {
-                if(i == Room.RoomProperty.number.ordinal())
-                    name = sc.nextLine();
-                else {
-                    sc.nextLine();
-                }
-                ++i;
-            }
-            String tmp = sc.nextLine();
-            allRoomsWithType.add(name + "     " + tmp);
-        }
-        Collections.sort(allRoomsWithType);
-        Printer.printArray(allRoomsWithType);
-    }
+	public static void displayAllRoom(File file) throws FileNotFoundException {
+
+	}
+
+	public static void diaplayAllChosenRoom(File file, Room.RoomProperty property) throws FileNotFoundException {
+		ArrayList<String> allRoomsWithType = new ArrayList<>();
+		for (File f : file.listFiles()) {
+			Scanner sc = new Scanner(f);
+			int i = 0;
+			String name = "";
+			while (i < property.ordinal() && sc.hasNext()) {
+				if (i == Room.RoomProperty.number.ordinal())
+					name = sc.nextLine();
+				else {
+					sc.nextLine();
+				}
+				++i;
+			}
+			String tmp = sc.nextLine();
+			allRoomsWithType.add(name + "     " + tmp);
+		}
+		Collections.sort(allRoomsWithType);
+		Printer.printArray(allRoomsWithType);
+	}
 }
