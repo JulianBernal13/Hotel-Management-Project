@@ -2,6 +2,8 @@ package HotelManagement;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class FileReader {
@@ -34,4 +36,31 @@ public class FileReader {
 		}
 	}
 
+    public static void displayAllRoom(File file) throws FileNotFoundException {
+
+    }
+
+    public static void diaplayAllChosenRoom(File file, Room.RoomProperty property) throws FileNotFoundException {
+        ArrayList<String> allRoomsWithType = new ArrayList<>();
+        for (File f : file.listFiles()) {
+            Scanner sc = new Scanner(f);
+            int i = 0;
+            String name  = "";
+            while(i < property.ordinal() && sc.hasNext()) {
+                if(i == Room.RoomProperty.number.ordinal())
+                    name = sc.nextLine();
+                else {
+                    sc.nextLine();
+                }
+                ++i;
+            }
+            String tmp = sc.nextLine();
+            allRoomsWithType.add(name + "     " + tmp);
+        }
+        Collections.sort(allRoomsWithType);
+        Printer.printArray(allRoomsWithType);
+    }
+
+    public static void displayEmpINfo(File info) throws FileNotFoundException{
+    }
 }

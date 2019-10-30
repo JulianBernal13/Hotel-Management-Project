@@ -2,6 +2,7 @@ package HotelManagement;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 /**
@@ -9,8 +10,8 @@ import java.util.Scanner;
  * @date 10/18/19 22:40
  */
 public class Room {
-    private String type;
     private int number;
+    private String type;
     private double price;
     private boolean isEmpty;
     private boolean isClean;
@@ -19,7 +20,7 @@ public class Room {
     private String notes;
 
     public static enum RoomProperty {
-        type,number, price, isEmpty, IsClean, maintaince, notes
+        number, type, price, isEmpty, IsClean, maintaince, notes
     }
     static final int singleRoom=100;
     static final int doubleRoom=150;
@@ -237,6 +238,7 @@ public class Room {
 
     public static int showTypeRoomEmpty(String path, String type) throws FileNotFoundException {
         File allRoom= new File(path);
+        ArrayList<String> emptyRooms = new ArrayList<>();
         int count=0;
         for (File file : allRoom.listFiles()) {
             Scanner sc = new Scanner(file);
@@ -245,10 +247,13 @@ public class Room {
             String originalPrice = sc.nextLine();
             String originalIsEmpty = sc.nextLine();
             if(originalType.equals(type) && originalIsEmpty.equals("true")){
-                System.out.println(file.getName() + "    "+type);
+                emptyRooms.add(originalNumber + "    "+type + "     " + originalPrice);
                 count++;
             }
         }
+        Collections.sort(emptyRooms);
+        Printer.printArray(emptyRooms);
+
         if(count>0){
             return 1;
         }

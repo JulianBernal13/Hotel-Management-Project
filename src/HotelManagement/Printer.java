@@ -1,5 +1,8 @@
 package HotelManagement;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class Printer {
     public static void printWelcome(){
         System.out.println("=============================================");
@@ -48,5 +51,11 @@ public class Printer {
     	System.out.println("=============================================");
     	System.out.println("Enter room number you wish to view          ");
     	System.out.println("");
+    }
+
+    public static <T> void printArray(ArrayList<T> collections) {
+        for (T element: collections) {
+            System.out.println(element);
+        }
     }
 }
