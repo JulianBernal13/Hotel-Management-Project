@@ -7,18 +7,17 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class CustomerFileController implements FileController {
-    public static void displayAll(File cur) {
+    public static void displayAll(File customers) {
 
     }
 
     public static File lookUpCustomer(File customers, String name) {
-//        System.out.println("Please enter customer's name:");
+        name = FileController.convertToTxt(name);
         for(File tmp : customers.listFiles()) {
             if(tmp.getName() == name) {
                 return tmp;
             }
         }
-//        System.out.println("Customer does not exists");
         return null;
     }
 
@@ -28,17 +27,16 @@ public class CustomerFileController implements FileController {
         return null;
     }
 
-
-
-
     public static File createCustomer(File customers, String name) {
         return null;
     }
 
     public static void getCustomerInfo(File customers, String name, Customer.customerProperty property) throws FileNotFoundException {
         File customer = lookUpCustomer(customers, name);
-        if(customer == null)
+        if(customer == null) {
             System.out.println("Customer dose not exists");
+            return;
+        }
         Scanner sc = new Scanner(customer);
         int i = 0;
         while(i++ < property.ordinal() && sc.hasNext())
@@ -51,8 +49,10 @@ public class CustomerFileController implements FileController {
 
     public static void getCustomerInfo(File customers, String name, String property) throws FileNotFoundException {
         File customer = lookUpCustomer(customers, name);
-        if(customer == null)
+        if(customer == null) {
             System.out.println("Customer dose not exists");
+            return;
+        }
         Scanner sc = new Scanner(customer);
         for(Customer.customerProperty p : Customer.customerProperty.values()) {
             if(p.toString() == property)
