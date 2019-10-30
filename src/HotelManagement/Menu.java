@@ -60,7 +60,7 @@ public class Menu {
         Hotel hotel = new Hotel(path, name, new Location(address), floor, numRoom, password);
     }
 
-    private void manageHotel() throws FileNotFoundException {
+    private void manageHotel() throws IOException {
         Scanner sc = new Scanner(System.in);
         String path = "." + File.separator + "ManagementSystem";
         System.out.println("Which Hotel?");
@@ -92,7 +92,7 @@ public class Menu {
         }
     }
 
-    private void managedByReception(File cur) throws FileNotFoundException {
+    private void managedByReception(File cur) throws IOException {
         Printer.printReceptionMenu();
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
@@ -118,6 +118,10 @@ public class Menu {
                 String roomPath = cur.getPath()+File.separator+"Rooms";
                 Room.checkOut(roomPath,num);
                 System.out.println("Success! Now the room is empty.");
+                break;
+            }
+            case "LC": {
+                CustomerFileController.menuLookUp(CustomerFileController.cdCustomerFile(cur));
                 break;
             }
         }
