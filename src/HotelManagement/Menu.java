@@ -118,12 +118,18 @@ public class Menu {
 			break;
 		}
 		case "CO": {
-			System.out.println("which room are you going to check-out?");
-			int num = Integer.parseInt(sc.nextLine());
 			String roomPath = cur.getPath() + File.separator + "Rooms";
-			Room.checkOut(roomPath, num);
-			System.out.println("Success! Now the room is empty.");
-			break;
+			System.out.println("which room are you going to check-out?");
+			if(Room.showOccupiedRoom(roomPath)==1){
+				int num = Integer.parseInt(sc.nextLine());
+				Room.checkOut(roomPath, num);
+				System.out.println("Success! Now the room is empty.");
+				break;
+			}
+			else{
+				System.out.println("There is no room occupied.");
+				break;
+			}
 		}
 		case "LC": {
 			CustomerFileController.menuLookUp(CustomerFileController.cdCustomerFile(cur));

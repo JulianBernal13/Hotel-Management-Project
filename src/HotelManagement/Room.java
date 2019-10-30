@@ -232,4 +232,28 @@ public class Room {
             return 0;
         }
     }
+
+    public static int showOccupiedRoom(String path) throws FileNotFoundException {
+        File allRoom = new File(path);
+        ArrayList<String> emptyRooms = new ArrayList<>();
+        int count = 0;
+        for (File file : allRoom.listFiles()) {
+            Scanner sc = new Scanner(file);
+            String originalNumber = sc.nextLine();
+            String originalType = sc.nextLine();
+            String originalPrice = sc.nextLine();
+            String originalIsEmpty = sc.nextLine();
+            if (originalIsEmpty.equals("false")) {
+                emptyRooms.add(originalNumber + "    " + originalType + "     " + originalPrice);
+                count++;
+            }
+        }
+        Collections.sort(emptyRooms);
+        Printer.printArray(emptyRooms);
+        if (count > 0) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }
