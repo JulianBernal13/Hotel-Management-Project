@@ -137,7 +137,7 @@ public class Menu {
                     System.out.println("Success! Now the room is empty.");
                     break;
                 }
-                case "DE" : {FileReader.displayEmpINfo(info); break;}
+                case "DE" : {FileReader.displayEmpInfo(info); break;}
                 case "LR" :
                 	File rooms = new File(cur.getPath() + File.pathSeparator + "Rooms");
                 	listRooms(rooms); //call Room List
