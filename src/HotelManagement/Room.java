@@ -92,8 +92,8 @@ public class Room {
         File cur = new File(this.path + File.separator + this.number + ".txt");
         if(cur.createNewFile()) {
             PrintWriter writer = new PrintWriter(cur);
-            writer.println(type);
             writer.println(number);
+            writer.println(type);
             writer.println(String.valueOf(price));
             writer.println(String.valueOf(isEmpty));
             writer.println(String.valueOf(isClean));
@@ -106,75 +106,64 @@ public class Room {
 
     public static void changeRoomType(String path, int number, String type) throws FileNotFoundException {
         File file = new File(path+File.separator+number+".txt");
-        Scanner sc = new Scanner(file);
-        String originalType = sc.nextLine();
-        String originalNumber = sc.nextLine();
-        String originalPrice = sc.nextLine();
-        String originalIsEmpty = sc.nextLine();
-        String originalIsClean = sc.nextLine();
-        String originalMaintaince = sc.nextLine();
-        String originalNote = sc.nextLine();
-        PrintWriter Originalwriter = new PrintWriter(file);
-        Originalwriter.write("");
-        Originalwriter.flush();
-        Originalwriter.close();
+        ArrayList<String> oldInfo = FileController.copyOldInfo(file);
+        FileController.cleanFileContent(file);
         PrintWriter writer = new PrintWriter(file);
         switch (type){
             case "single":{
+                writer.println(oldInfo.get(RoomProperty.number.ordinal()));
                 writer.println("single");
-                writer.println(originalNumber);
-                writer.println(String.valueOf(singleRoom));
-                writer.println(String.valueOf(originalIsEmpty));
-                writer.println(String.valueOf(originalIsClean));
-                writer.println(String.valueOf(originalMaintaince));
-                writer.println(String.valueOf(originalNote));
+                writer.println(oldInfo.get(RoomProperty.price.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.isEmpty.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.IsClean.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.maintaince.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.notes.ordinal()));
                 writer.flush();
                 writer.close();
                 break;
             }
             case "double":{
+                writer.println(oldInfo.get(RoomProperty.number.ordinal()));
                 writer.println("double");
-                writer.println(originalNumber);
-                writer.println(String.valueOf(doubleRoom));
-                writer.println(String.valueOf(originalIsEmpty));
-                writer.println(String.valueOf(originalIsClean));
-                writer.println(String.valueOf(originalMaintaince));
-                writer.println(String.valueOf(originalNote));
+                writer.println(oldInfo.get(RoomProperty.price.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.isEmpty.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.IsClean.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.maintaince.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.notes.ordinal()));
                 writer.flush();
                 writer.close();
                 break;
             }
             case "triple":{
+                writer.println(oldInfo.get(RoomProperty.number.ordinal()));
                 writer.println("triple");
-                writer.println(originalNumber);
-                writer.println(String.valueOf(tripleRoom));
-                writer.println(String.valueOf(originalIsEmpty));
-                writer.println(String.valueOf(originalIsClean));
-                writer.println(String.valueOf(originalMaintaince));
-                writer.println(String.valueOf(originalNote));
-                writer.flush();
-                writer.close();
+                writer.println(oldInfo.get(RoomProperty.price.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.isEmpty.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.IsClean.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.maintaince.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.notes.ordinal()));
                 break;
             }
             case "queen":{
+                writer.println(oldInfo.get(RoomProperty.number.ordinal()));
                 writer.println("queen");
-                writer.println(originalNumber);
-                writer.println(String.valueOf(queenRoom));
-                writer.println(String.valueOf(originalIsEmpty));
-                writer.println(String.valueOf(originalIsClean));
-                writer.println(String.valueOf(originalMaintaince));
-                writer.println(String.valueOf(originalNote));
+                writer.println(oldInfo.get(RoomProperty.price.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.isEmpty.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.IsClean.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.maintaince.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.notes.ordinal()));
                 writer.flush();
                 writer.close();
                 break;
             }
             case "king":{
+                writer.println(oldInfo.get(RoomProperty.number.ordinal()));
                 writer.println("king");
-                writer.println(originalNumber);
-                writer.println(String.valueOf(kingRoom));writer.println(String.valueOf(originalIsEmpty));
-                writer.println(String.valueOf(originalIsClean));
-                writer.println(String.valueOf(originalMaintaince));
-                writer.println(String.valueOf(originalNote));
+                writer.println(oldInfo.get(RoomProperty.price.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.isEmpty.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.IsClean.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.maintaince.ordinal()));
+                writer.println(oldInfo.get(RoomProperty.notes.ordinal()));
                 writer.flush();
                 writer.close();
                 break;
@@ -186,52 +175,34 @@ public class Room {
     }
     public static void checkIn(String path,int number) throws FileNotFoundException {
         File file = new File(path+File.separator+number+".txt");
-        Scanner sc = new Scanner(file);
-        String originalType = sc.nextLine();
-        String originalNumber = sc.nextLine();
-        String originalPrice = sc.nextLine();
-        String originalIsEmpty = sc.nextLine();
-        String originalIsClean = sc.nextLine();
-        String originalMaintaince = sc.nextLine();
-        String originalNote = sc.nextLine();
-        PrintWriter Originalwriter = new PrintWriter(file);
-        Originalwriter.write("");
-        Originalwriter.flush();
-        Originalwriter.close();
+        ArrayList<String> oldInfo = FileController.copyOldInfo(file);
+        FileController.cleanFileContent(file);
+
         PrintWriter writer = new PrintWriter(file);
-        writer.println(originalType);
-        writer.println(originalNumber);
-        writer.println(originalPrice);
+        writer.println(oldInfo.get(RoomProperty.number.ordinal()));
+        writer.println(oldInfo.get(RoomProperty.type.ordinal()));
+        writer.println(oldInfo.get(RoomProperty.price.ordinal()));
         writer.println("false");
-        writer.println(originalIsClean);
-        writer.println(originalMaintaince);
-        writer.println(originalNote);
+        writer.println(oldInfo.get(RoomProperty.IsClean.ordinal()));
+        writer.println(oldInfo.get(RoomProperty.maintaince.ordinal()));
+        writer.println(oldInfo.get(RoomProperty.notes.ordinal()));
         writer.flush();
         writer.close();
     }
 
     public static void checkOut(String path, int number) throws FileNotFoundException {
         File file = new File(path+File.separator+number+".txt");
-        Scanner sc = new Scanner(file);
-        String originalType = sc.nextLine();
-        String originalNumber = sc.nextLine();
-        String originalPrice = sc.nextLine();
-        String originalIsEmpty = sc.nextLine();
-        String originalIsClean = sc.nextLine();
-        String originalMaintaince = sc.nextLine();
-        String originalNote = sc.nextLine();
-        PrintWriter Originalwriter = new PrintWriter(file);
-        Originalwriter.write("");
-        Originalwriter.flush();
-        Originalwriter.close();
+        ArrayList<String> oldInfo = FileController.copyOldInfo(file);
+        FileController.cleanFileContent(file);
+
         PrintWriter writer = new PrintWriter(file);
-        writer.println(originalType);
-        writer.println(originalNumber);
-        writer.println(originalPrice);
+        writer.println(oldInfo.get(RoomProperty.number.ordinal()));
+        writer.println(oldInfo.get(RoomProperty.type.ordinal()));
+        writer.println(oldInfo.get(RoomProperty.price.ordinal()));
         writer.println("true");
-        writer.println(originalIsClean);
-        writer.println(originalMaintaince);
-        writer.println(originalNote);
+        writer.println(oldInfo.get(RoomProperty.IsClean.ordinal()));
+        writer.println(oldInfo.get(RoomProperty.maintaince.ordinal()));
+        writer.println(oldInfo.get(RoomProperty.notes.ordinal()));
         writer.flush();
         writer.close();
     }
@@ -242,8 +213,8 @@ public class Room {
         int count=0;
         for (File file : allRoom.listFiles()) {
             Scanner sc = new Scanner(file);
-            String originalType = sc.nextLine();
             String originalNumber = sc.nextLine();
+            String originalType = sc.nextLine();
             String originalPrice = sc.nextLine();
             String originalIsEmpty = sc.nextLine();
             if(originalType.equals(type) && originalIsEmpty.equals("true")){
@@ -261,13 +232,28 @@ public class Room {
             return 0;
         }
     }
-    
-    public static void RoomWriter(File curRoom, Room room) throws FileNotFoundException {
-        PrintWriter Originalwriter = new PrintWriter(curRoom);
-        Originalwriter.write("");
-        Originalwriter.flush();
-        Originalwriter.close();
-        //PrintWriter writer = new PrintWriter(file);
 
+    public static int showOccupiedRoom(String path) throws FileNotFoundException {
+        File allRoom = new File(path);
+        ArrayList<String> emptyRooms = new ArrayList<>();
+        int count = 0;
+        for (File file : allRoom.listFiles()) {
+            Scanner sc = new Scanner(file);
+            String originalNumber = sc.nextLine();
+            String originalType = sc.nextLine();
+            String originalPrice = sc.nextLine();
+            String originalIsEmpty = sc.nextLine();
+            if (originalIsEmpty.equals("false")) {
+                emptyRooms.add(originalNumber + "    " + originalType + "     " + originalPrice);
+                count++;
+            }
+        }
+        Collections.sort(emptyRooms);
+        Printer.printArray(emptyRooms);
+        if (count > 0) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }
