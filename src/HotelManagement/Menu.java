@@ -82,18 +82,45 @@ public class Menu {
 //        path += File.separator + name;
         System.out.println("Choose your occupation number");
         System.out.println("1. Manager");
-        System.out.println("2. Counter");
+        System.out.println("2. Reception");
 
         int occu = sc.nextInt();
         switch(occu) {
             case 1: {managedByManager(cur); break;}
-            case 2: {managedByCounter(cur); break;}
+            case 2: {managedByReception(cur); break;}
             default: break;
         }
     }
 
-    private void managedByCounter(File cur) {
-        Printer.printCounterMenu();
+    private void managedByReception(File cur) throws FileNotFoundException {
+        Printer.printReceptionMenu();
+        Scanner sc = new Scanner(System.in);
+        String command = sc.nextLine();
+        switch (command){
+            case "CI":{
+                String roomPath = cur.getPath()+File.separator+"Rooms";
+                System.out.println("What type of room do you want?((single,double,triple,queen,king))");
+                String type = sc.nextLine();
+                if(Room.showTypeRoomEmpty(roomPath,type)==1) {
+                    System.out.println("Which room are you going to check-in?");
+                    int num = Integer.parseInt(sc.nextLine());
+                    Room.checkIn(roomPath, num);
+                    System.out.println("Success! Now the room is occupied.");
+                }
+                else {
+                    System.out.println("Sorry, we do not have such room available.");
+                }
+                break;
+            }
+            case "CO":{
+                System.out.println("which room are you going to check-out?");
+                int num = Integer.parseInt(sc.nextLine());
+                String roomPath = cur.getPath()+File.separator+"Rooms";
+                Room.checkOut(roomPath,num);
+                System.out.println("Success! Now the room is empty.");
+                break;
+            }
+        }
     }
 
     private void managedByManager(File cur) throws FileNotFoundException {
@@ -114,29 +141,6 @@ public class Menu {
             switch(command) {
                 case "exit" : break;
                 case "DH" : {FileReader.displayHotelInfo(info); break;}
-                case "CI":{
-                    String roomPath = cur.getPath()+File.separator+"Rooms";
-                    System.out.println("What type of room do you want?((single,double,triple,queen,king))");
-                    String type = sc.nextLine();
-                    if(Room.showTypeRoomEmpty(roomPath,type)==1) {
-                        System.out.println("Which room are you going to check-in?");
-                        int num = Integer.parseInt(sc.nextLine());
-                        Room.checkIn(roomPath, num);
-                        System.out.println("Success! Now the room is occupied.");
-                    }
-                    else {
-                        System.out.println("Sorry, we do not have such room available.");
-                    }
-                    break;
-                }
-                case "CO":{
-                    System.out.println("which room are you going to check-out?");
-                    int num = Integer.parseInt(sc.nextLine());
-                    String roomPath = cur.getPath()+File.separator+"Rooms";
-                    Room.checkOut(roomPath,num);
-                    System.out.println("Success! Now the room is empty.");
-                    break;
-                }
                 case "DE" : {FileReader.displayEmpInfo(info); break;}
                 case "LR" :
                 	File rooms = new File(cur.getPath() + File.pathSeparator + "Rooms");

@@ -28,8 +28,6 @@ public class Printer {
     public static void printManagerMenu() {
         System.out.println("=============================================");
         System.out.println("Enter 'DH' to display hotal information      ");
-        System.out.println("Enter 'CI' to help a customer check-in      ");
-        System.out.println("Enter 'CO' to help a customer check-out      ");
         System.out.println("Enter 'LR' to list all rooms and to edit     ");
         System.out.println("Enter 'CE' to call an employee               ");
         System.out.println("Enter 'EE' to edit employee                  ");
@@ -38,11 +36,11 @@ public class Printer {
         System.out.println("");
     }
 
-    public static void printCounterMenu() {
+    public static void printReceptionMenu() {
         System.out.println("=============================================");
+        System.out.println("Enter 'CI' to help a customer check-in      ");
+        System.out.println("Enter 'CO' to help a customer check-out      ");
         System.out.println("Enter 'DH' to display hotal information      ");
-        System.out.println("Enter 'CE' to call an employee               ");
-        System.out.println("Enter 'EE' to edit employee                  ");
         System.out.println("Enter 'exit' to exit");
         System.out.println("");
     }
