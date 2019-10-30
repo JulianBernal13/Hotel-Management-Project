@@ -33,7 +33,7 @@ public class FileReader {
 	
 	public static void displayRoomInfo(File file) throws FileNotFoundException {
 		Scanner in = new Scanner(file);
-		for (Hotel.HotelProperty tmp : Hotel.HotelProperty.values()) {
+		for (Room.RoomProperty tmp : Room.RoomProperty.values()) {
 			System.out.println(tmp.name() + ": " + in.nextLine());
 		}
 	}

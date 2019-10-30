@@ -233,7 +233,7 @@ public class Menu {
 	}
 
 	private void listRooms(File cur) throws IOException {
-		File rooms = new File(cur.getPath() + File.pathSeparator + "Rooms");
+		File rooms = new File(cur.getPath() + File.separator + "Rooms");
 		Printer.printRoomview();
 		Scanner sc = new Scanner(System.in);
 		for (File file : rooms.listFiles()) {
@@ -269,8 +269,27 @@ public class Menu {
 	}
 	
 	private void EditRoom(File room) throws FileNotFoundException {
-		FileReader.displayRoomInfo(room);
-		
+		Room curRoom = Room.getRoomFile(room);
+		Printer.printRoomEditMenu(curRoom);
+		Scanner sc = new Scanner(System.in);
+		String command = sc.nextLine();
+		while(command.equals("save") || command.contentEquals("exit")){
+			Printer.printRoomEditMenu(curRoom);
+			switch(command){
+			case"Empty":{
+				curRoom.setEmpty(true);
+			}
+			case"clean":{
+				curRoom.setClean(true);
+			}
+			case"Maintaince":{
+				
+			}
+			case"Notes":{
+			
+			}
+		}
+		}
 	}
 
 }

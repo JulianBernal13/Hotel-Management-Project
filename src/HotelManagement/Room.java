@@ -62,6 +62,10 @@ public class Room {
     public void setPrice(double price) {
         this.price = price;
     }
+    
+    public void setType(String type) {
+    	this.type = type;
+    }
 
     public boolean isEmpty() {
         return isEmpty;
@@ -71,7 +75,7 @@ public class Room {
         isEmpty = empty;
     }
     
-    public String Maintaince() {
+    public String getMaintaince() {
         return maintaince;
     }
 
@@ -79,14 +83,13 @@ public class Room {
         this.maintaince = maintaince;
     }
     
-    public String Notes() {
+    public String getNotes() {
         return notes;
     }
 
     public void setNotes(String notes) {
         this.notes = notes;
     }
-
 
     public void createRoomFile() throws IOException {
         File cur = new File(this.path + File.separator + this.number + ".txt");
@@ -255,5 +258,22 @@ public class Room {
         } else {
             return 0;
         }
+    }
+    
+    public static Room getRoomFile(File cur) throws FileNotFoundException {
+        ArrayList<String> oldInfo = FileController.copyOldInfo(cur);
+        Room newRoom = new Room(Integer.parseInt(oldInfo.get(RoomProperty.number.ordinal())), "hello");
+    	newRoom.setClean(Boolean.parseBoolean(oldInfo.get(RoomProperty.IsClean.ordinal())));
+    	newRoom.setEmpty(Boolean.parseBoolean(oldInfo.get(RoomProperty.isEmpty.ordinal())));
+    	newRoom.setMaintaince(oldInfo.get(RoomProperty.maintaince.ordinal()));
+    	newRoom.setPrice(Integer.parseInt(oldInfo.get(RoomProperty.price.ordinal())));
+    	newRoom.setNotes(oldInfo.get(RoomProperty.notes.ordinal()));
+    	newRoom.setType(oldInfo.get(RoomProperty.type.ordinal()));
+    	return newRoom;
+    }
+    
+    public static String noteMaker(String writer) {
+    	
+    	return null;
     }
 }

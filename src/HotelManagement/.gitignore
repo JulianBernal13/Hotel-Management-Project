@@ -13,3 +13,7 @@
 /Printer.class
 /Room.class
 /Room$RoomProperty.class
+/CustomerFileController.class
+/Employee$EmployeeProperty.class
+/FileController.class
+/Manager$ManagerProperty.class

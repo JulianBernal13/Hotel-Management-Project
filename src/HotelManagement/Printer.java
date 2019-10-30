@@ -70,4 +70,21 @@ public class Printer {
 			System.out.println(element);
 		}
 	}
+	
+	public static void printRoomEditMenu(Room room) {
+		System.out.println("=============================================");
+
+		System.out.println("Room number: " + room.getNumber());
+		System.out.println("Room occupied: " + room.isEmpty());
+		System.out.println("Room is clean: " + room.isClean());
+		System.out.println("Room maintaince note: " + room.getMaintaince());
+		System.out.println("Room number " + room.getNotes());
+		System.out.println("");
+		System.out.println("Enter 'Empty' to set room to empty      ");
+		System.out.println("Enter 'clean' to set room to clean      ");
+		System.out.println("Enter 'Maintaince' to edit maintaince notes     ");
+		System.out.println("Enter 'Notes' to edit general room notes      ");
+	}
+	
+	
 }
