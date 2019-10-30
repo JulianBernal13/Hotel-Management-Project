@@ -92,8 +92,8 @@ public class Room {
         File cur = new File(this.path + File.separator + this.number + ".txt");
         if(cur.createNewFile()) {
             PrintWriter writer = new PrintWriter(cur);
-            writer.println(type);
             writer.println(number);
+            writer.println(type);
             writer.println(String.valueOf(price));
             writer.println(String.valueOf(isEmpty));
             writer.println(String.valueOf(isClean));
@@ -107,74 +107,67 @@ public class Room {
     public static void changeRoomType(String path, int number, String type) throws FileNotFoundException {
         File file = new File(path+File.separator+number+".txt");
         Scanner sc = new Scanner(file);
-        String originalType = sc.nextLine();
-        String originalNumber = sc.nextLine();
-        String originalPrice = sc.nextLine();
-        String originalIsEmpty = sc.nextLine();
-        String originalIsClean = sc.nextLine();
-        String originalMaintaince = sc.nextLine();
-        String originalNote = sc.nextLine();
-        PrintWriter Originalwriter = new PrintWriter(file);
-        Originalwriter.write("");
-        Originalwriter.flush();
-        Originalwriter.close();
+        ArrayList<String> oldInfo = new ArrayList<>();
+        while(sc.hasNext()){
+            oldInfo.add(String.valueOf(sc.nextLine()));
+        }
+        FileReader.cleanFileContent(file);
         PrintWriter writer = new PrintWriter(file);
         switch (type){
             case "single":{
+                writer.println(oldInfo.get(0));
                 writer.println("single");
-                writer.println(originalNumber);
-                writer.println(String.valueOf(singleRoom));
-                writer.println(String.valueOf(originalIsEmpty));
-                writer.println(String.valueOf(originalIsClean));
-                writer.println(String.valueOf(originalMaintaince));
-                writer.println(String.valueOf(originalNote));
+                writer.println(oldInfo.get(2));
+                writer.println(oldInfo.get(3));
+                writer.println(oldInfo.get(4));
+                writer.println(oldInfo.get(5));
+                writer.println(oldInfo.get(6));
                 writer.flush();
                 writer.close();
                 break;
             }
             case "double":{
+                writer.println(oldInfo.get(0));
                 writer.println("double");
-                writer.println(originalNumber);
-                writer.println(String.valueOf(doubleRoom));
-                writer.println(String.valueOf(originalIsEmpty));
-                writer.println(String.valueOf(originalIsClean));
-                writer.println(String.valueOf(originalMaintaince));
-                writer.println(String.valueOf(originalNote));
+                writer.println(oldInfo.get(2));
+                writer.println(oldInfo.get(3));
+                writer.println(oldInfo.get(4));
+                writer.println(oldInfo.get(5));
+                writer.println(oldInfo.get(6));
                 writer.flush();
                 writer.close();
                 break;
             }
             case "triple":{
+                writer.println(oldInfo.get(0));
                 writer.println("triple");
-                writer.println(originalNumber);
-                writer.println(String.valueOf(tripleRoom));
-                writer.println(String.valueOf(originalIsEmpty));
-                writer.println(String.valueOf(originalIsClean));
-                writer.println(String.valueOf(originalMaintaince));
-                writer.println(String.valueOf(originalNote));
-                writer.flush();
-                writer.close();
+                writer.println(oldInfo.get(2));
+                writer.println(oldInfo.get(3));
+                writer.println(oldInfo.get(4));
+                writer.println(oldInfo.get(5));
+                writer.println(oldInfo.get(6));
                 break;
             }
             case "queen":{
+                writer.println(oldInfo.get(0));
                 writer.println("queen");
-                writer.println(originalNumber);
-                writer.println(String.valueOf(queenRoom));
-                writer.println(String.valueOf(originalIsEmpty));
-                writer.println(String.valueOf(originalIsClean));
-                writer.println(String.valueOf(originalMaintaince));
-                writer.println(String.valueOf(originalNote));
+                writer.println(oldInfo.get(2));
+                writer.println(oldInfo.get(3));
+                writer.println(oldInfo.get(4));
+                writer.println(oldInfo.get(5));
+                writer.println(oldInfo.get(6));
                 writer.flush();
                 writer.close();
                 break;
             }
             case "king":{
+                writer.println(oldInfo.get(0));
                 writer.println("king");
-                writer.println(originalNumber);
-                writer.println(String.valueOf(kingRoom));writer.println(String.valueOf(originalIsEmpty));
-                writer.println(String.valueOf(originalIsClean));
-                writer.println(String.valueOf(originalMaintaince));
-                writer.println(String.valueOf(originalNote));
+                writer.println(oldInfo.get(2));
+                writer.println(oldInfo.get(3));
+                writer.println(oldInfo.get(4));
+                writer.println(oldInfo.get(5));
+                writer.println(oldInfo.get(6));
                 writer.flush();
                 writer.close();
                 break;
@@ -187,25 +180,19 @@ public class Room {
     public static void checkIn(String path,int number) throws FileNotFoundException {
         File file = new File(path+File.separator+number+".txt");
         Scanner sc = new Scanner(file);
-        String originalType = sc.nextLine();
-        String originalNumber = sc.nextLine();
-        String originalPrice = sc.nextLine();
-        String originalIsEmpty = sc.nextLine();
-        String originalIsClean = sc.nextLine();
-        String originalMaintaince = sc.nextLine();
-        String originalNote = sc.nextLine();
-        PrintWriter Originalwriter = new PrintWriter(file);
-        Originalwriter.write("");
-        Originalwriter.flush();
-        Originalwriter.close();
+        ArrayList<String> oldInfo = new ArrayList<>();
+        while(sc.hasNext()){
+            oldInfo.add(String.valueOf(sc.nextLine()));
+        }
+        FileReader.cleanFileContent(file);
         PrintWriter writer = new PrintWriter(file);
-        writer.println(originalType);
-        writer.println(originalNumber);
-        writer.println(originalPrice);
+        writer.println(oldInfo.get(0));
+        writer.println(oldInfo.get(1));
+        writer.println(oldInfo.get(2));
         writer.println("false");
-        writer.println(originalIsClean);
-        writer.println(originalMaintaince);
-        writer.println(originalNote);
+        writer.println(oldInfo.get(4));
+        writer.println(oldInfo.get(5));
+        writer.println(oldInfo.get(6));
         writer.flush();
         writer.close();
     }
@@ -213,25 +200,19 @@ public class Room {
     public static void checkOut(String path, int number) throws FileNotFoundException {
         File file = new File(path+File.separator+number+".txt");
         Scanner sc = new Scanner(file);
-        String originalType = sc.nextLine();
-        String originalNumber = sc.nextLine();
-        String originalPrice = sc.nextLine();
-        String originalIsEmpty = sc.nextLine();
-        String originalIsClean = sc.nextLine();
-        String originalMaintaince = sc.nextLine();
-        String originalNote = sc.nextLine();
-        PrintWriter Originalwriter = new PrintWriter(file);
-        Originalwriter.write("");
-        Originalwriter.flush();
-        Originalwriter.close();
+        ArrayList<String> oldInfo = new ArrayList<>();
+        while(sc.hasNext()){
+            oldInfo.add(String.valueOf(sc.nextLine()));
+        }
+        FileReader.cleanFileContent(file);
         PrintWriter writer = new PrintWriter(file);
-        writer.println(originalType);
-        writer.println(originalNumber);
-        writer.println(originalPrice);
+        writer.println(oldInfo.get(0));
+        writer.println(oldInfo.get(1));
+        writer.println(oldInfo.get(2));
         writer.println("true");
-        writer.println(originalIsClean);
-        writer.println(originalMaintaince);
-        writer.println(originalNote);
+        writer.println(oldInfo.get(4));
+        writer.println(oldInfo.get(5));
+        writer.println(oldInfo.get(6));
         writer.flush();
         writer.close();
     }
@@ -242,8 +223,8 @@ public class Room {
         int count=0;
         for (File file : allRoom.listFiles()) {
             Scanner sc = new Scanner(file);
-            String originalType = sc.nextLine();
             String originalNumber = sc.nextLine();
+            String originalType = sc.nextLine();
             String originalPrice = sc.nextLine();
             String originalIsEmpty = sc.nextLine();
             if(originalType.equals(type) && originalIsEmpty.equals("true")){

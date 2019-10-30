@@ -2,6 +2,7 @@ package HotelManagement;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -76,4 +77,10 @@ public class FileReader {
 		Collections.sort(allRoomsWithType);
 		Printer.printArray(allRoomsWithType);
 	}
+	public static void cleanFileContent(File file) throws FileNotFoundException {
+        PrintWriter Originalwriter = new PrintWriter(file);
+        Originalwriter.write("");
+        Originalwriter.flush();
+        Originalwriter.close();
+    }
 }
