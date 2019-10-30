@@ -115,11 +115,18 @@ public class Menu {
                 case "exit" : break;
                 case "DH" : {FileReader.displayHotelInfo(info); break;}
                 case "CI":{
-                    System.out.println("Which room are you going to check-in?");
-                    int num = Integer.parseInt(sc.nextLine());
                     String roomPath = cur.getPath()+File.separator+"Rooms";
-                    Room.checkIn(roomPath,num);
-                    System.out.println("Success! Now the room is occupied.");
+                    System.out.println("What type of room do you want?((single,double,triple,queen,king))");
+                    String type = sc.nextLine();
+                    if(Room.showTypeRoomEmpty(roomPath,type)==1) {
+                        System.out.println("Which room are you going to check-in?");
+                        int num = Integer.parseInt(sc.nextLine());
+                        Room.checkIn(roomPath, num);
+                        System.out.println("Success! Now the room is occupied.");
+                    }
+                    else {
+                        System.out.println("Sorry, we do not have such room available.");
+                    }
                     break;
                 }
                 case "CO":{

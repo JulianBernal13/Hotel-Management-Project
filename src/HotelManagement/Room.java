@@ -234,4 +234,26 @@ public class Room {
         writer.flush();
         writer.close();
     }
+
+    public static int showTypeRoomEmpty(String path, String type) throws FileNotFoundException {
+        File allRoom= new File(path);
+        int count=0;
+        for (File file : allRoom.listFiles()) {
+            Scanner sc = new Scanner(file);
+            String originalType = sc.nextLine();
+            String originalNumber = sc.nextLine();
+            String originalPrice = sc.nextLine();
+            String originalIsEmpty = sc.nextLine();
+            if(originalType.equals(type) && originalIsEmpty.equals("true")){
+                System.out.println(file.getName() + "    "+type);
+                count++;
+            }
+        }
+        if(count>0){
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
 }
