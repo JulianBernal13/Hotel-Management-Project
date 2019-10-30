@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CustomerFileController implements FileController {
@@ -48,6 +49,16 @@ public class CustomerFileController implements FileController {
         return newCustomer;
     }
 
+    public static int getPropertyOrdinal(String property) {
+        int i = 0;
+        for (Customer.customerProperty p: Customer.customerProperty.values()) {
+            if(p.name() == property)
+                return i;
+            i++;
+        }
+        return -1;
+    }
+
     public static void getCustomerInfo(File customers, String name, Customer.customerProperty property) throws FileNotFoundException {
         File customer = lookUpCustomer(customers, name);
         if(!customer.exists()) {
@@ -87,5 +98,26 @@ public class CustomerFileController implements FileController {
     public static File cdCustomerFile(File hotel) {
         String filePath = hotel.getPath() + File.separator + "Customer";
         return new File(filePath);
+    }
+
+    public static ArrayList<String> extractCustmorInfo(File customers, String name) throws FileNotFoundException {
+        ArrayList<String> info = new ArrayList<>();
+//        File customer = lookUpCustomer(customers, name);
+        Scanner sc = new Scanner(lookUpCustomer(customers, name));
+        while(sc.hasNext()) {
+            info.add(sc.nextLine());
+        }
+        return info;
+    }
+
+    public static void modifyCustomer(File customers, String name, String property) throws FileNotFoundException {
+        ArrayList<String> info = extractCustmorInfo(customers, name);
+        System.out.println("Enter what you like to change to " + name + ": " + property);
+        Scanner sc = new Scanner(System.in);
+        int i = getPropertyOrdinal(property);
+        if(i == -1)
+            return;
+//        info.get(i) = sc.nextLine();
+
     }
 }
