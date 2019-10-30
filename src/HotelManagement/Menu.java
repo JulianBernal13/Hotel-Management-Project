@@ -203,6 +203,14 @@ public class Menu {
 				manager.addEmployeeToFile(emp.getPath(), emp);
 				break;
 			}
+			case "FE": {
+				String employeePath = cur.getPath() + File.separator + "Employee";
+				Scanner sc2 = new Scanner(System.in);
+				System.out.println("Enter the ID for new employee you want to fire");
+				String id = sc2.nextLine();
+				manager.deleteEmployeeFromFile(employeePath, id);
+				break;
+			}
 			case "CRT": {
 				String roomPath = cur.getPath() + File.separator + "Rooms";
 				File f = new File(roomPath);
