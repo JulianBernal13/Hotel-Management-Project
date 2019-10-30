@@ -74,6 +74,9 @@ public class Hotel {
 		if (cur.createNewFile()) {
 			PrintWriter writer1 = new PrintWriter(cur);
 			writer1.println(manager.getTitleName());
+			writer1.println(manager.getID());
+			writer1.println(manager.getPaymentType());
+			writer1.println(String.valueOf(manager.getSalary()));
 			writer1.flush();
 			writer1.close();
 		}
