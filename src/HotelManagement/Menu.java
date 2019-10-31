@@ -257,10 +257,18 @@ public class Menu {
 			Printer.printRoomEditMenu(curRoom);
 			switch(command){
 			case"Empty":{
-				curRoom.setEmpty(true);
+				if(curRoom.isEmpty() == true) {
+					curRoom.setEmpty(false);
+				} else {
+					curRoom.setEmpty(true);
+				}
 			}
 			case"clean":{
-				curRoom.setClean(true);
+				if(curRoom.isClean() == true) {
+					curRoom.setClean(false);
+				} else {
+					curRoom.setClean(true);
+				}
 			}
 			case"Maintaince":{
 				
