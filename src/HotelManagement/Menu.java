@@ -104,32 +104,12 @@ public class Menu {
 		String command = sc.nextLine();
 		switch (command) {
 		case "CI": {
-			String roomPath = cur.getPath() + File.separator + "Rooms";
-			System.out.println("What type of room do you want?((single,double,triple,queen,king))");
-			String type = sc.nextLine();
-			if (Room.showTypeRoomEmpty(roomPath, type) == 1) {
-				System.out.println("Which room are you going to check-in?");
-				int num = Integer.parseInt(sc.nextLine());
-				Room.checkIn(roomPath, num);
-				System.out.println("Success! Now the room is occupied.");
-			} else {
-				System.out.println("Sorry, we do not have such room available.");
-			}
+			RoomFileController.checkIn(cur);
 			break;
 		}
 		case "CO": {
-			String roomPath = cur.getPath() + File.separator + "Rooms";
-			System.out.println("which room are you going to check-out?");
-			if(Room.showOccupiedRoom(roomPath)==1){
-				int num = Integer.parseInt(sc.nextLine());
-				Room.checkOut(roomPath, num);
-				System.out.println("Success! Now the room is empty.");
-				break;
-			}
-			else{
-				System.out.println("There is no room occupied.");
-				break;
-			}
+			RoomFileController.checkOut(cur);
+			break;
 		}
 		case "LC": {
 			CustomerFileController.menuLookUp(CustomerFileController.cdCustomerFile(cur));
