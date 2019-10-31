@@ -170,8 +170,12 @@ public class Menu {
 			case "CE":
 				break; // call employee
 			case "EE": {
-
-				String employeePath = cur.getPath() + File.separator + "Employee";
+				Scanner sc2 = new Scanner(System.in);
+				System.out.println("Enter the id for the employee you want to edit");
+				String id = sc2.nextLine();
+				System.out.println("What do you want to change about the employee?");
+				String property = sc2.nextLine();
+				EmployeeFileController.modifyEmployee(info1, id, property);
 
 				break;
 			} // edit employee
