@@ -7,11 +7,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
+import static HotelManagement.Room.*;
+
 /**
  * @author Yingxie Gao
  * @date 10/30/19 21:48
  */
 public class RoomFileController {
+
 
     public static void changeRoomType(String path, int number, String type) throws FileNotFoundException {
         File file = new File(path+File.separator+number+".txt");
@@ -20,59 +23,51 @@ public class RoomFileController {
         PrintWriter writer = new PrintWriter(file);
         switch (type){
             case "single":{
-                writer.println(oldInfo.get(Room.RoomProperty.number.ordinal()));
-                writer.println("single");
-                writer.println(oldInfo.get(Room.RoomProperty.price.ordinal()));
-                writer.println(oldInfo.get(Room.RoomProperty.isEmpty.ordinal()));
-                writer.println(oldInfo.get(Room.RoomProperty.IsClean.ordinal()));
-                writer.println(oldInfo.get(Room.RoomProperty.maintaince.ordinal()));
-                writer.println(oldInfo.get(Room.RoomProperty.notes.ordinal()));
+                oldInfo.set(Room.RoomProperty.type.ordinal(),"single");
+                oldInfo.set(Room.RoomProperty.price.ordinal(), String.valueOf(singleRoom));
+                for(String tmp:oldInfo){
+                    writer.println(tmp);
+                }
                 writer.flush();
                 writer.close();
                 break;
             }
             case "double":{
-                writer.println(oldInfo.get(Room.RoomProperty.number.ordinal()));
-                writer.println("double");
-                writer.println(oldInfo.get(Room.RoomProperty.price.ordinal()));
-                writer.println(oldInfo.get(Room.RoomProperty.isEmpty.ordinal()));
-                writer.println(oldInfo.get(Room.RoomProperty.IsClean.ordinal()));
-                writer.println(oldInfo.get(Room.RoomProperty.maintaince.ordinal()));
-                writer.println(oldInfo.get(Room.RoomProperty.notes.ordinal()));
+                oldInfo.set(Room.RoomProperty.type.ordinal(),"double");
+                oldInfo.set(Room.RoomProperty.price.ordinal(), String.valueOf(doubleRoom));
+                for(String tmp:oldInfo){
+                    writer.println(tmp);
+                }
                 writer.flush();
                 writer.close();
                 break;
             }
             case "triple":{
-                writer.println(oldInfo.get(Room.RoomProperty.number.ordinal()));
-                writer.println("triple");
-                writer.println(oldInfo.get(Room.RoomProperty.price.ordinal()));
-                writer.println(oldInfo.get(Room.RoomProperty.isEmpty.ordinal()));
-                writer.println(oldInfo.get(Room.RoomProperty.IsClean.ordinal()));
-                writer.println(oldInfo.get(Room.RoomProperty.maintaince.ordinal()));
-                writer.println(oldInfo.get(Room.RoomProperty.notes.ordinal()));
+                oldInfo.set(Room.RoomProperty.type.ordinal(),"triple");
+                oldInfo.set(Room.RoomProperty.price.ordinal(), String.valueOf(tripleRoom));
+                for(String tmp:oldInfo){
+                    writer.println(tmp);
+                }
+                writer.flush();
+                writer.close();
                 break;
             }
             case "queen":{
-                writer.println(oldInfo.get(Room.RoomProperty.number.ordinal()));
-                writer.println("queen");
-                writer.println(oldInfo.get(Room.RoomProperty.price.ordinal()));
-                writer.println(oldInfo.get(Room.RoomProperty.isEmpty.ordinal()));
-                writer.println(oldInfo.get(Room.RoomProperty.IsClean.ordinal()));
-                writer.println(oldInfo.get(Room.RoomProperty.maintaince.ordinal()));
-                writer.println(oldInfo.get(Room.RoomProperty.notes.ordinal()));
+                oldInfo.set(Room.RoomProperty.type.ordinal(),"queen");
+                oldInfo.set(Room.RoomProperty.price.ordinal(), String.valueOf(queenRoom));
+                for(String tmp:oldInfo){
+                    writer.println(tmp);
+                }
                 writer.flush();
                 writer.close();
                 break;
             }
             case "king":{
-                writer.println(oldInfo.get(Room.RoomProperty.number.ordinal()));
-                writer.println("king");
-                writer.println(oldInfo.get(Room.RoomProperty.price.ordinal()));
-                writer.println(oldInfo.get(Room.RoomProperty.isEmpty.ordinal()));
-                writer.println(oldInfo.get(Room.RoomProperty.IsClean.ordinal()));
-                writer.println(oldInfo.get(Room.RoomProperty.maintaince.ordinal()));
-                writer.println(oldInfo.get(Room.RoomProperty.notes.ordinal()));
+                oldInfo.set(Room.RoomProperty.type.ordinal(),"king");
+                oldInfo.set(Room.RoomProperty.price.ordinal(), String.valueOf(tripleRoom));
+                for(String tmp:oldInfo){
+                    writer.println(tmp);
+                }
                 writer.flush();
                 writer.close();
                 break;
@@ -102,13 +97,10 @@ public class RoomFileController {
         FileController.cleanFileContent(file);
 
         PrintWriter writer = new PrintWriter(file);
-        writer.println(oldInfo.get(Room.RoomProperty.number.ordinal()));
-        writer.println(oldInfo.get(Room.RoomProperty.type.ordinal()));
-        writer.println(oldInfo.get(Room.RoomProperty.price.ordinal()));
-        writer.println("false");
-        writer.println(oldInfo.get(Room.RoomProperty.IsClean.ordinal()));
-        writer.println(oldInfo.get(Room.RoomProperty.maintaince.ordinal()));
-        writer.println(oldInfo.get(Room.RoomProperty.notes.ordinal()));
+        oldInfo.set(RoomProperty.isEmpty.ordinal(), "false");
+        for(String tmp:oldInfo){
+            writer.println(tmp);
+        }
         writer.flush();
         writer.close();
     }
@@ -119,15 +111,10 @@ public class RoomFileController {
         FileController.cleanFileContent(file);
 
         PrintWriter writer = new PrintWriter(file);
-        writer.println(oldInfo.get(Room.RoomProperty.number.ordinal()));
-        writer.println(oldInfo.get(Room.RoomProperty.type.ordinal()));
-        writer.println(oldInfo.get(Room.RoomProperty.price.ordinal()));
-        writer.println("true");
-        writer.println(oldInfo.get(Room.RoomProperty.IsClean.ordinal()));
-        writer.println(oldInfo.get(Room.RoomProperty.maintaince.ordinal()));
-        writer.println(oldInfo.get(Room.RoomProperty.notes.ordinal()));
-        writer.flush();
-        writer.close();
+        oldInfo.set(RoomProperty.isEmpty.ordinal(), "true");
+        for(String tmp:oldInfo){
+            writer.println(tmp);
+        }
     }
 
     public static int showTypeRoomEmpty(String path, String type) throws FileNotFoundException {
