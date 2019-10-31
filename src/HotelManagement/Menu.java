@@ -231,6 +231,7 @@ public class Menu {
 		}
 		FileReader.displayRoomInfo(check);
 		System.out.println("enter 'Edit' to modifty current room or 'Exit' to return to manager screen");
+		while(true){
 		String command = sc.nextLine();
 		switch(command) {
 		case "Edit": {
@@ -244,24 +245,25 @@ public class Menu {
 								"enter new command");
 		}
 		}
+		}
 		
 		// james
 	}
 	
-	private void EditRoom(File room) throws FileNotFoundException {
+	private void EditRoom(File room) throws IOException {
 		Room curRoom = Room.getRoomFile(room);
-		Printer.printRoomEditMenu(curRoom);
 		Scanner sc = new Scanner(System.in);
-		String command = sc.nextLine();
-		while(command.equals("save") || command.contentEquals("exit")){
+		while(true){
 			Printer.printRoomEditMenu(curRoom);
-			switch(command){
+			String input = sc.nextLine();
+			switch(input){
 			case"Empty":{
 				if(curRoom.isEmpty() == true) {
 					curRoom.setEmpty(false);
 				} else {
 					curRoom.setEmpty(true);
 				}
+				break;
 			}
 			case"clean":{
 				if(curRoom.isClean() == true) {
@@ -269,14 +271,23 @@ public class Menu {
 				} else {
 					curRoom.setClean(true);
 				}
+				break;
 			}
 			case"Maintaince":{
-				
+				//Room.noteMaker(curRoom.getMaintaince());
+				break;
 			}
 			case"Notes":{
+				break;
+			}
+			
+			case"exit":{
+				break;
+			}
+			default:
+				
 			
 			}
-		}
 		}
 	}
 

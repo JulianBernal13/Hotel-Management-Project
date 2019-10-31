@@ -1,5 +1,6 @@
 package HotelManagement;
 
+import java.awt.Desktop;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -114,14 +115,30 @@ public class Room {
     	newRoom.setClean(Boolean.parseBoolean(oldInfo.get(RoomProperty.IsClean.ordinal())));
     	newRoom.setEmpty(Boolean.parseBoolean(oldInfo.get(RoomProperty.isEmpty.ordinal())));
     	newRoom.setMaintaince(oldInfo.get(RoomProperty.maintaince.ordinal()));
-    	newRoom.setPrice(Integer.parseInt(oldInfo.get(RoomProperty.price.ordinal())));
+    	newRoom.setPrice(Double.parseDouble(oldInfo.get(RoomProperty.price.ordinal())));
     	newRoom.setNotes(oldInfo.get(RoomProperty.notes.ordinal()));
     	newRoom.setType(oldInfo.get(RoomProperty.type.ordinal()));
     	return newRoom;
     }
     
-    public static String noteMaker(String writer) {
-    	
-    	return null;
+    public static String noteMaker(String writer) throws IOException {
+		Scanner sc = new Scanner(System.in);
+		String command = "";
+    	while(!command.equals("done")) {
+    		System.out.println("type 'Backspace' to deleate previous line or press 'enter' to commit current line \n +"
+    				+ "type save when done");
+    		System.out.print(writer);
+    		command = sc.nextLine();
+    		switch(command) {
+    		case"Backspace":{
+    			System.out.print("hello");
+    		}
+    		case"save":{
+    			break;
+    		}
+    		}
+    	}
+
+    	return writer;
     }
 }
