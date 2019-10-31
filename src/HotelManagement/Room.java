@@ -15,7 +15,7 @@ public class Room {
     private double price;
     private boolean isEmpty;
     private boolean isClean;
-    private String path; 
+    private String path;
     private String maintaince;
     private String notes;
 

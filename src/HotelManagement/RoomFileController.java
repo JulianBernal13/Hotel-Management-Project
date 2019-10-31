@@ -44,7 +44,7 @@ public class RoomFileController {
             }
             case "triple":{
                 oldInfo.set(Room.RoomProperty.type.ordinal(),"triple");
-                oldInfo.set(Room.RoomProperty.price.ordinal(), String.valueOf(tripleRoom));
+                oldInfo.set(Room.RoomProperty.price.ordinal(), String.valueOf(kingRoom));
                 for(String tmp:oldInfo){
                     writer.println(tmp);
                 }
@@ -122,11 +122,11 @@ public class RoomFileController {
         ArrayList<String> emptyRooms = new ArrayList<>();
         int count=0;
         for (File file : allRoom.listFiles()) {
-            Scanner sc = new Scanner(file);
-            String originalNumber = sc.nextLine();
-            String originalType = sc.nextLine();
-            String originalPrice = sc.nextLine();
-            String originalIsEmpty = sc.nextLine();
+            ArrayList<String> oldInfo = FileController.extractInfo(file);
+            String originalType = oldInfo.get(RoomProperty.type.ordinal());
+            String originalIsEmpty = oldInfo.get(RoomProperty.isEmpty.ordinal());
+            String originalNumber = oldInfo.get(RoomProperty.number.ordinal());
+            String originalPrice = oldInfo.get(RoomProperty.price.ordinal());
             if(originalType.equals(type) && originalIsEmpty.equals("true")){
                 emptyRooms.add(originalNumber + "    "+type + "     " + originalPrice);
                 count++;
@@ -148,11 +148,11 @@ public class RoomFileController {
         ArrayList<String> emptyRooms = new ArrayList<>();
         int count = 0;
         for (File file : allRoom.listFiles()) {
-            Scanner sc = new Scanner(file);
-            String originalNumber = sc.nextLine();
-            String originalType = sc.nextLine();
-            String originalPrice = sc.nextLine();
-            String originalIsEmpty = sc.nextLine();
+            ArrayList<String> oldInfo = FileController.extractInfo(file);
+            String originalType = oldInfo.get(RoomProperty.type.ordinal());
+            String originalIsEmpty = oldInfo.get(RoomProperty.isEmpty.ordinal());
+            String originalNumber = oldInfo.get(RoomProperty.number.ordinal());
+            String originalPrice = oldInfo.get(RoomProperty.price.ordinal());
             if (originalIsEmpty.equals("false")) {
                 emptyRooms.add(originalNumber + "    " + originalType + "     " + originalPrice);
                 count++;
