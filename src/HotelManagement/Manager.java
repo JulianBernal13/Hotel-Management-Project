@@ -9,8 +9,6 @@ import java.util.Random;
 
 public class Manager extends Employee {
 
-	private String id;
-	private int salary;
 	// Only Manager can access this
 	private ArrayList<Employee> employees;
 	private String hotel;
@@ -20,6 +18,14 @@ public class Manager extends Employee {
 		titleName, id, paymentType, salary
 	}
 
+	/**
+	 * Creates a manager whenever a hotel is built
+	 * @param path
+	 * @param titleName
+	 * @param id
+	 * @param paymentType
+	 * @param salary
+	 */
 	public Manager(String path, String titleName, String id, String paymentType, int salary) {
 
 		super(path, titleName, id, paymentType, salary);
