@@ -17,22 +17,29 @@ public class Customer {
         firstname, lastname, isVIP, isStaying, contractHistory, futureContract;
     }
 
-//    public static enum customerProperty {
-//        firstname, lastname, isVIP, isStaying, contractHistory, futureContract;
-//    }
-
-    String firstname;
-    String lastname;
-    boolean isVIP = false;
-    boolean isStaying = false;
+    private final String firstname;
+    private final String lastname;
+    private boolean isVIP = false;
+    private boolean isStaying = false;
     ArrayList<Contract> contractHistory;
     ArrayList<Contract> futureContract;
 
+    /**
+     * @param firstname
+     * @param lastname
+     * Construct a customer object from given firstname and lastname.
+     * This is only used when the customer logs in for the first time.
+     */
     Customer(String firstname, String lastname) {
         this.firstname = firstname;
         this.lastname = lastname;
     }
 
+    /**
+     * @param customerFile
+     * @throws FileNotFoundException
+     * Construct a customer object form an existing file.
+     */
     Customer(File customerFile) throws FileNotFoundException {
         //needs exception handing
         Scanner sc = new Scanner(customerFile);
@@ -56,5 +63,13 @@ public class Customer {
 
     public void setStaying(boolean staying) {
         isStaying = staying;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
     }
 }
