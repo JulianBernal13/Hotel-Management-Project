@@ -1,7 +1,5 @@
 package HotelManagement;
 
-import java.io.File;
-
 /**
  * 
  * @author Julian Garcia
@@ -25,12 +23,14 @@ public class Employee {
 	public static enum EmployeeProperty {
 		titleName, id, paymentType, salary
 	}
-	// private HotelManagement.Employee[] a;
 
 	/**
 	 * Constructs an employee
 	 * 
 	 * @param titleName
+	 * @param id
+	 * @param paymentType
+	 * @param salary
 	 */
 	public Employee(String path, String titleName, String id, String paymentType, int salary) {
 		this.path = path;
@@ -40,7 +40,6 @@ public class Employee {
 		this.salary = salary;
 		clockIn = false;
 		hotel = checkCurrentHotel();
-		// this.path = path + File.separator + id + ".txt";;
 	}
 
 	public void setTitleName(String titleName) {
@@ -67,7 +66,11 @@ public class Employee {
 		return this.hotel;
 	}
 
-	// Retrieves the hotel from the path
+	/**
+	 * Returns the path for this hotel
+	 * 
+	 * @return hotel
+	 */
 	public String checkCurrentHotel() {
 		String hotel = path.substring(19, path.length() - 9);
 		return hotel;
