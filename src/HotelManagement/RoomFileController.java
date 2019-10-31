@@ -44,7 +44,7 @@ public class RoomFileController {
             }
             case "triple":{
                 oldInfo.set(Room.RoomProperty.type.ordinal(),"triple");
-                oldInfo.set(Room.RoomProperty.price.ordinal(), String.valueOf(kingRoom));
+                oldInfo.set(Room.RoomProperty.price.ordinal(), String.valueOf(tripleRoom));
                 for(String tmp:oldInfo){
                     writer.println(tmp);
                 }
@@ -64,7 +64,7 @@ public class RoomFileController {
             }
             case "king":{
                 oldInfo.set(Room.RoomProperty.type.ordinal(),"king");
-                oldInfo.set(Room.RoomProperty.price.ordinal(), String.valueOf(tripleRoom));
+                oldInfo.set(Room.RoomProperty.price.ordinal(), String.valueOf(kingRoom));
                 for(String tmp:oldInfo){
                     writer.println(tmp);
                 }
