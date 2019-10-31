@@ -14,7 +14,7 @@ public class CustomerFileController implements FileController {
         String name = sc.nextLine();
         registerCustomer(customers, name);
         getCustomerInfo(customers, name, "isVIP");
-        getCustomerInfo(customers, name, Customer.customerProperty.firstname);
+        getCustomerInfo(customers, name, Customer.Property.firstname);
 
     }
     public static void displayAll(File customers) {
@@ -51,7 +51,7 @@ public class CustomerFileController implements FileController {
 
     public static int getPropertyOrdinal(String property) {
         int i = 0;
-        for (Customer.customerProperty p: Customer.customerProperty.values()) {
+        for (Customer.Property p: Customer.Property.values()) {
             if(p.name() == property)
                 return i;
             i++;
@@ -59,7 +59,7 @@ public class CustomerFileController implements FileController {
         return -1;
     }
 
-    public static void getCustomerInfo(File customers, String name, Customer.customerProperty property) throws FileNotFoundException {
+    public static void getCustomerInfo(File customers, String name, Customer.Property property) throws FileNotFoundException {
         File customer = lookUpCustomer(customers, name);
         if(!customer.exists()) {
             System.out.println("Customer dose not exists");
@@ -82,7 +82,7 @@ public class CustomerFileController implements FileController {
             return;
         }
         Scanner sc = new Scanner(customer);
-        for(Customer.customerProperty p : Customer.customerProperty.values()) {
+        for(Customer.Property p : Customer.Property.values()) {
             if(p.toString() == property)
                 break;
             sc.nextLine();
