@@ -2,6 +2,7 @@ package HotelManagement;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -159,8 +160,14 @@ public class RoomFileController {
         return count;
     }
 
-    public static void checkIn(File cur) throws FileNotFoundException {
-        String roomPath = cur.getPath() + File.separator + "Rooms";
+    public static void checkIn(File hotel) throws IOException {
+        System.out.println("Enter customer's name");
+        Scanner sc = new Scanner(System.in);
+        File customer = CustomerFileController.registerCustomer(CustomerFileController.cdCustomerFile(hotel), sc.nextLine());
+        String isStaying = CustomerFileController.getCustomerInfo(customer, "isVIP");
+        if(isStaying == "true")
+            return;
+        String roomPath = hotel.getPath() + File.separator + "Rooms";
         System.out.println("What type of room do you want?((single,double,triple,queen,king))");
         Scanner scanner = new Scanner(System.in);
         String type = scanner.nextLine();
@@ -168,6 +175,7 @@ public class RoomFileController {
             System.out.println("Which room are you going to check-in?");
             int num = Integer.parseInt(scanner.nextLine());
             changeRoomOccupied(roomPath, num);
+            //change customer's states
             System.out.println("Success! Now the room is occupied.");
         } else {
             System.out.println("Sorry, we do not have such room available.");

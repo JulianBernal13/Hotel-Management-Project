@@ -11,24 +11,28 @@ import java.io.IOException;
 //}
 
 /**
- * @author Yingxie Gao
+ * @author Yingxie Gao, Anji Yu
  * @date 10/18/19 22:30
  */
 
 public class Hotel {
-	private String name;
-	private Location location;
-	private int numOfLevel;
-	private int levelRmNum;
-	private Manager manager; //
-	private Room rooms[][];
-	private ArrayList<Employee> employees;
-	private String password;
-	private String path;
 
 	public static enum HotelProperty {
 		name, location, numOfLevel, levelRmNum, password;
 	}
+
+	private String name;
+	private Location location;
+	private int numOfLevel;
+	private int levelRmNum;
+	private String password;
+	private String path;
+	private Room rooms[][];
+	private Manager manager; //
+	private ArrayList<Employee> employees;
+
+
+
 
 	public Hotel(String path, String name, Location location, int numOfLevel, int levelRmNum, String password)
 			throws IOException {
@@ -63,6 +67,7 @@ public class Hotel {
 		}
 
 		createDirectory(this.path, "Customer");
+//		FileController.createDirectory(this.path, "Customer");
 
 		// createDirectory(this.path, "Employee");
 

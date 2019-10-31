@@ -36,7 +36,7 @@ public interface FileController {
         Originalwriter.close();
     }
 
-    static File makeDirectory(File cur, String directoryName) {
+    static File createDirectory(File cur, String directoryName) {
         File newDirectory = new File(cur.getPath() + File.separator + directoryName);
         newDirectory.mkdir();
         return newDirectory;
