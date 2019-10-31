@@ -20,7 +20,7 @@ public interface FileController {
         return null; //needs exception handling
     }
 
-    static ArrayList<String> copyOldInfo(File file) throws FileNotFoundException {
+    static ArrayList<String> extractInfo(File file) throws FileNotFoundException {
         Scanner sc = new Scanner(file);
         ArrayList<String> oldInfo = new ArrayList<>();
         while(sc.hasNext()){

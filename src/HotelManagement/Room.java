@@ -109,7 +109,7 @@ public class Room {
 
     public static void changeRoomType(String path, int number, String type) throws FileNotFoundException {
         File file = new File(path+File.separator+number+".txt");
-        ArrayList<String> oldInfo = FileController.copyOldInfo(file);
+        ArrayList<String> oldInfo = FileController.extractInfo(file);
         FileController.cleanFileContent(file);
         PrintWriter writer = new PrintWriter(file);
         switch (type){
@@ -178,7 +178,7 @@ public class Room {
     }
     public static void checkIn(String path,int number) throws FileNotFoundException {
         File file = new File(path+File.separator+number+".txt");
-        ArrayList<String> oldInfo = FileController.copyOldInfo(file);
+        ArrayList<String> oldInfo = FileController.extractInfo(file);
         FileController.cleanFileContent(file);
 
         PrintWriter writer = new PrintWriter(file);
@@ -195,7 +195,7 @@ public class Room {
 
     public static void checkOut(String path, int number) throws FileNotFoundException {
         File file = new File(path+File.separator+number+".txt");
-        ArrayList<String> oldInfo = FileController.copyOldInfo(file);
+        ArrayList<String> oldInfo = FileController.extractInfo(file);
         FileController.cleanFileContent(file);
 
         PrintWriter writer = new PrintWriter(file);
@@ -261,7 +261,7 @@ public class Room {
     }
     
     public static Room getRoomFile(File cur) throws FileNotFoundException {
-        ArrayList<String> oldInfo = FileController.copyOldInfo(cur);
+        ArrayList<String> oldInfo = FileController.extractInfo(cur);
         Room newRoom = new Room(Integer.parseInt(oldInfo.get(RoomProperty.number.ordinal())), "hello");
     	newRoom.setClean(Boolean.parseBoolean(oldInfo.get(RoomProperty.IsClean.ordinal())));
     	newRoom.setEmpty(Boolean.parseBoolean(oldInfo.get(RoomProperty.isEmpty.ordinal())));
