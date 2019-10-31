@@ -12,11 +12,12 @@ public class CustomerFileController implements FileController {
         System.out.println("Enter customer name");
         Scanner sc = new Scanner(System.in);
         String name = sc.nextLine();
-        File customer = registerCustomer(customers, name);
-        String tmp = getCustomerInfo(customer, "isVIP");
-        System.out.println(tmp);
-        getCustomerInfo(customer, Customer.Property.firstname);
-
+        File customer = lookUpCustomer(customers, name);
+        if(!customer.exists()) {
+            System.out.println("Customer " + name + " does not exist");
+            return;
+        }
+        Printer.printFile(customer);
     }
     public static void displayAll(File customers) {
 

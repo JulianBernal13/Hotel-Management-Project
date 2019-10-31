@@ -1,7 +1,10 @@
 package HotelManagement;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
 
 public class Printer {
 	public static void printWelcome() {
@@ -85,6 +88,11 @@ public class Printer {
 		System.out.println("Enter 'Maintaince' to edit maintaince notes     ");
 		System.out.println("Enter 'Notes' to edit general room notes      ");
 	}
-	
+
+	public static void printFile(File file) throws FileNotFoundException {
+		Scanner sc = new Scanner(file);
+		while(sc.hasNext())
+			System.out.println(sc.nextLine());
+	}
 	
 }
