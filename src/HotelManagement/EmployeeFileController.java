@@ -12,9 +12,8 @@ public class EmployeeFileController implements FileController {
 		System.out.println("Enter Employee name");
 		Scanner sc = new Scanner(System.in);
 		String name = sc.nextLine();
-		registerEmployee(employees, name);
-		getEmployeeInfo(employees, name, "isVIP");
 		getEmployeeInfo(employees, name, Employee.EmployeeProperty.titleName);
+		getEmployeeInfo(employees, name, Employee.EmployeeProperty.id);
 
 	}
 
@@ -97,6 +96,7 @@ public class EmployeeFileController implements FileController {
 		System.out.println(ret);
 	}
 
+	// helps to look through hotel
 	public static File cdEmployeeFile(File hotel) {
 		String filePath = hotel.getPath() + File.separator + "Employee";
 		return new File(filePath);
