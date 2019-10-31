@@ -136,13 +136,7 @@ public class RoomFileController {
         }
         Collections.sort(emptyRooms);
         Printer.printArray(emptyRooms);
-
-        if(count>0){
-            return 1;
-        }
-        else {
-            return 0;
-        }
+        return count;
     }
 
     public static int showOccupiedRoom(String path) throws FileNotFoundException {
@@ -162,11 +156,7 @@ public class RoomFileController {
         }
         Collections.sort(emptyRooms);
         Printer.printArray(emptyRooms);
-        if (count > 0) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return count;
     }
 
     public static void checkIn(File cur) throws FileNotFoundException {
@@ -174,7 +164,7 @@ public class RoomFileController {
         System.out.println("What type of room do you want?((single,double,triple,queen,king))");
         Scanner scanner = new Scanner(System.in);
         String type = scanner.nextLine();
-        if (showTypeRoomEmpty(roomPath, type) == 1) {
+        if (showTypeRoomEmpty(roomPath, type) > 0) {
             System.out.println("Which room are you going to check-in?");
             int num = Integer.parseInt(scanner.nextLine());
             changeRoomOccupied(roomPath, num);
@@ -188,7 +178,7 @@ public class RoomFileController {
         Scanner scanner = new Scanner(System.in);
         String roomPath = cur.getPath() + File.separator + "Rooms";
         System.out.println("which room are you going to check-out?");
-        if(showOccupiedRoom(roomPath)==1){
+        if(showOccupiedRoom(roomPath) > 0){
             int num = Integer.parseInt(scanner.nextLine());
             changeRoomEmpty(roomPath, num);
             System.out.println("Success! Now the room is empty.");

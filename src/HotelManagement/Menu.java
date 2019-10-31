@@ -19,10 +19,12 @@ public class Menu {
 		case "new": {
 			createHotel();
 			menu();
+			break;
 		}
 		case "manage": {
 			manageHotel();
 			menu();
+			break;
 		}
 		case "exit":
 			break;
