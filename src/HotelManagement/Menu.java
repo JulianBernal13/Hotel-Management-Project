@@ -167,8 +167,10 @@ public class Menu {
 			}
 			case "LR":
 				listRooms(cur); // call Room List
-			case "CE":
+			case "CE":{
+				EmployeeFileController.menuLookUp(EmployeeFileController.cdEmployeeFile(cur));
 				break; // call employee
+			}
 			case "EE": {
 				Scanner sc2 = new Scanner(System.in);
 				System.out.println("Enter the id for the employee you want to edit");
