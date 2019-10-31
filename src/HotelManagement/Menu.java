@@ -197,15 +197,7 @@ public class Menu {
 				break;
 			}
 			case "CRT": {
-				String roomPath = cur.getPath() + File.separator + "Rooms";
-				File f = new File(roomPath);
-				FileReader.diaplayAllChosenRoom(f, Room.RoomProperty.type);
-				System.out.println("Which room are you going to change type?");
-				int num = Integer.parseInt(sc.nextLine());
-				System.out.println("What type are you going to change?(single,double,triple,queen,king)");
-				String type = sc.nextLine();
-				Room.changeRoomType(roomPath, num, type);
-				System.out.println("Success! Now the room is " + type);
+				RoomFileController.applyRoomType(cur);
 				break;
 			} // change room type
 			}

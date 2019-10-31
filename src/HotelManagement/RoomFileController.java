@@ -83,6 +83,19 @@ public class RoomFileController {
         }
     }
 
+    public static void applyRoomType(File cur) throws FileNotFoundException {
+        Scanner scanner = new Scanner(System.in);
+        String roomPath = cur.getPath() + File.separator + "Rooms";
+        File f = new File(roomPath);
+        FileReader.diaplayAllChosenRoom(f, Room.RoomProperty.type);
+        System.out.println("Which room are you going to change type?");
+        int num = Integer.parseInt(scanner.nextLine());
+        System.out.println("What type are you going to change?(single,double,triple,queen,king)");
+        String type = scanner.nextLine();
+        changeRoomType(roomPath, num, type);
+        System.out.println("Success! Now the room is " + type);
+    }
+
     public static void changeRoomOccupied(String path,int number) throws FileNotFoundException {
         File file = new File(path+File.separator+number+".txt");
         ArrayList<String> oldInfo = FileController.extractInfo(file);
