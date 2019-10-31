@@ -91,24 +91,28 @@ public class CustomerFileController implements FileController {
         return new File(filePath);
     }
 
-    public static ArrayList<String> extractCustmorInfo(File customers, String name) throws FileNotFoundException {
+    public static ArrayList<String> extractCustmorInfo(File customer) throws FileNotFoundException {
         ArrayList<String> info = new ArrayList<>();
 //        File customer = lookUpCustomer(customers, name);
-        Scanner sc = new Scanner(lookUpCustomer(customers, name));
+        Scanner sc = new Scanner(customer);
         while(sc.hasNext()) {
             info.add(sc.nextLine());
         }
         return info;
     }
 
-    public static void modifyCustomer(File customers, String name, String property) throws FileNotFoundException {
-        ArrayList<String> info = extractCustmorInfo(customers, name);
-        System.out.println("Enter what you like to change to " + name + ": " + property);
-        Scanner sc = new Scanner(System.in);
+    public static void modifyCustomer(File customer, String property, String modified) throws FileNotFoundException {
+        ArrayList<String> info = extractCustmorInfo(customer);
+//        System.out.println("Enter what you like to change to " + property);
         int i = getPropertyOrdinal(property);
         if(i == -1)
             return;
-//        info.get(i) = sc.nextLine();
-
+        info.set(i, modified);
+        PrintWriter writer = new PrintWriter(customer);
+        for(String s : info) {
+            writer.println(s);
+        }
+        writer.flush();
+        writer.close();
     }
 }

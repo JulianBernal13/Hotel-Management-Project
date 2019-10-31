@@ -164,9 +164,11 @@ public class RoomFileController {
         System.out.println("Enter customer's name");
         Scanner sc = new Scanner(System.in);
         File customer = CustomerFileController.registerCustomer(CustomerFileController.cdCustomerFile(hotel), sc.nextLine());
-        String isStaying = CustomerFileController.getCustomerInfo(customer, "isVIP");
-        if(isStaying == "true")
+        String isStaying = CustomerFileController.getCustomerInfo(customer, "isStaying");
+        if(isStaying.equals("true")) {
+            System.out.println("This customer is already checked in");
             return;
+        }
         String roomPath = hotel.getPath() + File.separator + "Rooms";
         System.out.println("What type of room do you want?((single,double,triple,queen,king))");
         Scanner scanner = new Scanner(System.in);
@@ -175,6 +177,7 @@ public class RoomFileController {
             System.out.println("Which room are you going to check-in?");
             int num = Integer.parseInt(scanner.nextLine());
             changeRoomOccupied(roomPath, num);
+            CustomerFileController.modifyCustomer(customer, "isStaying", "true");
             //change customer's states
             System.out.println("Success! Now the room is occupied.");
         } else {
