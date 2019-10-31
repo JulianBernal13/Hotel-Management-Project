@@ -115,6 +115,8 @@ public class RoomFileController {
         for(String tmp:oldInfo){
             writer.println(tmp);
         }
+        writer.flush();
+        writer.close();
     }
 
     public static int showTypeRoomEmpty(String path, String type) throws FileNotFoundException {
