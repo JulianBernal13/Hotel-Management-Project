@@ -38,7 +38,7 @@ public class Customer {
     /**
      * @param customerFile
      * @throws FileNotFoundException
-     * Construct a customer object form an existing file.
+     * Construct a customer object form an existing customer file.
      */
     Customer(File customerFile) throws FileNotFoundException {
         //needs exception handing
