@@ -6,10 +6,6 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.io.IOException;
 
-//enum HotelProperty {
-//    name, location, numOfLevel, levelRmNum, password;
-//}
-
 /**
  * @author Yingxie Gao, Anji Yu
  * @date 10/18/19 22:30
@@ -17,6 +13,7 @@ import java.io.IOException;
 
 public class Hotel {
 
+	//needs to be matched with the initialization order in constructor
 	public static enum HotelProperty {
 		name, location, numOfLevel, levelRmNum, password;
 	}
@@ -98,5 +95,9 @@ public class Hotel {
 
 	public String getPath() {
 		return path;
+	}
+
+	public void writeHotelToFile() {
+
 	}
 }
