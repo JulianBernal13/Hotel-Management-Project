@@ -1,8 +1,6 @@
 package HotelManagement;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Scanner;
 
 /**
  * @author Yingxie Gao
@@ -11,7 +9,12 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        Menu m = new Menu();
+        MainMenu m = new MainMenu();
+        File managementSystem = new File("." + File.separator + "ManagementSystem");
+        managementSystem.mkdir();
         m.menu();
+
+        MainMenuTwo m2 = new MainMenuTwo();
+        m2.menu();
     }
 }

@@ -44,8 +44,6 @@ public class Hotel {
 		this.password = password;
 		rooms = new Room[numOfLevel][levelRmNum];
 
-		Random rand = new Random();
-
 		File info = new File(path + File.separator + "info.txt");
 		PrintWriter writer = new PrintWriter(info);
 		writer.println(name);
@@ -66,11 +64,11 @@ public class Hotel {
 			}
 		}
 
-		createDirectory(this.path, "Customer");
-//		FileController.createDirectory(this.path, "Customer");
+//		createDirectory(this.path, "Customer");
+		FileController.createDirectory(this.path, "Customer");
 
 		// createDirectory(this.path, "Employee");
-
+		Random rand = new Random();
 		String employeePath = path + File.separator + "Employee";
 		manager = new Manager(employeePath, "Manager", "M" + rand.nextInt(10000), "bi-weekly", 80000);
 
@@ -90,14 +88,15 @@ public class Hotel {
 		ArrayList<Employee> employees = new ArrayList<>();
 	}
 
+	public Hotel (File file) {
+
+	}
+
 	public String getManagerID() {
 		return this.manager.getID();
 	}
 
-	public static void createDirectory(String currentPath, String name) {
-		String targetPath = currentPath + File.separator + name;
-		File targetFile = new File(targetPath);
-		targetFile.mkdir();
+	public String getPath() {
+		return path;
 	}
-
 }

@@ -42,4 +42,10 @@ public interface FileController {
         return newDirectory;
     }
 
+    static File createDirectory(String path, String directoryName) {
+        File newDirectory = new File(path + File.separator + directoryName);
+        newDirectory.mkdir();
+        return newDirectory;
+    }
+
 }

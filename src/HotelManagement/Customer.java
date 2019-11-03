@@ -41,7 +41,7 @@ public class Customer {
      * Construct a customer object form an existing customer file.
      */
     Customer(File customerFile) throws FileNotFoundException {
-        //needs exception handing
+        //needs exception handling
         Scanner sc = new Scanner(customerFile);
         this.firstname = sc.nextLine();
         this.lastname = sc.nextLine();

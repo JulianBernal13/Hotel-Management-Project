@@ -8,11 +8,13 @@ public class Contract {
     private int start;
     private int end;
     private Customer customer;
+    private Room room;
 
-    public Contract(int start, int end, Customer customer) {
+    public Contract(int start, int end, Customer customer, Room room) {
         this.start = start;
         this.end = end;
         this.customer = customer;
+        this.room = room;
     }
 
     public int getStart() {

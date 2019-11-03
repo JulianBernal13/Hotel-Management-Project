@@ -198,4 +198,83 @@ public class RoomFileController {
             System.out.println("There is no room occupied.");
         }
     }
+
+    public static void listRooms(File cur) throws IOException {
+        File rooms = new File(cur.getPath() + File.separator + "Rooms");
+        Printer.printRoomview();
+        Scanner sc = new Scanner(System.in);
+        for (File file : rooms.listFiles()) {
+            System.out.println("-" + file.getName());
+        }
+        String room = sc.nextLine();
+        File check = new File(rooms + File.separator + room);
+        while (!check.exists()) {
+            System.out.println("room does not exist, enter another room \n");
+            for (File file : rooms.listFiles()) {
+                System.out.println("-" + file.getName());
+            }
+            room = sc.nextLine();
+            check = new File(rooms + File.separator + room);
+        }
+        FileReader.displayRoomInfo(check);
+        System.out.println("enter 'Edit' to modifty current room or 'Exit' to return to manager screen");
+        while(true){
+            String command = sc.nextLine();
+            switch(command) {
+                case "Edit": {
+                    EditRoom(check);
+                }
+                case "Exit": {
+                    break;
+                }
+                default: {
+                    System.out.println("command does not exit \n" +
+                            "enter new command");
+                }
+            }
+        }
+
+        // james
+    }
+
+    public static void EditRoom(File room) throws IOException {
+        Room curRoom = Room.getRoomFile(room);
+        Scanner sc = new Scanner(System.in);
+        while(true){
+            Printer.printRoomEditMenu(curRoom);
+            String input = sc.nextLine();
+            switch(input){
+                case"Empty":{
+                    if(curRoom.isEmpty() == true) {
+                        curRoom.setEmpty(false);
+                    } else {
+                        curRoom.setEmpty(true);
+                    }
+                    break;
+                }
+                case"clean":{
+                    if(curRoom.isClean() == true) {
+                        curRoom.setClean(false);
+                    } else {
+                        curRoom.setClean(true);
+                    }
+                    break;
+                }
+                case"Maintaince":{
+                    //Room.noteMaker(curRoom.getMaintaince());
+                    break;
+                }
+                case"Notes":{
+                    break;
+                }
+
+                case"exit":{
+                    break;
+                }
+                default:
+
+
+            }
+        }
+    }
 }

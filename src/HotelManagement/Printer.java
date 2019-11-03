@@ -94,5 +94,10 @@ public class Printer {
 		while(sc.hasNext())
 			System.out.println(sc.nextLine());
 	}
+
+	public static void printFolderContent(File folder) {
+		for(File file : folder.listFiles())
+			System.out.println(file.getName());
+	}
 	
 }
