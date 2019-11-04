@@ -64,7 +64,6 @@ public class HotelFileController implements FileController{
             writer1.println(String.valueOf(manager.getSalary()));
             writer1.flush();
             writer1.close();
-
         }
     }
 }

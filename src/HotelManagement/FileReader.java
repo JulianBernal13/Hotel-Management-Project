@@ -15,11 +15,15 @@ public class FileReader {
 		return in.nextLine();
 	}
 
-	public static void displayHotelInfo(File file) throws FileNotFoundException {
-		Scanner in = new Scanner(file);
+	public static void displayHotelInfo(File info) throws FileNotFoundException {
+		Scanner in = new Scanner(info);
 		for (Hotel.Property tmp : Hotel.Property.values()) {
 			System.out.println(tmp.name() + ": " + in.nextLine());
 		}
+	}
+
+	public static void displayHotelInfo(String hotelPath) throws FileNotFoundException {
+		displayHotelInfo(new File(hotelPath + File.separator + "info.txt"));
 	}
 
 	public static String displayRoomInfoIndivual(File file, Room.RoomProperty property) throws FileNotFoundException {

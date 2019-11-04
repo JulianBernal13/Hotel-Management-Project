@@ -23,7 +23,7 @@ public class ManagerMenu implements Menu {
             case "exit":
                 break;
             case "DH": {
-//                FileReader.displayHotelInfo(info);
+                FileReader.displayHotelInfo(hotel.getPath());
                 break;
             }
             case "DE": {
@@ -63,7 +63,8 @@ public class ManagerMenu implements Menu {
                 System.out.println("Enter the salary for new employee");
                 String salary = sc2.nextLine();
                 Employee emp = new Employee(employeePath, titleName, id, paymentType, Integer.parseInt(salary));
-                manager.addEmployeeToFile(emp.getPath(), emp);
+                //manager needs to be initialize. Menu logic needs to be fixed
+                //manager.addEmployeeToFile(emp.getPath(), emp);
                 break;
             }
             case "FE": {
