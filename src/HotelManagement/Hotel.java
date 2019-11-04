@@ -1,6 +1,7 @@
 package HotelManagement;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
@@ -29,8 +30,16 @@ public class Hotel {
 	private ArrayList<Employee> employees;
 
 
-
-
+	/**
+	 * @param path
+	 * @param name
+	 * @param location
+	 * @param numOfLevel
+	 * @param levelRmNum
+	 * @param password
+	 * @throws IOException
+	 * This is only used for constructing a hotel
+	 */
 	public Hotel(String path, String name, Location location, int numOfLevel, int levelRmNum, String password)
 			throws IOException {
 		this.path = path;
@@ -97,7 +106,15 @@ public class Hotel {
 		return path;
 	}
 
-	public void writeHotelToFile() {
-
+	public void writeHotelInfo() throws FileNotFoundException {
+		File info = new File(path + File.separator + "info.txt");
+		PrintWriter writer = new PrintWriter(info);
+		writer.println(name);
+		writer.println(location);
+		writer.println(numOfLevel);
+		writer.println(levelRmNum);
+		writer.println(password);
+		writer.flush();
+		writer.close();
 	}
 }

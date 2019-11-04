@@ -20,7 +20,7 @@ public class Customer {
 
     private final String firstname;
     private final String lastname;
-    private String path;
+    private String path; //path of this particular customer, i.e., Anji.txt
     private boolean isVIP = false;
     private boolean isStaying = false;
 
@@ -92,5 +92,7 @@ public class Customer {
         writer.println(this.lastname);
         writer.println(this.isVIP);
         writer.println(this.isStaying);
+        writer.flush();
+        writer.close();
     }
 }

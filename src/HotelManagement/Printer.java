@@ -3,7 +3,6 @@ package HotelManagement;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Scanner;
 
 public class Printer {
@@ -80,7 +79,7 @@ public class Printer {
 		System.out.println("Room number: " + room.getNumber());
 		System.out.println("Room occupied: " + room.isEmpty());
 		System.out.println("Room is clean: " + room.isClean());
-		System.out.println("Room maintaince note: " + room.getMaintaince());
+		System.out.println("Room maintaince note: " + room.getMaintenance());
 		System.out.println("Room number " + room.getNotes());
 		System.out.println("");
 		System.out.println("Enter 'Empty' to set room to empty      ");

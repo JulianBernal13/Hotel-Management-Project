@@ -2,6 +2,7 @@ package HotelManagement;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -46,6 +47,12 @@ public interface FileController {
         File newDirectory = new File(path + File.separator + directoryName);
         newDirectory.mkdir();
         return newDirectory;
+    }
+
+    static File createTxtFile(File cur, String fileName) throws IOException {
+        File newFile = new File(cur.getPath() + File.separator + convertToTxt(fileName));
+        newFile.createNewFile();
+        return newFile;
     }
 
 }

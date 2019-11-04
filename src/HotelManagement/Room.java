@@ -1,9 +1,7 @@
 package HotelManagement;
 
-import java.awt.Desktop;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Scanner;
 
 /**
@@ -17,11 +15,11 @@ public class Room {
     private boolean isEmpty;
     private boolean isClean;
     private String path;
-    private String maintaince;
+    private String maintenance;
     private String notes;
 
     public static enum RoomProperty {
-        number, type, price, isEmpty, IsClean, maintaince, notes
+        number, type, price, isEmpty, IsClean, maintenance, notes
     }
     static final int singleRoom=100;
     static final int doubleRoom=150;
@@ -36,7 +34,7 @@ public class Room {
         this.isClean = true;
         this.isEmpty = true;
         this.price = 100;
-        this.maintaince = "none";
+        this.maintenance = "none";
         this.notes = "none";
     }
 
@@ -76,12 +74,12 @@ public class Room {
         isEmpty = empty;
     }
     
-    public String getMaintaince() {
-        return maintaince;
+    public String getMaintenance() {
+        return maintenance;
     }
 
-    public void setMaintaince(String maintaince) {
-        this.maintaince = maintaince;
+    public void setMaintenance(String maintenance) {
+        this.maintenance = maintenance;
     }
     
     public String getNotes() {
@@ -101,7 +99,7 @@ public class Room {
             writer.println(String.valueOf(price));
             writer.println(String.valueOf(isEmpty));
             writer.println(String.valueOf(isClean));
-            writer.println(String.valueOf(maintaince));
+            writer.println(String.valueOf(maintenance));
             writer.println(String.valueOf(notes));
             writer.flush();
             writer.close();
@@ -114,7 +112,7 @@ public class Room {
         Room newRoom = new Room(Integer.parseInt(oldInfo.get(RoomProperty.number.ordinal())), "hello");
     	newRoom.setClean(Boolean.parseBoolean(oldInfo.get(RoomProperty.IsClean.ordinal())));
     	newRoom.setEmpty(Boolean.parseBoolean(oldInfo.get(RoomProperty.isEmpty.ordinal())));
-    	newRoom.setMaintaince(oldInfo.get(RoomProperty.maintaince.ordinal()));
+    	newRoom.setMaintenance(oldInfo.get(RoomProperty.maintenance.ordinal()));
     	newRoom.setPrice(Double.parseDouble(oldInfo.get(RoomProperty.price.ordinal())));
     	newRoom.setNotes(oldInfo.get(RoomProperty.notes.ordinal()));
     	newRoom.setType(oldInfo.get(RoomProperty.type.ordinal()));

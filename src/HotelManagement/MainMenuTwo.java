@@ -17,7 +17,7 @@ public class MainMenuTwo implements Menu {
 
         switch (command) {
             case "new": {
-                HotelFileController.createHotel();
+                HotelFileController.createHotel(managementSystem);
                 menu();
                 break;
             }
