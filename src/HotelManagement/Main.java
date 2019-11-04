@@ -9,11 +9,6 @@ import java.io.*;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        MainMenu m = new MainMenu();
-        File managementSystem = new File("." + File.separator + "ManagementSystem");
-        managementSystem.mkdir();
-        m.menu();
-
         MainMenuTwo m2 = new MainMenuTwo();
         m2.menu();
     }

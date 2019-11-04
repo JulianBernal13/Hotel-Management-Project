@@ -2,9 +2,10 @@ package HotelManagement;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class ReceptionMenu implements Menu{
-    Hotel hotel;
+    private Hotel hotel;
 
     public ReceptionMenu(Hotel hotel) {
         this.hotel = hotel;
@@ -12,6 +13,23 @@ public class ReceptionMenu implements Menu{
 
     @Override
     public void menu() throws IOException {
-
+		Printer.printReceptionMenu();
+		File hotelFile = new File(this.hotel.getPath());
+		Scanner sc = new Scanner(System.in);
+		String command = sc.nextLine();
+		switch (command) {
+		case "CI": {
+			RoomFileController.checkIn(hotelFile);
+			break;
+		}
+		case "CO": {
+			RoomFileController.checkOut(hotelFile);
+			break;
+		}
+		case "LC": {
+			CustomerFileController.menuLookUp(CustomerFileController.cdCustomerFile(hotelFile));
+			break;
+		}
+		}
     }
 }

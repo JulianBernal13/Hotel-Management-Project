@@ -2,13 +2,12 @@ package HotelManagement;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
 public class FileReader {
-	public static String getHotelInfo(File file, Hotel.HotelProperty property) throws FileNotFoundException {
+	public static String getHotelInfo(File file, Hotel.Property property) throws FileNotFoundException {
 		Scanner in = new Scanner(file);
 		int i = 0;
 		while (i++ < property.ordinal() && in.hasNext())
@@ -18,7 +17,7 @@ public class FileReader {
 
 	public static void displayHotelInfo(File file) throws FileNotFoundException {
 		Scanner in = new Scanner(file);
-		for (Hotel.HotelProperty tmp : Hotel.HotelProperty.values()) {
+		for (Hotel.Property tmp : Hotel.Property.values()) {
 			System.out.println(tmp.name() + ": " + in.nextLine());
 		}
 	}

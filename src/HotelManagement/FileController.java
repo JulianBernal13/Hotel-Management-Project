@@ -9,8 +9,9 @@ import java.util.Scanner;
 
 public interface FileController {
 
-    static String convertToTxt(String toBeConverted) {
-        return toBeConverted + ".txt";
+
+    static <T> String convertToTxt(T toBeConverted) {
+        return String.valueOf(toBeConverted) + ".txt";
     }
 
     static String convertTxtBack(String toBeConverted) {
