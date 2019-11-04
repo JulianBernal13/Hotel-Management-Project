@@ -3,6 +3,7 @@ package HotelManagement;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Random;
 import java.util.Scanner;
 
 public class HotelFileController implements FileController{
@@ -40,13 +41,30 @@ public class HotelFileController implements FileController{
         writer.close();
 
         FileController.createDirectory(hotelFile, "Customer");
-        FileController.createDirectory(hotelFile, "Employee");
+        File employeeFile = FileController.createDirectory(hotelFile, "Employee");
 
         File roomsFile = FileController.createDirectory(hotelFile, "Rooms");
         for (int i = 1; i <= numOfLevel; i++) {
             for (int j = 0; j < levelRmNum; j++) {
                 new Room(i * 100 + j, roomsFile.getPath()).createRoomFile();
             }
+        }
+
+        Random rand = new Random();
+        String employeePath = employeeFile.getPath();
+        Manager manager = new Manager(employeePath, "Manager",
+                "M" + rand.nextInt(10000), "bi-weekly", 80000);
+
+        File cur = new File(employeePath + File.separator + manager.getID() + ".txt");
+        if (cur.createNewFile()) {
+            PrintWriter writer1 = new PrintWriter(cur);
+            writer1.println(manager.getTitleName());
+            writer1.println(manager.getID());
+            writer1.println(manager.getPaymentType());
+            writer1.println(String.valueOf(manager.getSalary()));
+            writer1.flush();
+            writer1.close();
+
         }
     }
 }

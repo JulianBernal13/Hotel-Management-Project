@@ -43,7 +43,6 @@ public class Hotel {
 			for(int j = 0; j < levelRmNum; ++j) {
 				rooms[i][j] = new File(hotelFile.getPath() + File.separator
 						+ FileController.convertToTxt((i + 1) * 100 + j));
-
 			}
 		}
 	}
