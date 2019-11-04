@@ -56,4 +56,11 @@ public interface FileController {
         return newFile;
     }
 
+    static ArrayList<File> getAllFile(File file) {
+        ArrayList<File> ret = new ArrayList<>();
+        for(File f : file.listFiles())
+            ret.add(f);
+        return ret;
+    }
+
 }

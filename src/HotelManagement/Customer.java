@@ -83,7 +83,7 @@ public class Customer {
     }
 
     public void writeCustomerToFile() throws IOException {
-        File customer = new File(path);
+        File customer = new File(this.path);
         if(customer.exists())
             customer.delete();
         customer.createNewFile();

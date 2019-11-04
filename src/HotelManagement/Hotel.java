@@ -26,8 +26,9 @@ public class Hotel {
 	private String password;
 	private String path;
 	private File rooms[][];
+	private ArrayList<File> customers;
 	private Manager manager; //
-	private File employees[];
+	private ArrayList<File> employees;
 
 
 	public Hotel (File hotelFile) throws FileNotFoundException {
@@ -45,6 +46,8 @@ public class Hotel {
 						+ FileController.convertToTxt((i + 1) * 100 + j));
 			}
 		}
+		customers = FileController.getAllFile(CustomerFileController.cdCustomerFile(hotelFile));
+		employees = FileController.getAllFile(EmployeeFileController.cdEmployeeFile(hotelFile));
 	}
 
 	public String getPath() {
@@ -62,4 +65,13 @@ public class Hotel {
 		writer.flush();
 		writer.close();
 	}
+
+	private Customer getCustomer(String name) {
+		return null;
+	}
+
+//	private Employee getEmployee(String name) {
+//		return EmployeeFileController.getEmployee(name);
+//	}
+
 }
