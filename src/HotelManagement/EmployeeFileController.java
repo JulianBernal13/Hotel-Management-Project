@@ -19,7 +19,7 @@ public class EmployeeFileController implements FileController {
 		File employee = lookUpEmployee(employees, id);
 		if (!employee.exists()) {
 			System.out.println("The Employee with the ID: " + id + " does not exist");
-			return null;
+			return new File("yeah");
 		}
 		System.out.println("The Employee with the ID: " + id + " does exists and here are its properties" + "\n");
 		Printer.printFile(employee);
@@ -79,28 +79,32 @@ public class EmployeeFileController implements FileController {
 		return -1;
 	}
 
-//	public static void getEmployeeInfo(File employees, String name, Employee.EmployeeProperty property)
-//			throws FileNotFoundException {
-//		File employee = lookUpEmployee(employees, name);
-//		if (!employee.exists()) {
-//			System.out.println("Employee does not exist");
-//			return;
-//		}
-//		Scanner sc = new Scanner(employee);
-//		int i = 0;
-//		while (i++ < property.ordinal() && sc.hasNext())
-//			sc.nextLine();
-//		if (!sc.hasNext())
-//			System.out.println("Error, no such data exists");
-//		String ret = name + "   " + property.name() + "    " + sc.nextLine();
-//		System.out.println(ret);
-//	}
+	// public static void getEmployeeInfo(File employees, String name,
+	// Employee.EmployeeProperty property)
+	// throws FileNotFoundException {
+	// File employee = lookUpEmployee(employees, name);
+	// if (!employee.exists()) {
+	// System.out.println("Employee does not exist");
+	// return;
+	// }
+	// Scanner sc = new Scanner(employee);
+	// int i = 0;
+	// while (i++ < property.ordinal() && sc.hasNext())
+	// sc.nextLine();
+	// if (!sc.hasNext())
+	// System.out.println("Error, no such data exists");
+	// String ret = name + " " + property.name() + " " + sc.nextLine();
+	// System.out.println(ret);
+	// }
 
 	public static void getEmployeesInfo(File employees) throws FileNotFoundException {
 
 		File[] temp = employees.listFiles();
 		for (File f : temp) {
-			Printer.printFile(f);
+			if (f.getName().compareTo("Emp. to delete.txt") != 0) {
+				Printer.printFile(f);
+				System.out.print("\n");
+			}
 		}
 	}
 
@@ -122,6 +126,8 @@ public class EmployeeFileController implements FileController {
 
 	public static void modifyEmployee(File employees) throws IOException {
 		File employee = menuLookUp(employees);
+		if (employee.length() == 0)
+			return;
 		Scanner sc2 = new Scanner(System.in);
 		System.out.println("Are you sure you want to edit this employee? Re enter ID for final confirmation");
 		String id = sc2.nextLine();
@@ -237,6 +243,8 @@ public class EmployeeFileController implements FileController {
 
 	public static void deleteEmployee(File employees) throws IOException {
 		File employee = menuLookUp(employees);
+		if (employee.length() == 0)
+			return;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Are you sure you want to fire the Employee? Re enter ID for final confirmation");
 		String id = sc.nextLine();
@@ -267,7 +275,9 @@ public class EmployeeFileController implements FileController {
 		Scanner sc = new Scanner(temp);
 		ArrayList<String> info = new ArrayList<>();
 		while (sc.hasNext()) {
-			info.add(String.valueOf(sc.next()));
+			String t = String.valueOf(sc.next());
+			if (!info.contains(t))
+				info.add(String.valueOf(t));
 		}
 		File[] temp3 = employees.listFiles();
 		for (File f : temp3) {
@@ -279,8 +289,7 @@ public class EmployeeFileController implements FileController {
 			}
 		}
 
-		// Clears file if empty
-		if (info.size() == 0) {
+		if (info.size() == 0) {// Clears file if empty
 			PrintWriter writer = new PrintWriter(temp);
 			writer.print("");
 			writer.flush();
