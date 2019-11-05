@@ -156,7 +156,7 @@ public class Room {
         				if(oldInfo.get(i+1).contentEquals("none")){
         					i++;
         				} else {
-        					maints = "none\n";
+        					not = "none\n";
         					i++;
         				}
         			} else {
@@ -213,7 +213,7 @@ public class Room {
     				System.out.println("("+i+")"+theList.get(i));
     			}
     		} else {
-    			System.out.print("no writing exist enter a new line");
+    			System.out.println("no writing exist enter a new line");
     		}
     		command = sc.nextLine();
     		switch(command) {

@@ -215,27 +215,28 @@ public class RoomFileController {
         Boolean toggle = true;
         while(toggle) {
             File rooms = new File(cur.getPath() + File.separator + "Rooms");
+            rooms.delete();
         	Printer.printRoomview();
             Scanner sc = new Scanner(System.in);
             for (File file : rooms.listFiles()) {
                 System.out.println("-" + file.getName());
             }
             String room = sc.nextLine();
-            if(room == "exit") {
+            if(room.contentEquals("exit")) {
             	toggle = false;
             	break;
             }
             File check = new File(rooms + File.separator + room);
-            while (!check.exists()) {
+            while (!check.exists() && toggle) {
                 System.out.println("command does not exit enter another");
                 room = sc.nextLine();
-                if(room == "exit") {
+                if(room.contentEquals("exit")) {
                 	toggle = false;
                 	break;
                 }
                 check = new File(rooms + File.separator + room);
             }
-            if(check.exists()) {
+            if(check.exists() && toggle) {
             	DisplayRoom(check);
             }
         }
