@@ -81,7 +81,7 @@ public class Room {
     public void setType(String type) {
     	this.type = type;
     }
-    
+
 
     public boolean isEmpty() {
         return isEmpty;
