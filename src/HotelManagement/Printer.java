@@ -88,6 +88,15 @@ public class Printer {
 		System.out.println("Enter 'Notes' to edit general room notes      ");
 		System.out.println("Enter 'Exit' to get back to List of rooms and save changes     ");
 	}
+	public static void printRoomInfo(Room room) {
+		System.out.println("=============================================");
+
+		System.out.println("Room number: " + room.getNumber());
+		System.out.println("Room occupied: " + room.isEmpty());
+		System.out.println("Room is clean: " + room.isClean());
+		System.out.println("Room maintaince note: " + room.getMaintenance());
+		System.out.println("Room notes: " + room.getNotes());
+		}
 	
 	public static void printNoteMaker() {
 		System.out.println("=============================================");

@@ -35,7 +35,7 @@ public class Room {
         this.isEmpty = true;
         this.price = 100;
         this.maintenance = "Maintenance:true";
-        this.notes = "Notes:true\n" + "end";
+        this.notes = "Notes:true";
     }
 
     public Room(File file) throws FileNotFoundException {
@@ -118,6 +118,7 @@ public class Room {
             writer.println(isClean);
             writer.println(maintenance);
             writer.println(notes);
+            writer.println("end");
             writer.flush();
             writer.close();
         }
@@ -136,8 +137,8 @@ public class Room {
         String not= "";
         for(int i = 0;i < oldInfo.size();i++) {
         	if(oldInfo.get(i).contentEquals("Maintenance:true")) {
-        		while(oldInfo.get(i) != "Notes:true") {
-        			if(oldInfo.get(i) == "Maintenacne:true") {
+        		while(!oldInfo.get(i).contentEquals("Notes:true")) {
+        			if(oldInfo.get(i).contentEquals("Maintenance:true")) {
         				maints = "none";
         				i++;
         			} else {
@@ -145,12 +146,12 @@ public class Room {
         				i++;
         			}
         		}
-        		while(oldInfo.get(i) != "end") {
-        			if(oldInfo.get(i) == "Notes:true") {
-        				not = "none";
+        		while(!oldInfo.get(i).contentEquals("end")){
+        			if(oldInfo.get(i).contentEquals("Notes:true")) {
+        				not = "none\n";
         				i++;
         			} else {
-        				not = not + oldInfo.get(i);
+        				not = not + oldInfo.get(i) + "\n";
         				i++;
         			}
         		}
@@ -169,15 +170,21 @@ public class Room {
     
     public static void WriteToRoomeFile(File cur, Room room) throws IOException {
     		room.setMaintenance("Maintenance:true\n" + room.getMaintenance());
+    		String maints[] = room.getMaintenance().split("\\r?\\n");
     		room.setNotes("Notes:true\n" + room.getNotes() + "\nend");
+    		String not[] = room.getNotes().split("\\r?\\n");
             PrintWriter writer = new PrintWriter(cur);
             writer.println(room.getNumber());
             writer.println(room.getType());
             writer.println(String.valueOf(room.getPrice()));
             writer.println(String.valueOf(room.isEmpty));
             writer.println(String.valueOf(room.isClean));
-            writer.println(String.valueOf(room.getMaintenance()));
-            writer.println(String.valueOf(room.getNotes()));
+            for(int i = 0; i < maints.length;i++) {
+            	writer.println(String.valueOf(maints[i]));
+            }
+            for(int j = 0;j < not.length; j++) {
+            	writer.println(String.valueOf(not[j]));
+            }
             writer.flush();
             writer.close();
 

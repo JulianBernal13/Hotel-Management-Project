@@ -245,8 +245,10 @@ public class RoomFileController {
     public static void DisplayRoom(File room) throws IOException {
         Boolean toggle = true;
         Scanner sc = new Scanner(System.in);
+        Room curRoom = Room.getRoomFile(room);
         while(toggle) {
-        	FileReader.displayRoomInfo(room);
+            curRoom = Room.getRoomFile(room);
+            Printer.printRoomInfo(curRoom);
         	System.out.println("enter 'Edit' to modifty current room or 'Exit' to return to manager screen");
         	String command = sc.nextLine();
             switch(command) {
