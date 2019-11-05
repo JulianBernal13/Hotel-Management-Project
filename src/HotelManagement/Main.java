@@ -9,7 +9,7 @@ import java.io.*;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        MainMenuTwo m2 = new MainMenuTwo();
-        m2.menu();
+        MainMenu m = new MainMenu();
+        m.menu();
     }
 }
