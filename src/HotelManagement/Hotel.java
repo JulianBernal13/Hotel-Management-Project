@@ -66,7 +66,23 @@ public class Hotel {
 		writer.close();
 	}
 
-	private Customer getCustomer(String name) {
+	public Customer getCustomer(String name) throws FileNotFoundException {
+		for(File customer : this.customers) {
+			if (name.equals(FileController.convertTxtBack(customer.getName())))
+				return new Customer(customer);
+		}
+		return null;
+	}
+
+	public <T> Room getRoom(T room) throws FileNotFoundException {
+		int roomNumber = Integer.valueOf(String.valueOf(room));
+		int level = roomNumber / 100;
+		int num = roomNumber % 100;
+		return Room.getRoomFile(this.rooms[level - 1][num]);
+	}
+
+	public Employee getEmployee(String name) {
+		//return the employee matching name, or maybe just ID
 		return null;
 	}
 
