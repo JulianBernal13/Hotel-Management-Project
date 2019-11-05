@@ -163,7 +163,7 @@ public class RoomFileController {
     public static void checkIn(File hotel) throws IOException {
         System.out.println("Enter customer's name");
         Scanner sc = new Scanner(System.in);
-        File customer = CustomerFileController.registerCustomer(CustomerFileController.cdCustomerFile(hotel), sc.nextLine());
+        File customer = CustomerFileController.registerCustomer(CustomerFileController.cdCustomerFolder(hotel), sc.nextLine());
         String isStaying = CustomerFileController.getCustomerInfo(customer, "isStaying");
         if(isStaying.equals("true")) {
             System.out.println("This customer is already checked in");

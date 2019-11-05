@@ -19,7 +19,9 @@ public class ReceptionMenu implements Menu{
 		String command = sc.nextLine();
 		switch (command) {
 		case "CI": {
-			RoomFileController.checkIn(hotelFile);
+//			RoomFileController.checkIn(hotelFile);
+			CheckIn ci = new CheckIn(this.hotel);
+			ci.menu();
 			menu();
 			break;
 		}
@@ -29,7 +31,7 @@ public class ReceptionMenu implements Menu{
 			break;
 		}
 		case "LC": {
-			CustomerFileController.menuLookUp(CustomerFileController.cdCustomerFile(hotelFile));
+			CustomerFileController.menuLookUp(CustomerFileController.cdCustomerFolder(hotelFile));
 			break;
 		}
 		case "back": {

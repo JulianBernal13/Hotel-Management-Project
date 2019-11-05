@@ -87,9 +87,12 @@ public class CustomerFileController implements FileController {
         return sc.nextLine();
     }
 
-    public static File cdCustomerFile(File hotel) {
-        String filePath = hotel.getPath() + File.separator + "Customer";
-        return new File(filePath);
+    public static File cdCustomerFolder(File hotelFile) {
+        return cdCustomerFolder(hotelFile.getPath());
+    }
+
+    public static File cdCustomerFolder(String hotelPath) {
+        return new File(hotelPath + File.separator + "Customer");
     }
 
     public static ArrayList<String> extractCustmorInfo(File customer) throws FileNotFoundException {

@@ -38,6 +38,22 @@ public class Room {
         this.notes = "Notes:true\n" + "end";
     }
 
+    public Room(File file) throws FileNotFoundException {
+        Scanner sc = new Scanner(file);
+        this.path = file.getPath();
+        this.number = Integer.parseInt(sc.nextLine());
+        this.type = sc.nextLine();
+        this.price = Double.parseDouble(sc.nextLine());
+        this.isEmpty = Boolean.parseBoolean(sc.nextLine());
+        this.isClean = Boolean.parseBoolean(sc.nextLine());
+        this.maintenance = sc.nextLine();
+        this.notes = sc.nextLine();
+    }
+
+    public String getType() {
+        return type;
+    }
+
     public int getNumber() {
         return number;
     }
@@ -66,9 +82,6 @@ public class Room {
     	this.type = type;
     }
     
-    public String getType() {
-    	return type;
-    }
 
     public boolean isEmpty() {
         return isEmpty;
@@ -95,19 +108,25 @@ public class Room {
     }
 
     public void createRoomFile() throws IOException {
-        File cur = new File(this.path + File.separator + this.number + ".txt");
+        File cur = new File(this.path);
         if(cur.createNewFile()) {
             PrintWriter writer = new PrintWriter(cur);
             writer.println(number);
             writer.println(type);
-            writer.println(String.valueOf(price));
-            writer.println(String.valueOf(isEmpty));
-            writer.println(String.valueOf(isClean));
-            writer.println(String.valueOf(maintenance));
-            writer.println(String.valueOf(notes));
+            writer.println(price);
+            writer.println(isEmpty);
+            writer.println(isClean);
+            writer.println(maintenance);
+            writer.println(notes);
             writer.flush();
             writer.close();
         }
+    }
+
+    public void writeToFile() throws IOException {
+        File cur = new File(this.path);
+        cur.delete();
+        createRoomFile();
     }
 
     
