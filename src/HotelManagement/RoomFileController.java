@@ -176,6 +176,12 @@ public class RoomFileController {
         if (showTypeRoomEmpty(roomPath, type) > 0) {
             System.out.println("Which room are you going to check-in?");
             int num = Integer.parseInt(scanner.nextLine());
+            File check = new File(roomPath + File.separator + num+".txt");
+            while (!check.exists()) {
+                System.out.println("This room cannot be checked-in, enter another room \n");
+                num = Integer.parseInt(scanner.nextLine());
+                check = new File(roomPath + File.separator + num+".txt");
+            }
             changeRoomOccupied(roomPath, num);
             CustomerFileController.modifyCustomer(customer, "isStaying", "true");
             //change customer's states
@@ -190,8 +196,14 @@ public class RoomFileController {
         String roomPath = cur.getPath() + File.separator + "Rooms";
         System.out.println("which room are you going to check-out?");
         if(showOccupiedRoom(roomPath) > 0){
-            int num = Integer.parseInt(scanner.nextLine());
-            changeRoomEmpty(roomPath, num);
+            String num = scanner.nextLine();
+            File check = new File(roomPath + File.separator + num+".txt");
+            while (!check.exists()) {
+                System.out.println("This room cannot be checked-out, enter another room \n");
+                num = scanner.nextLine();
+                check = new File(roomPath + File.separator + num+".txt");
+            }
+            changeRoomEmpty(roomPath, Integer.parseInt(num));
             System.out.println("Success! Now the room is empty.");
         }
         else{

@@ -77,6 +77,7 @@ public class ManagerMenu implements Menu {
             }
             case "CRT": {
                 RoomFileController.applyRoomType(cur);
+                menu();
                 break;
             } // change room type
         }

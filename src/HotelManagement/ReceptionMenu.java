@@ -20,16 +20,21 @@ public class ReceptionMenu implements Menu{
 		switch (command) {
 		case "CI": {
 			RoomFileController.checkIn(hotelFile);
+			menu();
 			break;
 		}
 		case "CO": {
 			RoomFileController.checkOut(hotelFile);
+			menu();
 			break;
 		}
 		case "LC": {
 			CustomerFileController.menuLookUp(CustomerFileController.cdCustomerFile(hotelFile));
 			break;
 		}
+		case "back": {
+				break;
+			}
 		}
     }
 }
