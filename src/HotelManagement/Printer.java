@@ -40,7 +40,7 @@ public class Printer {
 	public static void printManagerMenu() {
 		System.out.println("=============================================");
 		System.out.println("Enter 'DH' to display hotal information      ");
-		System.out.println("Enter 'DE' to display employee information   ");
+		System.out.println("Enter 'DE' to display all employees   ");
 		System.out.println("Enter 'LR' to list all rooms and to edit     ");
 		System.out.println("Enter 'CE' to call an employee               ");
 		System.out.println("Enter 'EE' to edit employee                  ");
