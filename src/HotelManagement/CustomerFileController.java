@@ -17,7 +17,7 @@ public class CustomerFileController implements FileController {
             System.out.println("Customer " + name + " does not exist");
             return;
         }
-        Printer.printFile(customer);
+        Printer.printCustomer(customer);
     }
     public static void displayAll(File customers) {
 

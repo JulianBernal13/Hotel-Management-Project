@@ -48,6 +48,7 @@ public class Printer {
 		System.out.println("Enter 'FE' to fire employee                  ");
 		System.out.println("Enter 'CRT' to change room type                  ");
 		System.out.println("Enter 'exit' to exit");
+		System.out.println("=============================================");
 		System.out.println("");
 	}
 
@@ -57,7 +58,10 @@ public class Printer {
 		System.out.println("Enter 'CO' to help a customer check-out      ");
 		System.out.println("Enter 'LC' to look up a customer");
 //		System.out.println("Enter 'DH' to display hotal information      ");
+		System.out.println("Enter 'CV' to change VIP status of a customer");
 		System.out.println("Enter 'back' to back to previous menu");
+		System.out.println("=============================================");
+
 		System.out.println("");
 	}
 
@@ -115,6 +119,16 @@ public class Printer {
 	public static void printFolderContent(File folder) {
 		for(File file : folder.listFiles())
 			System.out.println(file.getName());
+	}
+
+	public static void printCustomer(File f) throws FileNotFoundException {
+		printCustomer(new Customer(f));
+	}
+
+	public static void printCustomer(Customer c) {
+		System.out.println(c);
+		System.out.println("is VIP " + c.isVIP());
+		System.out.println("is Staying " + c.isStaying());
 	}
 	
 }
