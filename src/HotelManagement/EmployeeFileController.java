@@ -11,8 +11,6 @@ import java.util.Scanner;
 
 public class EmployeeFileController implements FileController {
 	public static File menuLookUp(File employees) throws IOException {
-		deleteEmployee2(employees);
-
 		Scanner sc2 = new Scanner(System.in);
 		System.out.println("Enter Employee ID");
 		String id = sc2.nextLine();
@@ -87,7 +85,6 @@ public class EmployeeFileController implements FileController {
 	}
 
 	public static void getEmployeesInfo(File employees) throws FileNotFoundException {
-
 		File[] temp = employees.listFiles();
 		for (File f : temp) {
 			if (f.getName().compareTo("Emp. to delete.txt") != 0) {
@@ -136,11 +133,12 @@ public class EmployeeFileController implements FileController {
 			System.out.println("Enter what property you would like to change about this Employee");
 			String property = sc2.nextLine();
 			int i = getPropertyOrdinal(property);
-			a[i] = property;
 			if (i == -1) {
 				System.out.println("The property you are trying to change does not exist");
 				return; // Exits program
 			}
+			a[i] = property;
+
 			if (a[0] != null || a[1] != null) {
 				a[0] = "titleName";
 				a[1] = "id";
