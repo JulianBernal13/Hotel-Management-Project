@@ -140,7 +140,7 @@ public class Room {
         	if(oldInfo.get(i).contentEquals("Maintenance:true")) {
         		while(!oldInfo.get(i).contentEquals("Notes:true")) {
         			if(oldInfo.get(i).contentEquals("Maintenance:true")) {
-        				if(oldInfo.get(i+1).contentEquals("none"){
+        				if(oldInfo.get(i+1).contentEquals("none")){
         					i++;
         				} else {
         					maints = "none\n";
@@ -153,7 +153,7 @@ public class Room {
         		}
         		while(!oldInfo.get(i).contentEquals("end")){
         			if(oldInfo.get(i).contentEquals("Notes:true")) {
-        				if(oldInfo.get(i+1).contentEquals("none"){
+        				if(oldInfo.get(i+1).contentEquals("none")){
         					i++;
         				} else {
         					maints = "none\n";
