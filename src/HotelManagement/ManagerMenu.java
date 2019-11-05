@@ -15,6 +15,7 @@ public class ManagerMenu implements Menu {
     @Override
     public void menu() throws IOException {
         File cur = new File(hotel.getPath());
+        File employeeFiles = new File(cur.getPath() + File.separator + "Employee");
         System.out.println("Welcome manager");
         Printer.printManagerMenu();
         Scanner sc = new Scanner(System.in);
@@ -42,38 +43,16 @@ public class ManagerMenu implements Menu {
                 break; // call employee
             }
             case "EE": {
-                Scanner sc2 = new Scanner(System.in);
-                System.out.println("Enter the id for the employee you want to edit");
-                String id = sc2.nextLine();
-                System.out.println("What do you want to change about the employee?");
-                String property = sc2.nextLine();
-//                EmployeeFileController.modifyEmployee(info1, id, property);
-
+                EmployeeFileController.modifyEmployee(employeeFiles);
                 break;
             } // edit employee
             case "AE": {
-                String employeePath = cur.getPath() + File.separator + "Employee";
-                Scanner sc2 = new Scanner(System.in);
-                System.out.println("Enter the title Name for new employee");
-                String titleName = sc2.nextLine();
-                System.out.println("Enter the ID for new employee");
-                String id = sc2.nextLine();
-                System.out.println("Enter the paymentType for new employee");
-                String paymentType = sc2.nextLine();
-                System.out.println("Enter the salary for new employee");
-                String salary = sc2.nextLine();
-                Employee emp = new Employee(employeePath, titleName, id, paymentType, Integer.parseInt(salary));
-                //manager needs to be initialize. Menu logic needs to be fixed
-                //manager.addEmployeeToFile(emp.getPath(), emp);
-                break;
+                EmployeeFileController.createEmployee(employeeFiles);
+				break;
             }
             case "FE": {
-                String employeePath = cur.getPath() + File.separator + "Employee";
-                Scanner sc2 = new Scanner(System.in);
-                System.out.println("Enter the ID for new employee you want to fire");
-                String id = sc2.nextLine();
-                manager.deleteEmployeeFromFile(employeePath, id);
-                break;
+              EmployeeFileController.deleteEmployee(employeeFiles);
+				break;
             }
             case "CRT": {
                 RoomFileController.applyRoomType(cur);
