@@ -63,7 +63,7 @@ public class Printer {
 
 	public static void printRoomview() {
 		System.out.println("=============================================");
-		System.out.println("Enter room number you wish to view          ");
+		System.out.println("Enter room number you wish to view or Exit to exit list of rooms         ");
 		System.out.println("");
 	}
 
@@ -86,6 +86,15 @@ public class Printer {
 		System.out.println("Enter 'clean' to set room to clean      ");
 		System.out.println("Enter 'Maintaince' to edit maintaince notes     ");
 		System.out.println("Enter 'Notes' to edit general room notes      ");
+		System.out.println("Enter 'Exit' to get back to List of rooms and save changes     ");
+	}
+	
+	public static void printNoteMaker() {
+		System.out.println("=============================================");
+		System.out.println("Enter 'delete' then 'line number' to delete the line      ");
+		System.out.println("press enter key to enter current line and start another     ");
+		System.out.println("Enter 'Done' to exit editor and save changes      ");
+		System.out.println("Enter 'Exit' to exit with out saving any changes      ");
 	}
 
 	public static void printFile(File file) throws FileNotFoundException {

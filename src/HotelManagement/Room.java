@@ -65,6 +65,10 @@ public class Room {
     public void setType(String type) {
     	this.type = type;
     }
+    
+    public String getType() {
+    	return type;
+    }
 
     public boolean isEmpty() {
         return isEmpty;
@@ -119,24 +123,52 @@ public class Room {
     	return newRoom;
     }
     
+    public static void WriteToRoomeFile(File cur, Room room) throws IOException {
+            PrintWriter writer = new PrintWriter(cur);
+            writer.println(room.getNumber());
+            writer.println(room.getType());
+            writer.println(String.valueOf(room.getPrice()));
+            writer.println(String.valueOf(room.isEmpty));
+            writer.println(String.valueOf(room.isClean));
+            writer.println(String.valueOf(room.getMaintenance()));
+            writer.println(String.valueOf(room.getNotes()));
+            writer.flush();
+            writer.close();
+
+    }
+    
     public static String noteMaker(String writer) throws IOException {
 		Scanner sc = new Scanner(System.in);
 		String command = "";
-    	while(!command.equals("done")) {
-    		System.out.println("type 'Backspace' to deleate previous line or press 'enter' to commit current line \n +"
-    				+ "type save when done");
-    		System.out.print(writer);
+		String changes = writer;
+    	while(!command.equals("Done")) {
+    		Printer.printNoteMaker();
+    		if(!changes.isBlank()) {
+    			String lines[] = changes.split("\\r?\\n");
+    			for(int i = 0; i<lines.length;i++) {
+    				System.out.println("("+i+")"+lines[i]);
+    			}
+    		} else {
+    			System.out.print("no writing exist enter a new line");
+    		}
     		command = sc.nextLine();
     		switch(command) {
-    		case"Backspace":{
-    			System.out.print("hello");
-    		}
-    		case"save":{
+    		case"delete":{
     			break;
     		}
+    		case"Done":{
+    			writer = changes;
+    			break;
+    		}
+    		case"Exit":{
+    			command = "Done";
+    			break;
+    		}
+    		default:{
+    			changes = changes + "\n" + command;
     		}
     	}
-
-    	return writer;
+    	}
+		return writer;
     }
 }

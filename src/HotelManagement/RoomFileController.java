@@ -212,31 +212,50 @@ public class RoomFileController {
     }
 
     public static void listRooms(File cur) throws IOException {
-        File rooms = new File(cur.getPath() + File.separator + "Rooms");
-        Printer.printRoomview();
-        Scanner sc = new Scanner(System.in);
-        for (File file : rooms.listFiles()) {
-            System.out.println("-" + file.getName());
-        }
-        String room = sc.nextLine();
-        File check = new File(rooms + File.separator + room);
-        while (!check.exists()) {
-            System.out.println("room does not exist, enter another room \n");
+        Boolean toggle = true;
+        while(toggle) {
+            File rooms = new File(cur.getPath() + File.separator + "Rooms");
+        	Printer.printRoomview();
+            Scanner sc = new Scanner(System.in);
             for (File file : rooms.listFiles()) {
                 System.out.println("-" + file.getName());
             }
-            room = sc.nextLine();
-            check = new File(rooms + File.separator + room);
+            String room = sc.nextLine();
+            if(room == "exit") {
+            	toggle = false;
+            	break;
+            }
+            File check = new File(rooms + File.separator + room);
+            while (!check.exists()) {
+                System.out.println("command does not exit enter another");
+                room = sc.nextLine();
+                if(room == "exit") {
+                	toggle = false;
+                	break;
+                }
+                check = new File(rooms + File.separator + room);
+            }
+            if(check.exists()) {
+            	DisplayRoom(check);
+            }
         }
-        FileReader.displayRoomInfo(check);
-        System.out.println("enter 'Edit' to modifty current room or 'Exit' to return to manager screen");
-        while(true){
-            String command = sc.nextLine();
+
+        // james
+    }
+    public static void DisplayRoom(File room) throws IOException {
+        Boolean toggle = true;
+        Scanner sc = new Scanner(System.in);
+        while(toggle) {
+        	FileReader.displayRoomInfo(room);
+        	System.out.println("enter 'Edit' to modifty current room or 'Exit' to return to manager screen");
+        	String command = sc.nextLine();
             switch(command) {
                 case "Edit": {
-                    EditRoom(check);
+                    EditRoom(room);
+                    break;
                 }
                 case "Exit": {
+                	toggle = false;
                     break;
                 }
                 default: {
@@ -246,13 +265,13 @@ public class RoomFileController {
             }
         }
 
-        // james
     }
 
     public static void EditRoom(File room) throws IOException {
         Room curRoom = Room.getRoomFile(room);
         Scanner sc = new Scanner(System.in);
-        while(true){
+        Boolean toggle = true;
+        while(toggle){
             Printer.printRoomEditMenu(curRoom);
             String input = sc.nextLine();
             switch(input){
@@ -273,14 +292,17 @@ public class RoomFileController {
                     break;
                 }
                 case"Maintaince":{
-                    //Room.noteMaker(curRoom.getMaintaince());
+                    curRoom.setMaintenance(Room.noteMaker(curRoom.getMaintenance()));
                     break;
                 }
                 case"Notes":{
+                	curRoom.setNotes(Room.noteMaker(curRoom.getMaintenance()));
                     break;
                 }
 
-                case"exit":{
+                case"Exit":{
+                	toggle = false;
+                	Room.WriteToRoomeFile(room,curRoom);
                     break;
                 }
                 default:
