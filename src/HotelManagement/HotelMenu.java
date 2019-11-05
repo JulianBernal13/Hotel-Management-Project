@@ -44,11 +44,13 @@ public class HotelMenu implements Menu{
             case 1: {
                 ManagerMenu managerMenu = new ManagerMenu(hotel);
                 managerMenu.menu();
+                chooseHandler(hotel);
                 break;
             }
             case 2: {
                 ReceptionMenu receptionMenu = new ReceptionMenu(hotel);
                 receptionMenu.menu();
+                chooseHandler(hotel);
                 break;
             }
             default:

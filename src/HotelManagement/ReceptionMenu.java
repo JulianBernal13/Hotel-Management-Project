@@ -33,10 +33,12 @@ public class ReceptionMenu implements Menu{
 		}
 		case "LC": {
 			CustomerFileController.menuLookUp(CustomerFileController.cdCustomerFolder(hotelFile));
+			menu();
 			break;
 		}
 			case "CV": {
 				changeVIPStatue();
+				menu();
 				break;
 			}
 		case "back": {
