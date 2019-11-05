@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * @author Yingxie Gao, Anji Yu
@@ -30,7 +31,7 @@ public class Hotel {
 	private ArrayList<File> customers;
 	private Manager manager; //
 	private ArrayList<File> employees;
-	private HashMap<String, Integer> price;
+	private HashMap<String, Integer> price = new HashMap<>();
 
 
 	public Hotel (File hotelFile) throws FileNotFoundException {
@@ -50,6 +51,9 @@ public class Hotel {
 		}
 		customers = FileController.getAllFile(CustomerFileController.cdCustomerFile(hotelFile));
 		employees = FileController.getAllFile(EmployeeFileController.cdEmployeeFile(hotelFile));
+		Scanner sc = new Scanner(new File( path + File.separator + "priceInfo.txt"));
+		for(Price p : Price.values())
+			this.price.put(p.name(), Integer.parseInt(sc.nextLine()));
 	}
 
 	public String getPath() {
