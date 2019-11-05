@@ -2,6 +2,7 @@ package HotelManagement;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -139,10 +140,10 @@ public class Room {
         	if(oldInfo.get(i).contentEquals("Maintenance:true")) {
         		while(!oldInfo.get(i).contentEquals("Notes:true")) {
         			if(oldInfo.get(i).contentEquals("Maintenance:true")) {
-        				maints = "none";
+        				maints = "none\n";
         				i++;
         			} else {
-        				maints = maints + oldInfo.get(i);
+        				maints = maints + oldInfo.get(i) + "\n";
         				i++;
         			}
         		}
@@ -194,12 +195,14 @@ public class Room {
 		Scanner sc = new Scanner(System.in);
 		String command = "";
 		String changes = writer;
+		boolean toggle = true;
+		String lines[] = changes.split("\\r?\\n");
+	    ArrayList<String> theList = new ArrayList<String>(Arrays.asList(lines));
     	while(!command.equals("Done")) {
     		Printer.printNoteMaker();
     		if(!changes.isBlank()) {
-    			String lines[] = changes.split("\\r?\\n");
-    			for(int i = 0; i<lines.length;i++) {
-    				System.out.println("("+i+")"+lines[i]);
+    			for(int i = 0; i<theList.size();i++) {
+    				System.out.println("("+i+")"+theList.get(i));
     			}
     		} else {
     			System.out.print("no writing exist enter a new line");
@@ -207,10 +210,25 @@ public class Room {
     		command = sc.nextLine();
     		switch(command) {
     		case"delete":{
+    			while(toggle) {
+    				command = sc.nextLine();
+    				if(Integer.parseInt(command) < theList.size()) {
+    					theList.remove(Integer.parseInt(command));
+    					toggle = false;
+    				} else {
+    					System.out.print("line does not exsit");
+    					toggle = false;
+    				}
+    			}
+    			toggle = true;
     			break;
     		}
     		case"Done":{
-    			writer = changes;
+    			String sender = "";
+    			for(int k=0;k<theList.size();k++) {
+    				sender = sender + "\n" + theList.get(k);
+    			}
+    			writer = sender;
     			break;
     		}
     		case"Exit":{
@@ -218,7 +236,7 @@ public class Room {
     			break;
     		}
     		default:{
-    			changes = changes + "\n" + command;
+    			theList.add(command);
     		}
     	}
     	}

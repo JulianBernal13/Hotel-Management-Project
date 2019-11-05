@@ -298,7 +298,7 @@ public class RoomFileController {
                     break;
                 }
                 case"Notes":{
-                	curRoom.setNotes(Room.noteMaker(curRoom.getMaintenance()));
+                	curRoom.setNotes(Room.noteMaker(curRoom.getNotes()));
                     break;
                 }
 
