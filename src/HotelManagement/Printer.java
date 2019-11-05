@@ -3,6 +3,7 @@ package HotelManagement;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Printer {
@@ -57,7 +58,6 @@ public class Printer {
 		System.out.println("Enter 'CI' to help a customer check-in      ");
 		System.out.println("Enter 'CO' to help a customer check-out      ");
 		System.out.println("Enter 'LC' to look up a customer");
-//		System.out.println("Enter 'DH' to display hotal information      ");
 		System.out.println("Enter 'CV' to change VIP status of a customer");
 		System.out.println("Enter 'back' to back to previous menu");
 		System.out.println("=============================================");
@@ -119,6 +119,14 @@ public class Printer {
 	public static void printFolderContent(File folder) {
 		for(File file : folder.listFiles())
 			System.out.println(file.getName());
+	}
+
+	public static void printFolderContentInOrder(File folder) {
+		ArrayList<String> names = new ArrayList<>();
+		for(File file : folder.listFiles())
+			names.add(file.getName());
+		Collections.sort(names);
+		printArray(names);
 	}
 
 	public static void printCustomer(File f) throws FileNotFoundException {

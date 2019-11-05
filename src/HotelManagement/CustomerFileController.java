@@ -19,9 +19,6 @@ public class CustomerFileController implements FileController {
         }
         Printer.printCustomer(customer);
     }
-    public static void displayAll(File customers) {
-
-    }
 
     public static File lookUpCustomer(File customers, String name) {
         return new File(customers.getPath() + File.separator + FileController.convertToTxt(name));

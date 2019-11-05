@@ -15,7 +15,7 @@ public class HotelMenu implements Menu{
     public void menu() throws IOException {
         Scanner sc = new Scanner(System.in);
         System.out.println("Which Hotel?");
-        Printer.printFolderContent(this.managementSystem);
+        Printer.printFolderContentInOrder(this.managementSystem);
         System.out.println("Please enter hotel name");
         String name = sc.nextLine();
 
@@ -32,7 +32,7 @@ public class HotelMenu implements Menu{
         chooseHandler(curHotel);
     }
 
-    public static void chooseHandler(Hotel hotel) throws IOException {
+    public void chooseHandler(Hotel hotel) throws IOException {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Choose your occupation number");
