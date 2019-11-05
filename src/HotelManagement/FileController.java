@@ -11,12 +11,12 @@ public interface FileController {
 
 
     static <T> String convertToTxt(T toBeConverted) {
-        return String.valueOf(toBeConverted) + ".txt";
+        return toBeConverted + ".txt";
     }
 
     static String convertTxtBack(String toBeConverted) {
         int l = toBeConverted.length();
-        if (l > 4 && toBeConverted.substring(l - 4) == ".txt") {
+        if (l > 4 && toBeConverted.substring(l - 4).equals(".txt")) {
             return toBeConverted.substring(0, l - 4);
         }
         return null; //needs exception handling

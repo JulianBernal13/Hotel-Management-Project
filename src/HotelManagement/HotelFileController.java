@@ -49,17 +49,19 @@ public class HotelFileController implements FileController{
         writer.close();
 
         FileController.createDirectory(hotelFile, "Customer");
-        File employeeFile = FileController.createDirectory(hotelFile, "Employee");
+        File employeeFolder = FileController.createDirectory(hotelFile, "Employee");
 
-        File roomsFile = FileController.createDirectory(hotelFile, "Rooms");
+        File roomsFolder = FileController.createDirectory(hotelFile, "Rooms");
         for (int i = 1; i <= numOfLevel; i++) {
             for (int j = 0; j < levelRmNum; j++) {
-                new Room(i * 100 + j, roomsFile.getPath()).createRoomFile();
+                String roomPath = roomsFolder.getPath() + File.separator +
+                        FileController.convertToTxt(i * 100 + j);
+                new Room(i * 100 + j, roomPath).createRoomFile();
             }
         }
 
         Random rand = new Random();
-        String employeePath = employeeFile.getPath();
+        String employeePath = employeeFolder.getPath();
         Manager manager = new Manager(employeePath, "Manager",
                 "M" + rand.nextInt(10000), "bi-weekly", 80000);
         

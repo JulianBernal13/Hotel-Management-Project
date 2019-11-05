@@ -5,8 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -27,30 +25,34 @@ public class Hotel {
 	private int levelRmNum;
 	private String password;
 	private String path;
-	private File rooms[][];
-	private ArrayList<File> customers;
+	private Room rooms[][];
+	private ArrayList<Customer> customers = new ArrayList<>();
 	private Manager manager; //
-	private ArrayList<File> employees;
+	private ArrayList<Employee> employees;
 	private HashMap<String, Integer> price = new HashMap<>();
 
 
 	public Hotel (File hotelFile) throws FileNotFoundException {
 		this.path = hotelFile.getPath();
+		File roomFolder = cdRoomFolder();
+		File customerFolder = CustomerFileController.cdCustomerFolder(hotelFile);
+		File employeeFolder = EmployeeFileController.cdEmployeeFile(hotelFile);
 		ArrayList<String> info = FileController.extractInfo(new File( path + File.separator + "info.txt"));
 		this.name = info.get(Property.name.ordinal());
 		this.password = info.get(Property.password.ordinal());
 		this.numOfLevel = Integer.parseInt(info.get(Property.numOfLevel.ordinal()));
 		this.levelRmNum = Integer.parseInt(info.get(Property.levelRmNum.ordinal()));
 		this.location = new Location(info.get(Property.location.ordinal()));
-		rooms = new File[numOfLevel][levelRmNum];
+		rooms = new Room[numOfLevel][levelRmNum];
 		for(int i = 0; i < numOfLevel; ++i) {
 			for(int j = 0; j < levelRmNum; ++j) {
-				rooms[i][j] = new File(hotelFile.getPath() + File.separator
-						+ FileController.convertToTxt((i + 1) * 100 + j));
+				rooms[i][j] = new Room(new File(roomFolder.getPath() + File.separator
+						+ FileController.convertToTxt((i + 1) * 100 + j)));
 			}
 		}
-		customers = FileController.getAllFile(CustomerFileController.cdCustomerFile(hotelFile));
-		employees = FileController.getAllFile(EmployeeFileController.cdEmployeeFile(hotelFile));
+		for(File f : customerFolder.listFiles())
+			customers.add(new Customer(f));
+//		employees = FileController.getAllFile(EmployeeFileController.cdEmployeeFile(hotelFile));
 		Scanner sc = new Scanner(new File( path + File.separator + "priceInfo.txt"));
 		for(Price p : Price.values())
 			this.price.put(p.name(), Integer.parseInt(sc.nextLine()));
@@ -59,6 +61,8 @@ public class Hotel {
 	public String getPath() {
 		return path;
 	}
+	public int getNumOfLevel() {return numOfLevel;}
+	public int getLevelRmNum() {return levelRmNum;}
 
 	public void writeHotelInfo() throws FileNotFoundException {
 		File info = new File(path + File.separator + "info.txt");
@@ -72,19 +76,43 @@ public class Hotel {
 		writer.close();
 	}
 
+	public void writePriceInfo() throws FileNotFoundException {
+		File info = new File(path + File.separator + "priceInfo.txt");
+		PrintWriter writer = new PrintWriter(info);
+		for (Price p: Price.values()) {
+			writer.println(price.get(p.name()));
+		}
+		writer.flush();
+		writer.close();
+	}
+
 	public Customer getCustomer(String name) throws FileNotFoundException {
-		for(File customer : this.customers) {
-			if (name.equals(FileController.convertTxtBack(customer.getName())))
-				return new Customer(customer);
+		for(Customer customer : this.customers) {
+			if (name.equals(customer.toString())) {
+//				System.out.println("find customer");
+				return customer;
+			}
 		}
 		return null;
 	}
 
-	public <T> Room getRoom(T room) throws FileNotFoundException {
-		int roomNumber = Integer.valueOf(String.valueOf(room));
+	public void addCustomer(Customer c){
+		this.customers.add(c);
+	}
+
+	public File cdRoomFolder() {
+		return new File(this.getPath() + File.separator + "Rooms");
+	}
+
+	public <T> Room getRoom(T room){
+		int roomNumber = Integer.parseInt(String.valueOf(room));
 		int level = roomNumber / 100;
 		int num = roomNumber % 100;
-		return Room.getRoomFile(this.rooms[level - 1][num]);
+		return rooms[level - 1][num];
+	}
+
+	public Room getRoom(int i, int j) {
+		return rooms[i][j];
 	}
 
 	public Employee getEmployee(String name) {
@@ -92,6 +120,20 @@ public class Hotel {
 		return null;
 	}
 
+	public int showTypeRoom(String type) {
+		int counter = 0;
+		for(int i = 0; i < numOfLevel; ++i) {
+			for(int j = 0; j < levelRmNum; ++j) {
+				Room cur = rooms[i][j];
+				if(cur.isClean() && cur.isEmpty() && cur.getType().equals(type)) {
+					System.out.print(cur.getNumber() + "   ");
+					++counter;
+				}
+			}
+			System.out.println("");
+		}
+		return counter;
+	}
 //	private Employee getEmployee(String name) {
 //		return EmployeeFileController.getEmployee(name);
 //	}

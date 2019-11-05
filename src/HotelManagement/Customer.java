@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -36,7 +34,7 @@ public class Customer {
         this.firstname = firstname;
         this.lastname = lastname;
         this.path = customerFolder.getPath() + File.separator + FileController.convertToTxt(this.toString());
-        this.writeCustomerToFile();
+        this.writeToFile();
     }
 
     public String toString() {
@@ -82,7 +80,7 @@ public class Customer {
         return lastname;
     }
 
-    public void writeCustomerToFile() throws IOException {
+    public void writeToFile() throws IOException {
         File customer = new File(this.path);
         if(customer.exists())
             customer.delete();
