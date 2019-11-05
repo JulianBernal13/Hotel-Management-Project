@@ -54,6 +54,10 @@ public class HotelFileController implements FileController{
         String employeePath = employeeFile.getPath();
         Manager manager = new Manager(employeePath, "Manager",
                 "M" + rand.nextInt(10000), "bi-weekly", 80000);
+        
+        File cur2 = new File(employeePath + File.separator + "Emp. to delete" + ".txt"); // ONLY
+		cur2.createNewFile(); // I'M ADDING Also formatting
+
 
         File cur = new File(employeePath + File.separator + manager.getID() + ".txt");
         if (cur.createNewFile()) {
