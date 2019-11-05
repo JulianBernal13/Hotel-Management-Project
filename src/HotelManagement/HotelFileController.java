@@ -40,6 +40,14 @@ public class HotelFileController implements FileController{
         writer.flush();
         writer.close();
 
+        File priceInfo = FileController.createTxtFile(hotelFile, "priceInfo");
+        writer = new PrintWriter(priceInfo);
+        for(Price p : Price.values()) {
+            writer.println(p.getPrice());
+        }
+        writer.flush();
+        writer.close();
+
         FileController.createDirectory(hotelFile, "Customer");
         File employeeFile = FileController.createDirectory(hotelFile, "Employee");
 

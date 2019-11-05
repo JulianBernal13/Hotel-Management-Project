@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 import java.io.IOException;
 
@@ -29,6 +30,7 @@ public class Hotel {
 	private ArrayList<File> customers;
 	private Manager manager; //
 	private ArrayList<File> employees;
+	private HashMap<String, Integer> price;
 
 
 	public Hotel (File hotelFile) throws FileNotFoundException {
