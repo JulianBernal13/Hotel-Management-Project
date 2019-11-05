@@ -80,7 +80,7 @@ public class Printer {
 		System.out.println("Room occupied: " + room.isEmpty());
 		System.out.println("Room is clean: " + room.isClean());
 		System.out.println("Room maintaince note: " + room.getMaintenance());
-		System.out.println("Room number " + room.getNotes());
+		System.out.println("Room notes: " + room.getNotes());
 		System.out.println("");
 		System.out.println("Enter 'Empty' to set room to empty      ");
 		System.out.println("Enter 'clean' to set room to clean      ");
