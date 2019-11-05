@@ -79,22 +79,22 @@ public class EmployeeFileController implements FileController {
 		return -1;
 	}
 
-	public static void getEmployeeInfo(File employees, String name, Employee.EmployeeProperty property)
-			throws FileNotFoundException {
-		File employee = lookUpEmployee(employees, name);
-		if (!employee.exists()) {
-			System.out.println("Employee does not exist");
-			return;
-		}
-		Scanner sc = new Scanner(employee);
-		int i = 0;
-		while (i++ < property.ordinal() && sc.hasNext())
-			sc.nextLine();
-		if (!sc.hasNext())
-			System.out.println("Error, no such data exists");
-		String ret = name + "   " + property.name() + "    " + sc.nextLine();
-		System.out.println(ret);
-	}
+//	public static void getEmployeeInfo(File employees, String name, Employee.EmployeeProperty property)
+//			throws FileNotFoundException {
+//		File employee = lookUpEmployee(employees, name);
+//		if (!employee.exists()) {
+//			System.out.println("Employee does not exist");
+//			return;
+//		}
+//		Scanner sc = new Scanner(employee);
+//		int i = 0;
+//		while (i++ < property.ordinal() && sc.hasNext())
+//			sc.nextLine();
+//		if (!sc.hasNext())
+//			System.out.println("Error, no such data exists");
+//		String ret = name + "   " + property.name() + "    " + sc.nextLine();
+//		System.out.println(ret);
+//	}
 
 	public static void getEmployeesInfo(File employees) throws FileNotFoundException {
 
@@ -104,7 +104,7 @@ public class EmployeeFileController implements FileController {
 		}
 	}
 
-	// helps to look through hotel
+	// Creates directory
 	public static File cdEmployeeFile(File hotel) {
 		String filePath = hotel.getPath() + File.separator + "Employee";
 		return new File(filePath);
