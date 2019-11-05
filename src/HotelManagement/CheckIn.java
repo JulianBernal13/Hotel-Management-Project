@@ -21,15 +21,15 @@ public class CheckIn implements Menu {
         String name = sc.nextLine();
         Customer customer = hotel.getCustomer(name);
         if(customer == null) {
-            int i = name.indexOf(' ');
-            String firstName = name.substring(0, i), lastName = name.substring(i + 1);
-            hotel.addCustomer(new Customer(firstName, lastName, customerFolder));
+            hotel.addCustomer(name);
             customer = hotel.getCustomer(name);
         }
         if(customer.isStaying()) {
             System.out.println("This customer is already checked in");
             return;
         }
+        if(customer.isVIP())
+            System.out.println("Welcome VIP member!");
         System.out.println("What type of room do you want?((single,double,triple,queen,king))");
         String type = sc.nextLine();
         if (hotel.showTypeRoom(type) > 0) {

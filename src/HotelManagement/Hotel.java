@@ -2,6 +2,7 @@ package HotelManagement;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -98,6 +99,12 @@ public class Hotel {
 
 	public void addCustomer(Customer c){
 		this.customers.add(c);
+	}
+
+	public void addCustomer(String name) throws IOException {
+		int i = name.indexOf(' ');
+		String firstName = name.substring(0, i), lastName = name.substring(i + 1);
+		addCustomer(new Customer(firstName, lastName, CustomerFileController.cdCustomerFolder(path)));
 	}
 
 	public File cdRoomFolder() {

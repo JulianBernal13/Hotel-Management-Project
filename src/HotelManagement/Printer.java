@@ -57,6 +57,7 @@ public class Printer {
 		System.out.println("Enter 'CO' to help a customer check-out      ");
 		System.out.println("Enter 'LC' to look up a customer");
 //		System.out.println("Enter 'DH' to display hotal information      ");
+		System.out.println("Enter 'CV' to change VIP status of a customer");
 		System.out.println("Enter 'back' to back to previous menu");
 		System.out.println("");
 	}
