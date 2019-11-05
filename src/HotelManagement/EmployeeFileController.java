@@ -19,7 +19,7 @@ public class EmployeeFileController implements FileController {
 		File employee = lookUpEmployee(employees, id);
 		if (!employee.exists()) {
 			System.out.println("The Employee with the ID: " + id + " does not exist");
-			return new File("yeah");
+			return new File("empty");
 		}
 		System.out.println("The Employee with the ID: " + id + " does exists and here are its properties" + "\n");
 		Printer.printFile(employee);
@@ -79,23 +79,12 @@ public class EmployeeFileController implements FileController {
 		return -1;
 	}
 
-	// public static void getEmployeeInfo(File employees, String name,
-	// Employee.EmployeeProperty property)
-	// throws FileNotFoundException {
-	// File employee = lookUpEmployee(employees, name);
-	// if (!employee.exists()) {
-	// System.out.println("Employee does not exist");
-	// return;
-	// }
-	// Scanner sc = new Scanner(employee);
-	// int i = 0;
-	// while (i++ < property.ordinal() && sc.hasNext())
-	// sc.nextLine();
-	// if (!sc.hasNext())
-	// System.out.println("Error, no such data exists");
-	// String ret = name + " " + property.name() + " " + sc.nextLine();
-	// System.out.println(ret);
-	// }
+	public static void getEmployeeInfo(File employees) throws IOException {
+		File employee = menuLookUp(employees);
+		if (employee.length() == 0)
+			return;
+		System.out.print("\n");
+	}
 
 	public static void getEmployeesInfo(File employees) throws FileNotFoundException {
 
