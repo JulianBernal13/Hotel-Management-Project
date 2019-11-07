@@ -113,6 +113,7 @@ public class ContractFileController {
                             String path = dir + File.separator + customer.getFirstname() + " " + customer.getLastname() + ".txt";
                             Contract contract = new Contract(start, end, customer, room, path, price);
                             contract.writeToFile();
+                            RoomFileController.changeRoomOccupied(hotel.getPath()+File.separator+"Rooms", contract.getRoom().getNumber());
                             System.out.println("Success! Now the customer has been checked-in!");
                             break;
                         }
@@ -129,7 +130,7 @@ public class ContractFileController {
         }
     }
 
-    public static void checkOut(Hotel hotel) {
+    public static void checkOut(Hotel hotel) throws FileNotFoundException {
         File dir = new File(hotel.getPath() + File.separator + "Contracts" + File.separator + "In");
         for (File file : dir.listFiles()) {
             System.out.println(file.getName().substring(0,file.getName().length()-4));
@@ -143,9 +144,15 @@ public class ContractFileController {
             name = sc.nextLine();
             file = new File(dir+File.separator+name+".txt");
         }
+        sc.nextLine();
+        sc.nextLine();
+        sc.nextLine();
+        String roomNum =sc.nextLine();
         File out = new File(hotel.getPath() + File.separator + "Contracts" + File.separator + "Out");
         out.mkdir();
         file.renameTo(new File(hotel.getPath() + File.separator + "Contracts" + File.separator + "Out" + File.separator + file.getName()));
+
+        RoomFileController.changeRoomEmpty(hotel.getPath()+File.separator+"Rooms", Integer.parseInt(roomNum));
         System.out.println("Check-out Complete!");
 
     }
