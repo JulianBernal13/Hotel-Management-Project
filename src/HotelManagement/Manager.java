@@ -71,7 +71,7 @@ public class Manager extends Employee {
 	// Selection Sort (employees alphabet style)
 
 	// path given is ../Employee
-	public void addEmployeeToFile(String employeePath, Employee emp) throws IOException {
+	public void addEmployeeToFile(String employeePath, Employee emp, Hotel hotel) throws IOException {
 
 		String path = employeePath + File.separator + emp.getID() + ".txt";
 		File cur = new File(path);
@@ -84,6 +84,7 @@ public class Manager extends Employee {
 			writer.flush();
 			writer.close();
 			System.out.println("The employee with the ID " + emp.getID() + " has been added");
+			hotel.addEmployee(new Employee(cur));
 			// titleName, id, paymentType, wage
 		} else {
 			System.out.println("The employee with the ID " + emp.getID() + " already exists");

@@ -34,7 +34,7 @@ public class EmployeeFileController implements FileController {
 	}
 
 	// change for later, add manager.addEmployeeToFile code here
-	public static void createEmployee(File employees) throws IOException {
+	public static void createEmployee(File employees, Hotel hotel) throws IOException {
 		deleteEmployee2(employees);
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter the title name for new employee");
@@ -56,12 +56,17 @@ public class EmployeeFileController implements FileController {
 		File newEmployee = new File(filePath);
 		if (newEmployee.createNewFile()) {
 			PrintWriter writer = new PrintWriter(filePath);
-			writer.println("Titlename: " + titleName);
-			writer.println("ID: " + id);
-			writer.println("PaymentType: " + paymentType);
-			writer.println("Salary: " + salary);
+//			writer.println("Titlename: " + titleName);
+//			writer.println("ID: " + id);
+//			writer.println("PaymentType: " + paymentType);
+//			writer.println("Salary: " + salary);
+     		writer.println(titleName);
+			writer.println(id);
+			writer.println(paymentType);
+			writer.println(salary);
 			writer.flush();
 			writer.close();
+			hotel.addEmployee(new Employee(newEmployee));
 		}
 		System.out.println("The employee titled: " + titleName + " with the ID: " + id + " has been added");
 	}

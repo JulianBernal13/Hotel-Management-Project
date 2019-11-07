@@ -45,7 +45,7 @@ public class ManagerMenu implements Menu {
 			break;
 		}
 		case "AE": {
-			EmployeeFileController.createEmployee(employeeFiles);
+			EmployeeFileController.createEmployee(employeeFiles, hotel);
 			break;
 		}
 		case "FE": {

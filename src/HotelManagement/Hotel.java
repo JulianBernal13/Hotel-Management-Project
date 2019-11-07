@@ -107,6 +107,7 @@ public class Hotel {
 	public void addCustomer(Customer c){
 		this.customers.add(c);
 	}
+	public void addEmployee(Employee e) {this.employees.add(e);}
 
 	public void addCustomer(String name) throws IOException {
 		int i = name.indexOf(' ');
