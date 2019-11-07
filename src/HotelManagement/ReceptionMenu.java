@@ -21,8 +21,7 @@ public class ReceptionMenu implements Menu{
 		switch (command) {
 		case "CI": {
 //			RoomFileController.checkIn(hotelFile);
-			CheckIn ci = new CheckIn(this.hotel);
-			ci.menu();
+			ContractFileController.checkIn(hotel);
 			menu();
 			break;
 		}

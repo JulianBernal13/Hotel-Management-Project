@@ -160,37 +160,6 @@ public class RoomFileController {
         return count;
     }
 
-    public static void checkIn(File hotel) throws IOException {
-        System.out.println("Enter customer's name");
-        Scanner sc = new Scanner(System.in);
-        File customer = CustomerFileController.registerCustomer(CustomerFileController.cdCustomerFolder(hotel), sc.nextLine());
-        String isStaying = CustomerFileController.getCustomerInfo(customer, "isStaying");
-        if(isStaying.equals("true")) {
-            System.out.println("This customer is already checked in");
-            return;
-        }
-        String roomPath = hotel.getPath() + File.separator + "Rooms";
-        System.out.println("What type of room do you want?((single,double,triple,queen,king))");
-        Scanner scanner = new Scanner(System.in);
-        String type = scanner.nextLine();
-        if (showTypeRoomEmpty(roomPath, type) > 0) {
-            System.out.println("Which room are you going to check-in?");
-            int num = Integer.parseInt(scanner.nextLine());
-            File check = new File(roomPath + File.separator + num+".txt");
-            while (!check.exists()) {
-                System.out.println("This room cannot be checked-in, enter another room \n");
-                num = Integer.parseInt(scanner.nextLine());
-                check = new File(roomPath + File.separator + num+".txt");
-            }
-            changeRoomOccupied(roomPath, num);
-            CustomerFileController.modifyCustomer(customer, "isStaying", "true");
-            //change customer's states
-            System.out.println("Success! Now the room is occupied.");
-        } else {
-            System.out.println("Sorry, we do not have such room available.");
-        }
-    }
-
     public static void checkOut(File cur) throws FileNotFoundException {
         Scanner scanner = new Scanner(System.in);
         String roomPath = cur.getPath() + File.separator + "Rooms";
