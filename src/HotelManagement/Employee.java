@@ -1,5 +1,10 @@
 package HotelManagement;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 /**
  * 
  * @author Julian Garcia
@@ -20,7 +25,7 @@ public class Employee {
 	private String hotel;
 	private boolean clockIn;
 
-	public static enum EmployeeProperty {
+	public static enum Property {
 		titleName, id, paymentType, salary
 	}
 
@@ -40,6 +45,16 @@ public class Employee {
 		this.salary = salary;
 		clockIn = false;
 		hotel = checkCurrentHotel();
+	}
+
+	public Employee(File employeeFile) throws FileNotFoundException {
+		Scanner sc = new Scanner(employeeFile);
+		this.path = employeeFile.getPath();
+		ArrayList<String> info = FileController.extractInfo(employeeFile);
+		this.titleName = info.get(Property.titleName.ordinal());
+		this.id = info.get(Property.id.ordinal());
+		this.salary = Integer.parseInt(info.get(Property.salary.ordinal()));
+		this.paymentType = info.get(Property.paymentType.ordinal());
 	}
 
 	public void setTitleName(String titleName) {

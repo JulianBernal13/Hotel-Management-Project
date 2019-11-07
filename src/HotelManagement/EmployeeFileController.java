@@ -68,7 +68,7 @@ public class EmployeeFileController implements FileController {
 
 	public static int getPropertyOrdinal(String property) {
 		int i = 0;
-		for (Employee.EmployeeProperty p : Employee.EmployeeProperty.values()) {
+		for (Employee.Property p : Employee.Property.values()) {
 			if (p.name().toString().compareTo(property) == 0) {
 				return i;
 			}
@@ -117,7 +117,7 @@ public class EmployeeFileController implements FileController {
 		Scanner sc2 = new Scanner(System.in);
 		System.out.println("Are you sure you want to edit this employee? Re enter ID for final confirmation");
 		String id = sc2.nextLine();
-		if (FileReader.getEmployeeInfo(employee, Employee.EmployeeProperty.id).compareTo("ID: " + id) != 0) {
+		if (FileReader.getEmployeeInfo(employee, Employee.Property.id).compareTo("ID: " + id) != 0) {
 			System.out.println("Error: The entered ID is different or doesn't exist");
 			return;
 		}
@@ -235,7 +235,7 @@ public class EmployeeFileController implements FileController {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Are you sure you want to fire the Employee? Re enter ID for final confirmation");
 		String id = sc.nextLine();
-		if (FileReader.getEmployeeInfo(employee, Employee.EmployeeProperty.id).compareTo("ID: " + id) != 0) {
+		if (FileReader.getEmployeeInfo(employee, Employee.Property.id).compareTo("ID: " + id) != 0) {
 			System.out.println("Error: The entered ID is different or doesn't exist");
 			return;
 		}

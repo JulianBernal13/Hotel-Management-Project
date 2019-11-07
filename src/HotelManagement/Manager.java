@@ -5,14 +5,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.Scanner;
 
 public class Manager extends Employee {
 
 	// Only Manager can access this
 	private ArrayList<Employee> employees;
 	private String hotel;
-	private boolean clockIn;
+	private boolean clockIn = false;
 
 	public static enum ManagerProperty {
 		titleName, id, paymentType, salary
@@ -31,6 +31,11 @@ public class Manager extends Employee {
 		super(path, titleName, id, paymentType, salary);
 		clockIn = false;
 	}
+
+	public Manager(File employeeFile) throws FileNotFoundException {
+		super(employeeFile);
+	}
+
 
 	public Employee getEmployee(String id) {
 
@@ -111,10 +116,10 @@ public class Manager extends Employee {
 		for (File f : temp) {
 			if (f.equals(empCur)) {
 
-				String tempTN = FileReader.getEmployeeInfo(f, Employee.EmployeeProperty.titleName);
-				String tempID = FileReader.getEmployeeInfo(f, Employee.EmployeeProperty.id);
-				String tempPT = FileReader.getEmployeeInfo(f, Employee.EmployeeProperty.paymentType);
-				String tempS = FileReader.getEmployeeInfo(f, Employee.EmployeeProperty.salary);
+				String tempTN = FileReader.getEmployeeInfo(f, Property.titleName);
+				String tempID = FileReader.getEmployeeInfo(f, Property.id);
+				String tempPT = FileReader.getEmployeeInfo(f, Property.paymentType);
+				String tempS = FileReader.getEmployeeInfo(f, Property.salary);
 				return new Employee(employeePath, tempTN, tempID, tempPT, Integer.parseInt(tempS));
 
 			} else {

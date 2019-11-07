@@ -49,7 +49,7 @@ public class FileReader {
 		return in.nextLine();
 	}
 
-	public static String getEmployeeInfo(File file, Employee.EmployeeProperty property) throws FileNotFoundException {
+	public static String getEmployeeInfo(File file, Employee.Property property) throws FileNotFoundException {
 		Scanner in = new Scanner(file);
 		int i = 0;
 		while (i++ < property.ordinal() && in.hasNext())
@@ -59,7 +59,7 @@ public class FileReader {
 
 	public static void displayEmpInfo(File file) throws FileNotFoundException {
 		Scanner in = new Scanner(file);
-		for (Employee.EmployeeProperty tmp : Employee.EmployeeProperty.values()) {
+		for (Employee.Property tmp : Employee.Property.values()) {
 			System.out.println(tmp.name() + ": " + in.nextLine());
 		}
 	}

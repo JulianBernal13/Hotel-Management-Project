@@ -29,7 +29,8 @@ public class HotelMenu implements Menu{
 
         Hotel curHotel = new Hotel(hotelFile);
 
-        chooseHandler(curHotel);
+//        chooseHandler(curHotel);
+        chooseHandlertwo(curHotel);
     }
 
     public void chooseHandler(Hotel hotel) throws IOException {
@@ -55,6 +56,31 @@ public class HotelMenu implements Menu{
             }
             default:
                 break;
+        }
+    }
+
+    public void chooseHandlertwo(Hotel hotel) throws IOException {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Please enter your ID");
+        String id = sc.nextLine();
+        if(hotel.getManager(id) != null){
+            ManagerMenu managerMenu = new ManagerMenu(hotel);
+            managerMenu.menu();
+            return;
+        }
+        Employee e = hotel.getEmployee(id);
+        if(e != null) {
+            ReceptionMenu receptionMenu = new ReceptionMenu(hotel);
+            receptionMenu.menu();
+            return;
+        }
+        System.out.println("ID does not exist, do you want to continue? y/n");
+        switch(sc.nextLine()) {
+            case "y": {
+                chooseHandlertwo(hotel);
+            }
+            default: break;
         }
     }
 }

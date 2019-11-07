@@ -29,7 +29,7 @@ public class Hotel {
 	private Room rooms[][];
 	private ArrayList<Customer> customers = new ArrayList<>();
 	private Manager manager; //
-	private ArrayList<Employee> employees;
+	private ArrayList<Employee> employees = new ArrayList<>();
 	private HashMap<String, Integer> price = new HashMap<>();
 
 
@@ -53,7 +53,14 @@ public class Hotel {
 		}
 		for(File f : customerFolder.listFiles())
 			customers.add(new Customer(f));
-//		employees = FileController.getAllFile(EmployeeFileController.cdEmployeeFile(hotelFile));
+		for(File f : employeeFolder.listFiles()) {
+			if(!f.getName().equals("Emp. to delete.txt")) {
+				employees.add(new Employee(f));
+				if (employees.get(employees.size() - 1).getTitleName().equals("Manager"))
+					this.manager = new Manager(f);
+			}
+		}
+
 		Scanner sc = new Scanner(new File( path + File.separator + "priceInfo.txt"));
 		for(Price p : Price.values())
 			this.price.put(p.name(), Integer.parseInt(sc.nextLine()));
@@ -122,8 +129,17 @@ public class Hotel {
 		return rooms[i][j];
 	}
 
-	public Employee getEmployee(String name) {
-		//return the employee matching name, or maybe just ID
+	public Employee getEmployee(String id) {
+		for(Employee e : employees) {
+			if (e.getID().equals(id))
+				return e;
+		}
+		return null;
+	}
+
+	public Manager getManager(String id) {
+		if(this.manager.getID().equals(id))
+			return this.manager;
 		return null;
 	}
 
