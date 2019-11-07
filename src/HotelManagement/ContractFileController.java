@@ -18,20 +18,7 @@ public class ContractFileController {
 
     public static void reserveRoom(Hotel hotel) throws IOException {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter customer's name");
-        String name = sc.nextLine();
-        Customer customer = hotel.getCustomer(name);
-        if (customer == null) {
-            hotel.addCustomer(name);
-            customer = hotel.getCustomer(name);
-        }
-        if (customer.isStaying()) {
-            System.out.println("This customer is already checked in");
-            return;
-        }
-        if (customer.isVIP()) {
-            System.out.println("Welcome VIP member!");
-        }
+        Customer customer = CustomerFileController.enterCustomer(hotel);
 
         System.out.println("What type of room do you want?((single,double,triple,queen,king))");
         String type = sc.nextLine();
@@ -66,6 +53,21 @@ public class ContractFileController {
         }
         else{
             System.out.println("Sorry, we do not have such room available.");
+        }
+    }
+
+    public static void checkIn(Hotel hotel) throws IOException {
+        Scanner sc = new Scanner(System.in);
+        Customer customer = CustomerFileController.enterCustomer(hotel);
+        System.out.println("Do you have a reservation before?(y/n)");
+        String check = sc.nextLine();
+        switch (check) {
+            case "y": {
+
+            }
+            case "n": {
+
+            }
         }
     }
 }

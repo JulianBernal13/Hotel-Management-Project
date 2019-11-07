@@ -116,4 +116,23 @@ public class CustomerFileController implements FileController {
         writer.flush();
         writer.close();
     }
+
+    public static Customer enterCustomer(Hotel hotel) throws IOException {
+        System.out.println("Enter the customer's name");
+        Scanner sc = new Scanner(System.in);
+        String name = sc.nextLine();
+        Customer customer = hotel.getCustomer(name);
+        if (customer == null) {
+            hotel.addCustomer(name);
+            customer = hotel.getCustomer(name);
+        }
+        if (customer.isStaying()) {
+            System.out.println("This customer is already checked in");
+            return null;
+        }
+        if (customer.isVIP()) {
+            System.out.println("Welcome VIP member!");
+        }
+        return customer;
+    }
 }
