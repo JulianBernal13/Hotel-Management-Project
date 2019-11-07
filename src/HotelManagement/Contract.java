@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * @author Anji Yu
+ * @author Yingxie Gao
  */
 
 public class Contract {
@@ -13,14 +13,16 @@ public class Contract {
     private String end;
     private Customer customer;
     private Room room;
+    private double price;
     private String path;
 
-    public Contract(String start, String end, Customer customer, Room room,String path) {
+    public Contract(String start, String end, Customer customer, Room room,String path, double price) {
         this.start = start;
         this.end = end;
         this.customer = customer;
         this.room = room;
         this.path = path;
+        this.price = price;
     }
 
     public String getStart() {
@@ -63,6 +65,14 @@ public class Contract {
         this.path = path;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public void createContractFile() throws IOException {
         File cur = new File(this.path);
         if(cur.createNewFile()) {
@@ -71,6 +81,7 @@ public class Contract {
             writer.println(end);
             writer.println(customer.getFirstname()+" "+customer.getLastname());
             writer.println(room.getNumber());
+            writer.println(price);
             writer.flush();
             writer.close();
         }

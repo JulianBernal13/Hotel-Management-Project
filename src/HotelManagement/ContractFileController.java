@@ -39,16 +39,27 @@ public class ContractFileController {
 
             System.out.println("How long would you like to have this room?");
             int period = Integer.parseInt(sc.nextLine());
-            tempCalendar.add(Calendar.DATE, period);
-            String end = sdf.format(tempCalendar.getTime());
+            double price = period*room.getPrice();
+            System.out.println("The total price would be "+price);
+            System.out.println("Are you sure to reserve this room?(y/n)");
+            String sure = sc.nextLine();
+            switch (sure) {
+                case "y": {
+                    tempCalendar.add(Calendar.DATE, period);
+                    String end = sdf.format(tempCalendar.getTime());
 
-            String dir = hotel.getPath() + File.separator + "Contracts" + File.separator + "Reservation";
-            File file = new File(dir);
-            file.mkdirs();
-            String path = dir + File.separator + customer.getFirstname() + " " + customer.getLastname() + ".txt";
-            Contract contract = new Contract(start, end, customer, room, path);
-            contract.writeToFile();
-            System.out.println("Success! The reservation has been completed!");
+                    String dir = hotel.getPath() + File.separator + "Contracts" + File.separator + "Reservation";
+                    File file = new File(dir);
+                    file.mkdirs();
+                    String path = dir + File.separator + customer.getFirstname() + " " + customer.getLastname() + ".txt";
+                    Contract contract = new Contract(start, end, customer, room, path, price);
+                    contract.writeToFile();
+                    System.out.println("Success! The reservation has been completed!");
+                }
+                case "n": {
+                    break;
+                }
+            }
         } else {
             System.out.println("Sorry, we do not have such room available.");
         }
@@ -88,17 +99,28 @@ public class ContractFileController {
 
                     System.out.println("How long would you like to have this room?");
                     int period = Integer.parseInt(sc.nextLine());
-                    tempCalendar.add(Calendar.DATE, period);
-                    String end = sdf.format(tempCalendar.getTime());
+                    double price = period*room.getPrice();
+                    System.out.println("The total price would be "+price);
+                    System.out.println("Are you sure to check this room in?(y/n)");
+                    String sure = sc.nextLine();
+                    switch (sure) {
+                        case "y": {
+                            tempCalendar.add(Calendar.DATE, period);
+                            String end = sdf.format(tempCalendar.getTime());
+                            String dir = hotel.getPath() + File.separator + "Contracts" + File.separator + "In";
+                            File file = new File(dir);
+                            file.mkdirs();
+                            String path = dir + File.separator + customer.getFirstname() + " " + customer.getLastname() + ".txt";
+                            Contract contract = new Contract(start, end, customer, room, path, price);
+                            contract.writeToFile();
+                            System.out.println("Success! Now the customer has been checked-in!");
+                            break;
+                        }
+                        case "n": {
+                            break;
+                        }
+                    }
 
-                    String dir = hotel.getPath() + File.separator + "Contracts" + File.separator + "In";
-                    File file = new File(dir);
-                    file.mkdirs();
-                    String path = dir + File.separator + customer.getFirstname() + " " + customer.getLastname() + ".txt";
-                    Contract contract = new Contract(start, end, customer, room, path);
-                    contract.writeToFile();
-                    System.out.println("Success! Now the customer has been checked-in!");
-                    break;
                 } else {
                     System.out.println("Sorry, we do not have such room available.");
                     break;
@@ -107,7 +129,24 @@ public class ContractFileController {
         }
     }
 
-    public static void checkOut(Hotel hotel){
-        
+    public static void checkOut(Hotel hotel) {
+        File dir = new File(hotel.getPath() + File.separator + "Contracts" + File.separator + "In");
+        for (File file : dir.listFiles()) {
+            System.out.println(file.getName().substring(0,file.getName().length()-4));
+        }
+        System.out.println("Enter the customer's name to check-out");
+        Scanner sc = new Scanner(System.in);
+        String name = sc.nextLine();
+        File file = new File(dir+File.separator+name+".txt");
+        while(!file.exists()){
+            System.out.println("No such customer had checked-in");
+            name = sc.nextLine();
+            file = new File(dir+File.separator+name+".txt");
+        }
+        File out = new File(hotel.getPath() + File.separator + "Contracts" + File.separator + "Out");
+        out.mkdir();
+        file.renameTo(new File(hotel.getPath() + File.separator + "Contracts" + File.separator + "Out" + File.separator + file.getName()));
+        System.out.println("Check-out Complete!");
+
     }
 }

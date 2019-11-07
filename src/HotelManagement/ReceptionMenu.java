@@ -26,7 +26,7 @@ public class ReceptionMenu implements Menu{
 			break;
 		}
 		case "CO": {
-			RoomFileController.checkOut(hotelFile);
+			ContractFileController.checkOut(hotel);
 			menu();
 			break;
 		}
