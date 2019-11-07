@@ -144,16 +144,26 @@ public class ContractFileController {
             name = sc.nextLine();
             file = new File(dir+File.separator+name+".txt");
         }
-        sc.nextLine();
-        sc.nextLine();
-        sc.nextLine();
-        String roomNum =sc.nextLine();
+        Contract contract = readContract(hotel,file);
+        int roomNum =contract.getRoom().getNumber();
         File out = new File(hotel.getPath() + File.separator + "Contracts" + File.separator + "Out");
         out.mkdir();
         file.renameTo(new File(hotel.getPath() + File.separator + "Contracts" + File.separator + "Out" + File.separator + file.getName()));
 
-        RoomFileController.changeRoomEmpty(hotel.getPath()+File.separator+"Rooms", Integer.parseInt(roomNum));
+        RoomFileController.changeRoomEmpty(hotel.getPath()+File.separator+"Rooms", roomNum);
         System.out.println("Check-out Complete!");
 
+    }
+
+    public static Contract readContract(Hotel hotel,File file) throws FileNotFoundException {
+        Scanner sc = new Scanner(file);
+        String start = sc.nextLine();
+        String end = sc.nextLine();
+        Customer customer = hotel.getCustomer(sc.nextLine());
+        Room room = hotel.getRoom(sc.nextLine());
+        double price = Double.parseDouble(sc.nextLine());
+        String path = file.getPath();
+        Contract contract = new Contract(start,end,customer,room,path,price);
+        return contract;
     }
 }

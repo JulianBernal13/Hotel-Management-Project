@@ -160,26 +160,6 @@ public class RoomFileController {
         return count;
     }
 
-    public static void checkOut(File cur) throws FileNotFoundException {
-        Scanner scanner = new Scanner(System.in);
-        String roomPath = cur.getPath() + File.separator + "Rooms";
-        System.out.println("which room are you going to check-out?");
-        if(showOccupiedRoom(roomPath) > 0){
-            String num = scanner.nextLine();
-            File check = new File(roomPath + File.separator + num+".txt");
-            while (!check.exists()) {
-                System.out.println("This room cannot be checked-out, enter another room \n");
-                num = scanner.nextLine();
-                check = new File(roomPath + File.separator + num+".txt");
-            }
-            changeRoomEmpty(roomPath, Integer.parseInt(num));
-            System.out.println("Success! Now the room is empty.");
-        }
-        else{
-            System.out.println("There is no room occupied.");
-        }
-    }
-
     public static void listRooms(File cur) throws IOException {
         Boolean toggle = true;
         while(toggle) {
