@@ -140,25 +140,6 @@ public class RoomFileController {
         return count;
     }
 
-    public static int showOccupiedRoom(String path) throws FileNotFoundException {
-        File allRoom = new File(path);
-        ArrayList<String> emptyRooms = new ArrayList<>();
-        int count = 0;
-        for (File file : allRoom.listFiles()) {
-            ArrayList<String> oldInfo = FileController.extractInfo(file);
-            String originalType = oldInfo.get(RoomProperty.type.ordinal());
-            String originalIsEmpty = oldInfo.get(RoomProperty.isEmpty.ordinal());
-            String originalNumber = oldInfo.get(RoomProperty.number.ordinal());
-            String originalPrice = oldInfo.get(RoomProperty.price.ordinal());
-            if (originalIsEmpty.equals("false")) {
-                emptyRooms.add(originalNumber + "    " + originalType + "     " + originalPrice);
-                count++;
-            }
-        }
-        Collections.sort(emptyRooms);
-        Printer.printArray(emptyRooms);
-        return count;
-    }
 
     public static void listRooms(File cur) throws IOException {
         Boolean toggle = true;

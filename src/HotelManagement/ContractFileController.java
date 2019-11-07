@@ -86,9 +86,10 @@ public class ContractFileController {
             case "n": {
                 System.out.println("What type of room do you want?((single,double,triple,queen,king))");
                 String type = sc.nextLine();
-                if (hotel.showTypeRoom(type) > 0) {
+                if (RoomFileController.showTypeRoomEmpty(hotel.getPath()+File.separator+"Rooms",type) > 0) {
                     System.out.println("Which room are you going to reserve?");
-                    Room room = hotel.getRoom(sc.nextLine());
+                    int roomNum = Integer.parseInt(sc.nextLine());
+                    Room room = hotel.getRoom(roomNum);
                     while (!room.isEmpty() || !room.isClean() || !room.getType().equals(type)) {
                         System.out.println("This room cannot be checked-in, enter another room \n");
                         room = hotel.getRoom(sc.nextLine());
