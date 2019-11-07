@@ -36,11 +36,17 @@ public class ReceptionMenu implements Menu{
 			menu();
 			break;
 		}
-			case "CV": {
-				changeVIPStatue();
-				menu();
-				break;
-			}
+		case "CV": {
+			changeVIPStatue();
+			menu();
+			break;
+		}
+
+		case "RR":{
+			ContractFileController.reserveRoom(hotel);
+			menu();
+			break;
+		}
 		case "back": {
 				break;
 			}

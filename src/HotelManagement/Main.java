@@ -11,14 +11,14 @@ import java.util.GregorianCalendar;
  * @date 10/18/19 22:30
  */
 public class Main {
+    public static Date current = new Date();
+    public static Calendar calendar = new GregorianCalendar();
+    public static SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd");
 
     public static void main(String[] args) throws IOException {
-        SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd");
-        Date current = new Date();
-        Calendar calendar = new GregorianCalendar();
         calendar.setTime(current);
         //add 1 day to calendar
-        calendar.add(Calendar.DATE, 1);
+        //calendar.add(Calendar.DATE, 1);
         current = calendar.getTime();
         System.out.println(sdf.format(current));
         MainMenu m = new MainMenu();
