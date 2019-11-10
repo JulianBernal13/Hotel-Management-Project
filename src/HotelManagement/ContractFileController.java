@@ -37,7 +37,7 @@ public class ContractFileController {
 
             System.out.println("How long would you like to have this room?");
             int period = Integer.parseInt(sc.nextLine());
-            double price = period*room.getPrice();
+            double price = getPrice(hotel, period, room, customer);
             System.out.println("The total price would be "+price);
             System.out.println("Are you sure to reserve this room?(y/n)");
             String sure = sc.nextLine();
@@ -106,9 +106,7 @@ public class ContractFileController {
 
                     System.out.println("How long would you like to have this room?");
                     int period = Integer.parseInt(sc.nextLine());
-                    double price = period*room.getPrice();
-                    if(customer.isVIP())
-                        price *= hotel.getVIPDiscount();
+                    double price = getPrice(hotel, period, room, customer);
                     System.out.println("The total price would be "+price);
                     System.out.println("Are you sure to check this room in?(y/n)");
                     String sure = sc.nextLine();
@@ -152,10 +150,9 @@ public class ContractFileController {
         Scanner sc = new Scanner(System.in);
         String name = sc.nextLine();
         File file = new File(dir+File.separator+name+".txt");
-        while(!file.exists()){
+        if(!file.exists()){
             System.out.println("No such customer had checked-in");
-            name = sc.nextLine();
-            file = new File(dir+File.separator+name+".txt");
+            return;
         }
         Contract contract = readContract(hotel,file);
         int roomNum =contract.getRoom().getNumber();
@@ -200,6 +197,17 @@ public class ContractFileController {
         String path = file.getPath();
         Contract contract = new Contract(start,end,customer,room,path,price);
         return contract;
+    }
+
+    public static double getPrice(Hotel hotel, int period, double price, Customer c) {
+        double totalPrice = period * price;
+        if(c.isVIP())
+            totalPrice *= hotel.getVIPDiscount();
+        return totalPrice;
+    }
+
+    public static double getPrice(Hotel hotel, int period, Room r, Customer c) {
+        return getPrice(hotel, period, r.getPrice(), c);
     }
 
 }
