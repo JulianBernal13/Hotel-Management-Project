@@ -17,7 +17,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         calendar.setTime(current);
-        //add 1 day to calendar
+        //add 1 day to calendar for testing
         //calendar.add(Calendar.DATE, 1);
         current = calendar.getTime();
         System.out.println(sdf.format(current));

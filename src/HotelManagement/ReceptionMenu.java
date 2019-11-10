@@ -15,6 +15,7 @@ public class ReceptionMenu implements Menu{
     @Override
     public void menu() throws IOException {
 		Printer.printReceptionMenu();
+		ContractFileController.makeNotification(hotel);
 		File hotelFile = new File(this.hotel.getPath());
 		Scanner sc = new Scanner(System.in);
 		String command = sc.nextLine();

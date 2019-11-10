@@ -3,9 +3,7 @@ package HotelManagement;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.Scanner;
+import java.util.*;
 
 import static HotelManagement.Main.current;
 import static HotelManagement.Main.sdf;
@@ -86,6 +84,7 @@ public class ContractFileController {
                 customer.setStaying(true);
                 customer.writeToFile();
                 hotel.addInContract(contract);
+                hotel.getReservationContracts().remove(contract.getCustomer());
                 break;
             }
             case "n": {
@@ -165,9 +164,27 @@ public class ContractFileController {
         customer.setStaying(false);
         customer.writeToFile();
         hotel.addOutContract(contract);
-
+        hotel.getInContracts().remove(customer);
     }
 
+    public static void makeNotification(Hotel hotel){
+        int inCount=0;
+        int outCount=0;
+        HashMap<Customer,Contract> reservationContracts = hotel.getReservationContracts();
+        for (Contract c: reservationContracts.values()) {
+            if(c.getStart().equals(sdf.format(current))){
+                inCount++;
+            }
+        }
+        HashMap<Customer,Contract> inContracts = hotel.getInContracts();
+        for (Contract c: inContracts.values()) {
+            if(c.getEnd().equals(sdf.format(current))){
+                outCount++;
+            }
+        }
+        System.out.println("There will be "+inCount+" customer to check-in today");
+        System.out.println("There will be "+outCount+" customer to check-out today");
+    }
 
     public static Contract readContract(Hotel hotel,File file) throws FileNotFoundException {
         Scanner sc = new Scanner(file);

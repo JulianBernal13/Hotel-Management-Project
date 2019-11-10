@@ -30,9 +30,9 @@ public class Hotel {
 	private ArrayList<Customer> customers = new ArrayList<>();
 	private Manager manager; //
 	private ArrayList<Employee> employees = new ArrayList<>();
-	private ArrayList<Contract> reservationContracts = new ArrayList<>();
-	private ArrayList<Contract> inContracts = new ArrayList<>();
-	private ArrayList<Contract> outContracts = new ArrayList<>();
+	private HashMap<Customer, Contract> reservationContracts = new HashMap<>();
+	private HashMap<Customer, Contract> inContracts = new HashMap<>();
+	private HashMap<Customer, Contract> outContracts = new HashMap<>();
 	private HashMap<String, Integer> price = new HashMap<>();
 
 
@@ -66,15 +66,18 @@ public class Hotel {
 		File reservationFoler = new File(path+File.separator+"Contracts"+File.separator+"Reservation");
 
 		for(File f:reservationFoler.listFiles()){
-		    reservationContracts.add(ContractFileController.readContract(this,f));
+			Contract c = ContractFileController.readContract(this,f);
+		    reservationContracts.put(c.getCustomer(),c);
         }
         File inFoler = new File(path+File.separator+"Contracts"+File.separator+"In");
         for(File f:inFoler.listFiles()){
-            inContracts.add(ContractFileController.readContract(this,f));
+			Contract c = ContractFileController.readContract(this,f);
+			inContracts.put(c.getCustomer(),c);
         }
         File outFoler = new File(path+File.separator+"Contracts"+File.separator+"Reservation");
         for(File f:outFoler.listFiles()){
-            outContracts.add(ContractFileController.readContract(this,f));
+			Contract c = ContractFileController.readContract(this,f);
+			outContracts.put(c.getCustomer(),c);
         }
         for(File f : customerFolder.listFiles())
             customers.add(new Customer(f));
@@ -162,6 +165,18 @@ public class Hotel {
 		return null;
 	}
 
+	public HashMap<Customer, Contract> getReservationContracts() {
+		return reservationContracts;
+	}
+
+	public HashMap<Customer, Contract> getInContracts() {
+		return inContracts;
+	}
+
+	public HashMap<Customer, Contract> getOutContracts() {
+		return outContracts;
+	}
+
 	public int showTypeRoom(String type) {
 		int counter = 0;
 		for(int i = 0; i < numOfLevel; ++i) {
@@ -177,13 +192,13 @@ public class Hotel {
 		return counter;
 	}
 	public void addReservationContract (Contract c){
-		reservationContracts.add(c);
+		reservationContracts.put(c.getCustomer(),c);
 	}
 	public void addInContract (Contract c){
-		inContracts.add(c);
+		inContracts.put(c.getCustomer(),c);
 	}
 	public void addOutContract (Contract c){
-		outContracts.add(c);
+		outContracts.put(c.getCustomer(),c);
 	}
 
 //	private Employee getEmployee(String name) {
