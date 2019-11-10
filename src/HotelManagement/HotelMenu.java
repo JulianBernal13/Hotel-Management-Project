@@ -63,16 +63,19 @@ public class HotelMenu implements Menu{
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Please enter your ID");
+        Printer.printManagerID(hotel);
         String id = sc.nextLine();
         if(hotel.getManager(id) != null){
             ManagerMenu managerMenu = new ManagerMenu(hotel);
             managerMenu.menu();
+            chooseHandlertwo(hotel);
             return;
         }
         Employee e = hotel.getEmployee(id);
         if(e != null) {
             ReceptionMenu receptionMenu = new ReceptionMenu(hotel);
             receptionMenu.menu();
+            chooseHandlertwo(hotel);
             return;
         }
         System.out.println("ID does not exist, do you want to continue? y/n");

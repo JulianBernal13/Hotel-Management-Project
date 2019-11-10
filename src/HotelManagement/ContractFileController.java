@@ -69,7 +69,9 @@ public class ContractFileController {
         String check = sc.nextLine();
         switch (check) {
             case "y": {
-                File contractFile = new File(hotel.getPath() + File.separator + "Contracts" + File.separator + "Reservation" + File.separator + customer.getFirstname() + " " + customer.getLastname() + ".txt");
+                File contractFile = new File(hotel.getPath() + File.separator + "Contracts" +
+                        File.separator + "Reservation" + File.separator + customer.getFirstname() + " " +
+                        customer.getLastname() + ".txt");
                 if (!contractFile.exists()) {
                     System.out.println("This customer does not have a reservation.");
                     break;
@@ -105,6 +107,8 @@ public class ContractFileController {
                     System.out.println("How long would you like to have this room?");
                     int period = Integer.parseInt(sc.nextLine());
                     double price = period*room.getPrice();
+                    if(customer.isVIP())
+                        price *= hotel.getVIPDiscount();
                     System.out.println("The total price would be "+price);
                     System.out.println("Are you sure to check this room in?(y/n)");
                     String sure = sc.nextLine();

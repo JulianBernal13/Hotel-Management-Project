@@ -15,11 +15,13 @@ import java.util.Scanner;
 
 public class Hotel {
 
-	//needs to be matched with the initialization order in constructor
+
+    //needs to be matched with the initialization order in constructor
 	public static enum Property {
 		name, location, numOfLevel, levelRmNum, password;
 	}
 
+	private final double VIPDiscount = 0.8;
 	private String name;
 	private Location location;
 	private int numOfLevel;
@@ -165,6 +167,10 @@ public class Hotel {
 		return null;
 	}
 
+	public Manager getManager() {
+		return this.manager;
+	}
+
 	public HashMap<Customer, Contract> getReservationContracts() {
 		return reservationContracts;
 	}
@@ -201,6 +207,9 @@ public class Hotel {
 		outContracts.put(c.getCustomer(),c);
 	}
 
+	public double getVIPDiscount() {
+		return VIPDiscount;
+	}
 //	private Employee getEmployee(String name) {
 //		return EmployeeFileController.getEmployee(name);
 //	}

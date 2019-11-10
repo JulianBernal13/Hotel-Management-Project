@@ -139,5 +139,9 @@ public class Printer {
 		System.out.println("is VIP " + c.isVIP());
 		System.out.println("is Staying " + c.isStaying());
 	}
+
+	public static void printManagerID(Hotel hotel) {
+		System.out.println(hotel.getManager().getID());
+	}
 	
 }
