@@ -49,12 +49,11 @@ public class ContractFileController {
                     String end = sdf.format(tempCalendar.getTime());
 
                     String dir = hotel.getPath() + File.separator + "Contracts" + File.separator + "Reservation";
-                    File file = new File(dir);
-                    file.mkdirs();
                     String path = dir + File.separator + customer.getFirstname() + " " + customer.getLastname() + ".txt";
                     Contract contract = new Contract(start, end, customer, room, path, price);
                     contract.writeToFile();
                     System.out.println("Success! The reservation has been completed!");
+                    hotel.addReservationContract(contract);
                 }
                 case "n": {
                     break;
@@ -72,28 +71,34 @@ public class ContractFileController {
         String check = sc.nextLine();
         switch (check) {
             case "y": {
-                File contract = new File(hotel.getPath() + File.separator + "Contracts" + File.separator + "Reservation" + File.separator + customer.getFirstname() + " " + customer.getLastname() + ".txt");
-                if (!contract.exists()) {
+                File contractFile = new File(hotel.getPath() + File.separator + "Contracts" + File.separator + "Reservation" + File.separator + customer.getFirstname() + " " + customer.getLastname() + ".txt");
+                if (!contractFile.exists()) {
                     System.out.println("This customer does not have a reservation.");
                     break;
                 }
                 File in = new File(hotel.getPath() + File.separator + "Contracts" + File.separator + "In");
-                in.mkdir();
-                contract.renameTo(new File(hotel.getPath() + File.separator + "Contracts" + File.separator + "In" + File.separator + contract.getName()));
+                Contract contract = readContract(hotel,contractFile);
+                contractFile.renameTo(new File(hotel.getPath() + File.separator + "Contracts" + File.separator + "In" + File.separator + contractFile.getName()));
                 System.out.println("Success! Now the customer has been checked in.");
+                Room room = contract.getRoom();
+                room.setEmpty(false);
+                room.writeToFile();
+                customer.setStaying(true);
+                customer.writeToFile();
+                hotel.addInContract(contract);
                 break;
             }
             case "n": {
                 System.out.println("What type of room do you want?((single,double,triple,queen,king))");
                 String type = sc.nextLine();
-                if (RoomFileController.showTypeRoomEmpty(hotel.getPath()+File.separator+"Rooms",type) > 0) {
-                    System.out.println("Which room are you going to reserve?");
-                    int roomNum = Integer.parseInt(sc.nextLine());
-                    Room room = hotel.getRoom(roomNum);
+                if (hotel.showTypeRoom(type) > 0) {
+                    System.out.println("Which room are you going to check-in?");
+                    Room room = hotel.getRoom(sc.nextLine());
                     while (!room.isEmpty() || !room.isClean() || !room.getType().equals(type)) {
                         System.out.println("This room cannot be checked-in, enter another room \n");
                         room = hotel.getRoom(sc.nextLine());
                     }
+
                     Calendar tempCalendar = new GregorianCalendar();
                     tempCalendar.setTime(current);
                     String start = sdf.format(tempCalendar.getTime());
@@ -109,13 +114,17 @@ public class ContractFileController {
                             tempCalendar.add(Calendar.DATE, period);
                             String end = sdf.format(tempCalendar.getTime());
                             String dir = hotel.getPath() + File.separator + "Contracts" + File.separator + "In";
-                            File file = new File(dir);
-                            file.mkdirs();
                             String path = dir + File.separator + customer.getFirstname() + " " + customer.getLastname() + ".txt";
                             Contract contract = new Contract(start, end, customer, room, path, price);
                             contract.writeToFile();
-                            RoomFileController.changeRoomOccupied(hotel.getPath()+File.separator+"Rooms", contract.getRoom().getNumber());
+
+                            room.setEmpty(false);
+                            System.out.println();
+                            room.writeToFile();
+                            customer.setStaying(true);
+                            customer.writeToFile();
                             System.out.println("Success! Now the customer has been checked-in!");
+                            hotel.addInContract(contract);
                             break;
                         }
                         case "n": {
@@ -131,7 +140,7 @@ public class ContractFileController {
         }
     }
 
-    public static void checkOut(Hotel hotel) throws FileNotFoundException {
+    public static void checkOut(Hotel hotel) throws IOException {
         File dir = new File(hotel.getPath() + File.separator + "Contracts" + File.separator + "In");
         for (File file : dir.listFiles()) {
             System.out.println(file.getName().substring(0,file.getName().length()-4));
@@ -147,14 +156,18 @@ public class ContractFileController {
         }
         Contract contract = readContract(hotel,file);
         int roomNum =contract.getRoom().getNumber();
-        File out = new File(hotel.getPath() + File.separator + "Contracts" + File.separator + "Out");
-        out.mkdir();
         file.renameTo(new File(hotel.getPath() + File.separator + "Contracts" + File.separator + "Out" + File.separator + file.getName()));
-
-        RoomFileController.changeRoomEmpty(hotel.getPath()+File.separator+"Rooms", roomNum);
+        Room room = contract.getRoom();
+        Customer customer = contract.getCustomer();
         System.out.println("Check-out Complete!");
+        room.setEmpty(true);
+        room.writeToFile();
+        customer.setStaying(false);
+        customer.writeToFile();
+        hotel.addOutContract(contract);
 
     }
+
 
     public static Contract readContract(Hotel hotel,File file) throws FileNotFoundException {
         Scanner sc = new Scanner(file);
@@ -167,4 +180,5 @@ public class ContractFileController {
         Contract contract = new Contract(start,end,customer,room,path,price);
         return contract;
     }
+
 }

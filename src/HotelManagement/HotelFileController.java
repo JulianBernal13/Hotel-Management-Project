@@ -50,7 +50,12 @@ public class HotelFileController implements FileController{
 
         FileController.createDirectory(hotelFile, "Customer");
         File employeeFolder = FileController.createDirectory(hotelFile, "Employee");
+        FileController.createDirectory(hotelFile, "Contracts");
 
+        File contractsFile = new File(hotelFile.getPath()+File.separator+"Contracts");
+        FileController.createDirectory(contractsFile, "Reservation");
+        FileController.createDirectory(contractsFile, "In");
+        FileController.createDirectory(contractsFile, "Out");
         File roomsFolder = FileController.createDirectory(hotelFile, "Rooms");
         for (int i = 1; i <= numOfLevel; i++) {
             for (int j = 0; j < levelRmNum; j++) {

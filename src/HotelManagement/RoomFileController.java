@@ -92,54 +92,6 @@ public class RoomFileController {
         System.out.println("Success! Now the room is " + type);
     }
 
-    public static void changeRoomOccupied(String path,int number) throws FileNotFoundException {
-        File file = new File(path+File.separator+number+".txt");
-        ArrayList<String> oldInfo = FileController.extractInfo(file);
-        FileController.cleanFileContent(file);
-
-        PrintWriter writer = new PrintWriter(file);
-        oldInfo.set(RoomProperty.isEmpty.ordinal(), "false");
-        for(String tmp:oldInfo){
-            writer.println(tmp);
-        }
-        writer.flush();
-        writer.close();
-    }
-
-    public static void changeRoomEmpty(String path, int number) throws FileNotFoundException {
-        File file = new File(path+File.separator+number+".txt");
-        ArrayList<String> oldInfo = FileController.extractInfo(file);
-        FileController.cleanFileContent(file);
-
-        PrintWriter writer = new PrintWriter(file);
-        oldInfo.set(RoomProperty.isEmpty.ordinal(), "true");
-        for(String tmp:oldInfo){
-            writer.println(tmp);
-        }
-        writer.flush();
-        writer.close();
-    }
-
-    public static int showTypeRoomEmpty(String path, String type) throws FileNotFoundException {
-        File allRoom= new File(path);
-        ArrayList<String> emptyRooms = new ArrayList<>();
-        int count=0;
-        for (File file : allRoom.listFiles()) {
-            ArrayList<String> oldInfo = FileController.extractInfo(file);
-            String originalType = oldInfo.get(RoomProperty.type.ordinal());
-            String originalIsEmpty = oldInfo.get(RoomProperty.isEmpty.ordinal());
-            String originalNumber = oldInfo.get(RoomProperty.number.ordinal());
-            String originalPrice = oldInfo.get(RoomProperty.price.ordinal());
-            if(originalType.equals(type) && originalIsEmpty.equals("true")){
-                emptyRooms.add(originalNumber + "    "+type + "     " + originalPrice);
-                count++;
-            }
-        }
-        Collections.sort(emptyRooms);
-        Printer.printArray(emptyRooms);
-        return count;
-    }
-
 
     public static void listRooms(File cur) throws IOException {
         Boolean toggle = true;

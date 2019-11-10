@@ -108,6 +108,14 @@ public class Room {
         this.notes = notes;
     }
 
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
     public void createRoomFile() throws IOException {
         File cur = new File(this.path);
         if(cur.createNewFile()) {

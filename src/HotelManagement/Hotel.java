@@ -30,6 +30,9 @@ public class Hotel {
 	private ArrayList<Customer> customers = new ArrayList<>();
 	private Manager manager; //
 	private ArrayList<Employee> employees = new ArrayList<>();
+	private ArrayList<Contract> reservationContracts = new ArrayList<>();
+	private ArrayList<Contract> inContracts = new ArrayList<>();
+	private ArrayList<Contract> outContracts = new ArrayList<>();
 	private HashMap<String, Integer> price = new HashMap<>();
 
 
@@ -60,6 +63,21 @@ public class Hotel {
 					this.manager = new Manager(f);
 			}
 		}
+		File reservationFoler = new File(path+File.separator+"Contracts"+File.separator+"Reservation");
+
+		for(File f:reservationFoler.listFiles()){
+		    reservationContracts.add(ContractFileController.readContract(this,f));
+        }
+        File inFoler = new File(path+File.separator+"Contracts"+File.separator+"In");
+        for(File f:inFoler.listFiles()){
+            inContracts.add(ContractFileController.readContract(this,f));
+        }
+        File outFoler = new File(path+File.separator+"Contracts"+File.separator+"Reservation");
+        for(File f:outFoler.listFiles()){
+            outContracts.add(ContractFileController.readContract(this,f));
+        }
+        for(File f : customerFolder.listFiles())
+            customers.add(new Customer(f));
 
 		Scanner sc = new Scanner(new File( path + File.separator + "priceInfo.txt"));
 		for(Price p : Price.values())
@@ -158,6 +176,16 @@ public class Hotel {
 		}
 		return counter;
 	}
+	public void addReservationContract (Contract c){
+		reservationContracts.add(c);
+	}
+	public void addInContract (Contract c){
+		inContracts.add(c);
+	}
+	public void addOutContract (Contract c){
+		outContracts.add(c);
+	}
+
 //	private Employee getEmployee(String name) {
 //		return EmployeeFileController.getEmployee(name);
 //	}
