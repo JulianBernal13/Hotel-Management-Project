@@ -3,13 +3,17 @@ package HotelManagement;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 import static HotelManagement.Main.current;
 import static HotelManagement.Main.sdf;
 
 /**
- * @author Yingxie Gao
+ * @author Yingxie Gao, Anji Yu
  * @date 11/7/19 08:11
  */
 public class ContractFileController {
@@ -208,6 +212,30 @@ public class ContractFileController {
 
     public static double getPrice(Hotel hotel, int period, Room r, Customer c) {
         return getPrice(hotel, period, r.getPrice(), c);
+    }
+
+    public static void priceMatch(Hotel hotel, Contract contract) throws ParseException, IOException {
+        Customer customer = contract.getCustomer();
+        Room room = contract.getRoom();
+        Date start = getDate(contract.getStart());
+        Date end = getDate(contract.getEnd());
+        int period = getDifferenceDays(start, end);
+        contract.setPrice(getPrice(hotel, period, room, customer));
+        contract.writeToFile();
+    }
+
+    public static void changeRoom(Hotel hotel, Contract contract, Room room) throws IOException {
+        contract.setRoom(room);
+        contract.writeToFile();
+    }
+
+    public static Date getDate(String date) throws ParseException {
+        return new SimpleDateFormat("yyyy-MM-dd").parse(date);
+    }
+
+    public static int getDifferenceDays(Date d1, Date d2) {
+        long diff = d2.getTime() - d1.getTime();
+        return (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
     }
 
 }
