@@ -41,12 +41,15 @@ public class Printer {
 	public static void printManagerMenu() {
 		System.out.println("=============================================");
 		System.out.println("Enter 'DH' to display hotal information      ");
-		System.out.println("Enter 'DE' to display all employees   ");
+		System.out.println("Enter 'DE' to display all employees          ");
+		System.out.println("Enter 'DI' to display inventory              ");
 		System.out.println("Enter 'LR' to list all rooms and to edit     ");
 		System.out.println("Enter 'CE' to call an employee               ");
 		System.out.println("Enter 'EE' to edit employee                  ");
-		System.out.println("Enter 'AE' to add employee                  ");
+		System.out.println("Enter 'AE' to add employee                   ");
 		System.out.println("Enter 'FE' to fire employee                  ");
+		System.out.println("Enter 'AI' to add inventory item           ");
+		System.out.println("Enter 'UI' to use inventory item           "); // used
 		System.out.println("Enter 'CRT' to change room type                  ");
 		System.out.println("Enter 'exit' to exit");
 		System.out.println("=============================================");
@@ -55,6 +58,8 @@ public class Printer {
 
 	public static void printReceptionMenu() {
 		System.out.println("=============================================");
+		System.out.println("Enter 'DI' to display inventory             "); // used
+		System.out.println("Enter 'UI' to use inventory item            "); // used
 		System.out.println("Enter 'CI' to help a customer check-in      ");
 		System.out.println("Enter 'CO' to help a customer check-out      ");
 		System.out.println("Enter 'LC' to look up a customer");
@@ -77,7 +82,7 @@ public class Printer {
 			System.out.println(element);
 		}
 	}
-	
+
 	public static void printRoomEditMenu(Room room) {
 		System.out.println("=============================================");
 
@@ -93,6 +98,7 @@ public class Printer {
 		System.out.println("Enter 'Notes' to edit general room notes      ");
 		System.out.println("Enter 'Exit' to get back to List of rooms and save changes     ");
 	}
+
 	public static void printRoomInfo(Room room) {
 		System.out.println("=============================================");
 
@@ -101,8 +107,8 @@ public class Printer {
 		System.out.println("Room is clean: " + room.isClean());
 		System.out.println("Room maintaince note: " + room.getMaintenance());
 		System.out.println("Room notes: " + room.getNotes());
-		}
-	
+	}
+
 	public static void printNoteMaker() {
 		System.out.println("=============================================");
 		System.out.println("Enter 'delete' then 'line number' to delete the line      ");
@@ -113,18 +119,18 @@ public class Printer {
 
 	public static void printFile(File file) throws FileNotFoundException {
 		Scanner sc = new Scanner(file);
-		while(sc.hasNext())
+		while (sc.hasNext())
 			System.out.println(sc.nextLine());
 	}
 
 	public static void printFolderContent(File folder) {
-		for(File file : folder.listFiles())
+		for (File file : folder.listFiles())
 			System.out.println(file.getName());
 	}
 
 	public static void printFolderContentInOrder(File folder) {
 		ArrayList<String> names = new ArrayList<>();
-		for(File file : folder.listFiles())
+		for (File file : folder.listFiles())
 			names.add(file.getName());
 		Collections.sort(names);
 		printArray(names);
@@ -143,5 +149,5 @@ public class Printer {
 	public static void printManagerID(Hotel hotel) {
 		System.out.println(hotel.getManager().getID());
 	}
-	
+
 }
