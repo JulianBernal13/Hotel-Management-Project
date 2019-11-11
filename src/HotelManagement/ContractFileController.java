@@ -103,7 +103,14 @@ public class ContractFileController {
                         System.out.println("This room cannot be checked-in, enter another room \n");
                         room = hotel.getRoom(sc.nextLine());
                     }
-
+                    if(!customer.isVIP()) {
+                        System.out.println("Would you like to be our VIP member? y/n");
+                        if(sc.nextLine().equals("y")) {
+                            customer.setVIP(true);
+                            customer.writeToFile();
+                            System.out.println("Congratulations, you are now our VIP member");
+                        }
+                    }
                     Calendar tempCalendar = new GregorianCalendar();
                     tempCalendar.setTime(current);
                     String start = sdf.format(tempCalendar.getTime());
