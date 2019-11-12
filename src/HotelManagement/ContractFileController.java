@@ -183,9 +183,16 @@ public class ContractFileController {
         int inCount=0;
         int outCount=0;
         HashMap<Customer,Contract> reservationContracts = hotel.getReservationContracts();
-        for (Contract c: reservationContracts.values()) {
-            if(c.getStart().equals(sdf.format(current))){
+        Iterator<Map.Entry<Customer,Contract>> iter = reservationContracts.entrySet().iterator();
+        while(iter.hasNext()){
+            Map.Entry<Customer, Contract> entry = iter.next();
+            if(entry.getValue().getStart().equals(sdf.format(current))){
                 inCount++;
+            }
+            if(entry.getValue().getStart().compareTo(sdf.format(current))<0){
+                iter.remove();
+                File file = new File(entry.getValue().getPath());
+                file.delete();
             }
         }
         HashMap<Customer,Contract> inContracts = hotel.getInContracts();
@@ -237,7 +244,7 @@ public class ContractFileController {
     }
 
     public static Date getDate(String date) throws ParseException {
-        return new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        return sdf.parse(date);
     }
 
     public static int getDifferenceDays(Date d1, Date d2) {
