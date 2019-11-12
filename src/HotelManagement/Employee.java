@@ -21,6 +21,7 @@ public class Employee {
 
 	private String paymentType;
 	private int salary;
+	private String path;
 	private String hotel;
 	private boolean clockIn;
 
@@ -36,7 +37,8 @@ public class Employee {
 	 * @param paymentType
 	 * @param salary
 	 */
-	public Employee(String titleName, String id, String paymentType, int salary) {
+	public Employee(String path, String titleName, String id, String paymentType, int salary) {
+		this.path = path;
 		this.titleName = titleName;
 		this.id = id;
 		this.paymentType = paymentType;
@@ -47,6 +49,7 @@ public class Employee {
 
 	public Employee(File employeeFile) throws FileNotFoundException {
 		Scanner sc = new Scanner(employeeFile);
+		this.path = employeeFile.getPath();
 		ArrayList<String> info = FileController.extractInfo(employeeFile);
 		this.titleName = info.get(Property.titleName.ordinal());
 		this.id = info.get(Property.id.ordinal());
@@ -84,6 +87,7 @@ public class Employee {
 	 * @return hotel
 	 */
 	public String checkCurrentHotel() {
+		String hotel = path.substring(19, path.length() - 9);
 		return hotel;
 	}
 
@@ -93,6 +97,10 @@ public class Employee {
 
 	public void clockOut() {
 		clockIn = false;
+	}
+
+	public String getPath() {
+		return path;
 	}
 
 	public String getTitleName() {
