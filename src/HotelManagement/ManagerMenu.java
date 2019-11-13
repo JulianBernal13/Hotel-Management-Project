@@ -57,6 +57,10 @@ public class ManagerMenu implements Menu {
 			menu();
 			break;
 		} // change room type
+		case "Schedule":{
+			ScheduleController.ScheduleMenu(cur);
+			break;
+		}
 		}
 	}
 }
