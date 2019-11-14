@@ -47,6 +47,11 @@ public class ReceptionMenu implements Menu{
 			menu();
 			break;
 		}
+			case "DR":{
+				ContractFileController.deleteContract(hotel);
+				menu();
+				break;
+			}
 		case "back": {
 				break;
 			}

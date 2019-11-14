@@ -24,9 +24,10 @@ public class Employee {
 	private String path;
 	private String hotel;
 	private boolean clockIn;
+	private String payroll;
 
 	public static enum Property {
-		titleName, id, paymentType, salary
+		titleName, id, paymentType, salary, payroll
 	}
 
 	/**
@@ -55,6 +56,7 @@ public class Employee {
 		this.id = info.get(Property.id.ordinal());
 		this.salary = Integer.parseInt(info.get(Property.salary.ordinal()));
 		this.paymentType = info.get(Property.paymentType.ordinal());
+		this.payroll = info.get(Property.payroll.ordinal());
 	}
 
 	public void setTitleName(String titleName) {
@@ -71,6 +73,10 @@ public class Employee {
 
 	public void setPaymentType(String paymentType) {
 		this.paymentType = paymentType;
+	}
+
+	public void setPayroll(String payroll) {
+		this.payroll = payroll;
 	}
 
 	public void setHotel(String hotel) {
@@ -117,6 +123,10 @@ public class Employee {
 
 	public String getPaymentType() {
 		return paymentType;
+	}
+
+	public String getPayroll() {
+		return payroll;
 	}
 
 	public String toString() {

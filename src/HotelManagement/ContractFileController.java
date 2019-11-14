@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -24,32 +22,39 @@ public class ContractFileController {
 
         System.out.println("What type of room do you want?((single,double,triple,queen,king))");
         String type = sc.nextLine();
-        if (hotel.showTypeRoom(type) > 0) {
+        System.out.println("When do you want to start?(how many days later)");
+        int startDay = Integer.parseInt(sc.nextLine());
+        Calendar tempCalendar = new GregorianCalendar();
+        tempCalendar.setTime(current);
+        tempCalendar.add(Calendar.DATE, startDay);
+        String start = sdf.format(tempCalendar.getTime());
+
+        System.out.println("How long would you like to stay?");
+        int period = Integer.parseInt(sc.nextLine());
+        tempCalendar.add(Calendar.DATE, period);
+        String end = sdf.format(tempCalendar.getTime());
+
+        ArrayList<Integer> roomList = showAvailableRoom(type,hotel,start,end);
+        if (roomList.size() > 0) {
+            System.out.println(roomList.toString());
             System.out.println("Which room are you going to reserve?");
-            Room room = hotel.getRoom(sc.nextLine());
+            int roomNum = Integer.parseInt(sc.nextLine());
+            while(!roomList.contains(roomNum)){
+                System.out.println("This room can not be selected. Try another room again.");
+                roomNum = Integer.parseInt(sc.nextLine());
+            }
+            Room room = hotel.getRoom(roomNum);
             while (!room.getType().equals(type)) {
                 System.out.println("This room cannot be reserved, enter another room \n");
                 room = hotel.getRoom(sc.nextLine());
             }
 
-            System.out.println("When do you want to start?(how many days later)");
-            int startDay = Integer.parseInt(sc.nextLine());
-            Calendar tempCalendar = new GregorianCalendar();
-            tempCalendar.setTime(current);
-            tempCalendar.add(Calendar.DATE, startDay);
-            String start = sdf.format(tempCalendar.getTime());
-
-            System.out.println("How long would you like to have this room?");
-            int period = Integer.parseInt(sc.nextLine());
             double price = getPrice(hotel, period, room, customer);
             System.out.println("The total price would be "+price);
             System.out.println("Are you sure to reserve this room?(y/n)");
             String sure = sc.nextLine();
             switch (sure) {
                 case "y": {
-                    tempCalendar.add(Calendar.DATE, period);
-                    String end = sdf.format(tempCalendar.getTime());
-
                     String dir = hotel.getPath() + File.separator + "Contracts" + File.separator + "Reservation";
                     String path = dir + File.separator + customer.getFirstname() + " " + customer.getLastname() + ".txt";
                     Contract contract = new Contract(start, end, customer, room, path, price);
@@ -76,8 +81,8 @@ public class ContractFileController {
                 File contractFile = new File(hotel.getPath() + File.separator + "Contracts" +
                         File.separator + "Reservation" + File.separator + customer.getFirstname() + " " +
                         customer.getLastname() + ".txt");
-                if (!contractFile.exists()) {
-                    System.out.println("This customer does not have a reservation.");
+                if (!contractFile.exists() || !readContract(hotel,contractFile).getStart().equals(sdf.format(current))) {
+                    System.out.println("This customer does not have a reservation today.");
                     break;
                 }
                 File in = new File(hotel.getPath() + File.separator + "Contracts" + File.separator + "In");
@@ -96,9 +101,25 @@ public class ContractFileController {
             case "n": {
                 System.out.println("What type of room do you want?((single,double,triple,queen,king))");
                 String type = sc.nextLine();
-                if (hotel.showTypeRoom(type) > 0) {
+                Calendar tempCalendar = new GregorianCalendar();
+                tempCalendar.setTime(current);
+                String start = sdf.format(tempCalendar.getTime());
+
+                System.out.println("How long would you like to have this room?");
+                int period = Integer.parseInt(sc.nextLine());
+                tempCalendar.add(Calendar.DATE, period);
+                String end = sdf.format(tempCalendar.getTime());
+
+                ArrayList<Integer> roomList = showAvailableRoom(type,hotel,start,end);
+                if (roomList.size() > 0) {
+                    System.out.println(roomList.toString());
                     System.out.println("Which room are you going to check-in?");
-                    Room room = hotel.getRoom(sc.nextLine());
+                    int roomNum = Integer.parseInt(sc.nextLine());
+                    while(!roomList.contains(roomNum)){
+                        System.out.println("This room can not be selected. Try another room again.");
+                        roomNum = Integer.parseInt(sc.nextLine());
+                    }
+                    Room room = hotel.getRoom(roomNum);
                     while (!room.isEmpty() || !room.isClean() || !room.getType().equals(type)) {
                         System.out.println("This room cannot be checked-in, enter another room \n");
                         room = hotel.getRoom(sc.nextLine());
@@ -111,20 +132,13 @@ public class ContractFileController {
                             System.out.println("Congratulations, you are now our VIP member");
                         }
                     }
-                    Calendar tempCalendar = new GregorianCalendar();
-                    tempCalendar.setTime(current);
-                    String start = sdf.format(tempCalendar.getTime());
 
-                    System.out.println("How long would you like to have this room?");
-                    int period = Integer.parseInt(sc.nextLine());
                     double price = getPrice(hotel, period, room, customer);
                     System.out.println("The total price would be "+price);
                     System.out.println("Are you sure to check this room in?(y/n)");
                     String sure = sc.nextLine();
                     switch (sure) {
                         case "y": {
-                            tempCalendar.add(Calendar.DATE, period);
-                            String end = sdf.format(tempCalendar.getTime());
                             String dir = hotel.getPath() + File.separator + "Contracts" + File.separator + "In";
                             String path = dir + File.separator + customer.getFirstname() + " " + customer.getLastname() + ".txt";
                             Contract contract = new Contract(start, end, customer, room, path, price);
@@ -250,6 +264,68 @@ public class ContractFileController {
     public static int getDifferenceDays(Date d1, Date d2) {
         long diff = d2.getTime() - d1.getTime();
         return (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+    }
+
+    public static ArrayList<Integer> showAvailableRoom(String type, Hotel hotel,String start, String end) {
+
+        ArrayList<Integer> list = new ArrayList<>();
+        for(int i = 0; i < hotel.getNumOfLevel(); ++i) {
+            for(int j = 0; j < hotel.getLevelRmNum(); ++j) {
+                Room cur = hotel.getRoom(i,j);
+                if(cur.getType().equals(type)) {
+                    list.add(cur.getNumber());
+
+                }
+            }
+        }
+        HashMap<Customer,Contract> reservationContracts = hotel.getReservationContracts();
+        Iterator<Map.Entry<Customer,Contract>> iter = reservationContracts.entrySet().iterator();
+        while(iter.hasNext()){
+            Map.Entry<Customer, Contract> entry = iter.next();
+            String contractStartDay = entry.getValue().getStart();
+            String contractEndDay = entry.getValue().getEnd();
+            if((end.compareTo(contractStartDay)>0&&end.compareTo(contractEndDay)<=0) || (start.compareTo(contractStartDay)>=0&&start.compareTo(contractEndDay)<0) || (start.compareTo(contractStartDay)<=0&&end.compareTo(contractEndDay)>=0)){
+                Iterator<Integer> iterList = list.iterator();
+                while (iterList.hasNext()) {
+                    if (iterList.next()==entry.getValue().getRoom().getNumber()) {
+                        iterList.remove();
+                    }
+                }
+            }
+        }
+
+        HashMap<Customer,Contract> inContracts = hotel.getInContracts();
+        for (Contract c: inContracts.values()) {
+            String contractStartDay = c.getStart();
+            String contractEndDay = c.getEnd();
+            if((end.compareTo(contractStartDay)>0&&end.compareTo(contractEndDay)<=0) || (start.compareTo(contractStartDay)>=0&&start.compareTo(contractEndDay)<0) || (start.compareTo(contractStartDay)<=0&&end.compareTo(contractEndDay)>=0)){
+                Iterator<Integer> iterList = list.iterator();
+                while (iterList.hasNext()) {
+                    if (iterList.next()==c.getRoom().getNumber()) {
+                        iterList.remove();
+                    }
+                }
+            }
+        }
+        return list;
+    }
+
+    public static void deleteContract(Hotel hotel) throws FileNotFoundException {
+        System.out.println("Which contract are you going to delete?");
+        File contractFile = new File(hotel.getPath() + File.separator + "Contracts" +
+                File.separator + "Reservation");
+        File[] fs = contractFile.listFiles();
+        for(File f:fs){
+            System.out.println(f.getName());
+        }
+        Scanner sc = new Scanner(System.in);
+        String contractName = sc.nextLine();
+        File contractLocation = new File(hotel.getPath() + File.separator + "Contracts" +
+                File.separator + "Reservation"+File.separator+contractName+".txt");
+        Contract contract = readContract(hotel,contractLocation);
+        hotel.getReservationContracts().remove(contract.getCustomer());
+        File file = new File(contract.getPath());
+        file.delete();
     }
 
 }
