@@ -168,29 +168,40 @@ public class ContractFileController {
 
     public static void checkOut(Hotel hotel) throws IOException {
         File dir = new File(hotel.getPath() + File.separator + "Contracts" + File.separator + "In");
+        int count = 0;
         for (File file : dir.listFiles()) {
-            System.out.println(file.getName().substring(0,file.getName().length()-4));
+            Contract c = readContract(hotel,file);
+            if(c.getEnd().equals(sdf.format(current))) {
+                System.out.println(file.getName().substring(0, file.getName().length() - 4));
+                count++;
+            }
         }
-        System.out.println("Enter the customer's name to check-out");
-        Scanner sc = new Scanner(System.in);
-        String name = sc.nextLine();
-        File file = new File(dir+File.separator+name+".txt");
-        if(!file.exists()){
-            System.out.println("No such customer had checked-in");
-            return;
+        if(count>0) {
+            System.out.println("Enter the customer's name to check-out");
+            Scanner sc = new Scanner(System.in);
+            String name = sc.nextLine();
+            File file = new File(dir + File.separator + name + ".txt");
+            if (!file.exists()) {
+                System.out.println("No such customer had checked-in");
+                return;
+            }
+            Contract contract = readContract(hotel, file);
+            int roomNum = contract.getRoom().getNumber();
+            file.renameTo(new File(hotel.getPath() + File.separator + "Contracts" + File.separator + "Out" + File.separator + file.getName()));
+            Room room = contract.getRoom();
+            Customer customer = contract.getCustomer();
+            System.out.println("Check-out Complete!");
+            room.setEmpty(true);
+            room.writeToFile();
+            customer.setStaying(false);
+            customer.writeToFile();
+            hotel.addOutContract(contract);
+            hotel.getInContracts().remove(customer);
         }
-        Contract contract = readContract(hotel,file);
-        int roomNum =contract.getRoom().getNumber();
-        file.renameTo(new File(hotel.getPath() + File.separator + "Contracts" + File.separator + "Out" + File.separator + file.getName()));
-        Room room = contract.getRoom();
-        Customer customer = contract.getCustomer();
-        System.out.println("Check-out Complete!");
-        room.setEmpty(true);
-        room.writeToFile();
-        customer.setStaying(false);
-        customer.writeToFile();
-        hotel.addOutContract(contract);
-        hotel.getInContracts().remove(customer);
+        else
+        {
+            System.out.println("There is no room needs being checked-out.");
+        }
     }
 
     public static void makeNotification(Hotel hotel){
@@ -316,7 +327,7 @@ public class ContractFileController {
                 File.separator + "Reservation");
         File[] fs = contractFile.listFiles();
         for(File f:fs){
-            System.out.println(f.getName());
+            System.out.println(f.getName().substring(0,f.getName().length()-4));
         }
         Scanner sc = new Scanner(System.in);
         String contractName = sc.nextLine();
