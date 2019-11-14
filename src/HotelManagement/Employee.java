@@ -38,12 +38,13 @@ public class Employee {
 	 * @param paymentType
 	 * @param salary
 	 */
-	public Employee(String path, String titleName, String id, String paymentType, int salary) {
+	public Employee(String path, String titleName, String id, String paymentType, int salary, String payroll) {
 		this.path = path;
 		this.titleName = titleName;
 		this.id = id;
 		this.paymentType = paymentType;
 		this.salary = salary;
+		this.payroll = payroll;
 		clockIn = false;
 		hotel = checkCurrentHotel();
 	}

@@ -64,7 +64,7 @@ public class EmployeeFileController implements FileController {
 			writer.println(id);
 			writer.println(paymentType);
 			writer.println(salary);
-			writer.println("");
+			writer.println("test");
 			writer.flush();
 			writer.close();
 			hotel.addEmployee(new Employee(newEmployee));
