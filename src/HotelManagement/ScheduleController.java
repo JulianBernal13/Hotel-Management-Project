@@ -2,7 +2,9 @@ package HotelManagement;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -142,6 +144,13 @@ public class ScheduleController {
             } 
             case "Exit":{
             	toggle = false;
+            	trigger = false;
+            	break;
+            }
+            case "ClockIn":{
+            	ClockIn(hotel,CurrSchedule);
+            	trigger = false;
+            	break;
             }
             default:{
             	trigger = false;
@@ -156,6 +165,46 @@ public class ScheduleController {
             		trigger = false;
             	}
             }
+		}
+	}
+	
+	public static void ClockIn(File hotel, File Schedule) throws IOException {
+		Boolean toggle = true;
+		Scanner sc = new Scanner(System.in);
+		int year = -1;
+		int day = -1;
+		int month = -1;
+		int hour = -1;
+		while(toggle){
+			System.out.println("enter Employee to clock");
+    		EmployeeFileController.ListAllEmployees(hotel);
+    		String temp = sc.nextLine();
+    		if(EmployeeFileController.checkID(hotel,temp)) {
+    			System.out.println("enter year 4 digits");
+    			year = sc.nextInt();
+    			System.out.println("enter month in number");
+    			month = sc.nextInt();
+    			System.out.println("enter number day");
+    			day = sc.nextInt();
+    			System.out.println("enter hour clocked");
+    			hour = sc.nextInt();
+    			File clockin = new File(Schedule.getPath() + File.separator + year + "-" + month + "-" + day + ".txt");
+    			if(clockin.exists()) {
+    			    FileWriter fileWriter = new FileWriter(clockin.getPath(), true); //Set true for append mode
+        			PrintWriter fw = new PrintWriter(clockin);
+        		    fw.println(temp.substring(0, temp.length()-4));  //New line
+        		    fw.println(hour);
+        		    fw.close();
+        		    toggle = false;
+    			} else {
+    				clockin.createNewFile();
+    	            PrintWriter writer = new PrintWriter(clockin);
+    	            writer.println(temp.substring(0, temp.length()-4));  //New line
+        		    writer.println(hour);
+        		    writer.close();
+        		    toggle = false;
+    			}
+    		}
 		}
 	}
 	
