@@ -26,9 +26,9 @@ public class Manager extends Employee {
 	 * @param paymentType
 	 * @param salary
 	 */
-	public Manager(String path, String titleName, String id, String paymentType, int salary) {
+	public Manager(String path, String titleName, String id, String paymentType, int salary, String payroll) {
 
-		super(path, titleName, id, paymentType, salary);
+		super(path, titleName, id, paymentType, salary, payroll);
 		clockIn = false;
 	}
 
@@ -121,7 +121,7 @@ public class Manager extends Employee {
 				String tempID = FileReader.getEmployeeInfo(f, Property.id);
 				String tempPT = FileReader.getEmployeeInfo(f, Property.paymentType);
 				String tempS = FileReader.getEmployeeInfo(f, Property.salary);
-				return new Employee(employeePath, tempTN, tempID, tempPT, Integer.parseInt(tempS));
+				return new Employee(employeePath, tempTN, tempID, tempPT, Integer.parseInt(tempS), " ");
 
 			} else {
 				System.out.println("The employee with the ID " + id + " does not work here");

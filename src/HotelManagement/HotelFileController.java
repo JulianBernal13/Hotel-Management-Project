@@ -68,7 +68,7 @@ public class HotelFileController implements FileController{
         Random rand = new Random();
         String employeePath = employeeFolder.getPath();
         Manager manager = new Manager(employeePath, "Manager",
-                "M" + rand.nextInt(10000), "bi-weekly", 80000);
+                "M" + rand.nextInt(10000), "bi-weekly", 80000, "test");
         
         File cur2 = new File(employeePath + File.separator + "Emp. to delete" + ".txt"); // ONLY
 		cur2.createNewFile(); // I'M ADDING Also formatting
@@ -81,6 +81,7 @@ public class HotelFileController implements FileController{
             writer1.println(manager.getID());
             writer1.println(manager.getPaymentType());
             writer1.println(String.valueOf(manager.getSalary()));
+            writer1.println(manager.getPayroll());
             writer1.flush();
             writer1.close();
         }

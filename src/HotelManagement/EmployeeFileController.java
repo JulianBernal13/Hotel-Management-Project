@@ -324,7 +324,7 @@ public class EmployeeFileController implements FileController {
 		}
 		return tempID;
 	}
-<<<<<<< HEAD
+
 	
 	public static Boolean checkID(File hotel,String id) {
 		File Employee = new File(hotel.getPath() + File.separator + "Employee");
@@ -339,9 +339,10 @@ public class EmployeeFileController implements FileController {
 	public static void ListAllEmployees(File hotel) {
 		File Employee = new File(hotel.getPath() + File.separator + "Employee");
 		for (File file : Employee.listFiles()) {
-            System.out.println("-" + file.getName());
-        }
-=======
+			System.out.println("-" + file.getName());
+		}
+	}
+
 
 	public static void Payroll(File hotel) throws FileNotFoundException {
 		ArrayList<String> ids = new ArrayList<>();
@@ -565,6 +566,5 @@ public class EmployeeFileController implements FileController {
 		writer.println("Payroll: " + e.getPayroll());
 		writer.flush();
 		writer.close();
->>>>>>> 8ec58c884572101ba261974bc69c7e7407b843ad
 	}
 }
