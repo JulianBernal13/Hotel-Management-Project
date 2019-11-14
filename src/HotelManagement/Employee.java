@@ -38,19 +38,18 @@ public class Employee {
 	 * @param paymentType
 	 * @param salary
 	 */
-	public Employee(String path, String titleName, String id, String paymentType, int salary, String payroll) {
+	public Employee(String path, String titleName, String id, String paymentType, int salary) {
 		this.path = path;
 		this.titleName = titleName;
 		this.id = id;
 		this.paymentType = paymentType;
 		this.salary = salary;
 		clockIn = false;
-		this.payroll = payroll;
 		hotel = checkCurrentHotel();
 	}
 
 	public Employee(File employeeFile) throws FileNotFoundException {
-//		Scanner sc = new Scanner(employeeFile);
+		Scanner sc = new Scanner(employeeFile);
 		this.path = employeeFile.getPath();
 		ArrayList<String> info = FileController.extractInfo(employeeFile);
 		this.titleName = info.get(Property.titleName.ordinal());
