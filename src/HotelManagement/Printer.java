@@ -117,7 +117,25 @@ public class Printer {
 		System.out.println("Enter 'Done' to exit editor and save changes      ");
 		System.out.println("Enter 'Exit' to exit with out saving any changes      ");
 	}
+	
+	public static void printScheduleMenu() {
+		System.out.println("=============================================");
+		System.out.println("Enter 'list' to get a list of all schedules made     ");
+		System.out.println("Enter 'new' to make a new schedule    ");
+		System.out.println("Enter 'Exit' to exit to previous menu      ");
+	}
+	
+	public static void printAllSchedules() {
+		System.out.println("=============================================");
+		System.out.println("Enter Schedule name to view the Schedule     ");
+		System.out.println("Enter 'Exit' to exit to previous menu     ");
 
+	}
+	
+	public static void printDayView() {
+		System.out.println("=============================================");
+		System.out.println("Enter a day to view of this Schedule (Monday,Tuseday, ect)");
+	}
 	public static void printFile(File file) throws FileNotFoundException {
 		Scanner sc = new Scanner(file);
 		while (sc.hasNext())

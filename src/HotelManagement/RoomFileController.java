@@ -97,7 +97,7 @@ public class RoomFileController {
         Boolean toggle = true;
         while(toggle) {
             File rooms = new File(cur.getPath() + File.separator + "Rooms");
-            rooms.delete();
+            //rooms.delete();
         	Printer.printRoomview();
             Scanner sc = new Scanner(System.in);
             for (File file : rooms.listFiles()) {

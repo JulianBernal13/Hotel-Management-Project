@@ -1,6 +1,7 @@
 package HotelManagement;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,18 +64,67 @@ public class Schedule {
     	return this.day.get(day);
     }
     
-    public void setDayHour(String day, int hour, int ID) {
+    
+    public void setDayHourID(String day, int hour, int ID) {
     	this.day.get(day).put(hour, ID);
     }
     
+    public static Schedule ScheduleRead(File current) throws FileNotFoundException {
+        File cur = new File(current.getPath() + File.separator + current.getName() + ".txt");
+        Schedule back = new Schedule("check");
+        int line = 0;
+        String day = "";
+        int hour = 0;
+        int ID = 0;
+        back.setScheduleName(current.getName());
+        ArrayList<String> oldInfo = FileController.extractInfo(cur);
+        int i = 0;
+        while(i < oldInfo.size()) {
+        	day = oldInfo.get(i);
+        	i++;
+        	for(int j=0;j<24;j++) {
+        		hour = Integer.parseInt(oldInfo.get(i));
+        		i++;
+        		ID = Integer.parseInt(oldInfo.get(i));
+        		i++;
+        		back.setDayHourID(day, hour, ID);
+        	}
+        }
+        
+    	return back;
+    }
+    
     public void saveSchedule(File path) throws FileNotFoundException, IOException {
-        File cur = new File(path.getParent() + File.separator + this.ScheduleName);
-        if(cur.createNewFile()) {
+        File cur = new File(path.getPath() + File.separator + this.ScheduleName);
+        if(!cur.exists()) {
+        	cur.mkdir();
+        }
+        cur = new File(cur.getPath() + File.separator + this.ScheduleName + ".txt");
+        if(cur.exists()) {
             PrintWriter writer = new PrintWriter(cur);
-            
-            writer.println("end");
+            for(String key : day.keySet()) {
+                writer.println(key);
+            	for(int key2 : day.get(key).keySet()) {
+            		writer.println(key2);
+            		writer.println(day.get(key).get(key2));
+            	}
+            }
             writer.flush();
             writer.close();
+            System.out.println("reached");	
+        }
+        else if (cur.createNewFile()) {
+            PrintWriter writer = new PrintWriter(cur);
+            for(String key : day.keySet()) {
+                writer.println(key);
+            	for(int key2 : day.get(key).keySet()) {
+            		writer.println(key2);
+            		writer.println(day.get(key).get(key2));
+            	}
+            }
+            writer.flush();
+            writer.close();
+            System.out.println("reached");
         }
     }
 }
