@@ -51,6 +51,7 @@ public class HotelFileController implements FileController{
         FileController.createDirectory(hotelFile, "Customer");
         File employeeFolder = FileController.createDirectory(hotelFile, "Employee");
         FileController.createDirectory(hotelFile, "Contracts");
+        FileController.createDirectory(hotelFile, "Inventory"); //new code
 
         File contractsFile = new File(hotelFile.getPath()+File.separator+"Contracts");
         FileController.createDirectory(contractsFile, "Reservation");
@@ -70,8 +71,8 @@ public class HotelFileController implements FileController{
         Manager manager = new Manager(employeePath, "Manager",
                 "M" + rand.nextInt(10000), "bi-weekly", 80000, "test");
         
-        File cur2 = new File(employeePath + File.separator + "Emp. to delete" + ".txt"); // ONLY
-		cur2.createNewFile(); // I'M ADDING Also formatting
+        File cur2 = new File(employeePath + File.separator + "Emp. to delete" + ".txt"); 
+		cur2.createNewFile(); 
 
 
         File cur = new File(employeePath + File.separator + manager.getID() + ".txt");
