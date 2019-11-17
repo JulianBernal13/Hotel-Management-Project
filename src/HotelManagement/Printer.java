@@ -48,9 +48,10 @@ public class Printer {
 		System.out.println("Enter 'EE' to edit employee                  ");
 		System.out.println("Enter 'AE' to add employee                   ");
 		System.out.println("Enter 'FE' to fire employee                  ");
-		System.out.println("Enter 'AI' to add inventory item           ");
-		System.out.println("Enter 'UI' to use inventory item           "); // used
-		System.out.println("Enter 'CRT' to change room type                  ");
+		System.out.println("Enter 'IC' to call inventory item            ");
+		System.out.println("Enter 'AI' to add inventory item             ");
+		System.out.println("Enter 'UI' to use inventory item             ");
+		System.out.println("Enter 'CRT' to change room type              ");
 		System.out.println("Enter 'Schedule' to use Schedule             ");
 		System.out.println("Enter 'exit' to exit");
 		System.out.println("=============================================");
@@ -59,8 +60,9 @@ public class Printer {
 
 	public static void printReceptionMenu() {
 		System.out.println("=============================================");
-		System.out.println("Enter 'DI' to display inventory             "); // used
-		System.out.println("Enter 'UI' to use inventory item            "); // used
+		System.out.println("Enter 'DI' to display inventory             ");
+		System.out.println("Enter 'UI' to use inventory item            ");
+		System.out.println("Enter 'IC' to call inventory item            ");
 		System.out.println("Enter 'CI' to help a customer check-in      ");
 		System.out.println("Enter 'CO' to help a customer check-out      ");
 		System.out.println("Enter 'LC' to look up a customer");
@@ -118,29 +120,44 @@ public class Printer {
 		System.out.println("Enter 'Done' to exit editor and save changes      ");
 		System.out.println("Enter 'Exit' to exit with out saving any changes      ");
 	}
-	
+
 	public static void printScheduleMenu() {
 		System.out.println("=============================================");
 		System.out.println("Enter 'list' to get a list of all schedules made     ");
 		System.out.println("Enter 'new' to make a new schedule    ");
 		System.out.println("Enter 'Exit' to exit to previous menu      ");
 	}
-	
+
 	public static void printAllSchedules() {
 		System.out.println("=============================================");
 		System.out.println("Enter Schedule name to view the Schedule     ");
 		System.out.println("Enter 'Exit' to exit to previous menu     ");
 
 	}
-	
+
 	public static void printDayView() {
 		System.out.println("=============================================");
 		System.out.println("Enter a day to view of this Schedule (Monday,Tuseday, ect)");
 	}
+
 	public static void printFile(File file) throws FileNotFoundException {
 		Scanner sc = new Scanner(file);
+		if (!sc.hasNext())
+			System.out.println("There's nothing in this file"); // new code
 		while (sc.hasNext())
 			System.out.println(sc.nextLine());
+	}
+
+	public static void printFiles(File files) throws FileNotFoundException {// newmethod
+		File[] temp = files.listFiles();
+		if (temp.length == 0) {
+			System.out.println("There's nothing in this file \n"); // new code
+			return;
+		}
+		for (File f : temp) {
+			Printer.printFile(f);
+			System.out.print("\n");
+		}
 	}
 
 	public static void printFolderContent(File folder) {
