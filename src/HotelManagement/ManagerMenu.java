@@ -16,6 +16,7 @@ public class ManagerMenu implements Menu {
 	public void menu() throws IOException {
 		File cur = new File(hotel.getPath());
 		File employeeFiles = new File(cur.getPath() + File.separator + "Employee");
+		File inventory = new File(cur.getPath() + File.separator + "Inventory"); //Inventory new code
 		System.out.println("Welcome manager");
 		Printer.printManagerMenu();
 		EmployeeFileController.deleteEmployee2(employeeFiles);
@@ -30,6 +31,10 @@ public class ManagerMenu implements Menu {
 		}
 		case "DE": {
 			EmployeeFileController.getEmployeesInfo(employeeFiles);
+			break;
+		}
+		case "DI": {
+			InventoryFileController.getInventoryInfo(inventory);
 			break;
 		}
 		case "LR": {
@@ -50,6 +55,18 @@ public class ManagerMenu implements Menu {
 		}
 		case "FE": {
 			EmployeeFileController.deleteEmployee(employeeFiles);
+			break;
+		}
+		case "AI": {
+			InventoryFileController.createItem(inventory);
+			break;
+		}
+		case "IC": {
+			InventoryFileController.getInventoryItemInfo(inventory);
+			break;
+		}
+		case "UI": {
+			InventoryFileController.useItem(inventory);
 			break;
 		}
 		case "CRT": {
