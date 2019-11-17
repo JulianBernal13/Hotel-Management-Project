@@ -47,50 +47,6 @@ public class InventoryFileController implements FileController {
 		addNewInvItem(inventory, invItem, invName);
 	}
 
-	public static void addOnToInvItem(File invItem) throws IOException {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("An item like this already exists");
-		System.out.println("Would you want like to restock the item: " + invItem.getName() + " (yes or no)");
-		String yesOrNo = sc.nextLine();
-		if (yesOrNo.compareTo("yes") != 0) {
-			System.out.println("Invalid input or user entered no");
-			return;
-		}
-		System.out.println("What brand of " + invItem.getName() + " would you like to restock?");
-		String brand = sc.nextLine();
-		ArrayList<Inventory> info = extractInvInfo(invItem);
-		for (int i = 0; i < info.size(); i++) {
-			if (info.get(i).getBrand().compareTo(brand) == 0) {
-				addToOldBrand(invItem, info, info.get(i), i);
-			}
-		}
-		addNewBrand(invItem, info, brand);
-
-		writeInvToFile(invItem, info);
-	}
-
-	private static void addToOldBrand(File invItem, ArrayList<Inventory> info, Inventory inv, int index) {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter the amount you want to restock for the brand: " + inv.getBrand());
-		String amount = sc.nextLine();
-		info.set(index, new Inventory(inv.getName(), amount, inv.getBrand()));
-	}
-
-	private static void addNewBrand(File invItem, ArrayList<Inventory> info, String brand) {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("This hotel doesn't contain the brand: " + brand + " of the item: " + invItem.getName());
-		System.out.println("Would you like to add the brand: " + brand + " for this item? (yes or no)");
-		String yesOrNo = sc.nextLine();
-		if (yesOrNo.compareTo("yes") != 0) {
-			System.out.println("Invalid input or user entered no");
-			return;
-		} else {
-			System.out.println("Enter the amount you want to stock for the brand: " + brand);
-			String amount = sc.nextLine();
-			info.add(new Inventory(invItem.getName(), amount, brand));
-		}
-	}
-
 	private static void addNewInvItem(File inventory, File invItem, String invName)
 			throws FileNotFoundException, IOException {
 		Scanner sc = new Scanner(System.in);
@@ -99,9 +55,9 @@ public class InventoryFileController implements FileController {
 		if (newInvItem.createNewFile()) {
 			PrintWriter writer = new PrintWriter(filePath);
 			System.out.println("Enter the amount you want to stock for this item");
-			String amount = sc.next();
+			String amount = sc.nextLine();
 			System.out.println("Enter the brand for this item");
-			String brand = sc.next();
+			String brand = sc.nextLine();
 			writer.println("Name: " + invName);
 			writer.println("Amount: " + amount);
 			writer.println("Brand: " + brand);
@@ -109,6 +65,90 @@ public class InventoryFileController implements FileController {
 			writer.close();
 		}
 		System.out.println("The item: " + invName + " has now been added to the hotel!");
+	}
+
+	public static void addOnToInvItem(File invItem) throws IOException {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("An item like this already exists");
+		System.out.println("Would you want like to restock the item: "
+				+ invItem.getName().substring(0, invItem.getName().length() - 4) + "? (yes or no)");
+		String yesOrNo = sc.nextLine();
+		if (yesOrNo.compareTo("yes") != 0) {
+			System.out.println("Invalid input or user entered no \n");
+			return;
+		}
+		System.out.println("What brand of " + invItem.getName().substring(0, invItem.getName().length() - 4)
+				+ " would you like to restock?");
+		String brand = sc.nextLine();
+		ArrayList<Inventory> info = extractInvInfo(invItem);
+		boolean addToOldBrandTorF = false;
+		for (int i = 0; i < info.size(); i++) {
+			if (info.get(i).getBrand().compareTo(brand) == 0) {
+				addToOldBrand(invItem, info, info.get(i), i);
+				addToOldBrandTorF = true;
+			}
+		}
+		if (addToOldBrandTorF == false)
+			addNewBrand(invItem, info, brand);
+		writeInvToFile(invItem, info);
+	}
+
+	// Creates Inv object, then writes to file
+	public static ArrayList<Inventory> extractInvInfo(File invItem) throws FileNotFoundException {
+		ArrayList<Inventory> info = new ArrayList<>();
+		Scanner sc = new Scanner(invItem);
+		while (sc.hasNext()) {
+			sc.next();
+			String name = sc.nextLine();
+			sc.next();
+			String amount = sc.nextLine();
+			sc.next();
+			String brand = sc.nextLine();
+			info.add(new Inventory(name.trim(), amount.trim(), brand.trim()));
+		}
+		return info;
+	}
+
+	private static void addToOldBrand(File invItem, ArrayList<Inventory> info, Inventory inv, int index) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the amount you want to restock for the brand: " + inv.getBrand());
+		String amountS = sc.nextLine();
+		int amount = Integer.parseInt(amountS.split(" ")[0]) + Integer.parseInt(inv.getAmount().split(" ")[0]);
+		String amountName = inv.getAmount().split(" ")[1];
+		inv.setAmount(amount + " " + amountName);
+		info.set(index, new Inventory(inv.getName(), inv.getAmount(), inv.getBrand()));
+		System.out.println("Success, now there's " + inv.getAmount() + " of stock for the brand: " + inv.getBrand());
+	}
+
+	private static void addNewBrand(File invItem, ArrayList<Inventory> info, String brand) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("This hotel doesn't contain the brand: " + brand + ", of the item: "
+				+ invItem.getName().substring(0, invItem.getName().length() - 4));
+		System.out.println("Would you like to add the brand: " + brand + " for this item? (yes or no)");
+		String yesOrNo = sc.nextLine();
+		if (yesOrNo.compareTo("yes") != 0) {
+			System.out.println("Invalid input or user entered no \n");
+			return;
+		} else {
+			System.out.println("Enter the amount you want to stock for the brand: " + brand);
+			String amount = sc.nextLine();
+			info.add(new Inventory(invItem.getName().substring(0, invItem.getName().length() - 4), amount, brand));
+		}
+		System.out.println("The brand: " + brand + " of the item: "
+				+ invItem.getName().substring(0, invItem.getName().length() - 4) + " has now been added to the hotel!");
+	}
+
+	// Formatting issue. Basically gets all contents of invItem and puts it into
+	// an ArrayList
+	public static void writeInvToFile(File invItem, ArrayList<Inventory> inv) throws IOException {
+		PrintWriter writer = new PrintWriter(invItem);
+		for (Inventory v : inv) {
+			writer.println("Name: " + v.getName());
+			writer.println("Amount: " + v.getAmount());
+			writer.println("Brand: " + v.getBrand());
+		}
+		writer.flush();
+		writer.close();
 	}
 
 	public static int getPropertyOrdinal(String property) {
@@ -131,45 +171,7 @@ public class InventoryFileController implements FileController {
 	}
 
 	public static void getInventoryInfo(File inventory) throws FileNotFoundException {
-		File[] temp = inventory.listFiles();
-		for (File f : temp) {
-			Printer.printFile(f);
-			System.out.print("\n");
-		}
-	}
-
-	// Creates directory
-	public static void addNewInvItem(File invItem, Inventory inv) {
-
-	}
-
-	// Formatting issue. Basically gets all contents of invItem and puts it into
-	// an ArrayList
-	public static ArrayList<Inventory> extractInvInfo(File invItem) throws FileNotFoundException {
-		ArrayList<Inventory> info = new ArrayList<>();
-		// File employee = lookUpEmployee(employee, name);
-		Scanner sc = new Scanner(invItem);
-		while (sc.hasNext()) {
-			sc.next();
-			String name = sc.next();
-			sc.next();
-			String amount = sc.next();
-			sc.next();
-			String brand = sc.next();
-			info.add(new Inventory(name, amount, brand));
-		}
-		return info;
-	}
-
-	public static void writeInvToFile(File invItem, ArrayList<Inventory> inv) throws IOException {
-		PrintWriter writer = new PrintWriter(invItem);
-		for (Inventory v : inv) {
-			writer.println("Name: " + v.getName());
-			writer.println("Amount: " + v.getAmount());
-			writer.println("Brand: " + v.getBrand());
-		}
-		writer.flush();
-		writer.close();
+		Printer.printFiles(inventory);
 	}
 
 	public static void useItem(File inventory) throws IOException {
@@ -177,10 +179,11 @@ public class InventoryFileController implements FileController {
 		if (invItem.length() == 0)
 			return;
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Are you use you want access the item: " + invItem.getName() + " (yes or no)");
+		System.out.println("Are you use you want access the item: "
+				+ invItem.getName().substring(0, invItem.getName().length() - 4) + "? (yes or no)");
 		String yesOrNo = sc.nextLine();
 		if (yesOrNo.compareTo("yes") != 0) {
-			System.out.println("Invalid input or user entered no");
+			System.out.println("Invalid input or user entered no \n");
 			return;
 		} else {
 			System.out.println("Which brand of this item would you like to use?");
@@ -194,7 +197,8 @@ public class InventoryFileController implements FileController {
 				}
 			}
 			if (tr == false) {
-				System.out.println("The brand: " + brand + " does not exist for " + invItem.getName());
+				System.out.println("The brand: " + brand + ", does not exist for the item name: "
+						+ invItem.getName().substring(0, invItem.getName().length() - 4));
 				return;
 			}
 			writeInvToFile(invItem, info);
@@ -203,22 +207,23 @@ public class InventoryFileController implements FileController {
 
 	private static void accessCertainBrand(File invItem, ArrayList<Inventory> info, Inventory inv, int index) {
 		Scanner sc = new Scanner(System.in);
-		if (Integer.parseInt(inv.getAmount()) <= 0) {
+		if (Integer.parseInt(inv.getAmount().split(" ")[0]) <= 0) {
 			System.out.println("There's no stock for this item brand left");
 			return;
 		}
 		System.out.println("Enter the amount you want to use for the brand: " + inv.getBrand());
 		String amount = sc.nextLine();
-		if ((Integer.parseInt(inv.getAmount()) - Integer.parseInt(amount)) < 0) {
-			System.out.println("There's only " + inv.getAmount() + " amount of this brand stock left");
-			System.out.println("You can't take " + amount);
+		if ((Integer.parseInt(inv.getAmount().split(" ")[0]) - Integer.parseInt(amount.split(" ")[0])) < 0) {
+			System.out.println("There's only " + inv.getAmount() + " of this brand stock left");
+			System.out.println("You can't take " + amount.split(" ")[0]);
 			return;
 		}
-		int a = Integer.parseInt(inv.getAmount()) - Integer.parseInt((amount));
-		info.set(index, new Inventory(inv.getName(), Integer.toString(a), inv.getBrand()));
+		int a = Integer.parseInt(inv.getAmount().split(" ")[0]) - Integer.parseInt(amount.split(" ")[0]);
+		inv.setAmount(a + " " + inv.getAmount().split(" ")[1]);
+		info.set(index, new Inventory(inv.getName(), inv.getAmount(), inv.getBrand()));
 
-		System.out.println("Success, now there's only " + inv.getAmount() + " amount of stock left for the brand: "
-				+ inv.getBrand());
+		System.out.println(
+				"Success, now there's only " + inv.getAmount() + " of stock left for the brand: " + inv.getBrand());
 		return;
 	}
 
