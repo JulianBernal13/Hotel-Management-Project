@@ -43,6 +43,7 @@ public class Hotel {
 		File roomFolder = cdRoomFolder();
 		File customerFolder = CustomerFileController.cdCustomerFolder(hotelFile);
 		File employeeFolder = EmployeeFileController.cdEmployeeFile(hotelFile);
+		File inventoryFolder = InventoryFileController.cdInventoryFile(hotelFile); //new code
 		ArrayList<String> info = FileController.extractInfo(new File( path + File.separator + "info.txt"));
 		this.name = info.get(Property.name.ordinal());
 		this.password = info.get(Property.password.ordinal());
@@ -65,6 +66,8 @@ public class Hotel {
 					this.manager = new Manager(f);
 			}
 		}
+		
+		
 		File reservationFoler = new File(path+File.separator+"Contracts"+File.separator+"Reservation");
 
 		for(File f:reservationFoler.listFiles()){
