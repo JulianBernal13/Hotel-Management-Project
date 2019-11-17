@@ -43,7 +43,7 @@ public class Inventory {
 		this.name = name;
 		this.amount = amount;
 		this.brand = brand;
-		hotel = checkCurrentHotel();
+//		hotel = checkCurrentHotel();
 	}
 
 	public Inventory(File invItemFile) throws FileNotFoundException {
