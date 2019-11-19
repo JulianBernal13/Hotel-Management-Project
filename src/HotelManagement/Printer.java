@@ -142,6 +142,12 @@ public class Printer {
 		System.out.println("=============================================");
 		System.out.println("Enter a day to view of this Schedule (Monday,Tuseday, ect)");
 	}
+	
+	public static void printPayRollOptoins() {
+		System.out.println("=============================================");
+		System.out.println("Enter a employee id to start payroll calculations");
+
+	}
 
 	public static void printFile(File file) throws FileNotFoundException {
 		Scanner sc = new Scanner(file);

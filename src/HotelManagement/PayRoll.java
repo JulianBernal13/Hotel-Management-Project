@@ -66,4 +66,34 @@ public class PayRoll {
         writer.close();
     }
     
+    public void calculationHourPay(File date, int wage, HashMap<Integer,Integer> curDay) throws FileNotFoundException {
+        ArrayList<String> oldInfo = FileController.extractInfo(date);
+        int i = 0;
+        int firsthold = -1;
+        int lasthold = -1;
+        int hoursworked = 0;
+        while(i < oldInfo.size()) {
+        	if(Integer.parseInt(oldInfo.get(i)) == this.payId && firsthold == -1){
+        		firsthold = 1;
+        	}
+        	if(Integer.parseInt(oldInfo.get(i)) == this.payId && lasthold == -1) {
+        		lasthold = 1;
+        	}
+        	if(firsthold != -1 && lasthold == -1) {
+        		if(curDay.containsKey(oldInfo.get(i))) {
+        			int id = curDay.get(oldInfo.get(i));
+        			if(id == this.payId) {
+        				hoursworked++;
+        			}
+        		}
+        	}
+        	if(lasthold == 1 && firsthold == 1) {
+        		lasthold = -1;
+        		firsthold = -1;
+        	} 
+        	i++;
+        }
+        this.addTotal(wage * hoursworked);
+    }
+    
 }

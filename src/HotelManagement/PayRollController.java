@@ -1,12 +1,14 @@
 package HotelManagement;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PayRollController {
 	
-	public static void PayRollcalc(File hotel, File Secdule){
+	public static void PayRollcalc(File hotel, File Secdule) throws NumberFormatException, IOException{
 		Boolean toggle = true;
         Scanner sc = new Scanner(System.in);
         String command = "";
@@ -21,19 +23,36 @@ public class PayRollController {
         }
 	}
 	
-	public static void PayDates(File hotel, File Secudle,int id) {
+	public static void PayDates(File hotel, File Secudle,int id) throws IOException {
+		Schedule currsec = Schedule.ScheduleRead(Secudle);
 		Boolean toggle = true;
         Scanner sc = new Scanner(System.in);
         String command = "";
     	ArrayList<File> list = FileController.getAllFile(Secudle);
+    	PayRoll yes = new PayRoll(id);
         while(toggle) {
         	for(int i = 0; i < list.size(); i++) {
-        		if(!list.get(i).toString().contentEquals(Secudle.toString() + ".txt")){
+        		if(!list.get(i).getName().contentEquals(Secudle.getName() + ".txt")){
             		System.out.println(list.get(i).toString());
         		}
         	}
-        	System.out.print("enter a date to add to calculation");
+        	System.out.println("enter a date to add to calculation");
+        	command = sc.nextLine();
+        	File check = new File(Secudle.getPath() + File.separator + command);
+        	if(list.contains(check)) {
+        		String holder = list.get(list.indexOf(check)).getName();
+        		list.remove(check);
+        		System.out.println("what day is this");
+        		command = sc.nextLine();
+        		yes.calculationHourPay(check, 5, currsec.getDaySchedule(command));
+        	}
+        	System.out.println("add more dates? y/n");
+        	command = sc.nextLine();
+        	if(command.contentEquals("n")) {
+        		toggle = false;
+        	}
         }
+        yes.savePayRoll(Secudle);
 	}
 
 }
