@@ -24,6 +24,10 @@ public class ContractFileController {
         String type = sc.nextLine();
         System.out.println("When do you want to start?(how many days later)");
         int startDay = Integer.parseInt(sc.nextLine());
+        if(startDay < 0) {
+            System.out.println("Invalid input");
+            return;
+        }
         Calendar tempCalendar = new GregorianCalendar();
         tempCalendar.setTime(current);
         tempCalendar.add(Calendar.DATE, startDay);
