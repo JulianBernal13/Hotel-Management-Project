@@ -3,6 +3,7 @@ package HotelManagement;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Scanner;
 
 public class ReceptionMenu implements Menu {
@@ -13,7 +14,7 @@ public class ReceptionMenu implements Menu {
 	}
 
 	@Override
-	public void menu() throws IOException {
+	public void menu() throws IOException, ParseException {
 		Printer.printReceptionMenu();
 		ContractFileController.makeNotification(hotel);
 		File hotelFile = new File(this.hotel.getPath());
@@ -65,6 +66,9 @@ public class ReceptionMenu implements Menu {
 			menu();
 			break;
 		}
+			case "PM": {
+				ContractFileController.priceMatchMenu(hotel);
+			}
 		case "back": {
 			break;
 		}

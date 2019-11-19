@@ -2,11 +2,12 @@ package HotelManagement;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Scanner;
 
 public class MainMenu implements Menu {
     @Override
-    public void menu() throws IOException {
+    public void menu() throws IOException, ParseException {
         Printer.printWelcome();
 
         File managementSystem = new File("." + File.separator + "ManagementSystem");

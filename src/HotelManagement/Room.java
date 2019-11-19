@@ -18,6 +18,8 @@ public class Room {
     private String path;
     private String maintenance;
     private String notes;
+    private boolean isCIDiscount = false;
+    private boolean isRRDiscount = false;
 
     public static enum RoomProperty {
         number, type, price, isEmpty, IsClean, maintenance, notes

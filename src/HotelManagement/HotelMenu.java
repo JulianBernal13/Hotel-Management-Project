@@ -2,6 +2,7 @@ package HotelManagement;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Scanner;
 
 public class HotelMenu implements Menu{
@@ -12,7 +13,7 @@ public class HotelMenu implements Menu{
     }
 
     @Override
-    public void menu() throws IOException {
+    public void menu() throws IOException, ParseException {
         Scanner sc = new Scanner(System.in);
         System.out.println("Which Hotel?");
         Printer.printFolderContentInOrder(this.managementSystem);
@@ -33,7 +34,7 @@ public class HotelMenu implements Menu{
         chooseHandlertwo(curHotel);
     }
 
-    public void chooseHandler(Hotel hotel) throws IOException {
+    public void chooseHandler(Hotel hotel) throws IOException, ParseException {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Choose your occupation number");
@@ -59,7 +60,7 @@ public class HotelMenu implements Menu{
         }
     }
 
-    public void chooseHandlertwo(Hotel hotel) throws IOException {
+    public void chooseHandlertwo(Hotel hotel) throws IOException, ParseException {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Please enter your ID");

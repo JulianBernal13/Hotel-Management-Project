@@ -1,6 +1,7 @@
 package HotelManagement;
 
 import java.io.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -15,7 +16,7 @@ public class Main {
     public static Calendar calendar = new GregorianCalendar();
     public static SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd");
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ParseException {
         calendar.setTime(current);
         //add 1 day to calendar for testing
         //calendar.add(Calendar.DATE, 1);

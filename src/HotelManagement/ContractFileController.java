@@ -241,15 +241,16 @@ public class ContractFileController {
     }
 
     public static Contract readContract(Hotel hotel,File file) throws FileNotFoundException {
-        Scanner sc = new Scanner(file);
-        String start = sc.nextLine();
-        String end = sc.nextLine();
-        Customer customer = hotel.getCustomer(sc.nextLine());
-        Room room = hotel.getRoom(sc.nextLine());
-        double price = Double.parseDouble(sc.nextLine());
-        String path = file.getPath();
-        Contract contract = new Contract(start,end,customer,room,path,price);
-        return contract;
+//        Scanner sc = new Scanner(file);
+//        String start = sc.nextLine();
+//        String end = sc.nextLine();
+//        Customer customer = hotel.getCustomer(sc.nextLine());
+//        Room room = hotel.getRoom(sc.nextLine());
+//        double price = Double.parseDouble(sc.nextLine());
+//        String path = file.getPath();
+//        Contract contract = new Contract(start,end,customer,room,path,price);
+//        return contract;
+        return new Contract(file, hotel);
     }
 
     public static double getPrice(Hotel hotel, int period, double price, Customer c) {
@@ -270,6 +271,7 @@ public class ContractFileController {
         Date end = getDate(contract.getEnd());
         int period = getDifferenceDays(start, end);
         contract.setPrice(getPrice(hotel, period, room, customer));
+        contract.setVIPContract(customer.isVIP());
         contract.writeToFile();
     }
 
@@ -347,6 +349,19 @@ public class ContractFileController {
         hotel.getReservationContracts().remove(contract.getCustomer());
         File file = new File(contract.getPath());
         file.delete();
+    }
+
+    public static void priceMatchMenu(Hotel hotel) throws IOException, ParseException {
+        System.out.println("Please select the contract you would like to have price match");
+        Printer.printRRContract(hotel);
+        Scanner sc = new Scanner(System.in);
+        String name = sc.nextLine();
+        Customer customer = hotel.getCustomer(name);
+        if(!hotel.getReservationContracts().containsKey(customer)){
+            System.out.println("Invalid contract");
+            return;
+        }
+        priceMatch(hotel, hotel.getReservationContracts().get(customer));
     }
 
 }

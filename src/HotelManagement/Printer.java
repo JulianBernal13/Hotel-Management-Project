@@ -69,6 +69,8 @@ public class Printer {
 		System.out.println("Enter 'CV' to change VIP status of a customer");
 		System.out.println("Enter 'RR' to start reservation");
 		System.out.println("Enter 'DR' to delete a reservation contract");
+		System.out.println("Enter 'DR' to delete a contract");
+		System.out.println("Enter 'PM' to price match a reservation");
 		System.out.println("Enter 'back' to back to previous menu");
 		System.out.println("=============================================");
 
@@ -185,6 +187,12 @@ public class Printer {
 
 	public static void printManagerID(Hotel hotel) {
 		System.out.println(hotel.getManager().getID());
+	}
+
+	public static void printRRContract(Hotel hotel) {
+		for(Contract contract : hotel.getReservationContracts().values()){
+			System.out.println(contract.getCustomer());
+		}
 	}
 
 }
