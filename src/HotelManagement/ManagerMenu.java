@@ -16,7 +16,9 @@ public class ManagerMenu implements Menu {
 	public void menu() throws IOException {
 		File cur = new File(hotel.getPath());
 		File employeeFiles = new File(cur.getPath() + File.separator + "Employee");
-		File inventory = new File(cur.getPath() + File.separator + "Inventory"); //Inventory new code
+		File inventory = new File(cur.getPath() + File.separator + "Inventory"); // Inventory
+																					// new
+																					// code
 		System.out.println("Welcome manager");
 		Printer.printManagerMenu();
 		EmployeeFileController.deleteEmployee2(employeeFiles);
@@ -73,8 +75,13 @@ public class ManagerMenu implements Menu {
 			RoomFileController.applyRoomType(cur);
 			menu();
 			break;
-		} // change room type
-		case "Schedule":{
+		}
+		case "PR": {
+			EmployeeFileController.payroll(cur);
+			break;
+		}
+		// change room type
+		case "Schedule": {
 			ScheduleController.ScheduleMenu(cur);
 			break;
 		}
