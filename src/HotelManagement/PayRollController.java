@@ -49,7 +49,8 @@ public class PayRollController {
         		list.remove(check);
         		System.out.println("what day is this");
         		command = sc.nextLine();
-        		yes.calculationHourPay(check, 5, currsec.getDaySchedule(command));
+        		int wage = EmployeeFileController.Getwage(hotel, id);
+        		yes.calculationHourPay(check, wage, currsec.getDaySchedule(command));
         		yes.addDate(check.getName(), 2);
         	}
         	System.out.println("add more dates? y/n");

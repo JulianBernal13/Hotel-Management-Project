@@ -69,28 +69,43 @@ public class PayRoll {
     public void calculationHourPay(File date, int wage, HashMap<Integer,Integer> curDay) throws FileNotFoundException {
         ArrayList<String> oldInfo = FileController.extractInfo(date);
         int i = 0;
+        Boolean toggle = true;
         int firsthold = -1;
         int lasthold = -1;
+        int timel = 0;
+        int timef = 0;
         int hoursworked = 0;
         while(i < oldInfo.size()) {
         	System.out.println(this.payId + " : " + oldInfo.get(i));
         	if(Integer.parseInt(oldInfo.get(i)) == this.payId && firsthold == -1){
         		firsthold = 1;
-        	} else if(Integer.parseInt(oldInfo.get(i)) == this.payId && lasthold == 1) {
+        		timef = Integer.parseInt(oldInfo.get(i+1));
+        	} else if(Integer.parseInt(oldInfo.get(i)) == this.payId && firsthold == 1) {
         		lasthold = 1;
-        		
+        		timel = Integer.parseInt(oldInfo.get(i+1));
         	}
-        	if(firsthold == 1) {
+        	if(firsthold != -1) {
         		if(curDay.containsKey(Integer.parseInt(oldInfo.get(i)))){
         			int id = curDay.get(Integer.parseInt(oldInfo.get(i)));
         			if(id == this.payId) {
-        				hoursworked++;
+        				//hoursworked++;
         			}
         		}
         	}
         	if(lasthold == 1 && firsthold == 1) {
         		lasthold = -1;
         		firsthold = -1;
+        		
+                int j = 0;
+        		while(toggle) {
+        			if(curDay.get(timef + j) == this.payId){
+        				hoursworked++;
+        			}
+        			j++;
+        			if(!(j < timel - timef)) {
+        				toggle = false;
+        			}
+        		}
         	} 
         	i++;
         }
