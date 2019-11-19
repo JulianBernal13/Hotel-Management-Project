@@ -52,6 +52,7 @@ public class Printer {
 		System.out.println("Enter 'AI' to add inventory item             ");
 		System.out.println("Enter 'UI' to use inventory item             ");
 		System.out.println("Enter 'CRT' to change room type              ");
+		System.out.println("Enter 'PR' to access Payroll                 ");
 		System.out.println("Enter 'Schedule' to use Schedule             ");
 		System.out.println("Enter 'exit' to exit");
 		System.out.println("=============================================");
