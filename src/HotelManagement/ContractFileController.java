@@ -24,9 +24,9 @@ public class ContractFileController {
         String type = sc.nextLine();
         System.out.println("When do you want to start?(how many days later)");
         int startDay = Integer.parseInt(sc.nextLine());
-        if(startDay < 0) {
-            System.out.println("Invalid input");
-            return;
+        while (startDay<0){
+            System.out.println("Invalid input, please try again.");
+            startDay = Integer.parseInt(sc.nextLine());
         }
         Calendar tempCalendar = new GregorianCalendar();
         tempCalendar.setTime(current);
@@ -35,6 +35,10 @@ public class ContractFileController {
 
         System.out.println("How long would you like to stay?");
         int period = Integer.parseInt(sc.nextLine());
+        while (period<=0){
+            System.out.println("Invalid input, please try again.");
+            period = Integer.parseInt(sc.nextLine());
+        }
         tempCalendar.add(Calendar.DATE, period);
         String end = sdf.format(tempCalendar.getTime());
 
@@ -111,6 +115,10 @@ public class ContractFileController {
 
                 System.out.println("How long would you like to have this room?");
                 int period = Integer.parseInt(sc.nextLine());
+                while (period<=0){
+                    System.out.println("Invalid input, please try again.");
+                    period = Integer.parseInt(sc.nextLine());
+                }
                 tempCalendar.add(Calendar.DATE, period);
                 String end = sdf.format(tempCalendar.getTime());
 
