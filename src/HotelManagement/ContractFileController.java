@@ -362,6 +362,7 @@ public class ContractFileController {
             return;
         }
         priceMatch(hotel, hotel.getReservationContracts().get(customer));
+        System.out.println("Success!");
     }
 
 }

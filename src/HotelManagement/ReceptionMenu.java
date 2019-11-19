@@ -66,9 +66,12 @@ public class ReceptionMenu implements Menu {
 			menu();
 			break;
 		}
-			case "PM": {
-				ContractFileController.priceMatchMenu(hotel);
-			}
+
+		case "PM": {
+			ContractFileController.priceMatchMenu(hotel);
+			menu();
+			break;
+		}
 		case "back": {
 			break;
 		}
