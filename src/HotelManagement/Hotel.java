@@ -34,7 +34,7 @@ public class Hotel {
 	private ArrayList<Employee> employees = new ArrayList<>();
 	private HashMap<Customer, Contract> reservationContracts = new HashMap<>();
 	private HashMap<Customer, Contract> inContracts = new HashMap<>();
-	private HashMap<Customer, Contract> outContracts = new HashMap<>();
+	private ArrayList<Contract> outContracts = new ArrayList<>();
 	private HashMap<String, Integer> price = new HashMap<>();
 
 
@@ -82,7 +82,7 @@ public class Hotel {
         File outFoler = new File(path+File.separator+"Contracts"+File.separator+"Reservation");
         for(File f:outFoler.listFiles()){
 			Contract c = ContractFileController.readContract(this,f);
-			outContracts.put(c.getCustomer(),c);
+			outContracts.add(c);
         }
         for(File f : customerFolder.listFiles())
             customers.add(new Customer(f));
@@ -182,7 +182,7 @@ public class Hotel {
 		return inContracts;
 	}
 
-	public HashMap<Customer, Contract> getOutContracts() {
+	public ArrayList<Contract> getOutContracts() {
 		return outContracts;
 	}
 
@@ -207,7 +207,7 @@ public class Hotel {
 		inContracts.put(c.getCustomer(),c);
 	}
 	public void addOutContract (Contract c){
-		outContracts.put(c.getCustomer(),c);
+		outContracts.add(c);
 	}
 
 	public double getVIPDiscount() {

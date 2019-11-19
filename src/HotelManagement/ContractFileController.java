@@ -191,7 +191,13 @@ public class ContractFileController {
             }
             Contract contract = readContract(hotel, file);
             int roomNum = contract.getRoom().getNumber();
-            file.renameTo(new File(hotel.getPath() + File.separator + "Contracts" + File.separator + "Out" + File.separator + file.getName()));
+            File filee = new File(hotel.getPath() + File.separator + "Contracts" + File.separator + "Out" + File.separator + file.getName());
+            int frequency = 1;
+            while(filee.exists()){
+                filee = new File(hotel.getPath() + File.separator + "Contracts" + File.separator + "Out"+ File.separator+ frequency + file.getName());
+                frequency++;
+            }
+            file.renameTo(filee);
             Room room = contract.getRoom();
             Customer customer = contract.getCustomer();
             System.out.println("Check-out Complete!");
