@@ -323,18 +323,19 @@ public class EmployeeFileController implements FileController {
 			f = lookUpEmployee(employees, tempID);
 		}
 		return tempID;
-	}	
-	
-	static Boolean checkID(File hotel,String id) {
+	}
+
+	static Boolean checkID(File hotel, String id) {
 		File Employee = new File(hotel.getPath() + File.separator + "Employee");
 		for (File file : Employee.listFiles()) {
-			if(file.getName().contentEquals(id)) {
+			String file2 = file.getName(); //
+			if (file.getName().contentEquals(id)) {
 				return true;
 			}
-        }
+		}
 		return false;
 	}
-	
+
 	public static void ListAllEmployees(File hotel) {
 		File Employee = new File(hotel.getPath() + File.separator + "Employee");
 		for (File file : Employee.listFiles()) {
@@ -342,76 +343,132 @@ public class EmployeeFileController implements FileController {
 		}
 	}
 
-	public static void Payroll(File hotel) throws FileNotFoundException {
+	public static void payroll(File hotel) throws FileNotFoundException {
+		ArrayList<String> leaveMethod = new ArrayList<>(); // Only thing that
+															// works
 		ArrayList<String> ids = new ArrayList<>();
 		ArrayList<String> idTime = new ArrayList<>();
 		ArrayList<Integer> numberOfCI = new ArrayList<>();
-		File employees = new File(hotel.getPath() + File.separator + "Employees");
-		Scanner sc = new Scanner(hotel);
-		File f = new File(hotel.getPath() + File.separator + "Scheduler");
+		Scanner sc = new Scanner(System.in);
+		File employees = new File(hotel.getPath() + File.separator + "Employee");
+		File f = new File(hotel.getPath() + File.separator + "Schedules");
 		if (!f.exists()) {
-			System.out.println("The Scheduler file doesn't exist");
+			System.out.println("The Schedules file doesn't exist");
+			return;
 		}
 		File f2 = new File(f.getPath() + File.separator + "Clock in");
 		if (!f2.exists()) {
 			System.out.println("The Clock in file doesn't exist");
+			return;
 		}
 		System.out.println("Note: Payroll is calculated every week");
 		System.out.println("(1st-7th) (8th-15th) (16th-23rd) (24th-31st)");
 		System.out.println("What payroll week do you want to access? Enter yyyy-mm-dd");
 		String date = sc.next();
-		File f3 = new File(f2.getPath() + File.separator + date);
+		File f3 = new File(f2.getPath() + File.separator + date + ".txt");
 		if (!f3.exists()) {
 			System.out.println("This date isn't calculated yet");
+			return;
 		}
-		int day = Integer.parseInt(date.substring(8, 10));
+		String day = date.substring(8, 10);
 		String yymm = date.substring(0, 8);
 		String yy = date.substring(0, 5);
 		String mm = date.substring(5, 8);
 
-		if (1 <= day && day <= 7) {
-			calculateWeek(1, 7, yymm, f2, ids, idTime, numberOfCI);
-			checkEmpCI(f2, yy, mm, "01", ids, idTime, numberOfCI, employees);
-		} else if (8 <= day && day <= 15) {
-			calculateWeek(8, 15, yymm, f2, ids, idTime, numberOfCI);
+		if (1 <= Integer.parseInt(day) && Integer.parseInt(day) <= 7) {
+			calculateWeek("01", "07", yymm, f2, ids, idTime, numberOfCI, leaveMethod);
+			checkEmpCI(f2, yy, mm, "01", ids, idTime, numberOfCI, employees, leaveMethod);
+		} else if (8 <= Integer.parseInt(day) && Integer.parseInt(day) <= 15) {
+			calculateWeek("08", "15", yymm, f2, ids, idTime, numberOfCI, leaveMethod);
+			checkEmpCI(f2, yy, mm, "08", ids, idTime, numberOfCI, employees, leaveMethod);
 
-		} else if (16 <= day && day <= 23) {
-			calculateWeek(16, 23, yymm, f2, ids, idTime, numberOfCI);
+		} else if (16 <= Integer.parseInt(day) && Integer.parseInt(day) <= 23) {
+			calculateWeek("16", "23", yymm, f2, ids, idTime, numberOfCI, leaveMethod);
+			checkEmpCI(f2, yy, mm, "16", ids, idTime, numberOfCI, employees, leaveMethod);
 
-		} else if (24 <= day && day <= 31) {
-			calculateWeek(24, 31, yymm, f2, ids, idTime, numberOfCI);
-
+		} else if (24 <= Integer.parseInt(day) && Integer.parseInt(day) <= 31) {
+			calculateWeek("24", "31", yymm, f2, ids, idTime, numberOfCI, leaveMethod);
+			checkEmpCI(f2, yy, mm, "24", ids, idTime, numberOfCI, employees, leaveMethod);
 		}
+	}
 
+	private static void calculateWeek(String startDate, String endDate, String yymm, File f2, ArrayList<String> ids,
+			ArrayList<String> idTime, ArrayList<Integer> numberOfCI, ArrayList<String> leaveMethod)
+			throws FileNotFoundException {
+		while (Integer.parseInt(startDate) != Integer.parseInt(endDate) + 1) {
+			calculateDay(startDate, yymm, f2, ids, idTime, numberOfCI, leaveMethod);
+			if (leaveMethod.contains("This week isn't calculated yet"))
+				return;
+			int a = Integer.parseInt(startDate) + 1;
+			if (a < 10)
+				startDate = "0" + Integer.toString(a);
+			else
+				startDate = Integer.toString(a);
+		}
+	}
+
+	private static void calculateDay(String date, String yymm, File f2, ArrayList<String> ids, ArrayList<String> idTime,
+			ArrayList<Integer> numberOfCI, ArrayList<String> leaveMethod) throws FileNotFoundException {
+
+		File f3 = new File(f2.getPath() + File.separator + yymm + date + ".txt");
+		if (!f3.exists()) {
+			System.out.println("This week isn't calculated yet");
+			leaveMethod.add("This week isn't calculated yet");
+			return;
+		}
+		Scanner sc = new Scanner(f3);
+		while (sc.hasNext()) {
+			String id = sc.next();
+			if (id.compareTo("end") == 0)
+				break;
+			String time = sc.next();
+			if (ids.contains(id)) {
+				int index = ids.lastIndexOf(id);
+				ids.add(id);
+				idTime.add(time);
+				int a = numberOfCI.get(index) + 1;
+				numberOfCI.add(a);
+			} else {
+				ids.add(id);
+				idTime.add(time);
+				numberOfCI.add(1);
+			}
+		}
 	}
 
 	// mm:mm- yyyy:yyyy-
 	private static void checkEmpCI(File f2, String yy, String mm, String dd, ArrayList<String> ids,
-			ArrayList<String> idTime, ArrayList<Integer> numberOfCI, File employees) throws FileNotFoundException {
-		ArrayList<String> idsAreOdd = new ArrayList<>();
-		for (int i = 0; i < numberOfCI.size(); i++) {
-			if (numberOfCI.get(i) % 2 != 0) {
-				idsAreOdd.add(ids.get(i));
-			}
-		}
-		if (idsAreOdd.isEmpty()) {
-			System.out.println("The Payroll date is calculated!");
+			ArrayList<String> idTime, ArrayList<Integer> numberOfCI, File employees, ArrayList<String> leaveMethod)
+			throws FileNotFoundException {
+		if (leaveMethod.contains("This week isn't calculated yet"))
 			return;
+		ArrayList<String> idsAreOdd = new ArrayList<>();
+		ArrayList<String> idsAreNeeded = new ArrayList<>();
+		for (int i = numberOfCI.size() - 1; i >= 0; i--) {
+			if (!idsAreNeeded.contains(ids.get(i))) {
+				if (!idsAreOdd.contains(ids.get(i))) {
+					idsAreNeeded.add(ids.get(i));
+					if (numberOfCI.get(i) % 2 != 0) {
+						idsAreOdd.add(ids.get(i));
+					}
+				}
+			} else
+				idsAreNeeded.add(ids.get(i));
 		}
 
-		if (Integer.parseInt(dd) == 01) {
+		if (Integer.parseInt(dd) == 01 && idsAreOdd.size() != 0) {
 			if (mm.compareTo("01-") == 0) {
 				mm = Integer.toString(12) + '-'; // mm:01- to 12-
-				yy = Integer.toString(Integer.parseInt(yy.substring(0, 5)) - 1) + '-'; // yy:1999-
+				yy = Integer.toString(Integer.parseInt(yy.substring(0, 4)) - 1) + '-'; // yy:1999-
 																						// to
 																						// 1998-
 			} else
-				mm = Integer.toString(Integer.parseInt(mm.substring(0, 3)) - 1) + '-'; // mm:11-10
+				mm = Integer.toString(Integer.parseInt(mm.substring(0, 2)) - 1) + '-'; // mm:11-10
 
-			File f31 = new File(f2.getPath() + File.separator + yy + mm + dd + ".txt");
-			File f30 = new File(f2.getPath() + File.separator + yy + mm + dd + ".txt");
-			File f29 = new File(f2.getPath() + File.separator + yy + mm + dd + ".txt");
-			File f28 = new File(f2.getPath() + File.separator + yy + mm + dd + ".txt");
+			File f31 = new File(f2.getPath() + File.separator + yy + mm + "31" + ".txt");
+			File f30 = new File(f2.getPath() + File.separator + yy + mm + "30" + ".txt");
+			File f29 = new File(f2.getPath() + File.separator + yy + mm + "29" + ".txt");
+			File f28 = new File(f2.getPath() + File.separator + yy + mm + "28" + ".txt");
 
 			if (f31.exists()) {
 				addLastCL(f31, idsAreOdd, ids, idTime, numberOfCI);
@@ -423,6 +480,18 @@ public class EmployeeFileController implements FileController {
 				addLastCL(f28, idsAreOdd, ids, idTime, numberOfCI);
 			}
 		}
+		if ((Integer.parseInt(dd) == 8) && idsAreOdd.size() != 0) {
+			dd = "0" + Integer.toString(Integer.parseInt(dd) - 1) + '-';
+			File ff = new File(f2.getPath() + File.separator + yy + mm + dd + ".txt");
+			if (ff.exists())
+				addLastCL(ff, idsAreOdd, ids, idTime, numberOfCI);
+		}
+		if (idsAreOdd.size() != 0) {
+			dd = Integer.toString(Integer.parseInt(dd) - 1) + '-';
+			File ff = new File(f2.getPath() + File.separator + yy + mm + dd + ".txt");
+			if (ff.exists())
+				addLastCL(ff, idsAreOdd, ids, idTime, numberOfCI);
+		}
 		calculatePayroll(ids, idTime, numberOfCI, employees);
 	}
 
@@ -430,81 +499,103 @@ public class EmployeeFileController implements FileController {
 			File employees) throws FileNotFoundException {
 		ArrayList<String> idToPrint = new ArrayList<>();
 		for (String i : ids) {
-			idToPrint.add(i);
+			if (!idToPrint.contains(i))
+				idToPrint.add(i);
 		}
-		String[] temp = employees.list();
-		for (int i = 0; i < temp.length; i++) {
-			String test = temp[i]; // TEST
-			File f = new File(employees.getPath() + File.separator + temp[i]);
-			if (!f.exists())
+		File[] ftemp = employees.listFiles();
+		for (File f : ftemp) {
+			f = new File(employees.getPath() + File.separator + f.getName());
+			String fID = f.getName().substring(0, f.getName().length() - 4);
+			if (!f.exists()) {
 				System.out.println("File doesn't exist");
-			if (ids.contains(temp[i])) {
-				int ClockIn = Integer.parseInt(idTime.get(ids.indexOf(temp[i])));
-				ids.remove(temp[i]);
-				idTime.remove(temp[i]);
-				numberOfCI.remove(temp[i]);
-				int ClockOut = Integer.parseInt(idTime.get(ids.indexOf(temp[i])));
-				ids.remove(temp[i]);
-				idTime.remove(temp[i]);
-				numberOfCI.remove(temp[i]);
-				int hoursWrkd = Math.abs(ClockIn - ClockOut);
-				while (ids.contains(temp[i])) {
-					ClockIn = Integer.parseInt(idTime.get(ids.indexOf(temp[i])));
-					ids.remove(temp[i]);
-					idTime.remove(temp[i]);
-					numberOfCI.remove(temp[i]);
-					ClockOut = Integer.parseInt(idTime.get(ids.indexOf(temp[i])));
-					ids.remove(temp[i]);
-					idTime.remove(temp[i]);
-					numberOfCI.remove(temp[i]);
-					hoursWrkd += Math.abs(ClockIn - ClockOut);
+				return;
+			}
+			if (ids.contains(fID)) {
+				int ClockIn = Integer.parseInt(idTime.get(ids.indexOf(fID)));
+				idTime.remove(ids.indexOf(fID));
+				numberOfCI.remove(ids.indexOf(fID));
+				ids.remove(fID);
+				int ClockOut = Integer.parseInt(idTime.get(ids.indexOf(fID)));
+				idTime.remove(ids.indexOf(fID));
+				numberOfCI.remove(ids.indexOf(fID));
+				ids.remove(fID);
+				int hoursWrkd = 0;
+				if (ClockOut > ClockIn)
+					hoursWrkd = Math.abs(ClockIn - ClockOut) / 100;
+				else
+					hoursWrkd = Math.abs((2400 + ClockOut) - ClockIn) / 100;
+				while (ids.contains(fID)) {
+					ClockIn = Integer.parseInt(idTime.get(ids.indexOf(fID)));
+					idTime.remove(ids.indexOf(fID));
+					numberOfCI.remove(ids.indexOf(fID));
+					ids.remove(fID);
+					ClockOut = Integer.parseInt(idTime.get(ids.indexOf(fID)));
+					idTime.remove(ids.indexOf(fID));
+					numberOfCI.remove(ids.indexOf(fID));
+					ids.remove(fID);
+					if (ClockOut > ClockIn)
+						hoursWrkd += Math.abs(ClockIn - ClockOut) / 100;
+					else
+						hoursWrkd += Math.abs((2400 + ClockOut) - ClockIn) / 100;
 				}
 				Employee e = new Employee(f);
-				if (e.getPayroll() == null)
+				if (!e.getPayroll().contains("1st") && !e.getPayroll().contains("2nd")
+						&& !e.getPayroll().contains("3rd")) {
 					e.setPayroll(Integer.toString(hoursWrkd) + " (1st week)");
-				if (e.getPayroll().contains("1st") && !e.getPaymentType().contains("weekly")) {
-					e.setPayroll(Integer.toString(Integer.parseInt(e.getPayroll()) + hoursWrkd) + " (2nd week)");
-				}
-				if (e.getPayroll().contains("2nd") && !e.getPaymentType().contains("bi-weekly")) {
-					e.setPayroll(Integer.toString(Integer.parseInt(e.getPayroll()) + hoursWrkd) + " (3rd week)");
-				}
-				if (e.getPayroll().contains("3rd")) {
-					e.setPayroll(Integer.toString(Integer.parseInt(e.getPayroll()) + hoursWrkd) + " (4th week)");
+				} else if (e.getPayroll().contains("1st") && e.getPaymentType().contains("bi-weekly")) {
+					int tr = e.getAmount();
+					e.setPayroll(Integer.toString(e.getAmount() + hoursWrkd) + " (2nd week)");
+				} else if (e.getPayroll().contains("2nd") && e.getPaymentType().contains("monthly")) {
+					e.setPayroll(Integer.toString(e.getAmount() + hoursWrkd) + " (3rd week)");
+				} else if (e.getPayroll().contains("3rd")) {
+					e.setPayroll(Integer.toString(e.getAmount() + hoursWrkd) + " (4th week)");
 				}
 
-				if (e.getPayroll().contains("1st") && e.getPaymentType().contains("weekly")) {
-					System.out.println("The employee with the ID gets paid this week");
-					e.setPayroll(null);
+				if (e.getPayroll().contains("1st") && e.getPaymentType().contains("weekly")
+						&& !e.getPaymentType().contains("bi-weekly")) {
+					System.out.println("The employee with the " + e.getID() + " gets paid this week");
+					addMoney(e);
+					e.setPayroll("Payroll: ");
 				}
 				if (e.getPayroll().contains("2nd") && e.getPaymentType().contains("bi-weekly")) {
-					System.out.println("The employee with the ID gets paid this week");
-					e.setPayroll(null);
+					System.out.println("The employee with the " + e.getID() + " gets paid this week");
+					addMoney(e);
+					e.setPayroll("Payroll: ");
 				}
 				if (e.getPayroll().contains("4th") && e.getPaymentType().contains("montly")) {
-					System.out.println("The employee with the ID gets paid this week");
-					e.setPayroll(null);
+					System.out.println("The employee with the " + e.getID() + " gets paid this week");
+					addMoney(e);
+					e.setPayroll("Payroll: ");
 				}
+				if (!(e.getPayroll().length() < 11))
+					addMoney(e);
 				writeEmpToFile(f, e);
 			}
 
 		}
-		System.out.println("Here's a list of all the ID's history during this week's payroll");
+		System.out.println("Here's a list of all the ID's history during this week's payroll: \n");
 		for (String id : idToPrint) {
-			File ftemp = new File(employees.getPath() + File.separator + id + ".txt");
-			Printer.printFile(ftemp);
+			File ftemp2 = new File(employees.getPath() + File.separator + id + ".txt");
+			Printer.printFile(ftemp2);
+			System.out.println("");
 		}
 	}
 
 	private static void addLastCL(File fDate, ArrayList<String> idsAreOdd, ArrayList<String> ids,
 			ArrayList<String> idTime, ArrayList<Integer> numberOfCI) throws FileNotFoundException {
-		Scanner sc2 = new Scanner(fDate);
-		while (sc2.next() != "end") {
-			String id = sc2.next();
-			String time = sc2.next();
+
+		Scanner sc = new Scanner(fDate);
+		while (sc.hasNext()) {
+			String id = sc.next();
+			if (id.compareTo("end") == 0)
+				break;
+			String time = sc.next();
 			if (idsAreOdd.contains(id)) {
+				int index = ids.lastIndexOf(id);
 				ids.add(id);
 				idTime.add(time);
-				numberOfCI.add(numberOfCI.get(ids.lastIndexOf(id)) + 1);
+				int a = numberOfCI.get(index) + 1;
+				numberOfCI.add(a);
 				idsAreOdd.remove(id);
 			}
 		}
@@ -522,46 +613,24 @@ public class EmployeeFileController implements FileController {
 		}
 	}
 
-	private static void calculateWeek(int startDate, int endDate, String yymm, File f2, ArrayList<String> ids,
-			ArrayList<String> idTime, ArrayList<Integer> numberOfCI) throws FileNotFoundException {
+	private static void addMoney(Employee e) throws FileNotFoundException {
 
-		while (startDate != endDate) {
-			calculateDay(startDate++, yymm, f2, ids, idTime, numberOfCI);
-		}
-	}
-
-	private static void calculateDay(int date, String yymm, File f2, ArrayList<String> ids, ArrayList<String> idTime,
-			ArrayList<Integer> numberOfCI) throws FileNotFoundException {
-
-		File f3 = new File(f2.getPath() + File.separator + yymm + date + ".txt");
-		if (!f3.exists()) {
-			System.out.println("This date isn't calculated yet");
-			return;
-		}
-		Scanner sc = new Scanner(f3);
-		while (sc.next() != "end") {
-			String id = sc.next();
-			String time = sc.next();
-			if (ids.contains(id)) {
-				ids.add(id);
-				idTime.add(time);
-				numberOfCI.add(numberOfCI.get(ids.lastIndexOf(id)) + 1);
-			}
-			ids.add(id);
-			idTime.add(time);
-			numberOfCI.add(1);
-		}
-
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Temporary: How much is " + e.getID() + " getting paid? (per hour)");
+		String cash = sc.nextLine();
+		double r = e.getAmount() * Double.parseDouble(cash);
+		System.out
+				.println("The employee " + e.getID() + " is getting paid " + r + " so far (payment type matters!) \n");
 	}
 
 	private static void writeEmpToFile(File employee, Employee e) throws FileNotFoundException {
 
 		PrintWriter writer = new PrintWriter(employee);
-		writer.println("Titlename: " + e.getTitleName());
-		writer.println("Amount: " + e.getID());
-		writer.println("Brand: " + e.getPaymentType());
-		writer.println("Brand: " + e.getSalary());
-		writer.println("Payroll: " + e.getPayroll());
+		writer.println(e.getTitleName());
+		writer.println(e.getID());
+		writer.println(e.getPaymentType());
+		writer.println(e.getSalary());
+		writer.println(e.getPayroll());
 		writer.flush();
 		writer.close();
 	}
