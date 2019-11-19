@@ -152,6 +152,11 @@ public class ScheduleController {
             	trigger = false;
             	break;
             }
+            case "PayRoll":{
+            	PayRollController.PayRollcalc(hotel,CurrSchedule);
+            	trigger = false;
+            	break;
+            }
             default:{
             	trigger = false;
             }
