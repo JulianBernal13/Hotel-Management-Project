@@ -57,7 +57,7 @@ public class Employee {
 		this.id = info.get(Property.id.ordinal());
 		this.salary = Integer.parseInt(info.get(Property.salary.ordinal()));
 		this.paymentType = info.get(Property.paymentType.ordinal());
-		this.payroll = info.get(Property.payroll.ordinal());
+		//this.payroll = info.get(Property.payroll.ordinal());
 	}
 
 	public void setTitleName(String titleName) {

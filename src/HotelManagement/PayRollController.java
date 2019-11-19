@@ -20,6 +20,11 @@ public class PayRollController {
         		String temp = command.substring(0, command.length()-4);
         		PayDates(hotel, Secdule, Integer.parseInt(temp));
         	}
+        	System.out.println("do you want to do more payRolls? y/n");
+        	command = sc.nextLine();
+        	if(command.contentEquals("n")) {
+        		toggle = false;
+        	}
         }
 	}
 	
@@ -45,6 +50,7 @@ public class PayRollController {
         		System.out.println("what day is this");
         		command = sc.nextLine();
         		yes.calculationHourPay(check, 5, currsec.getDaySchedule(command));
+        		yes.addDate(check.getName(), 2);
         	}
         	System.out.println("add more dates? y/n");
         	command = sc.nextLine();

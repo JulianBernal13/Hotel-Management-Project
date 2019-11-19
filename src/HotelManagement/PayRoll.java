@@ -11,12 +11,12 @@ import java.util.Map;
 
 public class PayRoll {
 	private int total;
-	private Map<String,Integer> dates;
+	private HashMap<String,Integer> dates;
 	private int payId;
 	
     public PayRoll(int id){
     	this.total = 0;
-    	this.dates = null;
+    	dates = new HashMap<String,Integer>();
     	this.payId = id;
     }
     
@@ -41,7 +41,7 @@ public class PayRoll {
     }
     
     void addDate(String date, int check) {
-    	this.dates.put(date,check);
+    	this.dates.put(date, check);
     }
     
     void setId(int id) {
@@ -53,7 +53,7 @@ public class PayRoll {
         if(!cur.exists()) {
         	cur.mkdir();
         }
-        File saver = new File(cur.getPath() + File.pathSeparator + this.payId + ".txt");
+        File saver = new File(cur.getPath() + File.separator + this.payId + ".txt");
 		saver.createNewFile();
         PrintWriter writer = new PrintWriter(saver);
 	    writer.println(this.payId);
@@ -73,15 +73,16 @@ public class PayRoll {
         int lasthold = -1;
         int hoursworked = 0;
         while(i < oldInfo.size()) {
+        	System.out.println(this.payId + " : " + oldInfo.get(i));
         	if(Integer.parseInt(oldInfo.get(i)) == this.payId && firsthold == -1){
         		firsthold = 1;
-        	}
-        	if(Integer.parseInt(oldInfo.get(i)) == this.payId && lasthold == -1) {
+        	} else if(Integer.parseInt(oldInfo.get(i)) == this.payId && lasthold == 1) {
         		lasthold = 1;
+        		
         	}
-        	if(firsthold != -1 && lasthold == -1) {
-        		if(curDay.containsKey(oldInfo.get(i))) {
-        			int id = curDay.get(oldInfo.get(i));
+        	if(firsthold == 1) {
+        		if(curDay.containsKey(Integer.parseInt(oldInfo.get(i)))){
+        			int id = curDay.get(Integer.parseInt(oldInfo.get(i)));
         			if(id == this.payId) {
         				hoursworked++;
         			}
