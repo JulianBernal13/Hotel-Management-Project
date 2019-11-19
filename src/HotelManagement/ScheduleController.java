@@ -191,10 +191,10 @@ public class ScheduleController {
     			File clockin = new File(Schedule.getPath() + File.separator + year + "-" + month + "-" + day + ".txt");
     			if(clockin.exists()) {
     			    FileWriter fileWriter = new FileWriter(clockin.getPath(), true); //Set true for append mode
-        			PrintWriter fw = new PrintWriter(clockin);
-        		    fw.println(temp.substring(0, temp.length()-4));  //New line
-        		    fw.println(hour);
-        		    fw.close();
+        			PrintWriter fw = new PrintWriter(fileWriter);
+        			fw.println(temp.substring(0, temp.length()-4));  //New line
+        			fw.println(hour);
+        			fw.close();
         		    toggle = false;
     			} else {
     				clockin.createNewFile();
