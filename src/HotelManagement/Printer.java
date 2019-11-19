@@ -198,7 +198,8 @@ public class Printer {
 
 	public static void printRRContract(Hotel hotel) {
 		for(Contract contract : hotel.getReservationContracts().values()){
-			System.out.println(contract.getCustomer());
+//			System.out.println(contract.getCustomer());
+			System.out.println(contract);
 		}
 	}
 

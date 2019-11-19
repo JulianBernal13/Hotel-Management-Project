@@ -120,6 +120,6 @@ public class Contract {
 
     @Override
     public String toString() {
-        return this.customer.toString() +" "+ this.room.toString() + this.start + this.end;
+        return this.customer.toString() +" "+ this.room.toString() +" "+ this.start +" "+ this.end;
     }
 }

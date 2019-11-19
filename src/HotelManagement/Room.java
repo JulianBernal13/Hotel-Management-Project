@@ -260,4 +260,9 @@ public class Room {
     	}
 		return writer;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(this.number);
+    }
 }
