@@ -634,4 +634,10 @@ public class EmployeeFileController implements FileController {
 		writer.flush();
 		writer.close();
 	}
+	
+	public static int Getwage(File hotel, int id) throws FileNotFoundException {
+		File Employee = new File(hotel.getPath() + File.separator + "Employee" + File.separator + id + ".txt");
+        ArrayList<String> oldInfo = FileController.extractInfo(Employee);
+		return Integer.parseInt(oldInfo.get(3));
+	}
 }
