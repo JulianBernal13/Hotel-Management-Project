@@ -118,4 +118,8 @@ public class Contract {
         createContractFile();
     }
 
+    @Override
+    public String toString() {
+        return this.customer.toString() +" "+ this.room.toString() + this.start + this.end;
+    }
 }
