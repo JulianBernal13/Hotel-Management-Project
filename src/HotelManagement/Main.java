@@ -22,7 +22,10 @@ public class Main {
         //calendar.add(Calendar.DATE, 1);
         current = calendar.getTime();
         System.out.println(sdf.format(current));
-        MainMenu m = new MainMenu();
-        m.menu();
+//        MainMenu m = new MainMenu();
+//        m.menu();
+        System.out.println("Welcome to Hotel Management System");
+        DisplayMainMenu menu = new DisplayMainMenu();
+        menu.displayCommand();
     }
 }

@@ -3,6 +3,7 @@ package HotelManagement;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
 
@@ -203,4 +204,14 @@ public class Printer {
 		}
 	}
 
+	public static void printOutOfBound(int n) {
+		System.out.println("The command number you have entered is invalid");
+		System.out.println("Please enter an index number between 1 and " + n);
+	}
+
+	public static void printBorder() {
+		char[] chars = new char[50];
+		Arrays.fill(chars, '=');
+		System.out.println(chars);
+	}
 }

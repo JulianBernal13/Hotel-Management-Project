@@ -41,6 +41,12 @@ public class Customer {
         return firstname + " " + lastname;
     }
 
+    public void printinfo() {
+        System.out.println(firstname + " " + lastname);
+        System.out.println("VIP: " + (isVIP ? "yes" : "no"));
+        System.out.println("Is Staying:" + (isStaying ? "yes" : "no"));
+    }
+
     /**
      * @param customerFile
      * @throws FileNotFoundException
@@ -92,5 +98,26 @@ public class Customer {
         writer.println(this.isStaying);
         writer.flush();
         writer.close();
+    }
+
+    public static void changeVIPStatue(Hotel hotel) throws IOException {
+        System.out.println("Please enter customer's name");
+        Scanner sc = new Scanner(System.in);
+        String name = sc.nextLine();
+        Customer customer = hotel.getCustomer(name);
+        if (customer == null) {
+            System.out.println("Would you like to register customer " + name + "? y/n");
+            if (!sc.nextLine().equals("y"))
+                return;
+            hotel.addCustomer(name);
+            customer = hotel.getCustomer(name);
+        }
+        System.out.println("This customer is " + (customer.isVIP() ? "" : "not ") + "VIP");
+        System.out.println("Would you like to change it? y/n");
+        if (sc.nextLine().equals("y")) {
+            customer.setVIP(!customer.isVIP());
+            customer.writeToFile();
+            System.out.println("Change successful");
+        }
     }
 }
