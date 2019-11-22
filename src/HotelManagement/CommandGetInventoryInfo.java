@@ -3,10 +3,9 @@ package HotelManagement;
 import java.io.IOException;
 import java.text.ParseException;
 
-public class CommandGetInventoryInfo extends aCommandEmployee {
-    public CommandGetInventoryInfo(Hotel h, Employee e) {
+public class CommandGetInventoryInfo extends aCommand {
+    public CommandGetInventoryInfo(Hotel h) {
         hotel = h;
-        employee = e;
     }
 
     @Override

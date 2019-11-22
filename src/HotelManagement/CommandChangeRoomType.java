@@ -3,19 +3,20 @@ package HotelManagement;
 import java.io.IOException;
 import java.text.ParseException;
 
-public class CommandUseInventoryItem extends aCommand {
-    public CommandUseInventoryItem(Hotel h) {
+public class CommandChangeRoomType extends aCommandManager {
+    public CommandChangeRoomType(Hotel h) {
         hotel = h;
+        manager = hotel.getManager();
     }
 
     @Override
     public boolean execute() throws IOException, ParseException {
-        InventoryFileController.useItem(hotel.cdInventoryFolder());
+        RoomFileController.applyRoomType(hotel.getFile());
         return true;
     }
 
     @Override
     public String getDescription() {
-        return "use inventory item";
+        return "change room type";
     }
 }

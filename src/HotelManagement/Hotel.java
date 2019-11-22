@@ -141,12 +141,14 @@ public class Hotel {
 		addCustomer(new Customer(firstName, lastName, CustomerFileController.cdCustomerFolder(path)));
 	}
 
+	public File getFile() {return new File(this.getPath());}
 	public File cdRoomFolder() {
 		return new File(this.getPath() + File.separator + "Rooms");
 	}
-	public File cdInventoryFolder() {
-		return new File(this.getPath() + File.separator + "Inventory");
-	}
+	public File cdInventoryFolder() { return new File(this.getPath() + File.separator + "Inventory"); }
+	public File cdEmployeeFolder() { return new File(this.getPath() + File.separator + "Employee"); }
+	public File cdCustomerFolder() { return new File(this.getPath() + File.separator + "Customer"); }
+	public File cdContractFolder() { return new File(this.getPath() + File.separator + "Contracts"); }
 
 	public <T> Room getRoom(T room){
 		int roomNumber = Integer.parseInt(String.valueOf(room));

@@ -28,15 +28,15 @@ public class ManagerMenu implements Menu {
 		case "exit":
 			break;
 		case "DH": {
-			FileReader.displayHotelInfo(hotel.getPath());
+			FileReader.displayHotelInfo(hotel.getPath());//
 			break;
 		}
 		case "DE": {
-			EmployeeFileController.getEmployeesInfo(employeeFiles);
+			EmployeeFileController.getEmployeesInfo(employeeFiles);//
 			break;
 		}
 		case "DI": {
-			InventoryFileController.getInventoryInfo(inventory);
+			InventoryFileController.getInventoryInfo(inventory);//
 			break;
 		}
 		case "LR": {
@@ -44,19 +44,19 @@ public class ManagerMenu implements Menu {
 			break;
 		}
 		case "CE": {
-			EmployeeFileController.getEmployeeInfo(employeeFiles);
+			EmployeeFileController.getEmployeeInfo(employeeFiles);//
 			break;
 		}
 		case "EE": {
-			EmployeeFileController.modifyEmployee(employeeFiles);
+			EmployeeFileController.modifyEmployee(employeeFiles);//
 			break;
 		}
 		case "AE": {
-			EmployeeFileController.createEmployee(employeeFiles, hotel);
+			EmployeeFileController.createEmployee(employeeFiles, hotel);//
 			break;
 		}
 		case "FE": {
-			EmployeeFileController.deleteEmployee(employeeFiles);
+			EmployeeFileController.deleteEmployee(employeeFiles);//
 			break;
 		}
 		case "AI": {
@@ -64,25 +64,25 @@ public class ManagerMenu implements Menu {
 			break;
 		}
 		case "IC": {
-			InventoryFileController.getInventoryItemInfo(inventory);
+			InventoryFileController.getInventoryItemInfo(inventory);//
 			break;
 		}
 		case "UI": {
-			InventoryFileController.useItem(inventory);
+			InventoryFileController.useItem(inventory);//
 			break;
 		}
 		case "CRT": {
-			RoomFileController.applyRoomType(cur);
+			RoomFileController.applyRoomType(cur);//
 			menu();
 			break;
 		}
 		case "PR": {
-			EmployeeFileController.payroll(cur);
+			EmployeeFileController.payroll(cur);//
 			break;
 		}
 		// change room type
 		case "Schedule": {
-			ScheduleController.ScheduleMenu(cur);
+			ScheduleController.ScheduleMenu(cur);//
 			break;
 		}
 		}
