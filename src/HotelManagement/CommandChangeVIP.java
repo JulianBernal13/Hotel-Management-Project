@@ -17,6 +17,6 @@ public class CommandChangeVIP extends aCommandEmployee {
 
     @Override
     public String getDescription() {
-        return "to change a customer's VIP status";
+        return "change a customer's VIP status";
     }
 }

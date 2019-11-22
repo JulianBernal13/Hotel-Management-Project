@@ -17,6 +17,6 @@ public class CommandDeleteReservation extends aCommandEmployee {
 
     @Override
     public String getDescription() {
-        return "to cancel a reservation";
+        return "cancel a reservation";
     }
 }
