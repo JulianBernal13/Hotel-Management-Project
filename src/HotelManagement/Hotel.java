@@ -144,6 +144,9 @@ public class Hotel {
 	public File cdRoomFolder() {
 		return new File(this.getPath() + File.separator + "Rooms");
 	}
+	public File cdInventoryFolder() {
+		return new File(this.getPath() + File.separator + "Inventory");
+	}
 
 	public <T> Room getRoom(T room){
 		int roomNumber = Integer.parseInt(String.valueOf(room));
