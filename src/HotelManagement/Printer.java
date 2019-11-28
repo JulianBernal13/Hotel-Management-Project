@@ -104,6 +104,7 @@ public class Printer {
 		System.out.println("Enter 'clean' to set room to clean      ");
 		System.out.println("Enter 'Maintaince' to edit maintaince notes     ");
 		System.out.println("Enter 'Notes' to edit general room notes      ");
+		System.out.println("Enter 'DELETE' to delete room      "); // NEW CODE
 		System.out.println("Enter 'Exit' to get back to List of rooms and save changes     ");
 	}
 
@@ -143,7 +144,7 @@ public class Printer {
 		System.out.println("=============================================");
 		System.out.println("Enter a day to view of this Schedule (Monday,Tuseday, ect)");
 	}
-	
+
 	public static void printPayRollOptoins() {
 		System.out.println("=============================================");
 		System.out.println("Enter a employee id to start payroll calculations");
@@ -198,8 +199,8 @@ public class Printer {
 	}
 
 	public static void printRRContract(Hotel hotel) {
-		for(Contract contract : hotel.getReservationContracts().values()){
-//			System.out.println(contract.getCustomer());
+		for (Contract contract : hotel.getReservationContracts().values()) {
+			// System.out.println(contract.getCustomer());
 			System.out.println(contract);
 		}
 	}
