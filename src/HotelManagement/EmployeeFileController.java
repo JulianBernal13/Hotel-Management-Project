@@ -100,6 +100,34 @@ public class EmployeeFileController implements FileController {
 		}
 	}
 
+	// reads a file and returns the contents into an arraylist. Call this or
+	// void (get..)
+	public static ArrayList<String> getEmployeeInfoArr(File employees) throws IOException {
+		File employee = menuLookUp(employees);
+		if (employee.length() == 0)
+			return null;
+		return extractEmpInfo(employee);
+	}
+
+	// Creates an Employee object from a file
+	public static ArrayList<String> extractEmpInfo(File employee) throws FileNotFoundException {
+		ArrayList<String> info = new ArrayList<>();
+		Scanner sc = new Scanner(employee);
+		while (sc.hasNext()) {
+			String titleName = sc.nextLine();
+			info.add(titleName);
+			String id = sc.nextLine();
+			info.add(id);
+			String paymentType = sc.nextLine();
+			info.add(paymentType);
+			String salary = sc.nextLine();
+			info.add(salary);
+			String payroll = sc.nextLine();
+			info.add(payroll);
+		}
+		return info;
+	}
+
 	// Creates directory
 	public static File cdEmployeeFile(File hotel) {
 		String filePath = hotel.getPath() + File.separator + "Employee";
@@ -623,7 +651,7 @@ public class EmployeeFileController implements FileController {
 				.println("The employee " + e.getID() + " is getting paid " + r + " so far (payment type matters!) \n");
 	}
 
-	private static void writeEmpToFile(File employee, Employee e) throws FileNotFoundException {
+	public static void writeEmpToFile(File employee, Employee e) throws FileNotFoundException {
 
 		PrintWriter writer = new PrintWriter(employee);
 		writer.println(e.getTitleName());
@@ -634,10 +662,10 @@ public class EmployeeFileController implements FileController {
 		writer.flush();
 		writer.close();
 	}
-	
+
 	public static int Getwage(File hotel, int id) throws FileNotFoundException {
 		File Employee = new File(hotel.getPath() + File.separator + "Employee" + File.separator + id + ".txt");
-        ArrayList<String> oldInfo = FileController.extractInfo(Employee);
+		ArrayList<String> oldInfo = FileController.extractInfo(Employee);
 		return Integer.parseInt(oldInfo.get(3));
 	}
 }
