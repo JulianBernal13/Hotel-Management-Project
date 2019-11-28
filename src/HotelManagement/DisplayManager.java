@@ -17,5 +17,6 @@ public class DisplayManager extends aDisplay {
 		addCommand(new CommandMove(hotel)); // new code
 		addCommand(new CommandAddRoom(hotel)); // new code
 		addCommand(new CommandDeleteRoom(hotel)); // new code
+		
 	}
 }
