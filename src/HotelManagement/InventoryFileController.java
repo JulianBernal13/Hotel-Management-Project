@@ -93,7 +93,7 @@ public class InventoryFileController implements FileController {
 		writeInvToFile(invItem, info);
 	}
 
-	// Creates Inv object, then writes to file
+	// Creates Inv object from a file
 	public static ArrayList<Inventory> extractInvInfo(File invItem) throws FileNotFoundException {
 		ArrayList<Inventory> info = new ArrayList<>();
 		Scanner sc = new Scanner(invItem);
@@ -168,6 +168,19 @@ public class InventoryFileController implements FileController {
 			return;
 		Printer.printFile(invItem);
 		System.out.print("\n");
+	}
+
+	// reads a file and returns the contents into an arraylist. Call this or
+	// void (get..)
+	public static ArrayList<Inventory> getInventoryItemInfoArr(File inventory) throws IOException {
+		File invItem = menuLookUp(inventory);
+		if (invItem.length() == 0)
+			return null;
+		return extractInvInfo(invItem);
+	}
+
+	public static ArrayList<Inventory> getInventoryItemInfoArr2(File invItem) throws IOException {
+		return extractInvInfo(invItem);
 	}
 
 	public static void getInventoryInfo(File inventory) throws FileNotFoundException {
