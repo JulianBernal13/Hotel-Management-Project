@@ -106,6 +106,6 @@ public class Inventory {
 	}
 
 	public String toString() {
-		return "Inventory{" + "name='" + name + '\'' + '}';
+		return name;
 	}
 }
