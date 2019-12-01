@@ -421,4 +421,40 @@ public class ContractFileController {
 		System.out.println("Success!");
 	}
 
+	public static void contractReport(Hotel hotel){
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Are you going to check the report by year or by month? (y/m)");
+		String in = sc.nextLine();
+		switch (in){
+			case "y":{
+				System.out.println("Please indicate which year you want to look up the report.(e.g. 2019)");
+				String when = sc.nextLine();
+				ArrayList<Contract> outContracts = hotel.getOutContracts();
+				double price=0.0;
+				for(Contract c:outContracts){
+					System.out.println(c.getStart());
+					System.out.println(c.getStart().substring(0,3));
+					if(c.getStart().substring(0,3).equals(when)){
+						price = price+c.getPrice();
+					}
+				}
+				System.out.println("This year we earned $"+price+" by renting rooms.");
+				break;
+			}
+			case "m":{
+				System.out.println("Please indicate which year and which month you want to look up the report.(e.g. 2019-11)");
+				String when = sc.nextLine();
+				ArrayList<Contract> outContracts = hotel.getOutContracts();
+				double price=0.0;
+				for(Contract c:outContracts){
+					if(c.getStart().substring(0,6).equals(when)){
+						price = price+c.getPrice();
+					}
+				}
+				System.out.println("This month we earned $"+price+" by renting rooms.");
+			}
+		}
+	}
+
 }
+

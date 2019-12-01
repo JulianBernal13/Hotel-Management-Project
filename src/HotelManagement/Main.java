@@ -1,5 +1,7 @@
 package HotelManagement;
 
+import HotelManagement.Display.DisplayMainMenu;
+
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,7 +21,7 @@ public class Main {
     public static void main(String[] args) throws IOException, ParseException {
         calendar.setTime(current);
         //add 1 day to calendar for testing
-        //calendar.add(Calendar.DATE, 1);
+        calendar.add(Calendar.DATE, 2);
         current = calendar.getTime();
         System.out.println(sdf.format(current));
 //        MainMenu m = new MainMenu();

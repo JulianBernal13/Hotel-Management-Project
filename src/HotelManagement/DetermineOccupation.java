@@ -1,5 +1,9 @@
 package HotelManagement;
 
+import HotelManagement.Display.DisplayCustomer;
+import HotelManagement.Display.DisplayManager;
+import HotelManagement.Display.DisplayReception;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
