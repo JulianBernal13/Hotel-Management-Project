@@ -79,7 +79,7 @@ public class Hotel {
 			Contract c = ContractFileController.readContract(this, f);
 			inContracts.put(c.getCustomer(), c);
 		}
-		File outFoler = new File(path + File.separator + "Contracts" + File.separator + "Reservation");
+		File outFoler = new File(path + File.separator + "Contracts" + File.separator + "Out");
 		for (File f : outFoler.listFiles()) {
 			Contract c = ContractFileController.readContract(this, f);
 			outContracts.add(c);

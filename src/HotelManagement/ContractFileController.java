@@ -432,9 +432,7 @@ public class ContractFileController {
 				ArrayList<Contract> outContracts = hotel.getOutContracts();
 				double price=0.0;
 				for(Contract c:outContracts){
-					System.out.println(c.getStart());
-					System.out.println(c.getStart().substring(0,3));
-					if(c.getStart().substring(0,3).equals(when)){
+					if(c.getStart().substring(0,4).equals(when)){
 						price = price+c.getPrice();
 					}
 				}
@@ -447,7 +445,7 @@ public class ContractFileController {
 				ArrayList<Contract> outContracts = hotel.getOutContracts();
 				double price=0.0;
 				for(Contract c:outContracts){
-					if(c.getStart().substring(0,6).equals(when)){
+					if(c.getStart().substring(0,7).equals(when)){
 						price = price+c.getPrice();
 					}
 				}
