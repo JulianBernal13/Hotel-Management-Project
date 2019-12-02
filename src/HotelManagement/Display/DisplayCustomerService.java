@@ -14,6 +14,7 @@ public class DisplayCustomerService extends aDisplayEmployee {
         addCommand(new CommandChangeVIP(hotel, employee));
         addCommand(new CommandPriceMatch(hotel, employee));
         addCommand(new CommandDeleteReservation(hotel, employee));
+        addCommand(new CommandShowRoomPic(hotel, employee));
 
     }
 }

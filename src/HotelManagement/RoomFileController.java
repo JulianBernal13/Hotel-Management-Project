@@ -1,14 +1,14 @@
 package HotelManagement;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Scanner;
 
 import static HotelManagement.Room.*;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
 /**
  * @author Yingxie Gao
@@ -197,4 +197,49 @@ public class RoomFileController {
         }
     }
 
+    public static void showRoomPic(Hotel hotel){
+        Image image = null;
+        System.out.println("Which type of room do you want to see?(single,double,triple, queen,king)");
+        Scanner sc = new Scanner(System.in);
+        String type = sc.nextLine();
+        String style = hotel.getStyle();
+        try {
+            switch (type){
+                case "single":{
+                    File sourceimage = new File("src"+File.separator+"Pictures"+File.separator+style+File.separator+"SingleRoom.jpg");
+                    image = ImageIO.read(sourceimage);
+                }
+
+                case "double":{
+                    File sourceimage = new File("src"+File.separator+"Pictures"+File.separator+style+File.separator+"DoubleRoom.jpg");
+                    image = ImageIO.read(sourceimage);
+                }
+
+                case "triple":{
+                    File sourceimage = new File("src"+File.separator+"Pictures"+File.separator+style+File.separator+"TripleRoom.jpg");
+                    image = ImageIO.read(sourceimage);
+                }
+
+                case "queen":{
+                    File sourceimage = new File("src"+File.separator+"Pictures"+File.separator+style+File.separator+"QueenRoom.jpg");
+                    image = ImageIO.read(sourceimage);
+                }
+
+                case "king":{
+                    File sourceimage = new File("src"+File.separator+"Pictures"+File.separator+style+File.separator+"KingRoom.jpg");
+                    image = ImageIO.read(sourceimage);
+                }
+            }
+
+        } catch (IOException e) {
+        }
+
+        JFrame frame = new JFrame();
+        JLabel label = new JLabel(new ImageIcon(image));
+        frame.getContentPane().add(label, BorderLayout.CENTER);
+        frame.pack();
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    
 }

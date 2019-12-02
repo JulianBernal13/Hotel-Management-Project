@@ -17,11 +17,12 @@ public class Hotel {
 
 	// needs to be matched with the initialization order in constructor
 	public static enum Property {
-		name, location, numOfLevel, levelRmNum, password;
+		name, style, location, numOfLevel, levelRmNum, password;
 	}
 
 	private final double VIPDiscount = 0.8;
 	private String name;
+	private String style;
 	private Location location;
 	private int numOfLevel;
 	private int levelRmNum;
@@ -47,6 +48,7 @@ public class Hotel {
 
 		ArrayList<String> info = FileController.extractInfo(new File(path + File.separator + "info.txt"));
 		this.name = info.get(Property.name.ordinal());
+		this.style = info.get(Property.style.ordinal());
 		this.password = info.get(Property.password.ordinal());
 		this.numOfLevel = Integer.parseInt(info.get(Property.numOfLevel.ordinal()));
 		this.levelRmNum = Integer.parseInt(info.get(Property.levelRmNum.ordinal()));
@@ -108,6 +110,7 @@ public class Hotel {
 		File info = new File(path + File.separator + "info.txt");
 		PrintWriter writer = new PrintWriter(info);
 		writer.println(name);
+		writer.println(style);
 		writer.println(location);
 		writer.println(numOfLevel);
 		writer.println(levelRmNum);
@@ -152,6 +155,10 @@ public class Hotel {
 
 	public String getName() {
 		return name;
+	}
+
+	public String getStyle() {
+		return style;
 	}
 
 	public Location getLocation() {

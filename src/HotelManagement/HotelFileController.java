@@ -22,6 +22,8 @@ public class HotelFileController implements FileController {
 			name = sc.nextLine();
 			hotelFile = new File(file.getPath() + File.separator + name);
 		}
+		System.out.println("What kind of hotel style do you want create?(European/American/Chinese)");
+		String style = sc.nextLine();
 		System.out.println("What is your hotel's location? Enter an Address.");
 		String address = sc.nextLine();
 		System.out.println("How many floors does your hotel have?");
@@ -30,14 +32,15 @@ public class HotelFileController implements FileController {
 		int numRoom = Integer.parseInt(sc.nextLine());
 		System.out.println("Please set a password for this hotel.");
 		String password = sc.nextLine();
-		writeHotelToFile(hotelFile, name, new Location(address), floor, numRoom, password);
+		writeHotelToFile(hotelFile, name,style, new Location(address), floor, numRoom, password);
 	}
 
-	public static void writeHotelToFile(File hotelFile, String name, Location location, int numOfLevel, int levelRmNum,
+	public static void writeHotelToFile(File hotelFile, String name,String style, Location location, int numOfLevel, int levelRmNum,
 			String password) throws IOException {
 		File info = FileController.createTxtFile(hotelFile, "info");
 		PrintWriter writer = new PrintWriter(info);
 		writer.println(name);
+		writer.println(style);
 		writer.println(location);
 		writer.println(numOfLevel);
 		writer.println(levelRmNum);
@@ -423,7 +426,7 @@ public class HotelFileController implements FileController {
 		if (roomsToDelete.size() != 0)
 			roomsToDelete.clear();
 
-		writeHotelToFile(hotel.getFile(), hotel.getName(), hotel.getLocation(), hotel.getNumOfLevel(),
+		writeHotelToFile(hotel.getFile(), hotel.getName(),hotel.getStyle(), hotel.getLocation(), hotel.getNumOfLevel(),
 				hotel.getLevelRmNum(), hotel.getPassword());
 
 		// writeHotelToFile(hotel.getFile(), hotel.getName(),
@@ -554,7 +557,7 @@ public class HotelFileController implements FileController {
 		if (roomsToAdd.size() != 0)
 			roomsToAdd.clear();
 
-		writeHotelToFile(hotel.getFile(), hotel.getName(), hotel.getLocation(), hotel.getNumOfLevel(),
+		writeHotelToFile(hotel.getFile(), hotel.getName(), hotel.getStyle(), hotel.getLocation(), hotel.getNumOfLevel(),
 				hotel.getLevelRmNum(), hotel.getPassword());
 
 		// writeHotelToFile(hotel.getFile(), hotel.getName(),
