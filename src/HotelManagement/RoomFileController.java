@@ -208,26 +208,31 @@ public class RoomFileController {
                 case "single":{
                     File sourceimage = new File("src"+File.separator+"Pictures"+File.separator+style+File.separator+"SingleRoom.jpg");
                     image = ImageIO.read(sourceimage);
+                    break;
                 }
 
                 case "double":{
                     File sourceimage = new File("src"+File.separator+"Pictures"+File.separator+style+File.separator+"DoubleRoom.jpg");
                     image = ImageIO.read(sourceimage);
+                    break;
                 }
 
                 case "triple":{
                     File sourceimage = new File("src"+File.separator+"Pictures"+File.separator+style+File.separator+"TripleRoom.jpg");
                     image = ImageIO.read(sourceimage);
+                    break;
                 }
 
                 case "queen":{
                     File sourceimage = new File("src"+File.separator+"Pictures"+File.separator+style+File.separator+"QueenRoom.jpg");
                     image = ImageIO.read(sourceimage);
+                    break;
                 }
 
                 case "king":{
                     File sourceimage = new File("src"+File.separator+"Pictures"+File.separator+style+File.separator+"KingRoom.jpg");
                     image = ImageIO.read(sourceimage);
+                    break;
                 }
             }
 
