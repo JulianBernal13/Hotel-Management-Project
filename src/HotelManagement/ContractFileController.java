@@ -452,11 +452,6 @@ public class ContractFileController implements FileController {
 					}
 				}
 				System.out.println("This year we earned $"+price+" by renting rooms.");
-				System.out.println("Single room: $"+singlePrice+".");
-				System.out.println("Double room: $"+doublePrice+".");
-				System.out.println("Triple room: $"+triplePrice+".");
-				System.out.println("Queen room: $"+queenPrice+".");
-				System.out.println("King room: $"+kingPrice+".");
 				break;
 			}
 			case "m":{
@@ -480,13 +475,14 @@ public class ContractFileController implements FileController {
 					}
 				}
 				System.out.println("This month we earned $"+price+" by renting rooms.");
-				System.out.println("Single room: $"+singlePrice+".");
-				System.out.println("Double room: $"+doublePrice+".");
-				System.out.println("Triple room: $"+triplePrice+".");
-				System.out.println("Queen room: $"+queenPrice+".");
-				System.out.println("King room: $"+kingPrice+".");
+				break;
 			}
 		}
+		System.out.println("Single room: $"+singlePrice+".");
+		System.out.println("Double room: $"+doublePrice+".");
+		System.out.println("Triple room: $"+triplePrice+".");
+		System.out.println("Queen room: $"+queenPrice+".");
+		System.out.println("King room: $"+kingPrice+".");
 	}
 
 }
