@@ -14,7 +14,7 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
  * @author Yingxie Gao
  * @date 10/30/19 21:48
  */
-public class RoomFileController {
+public class RoomFileController implements FileController{
 
 
     public static void changeRoomType(String path, int number, String type) throws FileNotFoundException {

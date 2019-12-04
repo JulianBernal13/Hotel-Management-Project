@@ -14,7 +14,7 @@ import static HotelManagement.Main.sdf;
  * @author Yingxie Gao, Anji Yu
  * @date 11/7/19 08:11
  */
-public class ContractFileController {
+public class ContractFileController implements FileController {
 
 	public static void reserveRoom(Hotel hotel) throws IOException {
 		Scanner sc = new Scanner(System.in);
