@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class HotelFileController implements FileController {
 	public static void createHotel(File file) throws IOException {
@@ -23,8 +24,19 @@ public class HotelFileController implements FileController {
 			hotelFile = new File(file.getPath() + File.separator + name);
 		}
 		System.out.println("What kind of hotel style do you want create?(European/American/Chinese)");
-		String style = sc.nextLine();
-		System.out.println("What is your hotel's location? Enter an Address.");
+        String ePattern = ".*ur.*";
+		String aPattern = ".*meri.*";
+        String cPattern = ".*in.*";
+		String rawStyle = sc.nextLine();
+		String style = "";
+		if( Pattern.matches(ePattern, rawStyle))
+		    style = "European";
+        if( Pattern.matches(aPattern, rawStyle))
+            style = "Ameican";
+        if( Pattern.matches(cPattern, rawStyle))
+            style = "Chinese";
+
+        System.out.println("What is your hotel's location? Enter an Address.");
 		String address = sc.nextLine();
 		System.out.println("How many floors does your hotel have?");
 		int floor = Integer.parseInt(sc.nextLine());
