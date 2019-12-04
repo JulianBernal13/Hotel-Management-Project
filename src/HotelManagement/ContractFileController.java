@@ -425,6 +425,11 @@ public class ContractFileController {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Are you going to check the report by year or by month? (y/m)");
 		String in = sc.nextLine();
+		double singlePrice = 0.0;
+		double doublePrice = 0.0;
+		double triplePrice = 0.0;
+		double queenPrice = 0.0;
+		double kingPrice = 0.0;
 		switch (in){
 			case "y":{
 				System.out.println("Please indicate which year you want to look up the report.(e.g. 2019)");
@@ -433,10 +438,25 @@ public class ContractFileController {
 				double price=0.0;
 				for(Contract c:outContracts){
 					if(c.getStart().substring(0,4).equals(when)){
-						price = price+c.getPrice();
+						price += c.getPrice();
+						if(c.getRoom().getType().equals("single"))
+							singlePrice+=c.getPrice();
+						if(c.getRoom().getType().equals("double"))
+							doublePrice+=c.getPrice();
+						if(c.getRoom().getType().equals("triple"))
+							triplePrice+=c.getPrice();
+						if(c.getRoom().getType().equals("queen"))
+							queenPrice+=c.getPrice();
+						if(c.getRoom().getType().equals("king"))
+							kingPrice+=c.getPrice();
 					}
 				}
 				System.out.println("This year we earned $"+price+" by renting rooms.");
+				System.out.println("Single room: $"+singlePrice+".");
+				System.out.println("Double room: $"+doublePrice+".");
+				System.out.println("Triple room: $"+triplePrice+".");
+				System.out.println("Queen room: $"+queenPrice+".");
+				System.out.println("King room: $"+kingPrice+".");
 				break;
 			}
 			case "m":{
@@ -446,10 +466,25 @@ public class ContractFileController {
 				double price=0.0;
 				for(Contract c:outContracts){
 					if(c.getStart().substring(0,7).equals(when)){
-						price = price+c.getPrice();
+						price += c.getPrice();
+						if(c.getRoom().getType().equals("single"))
+							singlePrice+=c.getPrice();
+						if(c.getRoom().getType().equals("double"))
+							doublePrice+=c.getPrice();
+						if(c.getRoom().getType().equals("triple"))
+							triplePrice+=c.getPrice();
+						if(c.getRoom().getType().equals("queen"))
+							queenPrice+=c.getPrice();
+						if(c.getRoom().getType().equals("king"))
+							kingPrice+=c.getPrice();
 					}
 				}
 				System.out.println("This month we earned $"+price+" by renting rooms.");
+				System.out.println("Single room: $"+singlePrice+".");
+				System.out.println("Double room: $"+doublePrice+".");
+				System.out.println("Triple room: $"+triplePrice+".");
+				System.out.println("Queen room: $"+queenPrice+".");
+				System.out.println("King room: $"+kingPrice+".");
 			}
 		}
 	}

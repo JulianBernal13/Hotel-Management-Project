@@ -1,4 +1,4 @@
-package HotelManagement;
+package HotelManagement.Command;
 
 import java.io.IOException;
 import java.text.ParseException;

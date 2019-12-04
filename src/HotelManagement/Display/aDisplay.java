@@ -1,8 +1,7 @@
 package HotelManagement.Display;
 
 import HotelManagement.Printer;
-import HotelManagement.iCommand;
-import HotelManagement.iDisplay;
+import HotelManagement.Command.iCommand;
 
 import java.io.IOException;
 import java.text.ParseException;

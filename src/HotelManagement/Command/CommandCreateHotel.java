@@ -1,7 +1,6 @@
 package HotelManagement.Command;
 
 import HotelManagement.HotelFileController;
-import HotelManagement.iCommand;
 
 import java.io.File;
 import java.io.IOException;

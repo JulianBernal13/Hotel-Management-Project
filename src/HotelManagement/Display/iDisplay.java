@@ -1,4 +1,6 @@
-package HotelManagement;
+package HotelManagement.Display;
+
+import HotelManagement.Command.iCommand;
 
 import java.io.IOException;
 import java.text.ParseException;

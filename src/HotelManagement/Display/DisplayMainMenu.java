@@ -3,8 +3,7 @@ package HotelManagement.Display;
 import HotelManagement.Command.CommandCreateHotel;
 import HotelManagement.Command.CommandManageHotel;
 import HotelManagement.Printer;
-import HotelManagement.iCommand;
-import HotelManagement.iDisplay;
+import HotelManagement.Command.iCommand;
 
 import java.io.File;
 import java.io.IOException;
