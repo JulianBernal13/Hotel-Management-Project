@@ -2,6 +2,7 @@ package HotelManagement.Display;
 
 import HotelManagement.Command.CommandCreateHotel;
 import HotelManagement.Command.CommandManageHotel;
+import HotelManagement.Command.CommandStockSearch;
 import HotelManagement.Printer;
 import HotelManagement.Command.iCommand;
 
@@ -21,6 +22,7 @@ public class DisplayMainMenu implements iDisplay {
         }
         addCommand(new CommandCreateHotel(managementSystem));
         addCommand(new CommandManageHotel(managementSystem));
+        addCommand(new CommandStockSearch());
     }
 
     @Override
