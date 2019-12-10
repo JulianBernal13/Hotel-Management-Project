@@ -9,9 +9,6 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.nio.Buffer;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-
 public class InternetSearch {
 
 	public static BufferedReader googleSearch(String search) throws UnsupportedEncodingException, IOException{
