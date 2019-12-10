@@ -13,12 +13,12 @@ public class CommandDeleteRoom extends aCommand {
 
 	@Override
 	public boolean execute() throws IOException, ParseException {
-		HotelFileController.move(this.hotel);
+		HotelFileController.deleteRoom(this.hotel);
 		return true;
 	}
 
 	@Override
 	public String getDescription() {
-		return "delete a room to the current hotel";
+		return "delete a room from the current hotel";
 	}
 }
