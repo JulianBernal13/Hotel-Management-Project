@@ -24,19 +24,19 @@ public class HotelFileController implements FileController {
 			hotelFile = new File(file.getPath() + File.separator + name);
 		}
 		System.out.println("What kind of hotel style do you want create?(European/American/Chinese)");
-        String ePattern = ".*ur.*";
+		String ePattern = ".*ur.*";
 		String aPattern = ".*meri.*";
-        String cPattern = ".*in.*";
+		String cPattern = ".*in.*";
 		String rawStyle = sc.nextLine();
 		String style = "";
-		if( Pattern.matches(ePattern, rawStyle))
-		    style = "European";
-        if( Pattern.matches(aPattern, rawStyle))
-            style = "Ameican";
-        if( Pattern.matches(cPattern, rawStyle))
-            style = "Chinese";
+		if (Pattern.matches(ePattern, rawStyle))
+			style = "European";
+		if (Pattern.matches(aPattern, rawStyle))
+			style = "Ameican";
+		if (Pattern.matches(cPattern, rawStyle))
+			style = "Chinese";
 
-        System.out.println("What is your hotel's location? Enter an Address.");
+		System.out.println("What is your hotel's location? Enter an Address.");
 		String address = sc.nextLine();
 		System.out.println("How many floors does your hotel have?");
 		int floor = Integer.parseInt(sc.nextLine());
@@ -44,11 +44,11 @@ public class HotelFileController implements FileController {
 		int numRoom = Integer.parseInt(sc.nextLine());
 		System.out.println("Please set a password for this hotel.");
 		String password = sc.nextLine();
-		writeHotelToFile(hotelFile, name,style, new Location(address), floor, numRoom, password);
+		writeHotelToFile(hotelFile, name, style, new Location(address), floor, numRoom, password);
 	}
 
-	public static void writeHotelToFile(File hotelFile, String name,String style, Location location, int numOfLevel, int levelRmNum,
-			String password) throws IOException {
+	public static void writeHotelToFile(File hotelFile, String name, String style, Location location, int numOfLevel,
+			int levelRmNum, String password) throws IOException {
 		File info = FileController.createTxtFile(hotelFile, "info");
 		PrintWriter writer = new PrintWriter(info);
 		writer.println(name);
@@ -109,7 +109,7 @@ public class HotelFileController implements FileController {
 	public static void move(Hotel hotel) throws IOException {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("What would you like to move from this hotel?");
-		System.out.println("Options are: Employees, Inventory, or Customers");
+		System.out.println("Options are: Employees or Inventory");
 		String option = sc.nextLine().toLowerCase();
 		if (option.contains("employee") || option.contains("employees")) {
 			moveEmployee(hotel);
@@ -369,7 +369,7 @@ public class HotelFileController implements FileController {
 	}
 
 	// (2nd Use case)
-	public void deleteRoom(Hotel hotel) throws IOException {
+	public static void deleteRoom(Hotel hotel) throws IOException {
 		File hotelFile = new File(hotel.getPath());
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Do you want to delete a room or many rooms?");
@@ -381,104 +381,54 @@ public class HotelFileController implements FileController {
 			manyRoomsDel(hotel);
 			return;
 		}
-		System.out.println("These are all the available rooms you can delete");
-		System.out.println("Which of these rooms do you want to delete?");
-		System.out.println("This ID already exists, write another");
-
+		System.out.println("User entered invalid input");
 	}
 
-	private void manyRoomsDel(Hotel hotel) throws IOException {
+	public static void deleteRoom2(Room curRoom, Hotel hotel) throws IOException {
 		Scanner sc = new Scanner(System.in);
-		ArrayList<String> roomsToDelete = new ArrayList<>();
-		boolean toggle = false;
-		System.out.println("How many rooms would you like to delete? [Only enter a number]");
-		int numRms = sc.nextInt();
-		Room[][] roomArr = hotel.getRooms();
-		Room a = roomArr[0][0];
-		for (int i = 0; i < roomArr.length; ++i) {
-			for (int j = 0; j < roomArr[0].length; ++j) {
-				System.out.println(roomArr[i][j]);
-			}
-		}
-		System.out.println("Enter the rooms you want to delete.");
-		System.out.println("Note: You can only delete rooms in the same floor");
-		System.out.println("Also, they have to be in this format Ex. [103.txt]");
-		while (numRms >= 0) {
-			toggle = false;
-			while (toggle == true) {
-				String numRm = sc.nextLine();
-				if (numRm.contains(".txt")) {
-					if (roomsToDelete.isEmpty()) {
-						toggle = true;
-						roomsToDelete.add(numRm);
-						numRms--;
-						break;
-					} else if ((roomsToDelete.get(0).substring(0, 1).matches(numRm.substring(0, 1)))) {
-						toggle = true;
-						roomsToDelete.add(numRm);
-						numRms--;
-						break;
-					}
-				}
-				System.out.println("Invalid entry, try again");
-			}
-		}
-		for (int i = 0; i < roomArr.length; ++i) {
-			for (int j = 0; j < roomArr[0].length; ++j) {
-				if (roomsToDelete.contains(roomArr[i][j].getNumber())) {
-					File f = new File(hotel.getPath() + File.separator + "Rooms" + File.separator
-							+ roomArr[i][j].getNumber() + ".txt");
-					deleteRoom2(f, hotel);
-					// FileController.cleanFileContent(f);
-					roomsToDelete.remove(roomArr[i][j].getNumber());
-				}
-			}
-		}
-		System.out.println("Success! Deleted the rooms that existed in this hotel");
-		if (roomsToDelete.size() != 0)
-			roomsToDelete.clear();
-
-		writeHotelToFile(hotel.getFile(), hotel.getName(),hotel.getStyle(), hotel.getLocation(), hotel.getNumOfLevel(),
-				hotel.getLevelRmNum(), hotel.getPassword());
-
-		// writeHotelToFile(hotel.getFile(), hotel.getName(),
-		// hotel.getLocation(), roomArr.length,
-		// hotel.getLevelRmNum(), hotel.getPassword());
-	}
-
-	public static void deleteRoom2(File room, Hotel hotel) throws IOException {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Are you sure you want to delete" + room.getName() + " ? (y/n)");
+		System.out.println("Are you sure you want to delete the room " + curRoom + "? (y/n)");
 		String yOrn = sc.nextLine().toLowerCase();
 		if (!yOrn.matches("y")) {
 			System.out.println("Invalid input or user entered n");
 			return;
 		}
 		System.out.println("Re enter your manager ID");
-		String idMan = sc.nextLine().toLowerCase();
+		String idMan = sc.nextLine();
 		if (!idMan.matches(hotel.getManager().getID())) {
 			System.out.println("Error, the wrong ID has been entered");
 			return;
 		}
-		FileController.cleanFileContent(room);
-		room.delete();
 
-		// delete contracts and reservations with this room number
+		File temp = new File(curRoom.getPath());
+		Room t = hotel.getRoom(curRoom);
+		t.setEmpty(false);
+
+		PrintWriter writer = new PrintWriter(temp);
+		writer.println(t.getNumber());
+		writer.println(t.getType());
+		writer.println(String.valueOf(t.getPrice()));
+		writer.println(String.valueOf(t.isEmpty()));
+		writer.println(String.valueOf(t.isClean()));
+		writer.println("Maintence:True");
+		writer.println("Notes:True");
+		writer.println("end");
+		writer.flush();
+		writer.close();
+
+		// delete contracts and reservations with this room number (only 1 check
+		// in or reservation)
 		File ReservationFiles = new File(
 				hotel.getPath() + File.separator + "Contracts" + File.separator + "Reservation");
 		File[] fs = ReservationFiles.listFiles();
 		for (File contractResFile : fs) {
 			Scanner sc2 = new Scanner(contractResFile);
-			sc2.next();
-			sc2.next();
-			sc2.next();
-			String roomNumber = sc2.next();
-			if (room.getName().contains(roomNumber)) {
-				Contract contract = ContractFileController.readContract(hotel, contractResFile);
-				hotel.getReservationContracts().remove(contract.getCustomer());
-				sc2.close();
-				File tempF = new File(contract.getPath());
-				tempF.delete();
+			sc2.nextLine();
+			sc2.nextLine();
+			sc2.nextLine();
+			String roomNumber = sc2.nextLine();
+			String temp2 = "" + curRoom.getNumber();
+			if (roomNumber.contains(temp2)) {
+				addToDeleteFilesPermantly(contractResFile, hotel.getFile());
 			}
 		}
 
@@ -486,134 +436,247 @@ public class HotelFileController implements FileController {
 		File[] fs2 = ContractInFiles.listFiles();
 		for (File contractInFile : fs2) {
 			Scanner sc2 = new Scanner(contractInFile);
-			sc2.next();
-			sc2.next();
-			sc2.next();
-			String roomNumber = sc2.next();
-			if (room.getName().contains(roomNumber)) {
-				Contract contract = ContractFileController.readContract(hotel, contractInFile);
-				hotel.getInContracts().remove(contract.getCustomer());
-				sc2.close();
-				File tempF = new File(contract.getPath());
-				tempF.delete();
+			sc2.nextLine();
+			sc2.nextLine();
+			sc2.nextLine();
+			String roomNumber = sc2.nextLine();
+			String temp2 = "" + curRoom.getNumber();
+			if (roomNumber.contains(temp2)) {
+				addToDeleteFilesPermantly(contractInFile, hotel.getFile());
 			}
 		}
-
 	}
 
-	public void addRoom(Hotel hotel) throws IOException {
+	private static void manyRoomsDel(Hotel hotel) throws IOException {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Do you want to add a room, or many rooms?");
-		String roomOrRooms = sc.nextLine().toLowerCase();
-		if (roomOrRooms.matches("room")) {
-			System.out.println("What's the room number would you like to add? [Only enter a number]");
-			int roomName = sc.nextInt();
-			File roomNameFile = new File(
-					hotel.getPath() + File.separator + "Rooms" + File.separator + roomName + ".txt");
-			addRoom2(roomNameFile, hotel);
-			return;
-		} else if (roomOrRooms.contains("rooms")) {
-			manyRoomsAdd(hotel);
-			return;
-		}
-	}
-
-	private void manyRoomsAdd(Hotel hotel) throws IOException {
-		Scanner sc = new Scanner(System.in);
-		ArrayList<String> roomsToAdd = new ArrayList<>();
-		boolean toggle = false;
-		System.out.println("How many rooms would you like to add? [Only enter a number]");
+		ArrayList<String> roomsToDelete = new ArrayList<String>();
+		System.out.println("How many rooms would you like to delete? [Only enter a number]");
 		int numRms = sc.nextInt();
 		Room[][] roomArr = hotel.getRooms();
-		Room a = roomArr[0][0];
+		System.out.println("\n" + "Here's the list of rooms in the hotel:");
 		for (int i = 0; i < roomArr.length; ++i) {
 			for (int j = 0; j < roomArr[0].length; ++j) {
 				System.out.println(roomArr[i][j]);
 			}
 		}
-		System.out.println("Enter the rooms you want to add.");
-		System.out.println("Note: You can only add rooms in the same floor");
-		System.out.print("Also, they have to be in this format Ex. [103.txt]");
-		while (numRms >= 0) {
-			toggle = false;
-			while (toggle == true) {
-				String numRm = sc.nextLine();
-				if (numRm.contains(".txt")) {
-					if (roomsToAdd.isEmpty()) {
-						toggle = true;
-						roomsToAdd.add(numRm);
-						numRms--;
-						break;
-					} else if ((roomsToAdd.get(0).substring(0, 1).matches(numRm.substring(0, 1)))) {
-						toggle = true;
-						roomsToAdd.add(numRm);
-						numRms--;
-						break;
-					}
-				}
-				System.out.println("Invalid entry, try again");
+		System.out.println("Enter the rooms you want to delete");
+		System.out.println("Note: You can only delete rooms in the same floor");
+		System.out.println("Also, they have to be in this format Ex. [103]");
+		while (numRms > 0) {
+			String numRm = sc.nextLine();
+			if (numRm.matches("[0-9]+")) {
+				if (!roomsToDelete.contains(numRm)) {
+					roomsToDelete.add(numRm);
+					numRms--;
+				} else
+					System.out.println("Invalid entry, try again");
 			}
 		}
 		for (int i = 0; i < roomArr.length; ++i) {
 			for (int j = 0; j < roomArr[0].length; ++j) {
-				if (roomsToAdd.contains(roomArr[i][j].getNumber())) {
-					File f = new File(hotel.getPath() + File.separator + "Rooms" + File.separator
-							+ roomArr[i][j].getNumber() + ".txt");
-					addRoom2(f, hotel);
-					// FileController.cleanFileContent(f);
-					roomsToAdd.remove(roomArr[i][j].getNumber());
+				Room o = roomArr[i][j];
+				if (roomsToDelete.contains(Integer.toString(o.getNumber()))) {
+					deleteRoom2(roomArr[i][j], hotel);
+					roomsToDelete.remove(Integer.toString(o.getNumber()));
 				}
 			}
 		}
-		System.out.println("Success! We added new rooms to this existing hotel");
-		if (roomsToAdd.size() != 0)
-			roomsToAdd.clear();
+		System.out.println("Success! The rooms that were valid were erased from this hotel");
+		if (roomsToDelete.size() != 0)
+			roomsToDelete.clear();
 
-		writeHotelToFile(hotel.getFile(), hotel.getName(), hotel.getStyle(), hotel.getLocation(), hotel.getNumOfLevel(),
-				hotel.getLevelRmNum(), hotel.getPassword());
+		// writeHotelToFile(hotel.getFile(), hotel.getName(), hotel.getStyle(),
+		// hotel.getLocation(), hotel.getNumOfLevel(),
+		// hotel.getLevelRmNum(), hotel.getPassword());
 
 		// writeHotelToFile(hotel.getFile(), hotel.getName(),
 		// hotel.getLocation(), roomArr.length,
 		// hotel.getLevelRmNum(), hotel.getPassword());
 	}
 
-	private void addRoom2(File room, Hotel hotel) throws IOException {
+	public static void addRoom(Hotel hotel) throws IOException {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Are you sure you want to add" + room.getName() + " ? (y/n)");
+		System.out.println("Do you want to add one floor of rooms, or many floors of rooms?");
+		String roomOrRooms = sc.nextLine().toLowerCase();
+		if (roomOrRooms.contains("floor") && !roomOrRooms.contains("floors")) {
+			System.out.println("What is the floor you would like to add? [Ex. 4 floor]");
+			String roomName = sc.nextLine();
+			int roomf = Integer.parseInt(roomName.split(" ")[0]);
+			ArrayList<String> info = FileController
+					.extractInfo(new File(hotel.getPath() + File.separator + "info.txt"));
+			String a = info.get(4);
+			Room[] room = new Room[Integer.parseInt(a)];
+			for (int i = 0; i < Integer.parseInt(a); i++) {
+				if (i < 10) {
+					room[i] = new Room(new File(hotel.getRoom(0, 0).getPath()));
+					room[i].setNumber(Integer.parseInt(roomf + "0" + i));
+				} else {
+					room[i] = new Room(new File(hotel.getRoom(0, 0).getPath()));
+					room[i].setNumber(Integer.parseInt(roomf + "" + i));
+				}
+			}
+			addRoom2(room, hotel);
+			return;
+		} else if (roomOrRooms.contains("floors")) {
+			boolean toggle = false;
+			while (toggle == false) {
+				hotel = new Hotel(new File(hotel.getPath()));
+				System.out.println("What is the floor room number you would like to add? [Ex. 4 floor]");
+				String roomName = sc.nextLine();
+				int roomf = Integer.parseInt(roomName.split(" ")[0]);
+				ArrayList<String> info = FileController
+						.extractInfo(new File(hotel.getPath() + File.separator + "info.txt"));
+				String a = info.get(4);
+				Room[] room = new Room[Integer.parseInt(a)];
+				for (int i = 0; i < Integer.parseInt(a); i++) {
+					if (i < 10) {
+						room[i] = new Room(new File(hotel.getRoom(0, 0).getPath()));
+						room[i].setNumber(Integer.parseInt(roomf + "0" + i));
+					} else {
+						room[i] = new Room(new File(hotel.getRoom(0, 0).getPath()));
+						room[i].setNumber(Integer.parseInt(roomf + "" + i));
+					}
+				}
+				addRoom2(room, hotel);
+				System.out.println("\n" + "Do you want to add another floor? (y/n)?");
+				String yOrn = sc.nextLine().toLowerCase();
+				if (!yOrn.matches("y")) {
+					System.out.println("Exiting program");
+					toggle = true;
+					return;
+				}
+			}
+		}
+		System.out.println("User entered invalid input");
+	}
+
+	private static void addRoom2(Room[] room, Hotel hotel) throws IOException {
+		Scanner sc = new Scanner(System.in);
+		ArrayList<String> info = FileController.extractInfo(new File(hotel.getPath() + File.separator + "info.txt"));
+		String firstLetterOfFloor = Integer.toString(room[0].getNumber()).substring(0, 1);
+		Room[][] a = hotel.getRooms();
+		int rt = a.length;
+		int tr = a[0].length;
+		if (!(Integer.parseInt(firstLetterOfFloor) - a.length == 1)) {
+			System.out
+					.println("There's only " + a.length + " floors, you cannot add floor number " + firstLetterOfFloor);
+			return;
+		}
+		for (int i = 0; i < a.length; i++) {
+			for (int j = 0; j < a[0].length; j++) {
+				if (Integer.toString(a[i][j].getNumber()).contains(Integer.toString(room[0].getNumber()))) {
+					System.out.println("This floor already exists");
+					return;
+				}
+				if (Integer.toString(a[i][j].getNumber()).contains(Integer.toString(room[0].getNumber()))) {
+
+				}
+			}
+		}
+		System.out.println("Are you sure you want to add the " + firstLetterOfFloor + " floor? (y/n)");
 		String yOrn = sc.nextLine().toLowerCase();
 		if (!yOrn.matches("y")) {
 			System.out.println("Invalid input or user entered n");
 			return;
 		}
 		System.out.println("Re enter your manager ID");
-		String idMan = sc.nextLine().toLowerCase();
+		String idMan = sc.nextLine();
 		if (!idMan.matches(hotel.getManager().getID())) {
 			System.out.println("Error, the wrong ID has been entered");
 			return;
 		}
 		Room roomToDisplay = hotel.getRoom(0, 0);
 		File roomToDisplayFile = new File(roomToDisplay.getPath());
-		if (room.createNewFile()) {
-			Scanner sc2 = new Scanner(roomToDisplayFile);
-			PrintWriter writer = new PrintWriter(room);
-			writer.println(room.getName().substring(0, room.getName().length() - 4));
-			writer.println(sc2.nextLine());
-			writer.println(sc2.nextLine());
-			writer.println(sc2.nextLine());
-			writer.println(sc2.nextLine());
-			writer.println(sc2.nextLine());
-			writer.println(sc2.nextLine());
-			writer.println("end");
-			writer.flush();
-			writer.close();
-			sc2.close();
+		for (Room ro : room) {
+			File roomFileToMake = new File(
+					hotel.getPath() + File.separator + "Rooms" + File.separator + ro.getNumber() + ".txt");
+			if (roomFileToMake.createNewFile()) {
+				PrintWriter writer = new PrintWriter(roomFileToMake);
+				writer.println(ro.getNumber());
+				writer.println(roomToDisplay.getType());
+				writer.println(String.valueOf(roomToDisplay.getPrice()));
+				writer.println(String.valueOf(roomToDisplay.isEmpty()));
+				writer.println(String.valueOf(roomToDisplay.isClean()));
+				writer.println("Maintence:True");
+				writer.println("Notes:True");
+				writer.println("end");
+				writer.flush();
+				writer.close();
+			}
 		}
-		System.out.println("Every single room created will be made in the following format. For example");
-		Printer.printFile(roomToDisplayFile);
-		System.out.println("The only difference will be the room #, any edits to this new room can");
-		System.out.print("be made in the manager menu \n" + "The room has been created");
+		System.out
+				.println("\n" + "Every single room created will be made in the following format. For example:" + "\n");
 
+		Printer.printFile(roomToDisplayFile);
+
+		System.out.println("\n" + "The only difference will be the room #, any edits to this new room can");
+		System.out.print("be made in the manager menu \n" + "The floor has been created" + "\n");
+
+		int extraFloor = Integer.parseInt(info.get(3)) + 1;
+		File f = new File(hotel.getPath() + File.separator + "info.txt");
+		PrintWriter writer = new PrintWriter(f);
+		writer.println(info.get(0));
+		writer.println(info.get(1));
+		writer.println(info.get(2));
+		writer.println(extraFloor);
+		writer.println(info.get(4));
+		writer.println(info.get(5));
+		writer.flush();
+		writer.close();
+		return;
 	}
+
+	// private static void manyRoomsAdd(Hotel hotel) throws IOException {
+	// Scanner sc = new Scanner(System.in);
+	// ArrayList<String> roomsToAdd = new ArrayList<>();
+	// boolean toggle = false;
+	// System.out.println("How many floors would you like to add? [Only enter a
+	// number]");
+	// int numRms = sc.nextInt();
+	// Room[][] roomArr = hotel.getRooms();
+	// Room a = roomArr[0][0];
+	// for (int i = 0; i < roomArr.length; ++i) {
+	// for (int j = 0; j < roomArr[0].length; ++j) {
+	// System.out.println(roomArr[i][j]);
+	// }
+	// }
+	// System.out.println("Enter the rooms you want to add.");
+	// System.out.println("Note: You can only add rooms in the same floor");
+	// System.out.print("Also, they have to be in this format Ex. [103.txt]");
+	// while (numRms > 0) {
+	// String numRm = sc.nextLine();
+	// if (numRm.matches("[0-9]+")) {
+	// if (!roomsToAdd.contains(numRm)) {
+	// roomsToAdd.add(numRm);
+	// numRms--;
+	// } else
+	// System.out.println("Invalid entry, try again");
+	// }
+	// }
+	// for (int i = 0; i < roomArr.length; ++i) {
+	// for (int j = 0; j < roomArr[0].length; ++j) {
+	// if (roomsToAdd.contains(roomArr[i][j].getNumber())) {
+	// File f = new File(hotel.getPath() + File.separator + "Rooms" +
+	// File.separator
+	// + roomArr[i][j].getNumber() + ".txt");
+	// addRoom2(roomArr[i][j], hotel);
+	// // FileController.cleanFileContent(f);
+	// roomsToAdd.remove(roomArr[i][j].getNumber());
+	// }
+	// }
+	// }
+	// System.out.println("Success! We added new rooms to this existing hotel");
+	// if (roomsToAdd.size() != 0)
+	// roomsToAdd.clear();
+	//
+	// writeHotelToFile(hotel.getFile(), hotel.getName(), hotel.getStyle(),
+	// hotel.getLocation(), hotel.getNumOfLevel(),
+	// hotel.getLevelRmNum(), hotel.getPassword());
+
+	// writeHotelToFile(hotel.getFile(), hotel.getName(),
+	// hotel.getLocation(), roomArr.length,
+	// hotel.getLevelRmNum(), hotel.getPassword());
+	// }
 
 	@SuppressWarnings("resource")
 	public static void addToDeleteFilesPermantly(File file, File hotel) throws IOException {
