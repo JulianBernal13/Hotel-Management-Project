@@ -104,7 +104,7 @@ public class Printer {
 		System.out.println("Enter 'clean' to set room to clean      ");
 		System.out.println("Enter 'Maintaince' to edit maintaince notes     ");
 		System.out.println("Enter 'Notes' to edit general room notes      ");
-		System.out.println("Enter 'DELETE' to delete room      "); // NEW CODE
+		System.out.println("Enter 'Delete' to delete room      "); // NEW CODE
 		System.out.println("Enter 'Exit' to get back to List of rooms and save changes     ");
 	}
 
