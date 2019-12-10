@@ -13,7 +13,7 @@ public class CommandAddRoom extends aCommand {
 
 	@Override
 	public boolean execute() throws IOException, ParseException {
-		HotelFileController.move(this.hotel);
+		HotelFileController.addRoom(this.hotel);
 		return true;
 	}
 
