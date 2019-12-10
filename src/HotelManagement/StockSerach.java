@@ -45,7 +45,7 @@ public class StockSerach {
 			if(out.contains("\"," + Companystock)) {
 				int TO2 = out.indexOf("\"]\n,\"");
 				int TO3 = out.indexOf("\"," + Companystock);
-				String parsethis = out.substring(TO2, TO3);
+				//String parsethis = out.substring(TO2, TO3);
 				//CompanyName = parsethis;
 				
 			}
