@@ -12,7 +12,12 @@ public class StockSerach {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("please enter the name of the bussiness you wish to look up");
 		String input = sc.nextLine();
-		Document buff = InternetSearch.googleSearch(input);
+		BufferedReader buff = InternetSearch.googleSearch(input);
 
+		String out = buff.readLine();
+		while(out != null) {
+			System.out.println(out);
+			out = buff.readLine();
+		}
 	}
 }
