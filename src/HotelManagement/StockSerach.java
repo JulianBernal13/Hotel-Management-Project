@@ -16,9 +16,9 @@ public class StockSerach {
 		String input = sc.nextLine();
 		BufferedReader buff = InternetSearch.googleSearch(input);
 		
-		File test = new File ("." + File.separator + "URLreader");
-		test.createNewFile();
-		PrintWriter writer = new PrintWriter(test);
+		//File test = new File ("." + File.separator + "URLreader");
+		//test.createNewFile();
+		//PrintWriter writer = new PrintWriter(test);
 		
 		String out = buff.readLine();
 		
@@ -43,14 +43,14 @@ public class StockSerach {
 		            //System.out.print("");
 		        }
 			}
-			if(out.contains("\",\"" + Companystock)) {
-				int TO2 = out.indexOf("\"]\n,\"") + 7;
+			if(out.contains("\"," + Companystock)) {
+				int TO2 = out.indexOf("\"]\n,\"");
 				int TO3 = out.indexOf("\"," + Companystock);
 				String parsethis = out.substring(TO2, TO3);
-				CompanyName = parsethis.split("\"")[0];
+				//CompanyName = parsethis;
 				
 			}
-			writer.println(out);
+			//writer.println(out);
 			out = buff.readLine();
 		}
 		if(Companystock == 0) {
