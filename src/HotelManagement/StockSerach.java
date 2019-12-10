@@ -15,9 +15,9 @@ public class StockSerach {
 		String input = sc.nextLine();
 		BufferedReader buff = InternetSearch.googleSearch(input);
 		
-		//File test = new File ("." + File.separator + "URLreader");
-		//test.createNewFile();
-		//PrintWriter writer = new PrintWriter(test);
+		File test = new File ("." + File.separator + "URLreader");
+		test.createNewFile();
+		PrintWriter writer = new PrintWriter(test);
 		
 		String out = buff.readLine();
 		
@@ -35,21 +35,31 @@ public class StockSerach {
 					}
 					i++;
 					check = out.charAt(TO1-i);
+					writer.println(out);
+
 				}
 		        try {
 					Companystock = Double.parseDouble(toDouble);
 		        } catch (NumberFormatException e) {
-		            //System.out.print("");
 		        }
 			}
-			if(out.contains("\"," + Companystock)) {
-				int TO2 = out.indexOf("\"]\n,\"");
-				int TO3 = out.indexOf("\"," + Companystock);
-				//String parsethis = out.substring(TO2, TO3);
-				//CompanyName = parsethis;
-				
+			if(out.contains("<span class=\"vk_bk\">")) {
+				CompanyName = "";
+				int TO2 = out.indexOf("<span class=\"vk_bk\">");
+				int j = 1;
+				char check = out.charAt(TO2+j);
+				while(check != '>') {
+					j++;
+					check = out.charAt(TO2+j);
+				}
+				j++;
+				String toDouble = "";
+				while(check != '<') {
+					CompanyName = CompanyName + check;
+					j++;
+					check = out.charAt(TO2+j);
+				}
 			}
-			//writer.println(out);
 			out = buff.readLine();
 		}
 		if(Companystock == 0) {
